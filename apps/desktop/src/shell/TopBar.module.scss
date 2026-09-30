@@ -18,6 +18,11 @@
   &[data-platform="macos"] {
     padding-left: 78px;
   }
+
+  // Caption buttons sit flush against the window's right edge.
+  &:not([data-platform="macos"]) {
+    padding-right: 0;
+  }
 }
 
 // Everything not interactive drags the window.

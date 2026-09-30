@@ -9,10 +9,12 @@ import {
 } from "../shared/ui/icons";
 import styles from "./WindowControls.module.scss";
 
-export function WindowControls() {
+// Windows/Linux caption buttons. Outside the desktop shell (browser demo) they render inert.
+export function WindowControls({ native }: { native: boolean }) {
   const [maximized, setMaximized] = useState(false);
 
   useEffect(() => {
+    if (!native) return;
     const appWindow = getCurrentWindow();
     let disposed = false;
     let unlisten: (() => void) | undefined;
@@ -32,9 +34,9 @@ export function WindowControls() {
       disposed = true;
       unlisten?.();
     };
-  }, []);
+  }, [native]);
 
-  const appWindow = getCurrentWindow();
+  const appWindow = native ? getCurrentWindow() : null;
   const maximizeLabel = maximized ? t("还原窗口") : t("最大化窗口");
 
   return <div className={styles.root}>
@@ -43,7 +45,7 @@ export function WindowControls() {
       className={styles.button}
       aria-label={t("最小化窗口")}
       title={t("最小化窗口")}
-      onClick={() => void appWindow.minimize()}
+      onClick={() => void appWindow?.minimize()}
     >
       <Icon icon={windowMinimizeIcon} size="1.1em" />
     </button>
@@ -52,7 +54,7 @@ export function WindowControls() {
       className={styles.button}
       aria-label={maximizeLabel}
       title={maximizeLabel}
-      onClick={() => void appWindow.toggleMaximize()}
+      onClick={() => void appWindow?.toggleMaximize()}
     >
       <Icon icon={maximized ? windowRestoreIcon : windowMaximizeIcon} size="1.1em" />
     </button>
@@ -61,7 +63,7 @@ export function WindowControls() {
       className={[styles.button, styles.close].join(" ")}
       aria-label={t("关闭窗口")}
       title={t("关闭窗口")}
-      onClick={() => void appWindow.close()}
+      onClick={() => void appWindow?.close()}
     >
       <Icon icon={windowCloseIcon} size="1.1em" />
     </button>

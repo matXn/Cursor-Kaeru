@@ -35,7 +35,7 @@ export function TopBar({ platform, nativeDesktop }: { platform: DesktopPlatform;
         <span className={styles.harnessDot} aria-hidden="true" />
         {taken ? t("cursor kaeru 已接管") : t("cursor kaeru 未接管")}
       </NavLink>}
-      {nativeDesktop && platform !== "macos" && <WindowControls />}
+      {platform !== "macos" && <WindowControls native={nativeDesktop} />}
     </div>
   </header>;
 }
