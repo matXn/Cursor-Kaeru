@@ -1,5 +1,22 @@
 @use "./typography" as type;
 @use "./themes";
+@use "./brand" as brand;
+
+@font-face {
+  font-family: "Geist";
+  src: url("../shared/assets/fonts/Geist-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../shared/assets/fonts/Geist-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "PingFang-Medium";
@@ -19,14 +36,13 @@
 
 :root {
   --window-header-height: 30px;
-  --oa-ui-font: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --oa-ui-font: "Geist", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --oa-code-font: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
   --oa-metrics-font: "PingFang-Medium", var(--oa-ui-font);
   --oa-number-font: "HFKos", "PingFang-Medium", var(--oa-ui-font);
   font-family: var(--oa-ui-font);
   font-size: type.$font-size-base;
   color: var(--vscode-foreground);
-  background: transparent;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -49,6 +65,13 @@ body,
   overflow: hidden;
 }
 
+// Liquid-glass ambient backdrop. Floating glass surfaces sit on top of this
+// so the backdrop-filter has soft color to refract.
+body {
+  @include brand.ambient-backdrop;
+  background-attachment: fixed;
+}
+
 button,
 input,
 select {
@@ -64,11 +87,52 @@ button {
   -webkit-app-region: drag;
 }
 
+// ---- Liquid glass utility classes -----------------------------
+// Apply on top of component SCSS to lift a surface into glass.
+.glass-panel {
+  @include brand.glass-strong(var(--oa-radius-blob-b));
+}
+
+.glass-soft {
+  @include brand.glass(12%, 24px, 150%, var(--oa-radius-soft-a));
+}
+
+.glass-pill {
+  @include brand.glass(10%, 20px, 150%, var(--oa-radius-pill));
+}
+
+// Refined scrollbars
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vscode-scrollbarSlider-hoverBackground) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--vscode-scrollbarSlider-background);
+  border-radius: var(--oa-radius-pill);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+
+  &:hover {
+    background: var(--vscode-scrollbarSlider-hoverBackground);
+    background-clip: padding-box;
+  }
+}
+
 .scroll-shadow-top[data-scrolled="true"] {
   -webkit-mask-image: linear-gradient(
     to bottom,
     transparent 0,
-    black var(--app-content-top) ,
+    black var(--app-content-top),
     black 100%
   );
   mask-image: linear-gradient(

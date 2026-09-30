@@ -1,4 +1,5 @@
 @use "../../styles/typography" as type;
+@use "../../styles/brand" as brand;
 
 .target {
   width: 100%;
@@ -8,11 +9,18 @@
   overflow: hidden;
   background: var(--vscode-input-background);
   border: 1px solid var(--vscode-input-border, transparent);
-  border-radius: 5px;
+  border-radius: var(--oa-radius-pill);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 
   &:focus-within,
-  &[data-open] { border-color: var(--vscode-focusBorder); }
-  &[data-disabled] { opacity: 0.55; }
+  &[data-open] {
+    border-color: var(--vscode-focusBorder);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--vscode-focusBorder) 18%, transparent);
+  }
+
+  &[data-disabled] {
+    opacity: 0.55;
+  }
 }
 
 .trigger {
@@ -23,7 +31,7 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 8px;
-  padding: 0 8px;
+  padding: 0 12px;
   color: var(--vscode-input-foreground);
   background: transparent;
   border: 0;
@@ -43,7 +51,10 @@
   background: transparent;
   border: 0;
 
-  &:hover { color: var(--vscode-foreground); background: var(--vscode-list-hoverBackground); }
+  &:hover {
+    color: var(--vscode-foreground);
+    background: var(--vscode-list-hoverBackground);
+  }
 }
 
 .summary {
@@ -60,11 +71,11 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 4px;
-  background: var(--vscode-dropdown-background);
-  border: 1px solid var(--vscode-dropdown-border);
-  border-radius: var(--oa-overlay-radius);
+  padding: 6px;
   box-shadow: var(--oa-dropdown-shadow);
+  border-radius: var(--oa-radius-soft-b);
+
+  @include brand.glass(22%, 30px, 170%, var(--oa-radius-soft-b));
 }
 
 .listFrame,
@@ -87,11 +98,11 @@
   color: var(--vscode-descriptionForeground);
   font-size: type.$font-size-xs;
   font-weight: 600;
+  padding: 7px 10px 3px;
 }
 
 .group {
   gap: 8px;
-  padding: 7px 8px 3px;
   cursor: pointer;
 
   input {
@@ -114,15 +125,15 @@
 
 .optionRow {
   width: 100%;
-  min-height: 32px;
+  min-height: 34px;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 8px 5px 32px;
+  padding: 5px 12px 5px 34px;
   box-sizing: border-box;
   color: var(--vscode-dropdown-foreground);
   background: transparent;
-  border-radius: 4px;
+  border-radius: var(--oa-radius-pill);
   font-size: type.$font-size-xs;
   cursor: pointer;
 
@@ -146,15 +157,15 @@
 }
 
 .checkbox {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
   display: grid;
   place-items: center;
   color: var(--vscode-checkbox-foreground, var(--vscode-button-foreground));
   background: var(--vscode-checkbox-background, var(--vscode-input-background));
   border: 1px solid var(--vscode-checkbox-border, var(--vscode-input-border));
-  border-radius: 3px;
+  border-radius: 40% 58% 46% 54%;
 }
 
 .optionRow:has(input:checked) .checkbox,
@@ -170,7 +181,7 @@
   height: 2px;
   content: "";
   background: currentColor;
-  border-radius: 1px;
+  border-radius: var(--oa-radius-pill);
 }
 
 .option {
@@ -186,14 +197,18 @@
   }
 }
 
-.empty { padding: 8px; color: var(--vscode-descriptionForeground); font-size: type.$font-size-xs; }
+.empty {
+  padding: 8px;
+  color: var(--vscode-descriptionForeground);
+  font-size: type.$font-size-xs;
+}
 
 .footer {
   display: flex;
   justify-content: flex-end;
   gap: 4px;
-  margin-top: 4px;
-  padding-top: 4px;
+  margin-top: 6px;
+  padding-top: 6px;
   border-top: 1px solid var(--vscode-dropdown-border);
 
   button {
@@ -202,13 +217,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px 8px;
+    padding: 5px 12px;
     color: var(--vscode-textLink-foreground);
     background: transparent;
     border: 0;
-    border-radius: 4px;
+    border-radius: var(--oa-radius-pill);
     font-size: type.$font-size-xs;
 
-    &:hover { background: var(--vscode-list-hoverBackground); }
+    &:hover {
+      background: var(--vscode-list-hoverBackground);
+    }
   }
 }

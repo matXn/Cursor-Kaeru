@@ -284,33 +284,13 @@ impl ControlService {
 
     pub(super) async fn ads(
         &self,
-        disabled_ad_ids: Option<&str>,
-        language: &str,
+        _disabled_ad_ids: Option<&str>,
+        _language: &str,
     ) -> Result<AdRuntime> {
-        let client = self.clients.default_client().await?;
-        let installation_id = self.store.installation_id().await?;
-        let mut request = client
-            .get(ADS_ENDPOINT)
-            .header(DEVICE_ID_HEADER, installation_id)
-            .header(OS_HEADER, std::env::consts::OS)
-            .header(APP_VERSION_HEADER, &self.app_version)
-            .header(LANGUAGE_HEADER, language)
-            .timeout(std::time::Duration::from_secs(60));
-        if let Some(disabled_ad_ids) = disabled_ad_ids.filter(|value| !value.is_empty()) {
-            request = request.header(DISABLED_AD_IDS_HEADER, disabled_ad_ids);
-        }
-        let response = request.send().await?;
-        let status = response.status();
-        if !status.is_success() {
-            let message = response.text().await.unwrap_or_default();
-            return Err(Error::Provider(format!(
-                "advertisement service failed ({status}): {}",
-                message.chars().take(200).collect::<String>()
-            )));
-        }
-        let mut runtime = response.json::<AdRuntime>().await?.into_menu_slots()?;
-        runtime.cache_images(&client).await;
-        Ok(runtime)
+        // Ads are disabled in this build. Returning an empty runtime means the
+        // desktop shell renders no promotional slots, and no request is made to
+        // the upstream advertisement endpoint.
+        Ok(AdRuntime { slots: Vec::new() })
     }
 
     pub(super) async fn dismiss_ad(&self, ad_id: &str, input: &AdDismissalInput) -> Result<()> {

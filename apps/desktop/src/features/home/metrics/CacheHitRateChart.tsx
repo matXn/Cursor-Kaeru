@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { EChart } from "../charts/EChart";
 import styles from "./CacheHitRateChart.module.scss";
 
-const valueColor = "#40c463";
+const valueColor = "#35ccff";
 const trackColor = "rgba(139, 148, 158, 0.20)";
 
 export function CacheHitRateChart({ rate, animationKey = 0 }: { rate: number; animationKey?: number }) {

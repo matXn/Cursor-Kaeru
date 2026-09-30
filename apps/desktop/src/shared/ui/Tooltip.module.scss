@@ -1,4 +1,5 @@
 @use "../../styles/typography" as type;
+@use "../../styles/brand" as brand;
 
 .root {
   position: fixed;
@@ -6,15 +7,14 @@
   max-width: 420px;
   max-height: calc(100vh - 24px);
   overflow-y: auto;
-  padding: 8px 10px;
+  padding: 10px 14px;
   color: var(--vscode-editorHoverWidget-foreground, var(--vscode-foreground));
-  background: var(--vscode-editorHoverWidget-background);
-  border: 1px solid var(--vscode-editorHoverWidget-border);
-  border-radius: var(--oa-overlay-radius);
   box-shadow: var(--oa-tooltip-shadow);
   font-size: type.$font-size-xs;
   line-height: 1.5;
   overflow-wrap: anywhere;
+
+  @include brand.glass(16%, 26px, 160%, var(--oa-radius-soft-b));
 
   scrollbar-width: thin;
   scrollbar-color: var(--vscode-scrollbarSlider-background, rgba(0, 0, 0, 0.25)) transparent;

@@ -1,4 +1,5 @@
 @use "../styles/typography" as type;
+@use "../styles/brand" as brand;
 
 .root {
   position: fixed;
@@ -7,7 +8,10 @@
   right: 0;
   left: 0;
   height: var(--window-header-height);
-  background: transparent;
+  background: color-mix(in srgb, var(--vscode-editor-background) 30%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid color-mix(in srgb, var(--oa-glass-edge) 10%, transparent);
   -webkit-user-select: none;
   user-select: none;
 }
@@ -24,7 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8px;
+  padding: 0 10px;
   padding-right: 0px;
   pointer-events: none;
 }
@@ -34,16 +38,19 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   min-width: 0;
   color: var(--vscode-foreground);
   font-size: type.$font-size-base;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   pointer-events: none;
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     flex: 0 0 auto;
+    border-radius: 4px;
+    box-shadow: none;
   }
 }

@@ -35,11 +35,11 @@ type AxisLabel = {
 };
 
 const levelColors = [
-  "rgba(139, 148, 158, 0.20)",
-  "#9be9a8",
-  "#40c463",
-  "#30a14e",
-  "#216e39",
+  "#161b22",
+  "#0e4429",
+  "#006d32",
+  "#26a641",
+  "#39d353",
 ];
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 const CALENDAR_CONFIG = {

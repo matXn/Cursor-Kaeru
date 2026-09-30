@@ -18,12 +18,12 @@ type TooltipItem = {
 };
 
 const seriesColors = {
-  input: "#0091ff",
-  cacheRead: "#40c463",
-  cacheWrite: "#3A62BA",
-  output: "#E7B40B",
+  input: "#7c6bff",
+  cacheRead: "#35ccff",
+  cacheWrite: "#5b8def",
+  output: "#f0b95e",
 } as const;
-const levelLineColor = "#E7B40B";
+const levelLineColor = "#35ccff";
 const emptyBarColor = "rgba(139, 148, 158, 0.20)";
 const EMPTY_BAR_RATIO = 1;
 const DATA_HEIGHT_RATIO = 1;
@@ -119,7 +119,7 @@ export function DailyTokenUsageChart({
         interval: "auto",
         hideOverlap: true,
         formatter: (_value: string, index: number) => formatAxisLabel(data[index].bucketStartMs, granularity),
-        color: "#8c8c8c",
+        color: "#a2a8c4",
         fontFamily: "HFKos",
         margin: 14,
       },

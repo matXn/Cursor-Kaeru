@@ -815,7 +815,7 @@ mod tests {
 
     #[test]
     fn truncate_text_reports_the_actual_utf8_prefix_size() {
-        let content = "😀".repeat(1_000);
+        let content = "界".repeat(1_000);
         let output = truncate_text("Grep", &content, 81);
         let (kept, notice) = output
             .split_once("\n\n[truncated:")

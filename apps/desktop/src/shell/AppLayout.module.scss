@@ -1,23 +1,29 @@
-@use "../styles/typography" as type;
+@use "../styles/bruno-tokens" as bruno;
 
+// Bruno-style layout: solid sidebar + clean content area
 .root {
   --app-region-gap: 16px;
-  --app-toolbar-height: 36px;
+  --app-toolbar-height: 38px;
   --app-page-max-width: 1280px;
-  --app-page-padding: 18px;
-  --app-content-left: calc(var(--app-edge) + var(--app-menu-width) );
-  --app-content-top: calc(var(--window-safe-top) + var(--app-toolbar-height) + 10px );
-  background: var(--vscode-editor-background);
+  --app-page-padding: 20px;
+  --app-content-left: calc(var(--app-edge) + #{bruno.$bruno-sidebar-width});
+  --app-content-top: calc(var(--window-safe-top) + var(--app-toolbar-height) + 12px);
+  background: bruno.$bruno-bg-primary;
 }
 
+// Bruno-style solid sidebar with border
 .menuCard {
   position: fixed;
   z-index: 10;
-  top: calc(var(--window-menu-top));
-  bottom: var(--app-edge);
+  top: calc(var(--window-menu-top) + 8px);
+  bottom: calc(var(--app-edge) + 8px);
   left: var(--app-edge);
-  width: var(--app-menu-width);
+  width: bruno.$bruno-sidebar-width;
   overflow: hidden;
+  background: bruno.$bruno-bg-secondary;
+  border: 1px solid bruno.$bruno-border;
+  border-radius: bruno.$bruno-radius-md;
+  box-shadow: bruno.$bruno-shadow-md;
 }
 
 .navigation {
@@ -26,7 +32,7 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 6px;
+  padding: bruno.$bruno-space-4;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -36,107 +42,139 @@
   flex: 1 1 auto;
   width: 100%;
   min-height: 0;
+  overflow: auto;
 }
 
+// Bruno-style group headers: uppercase, small, top border
 .navigationGroup {
   display: flex;
   align-items: center;
-  color: color-mix(in srgb, var(--vscode-descriptionForeground) 65%, transparent);
-  font-size: type.$font-size-xs;
-  font-weight: normal;
-  padding: 5px 9px 2px;
-  margin-top: 0;
+  padding: bruno.$bruno-space-2 bruno.$bruno-space-3;
+  margin: bruno.$bruno-space-4 0 bruno.$bruno-space-2;
+  color: bruno.$bruno-text-secondary;
+  font-size: bruno.$bruno-font-size-xs;
+  font-weight: bruno.$bruno-font-weight-semibold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-top: 1px solid bruno.$bruno-border;
+  
+  &:first-child {
+    margin-top: 0;
+    border-top: none;
+  }
 }
 
+// Bruno-style menu items: 32px height, 4px radius, solid active background
 .navigationRow {
-  flex: 0 0 36px;
+  flex: 0 0 bruno.$bruno-height-md;
   display: flex;
   align-items: stretch;
+  margin: 2px 0;
 
   a,
   button {
     width: 100%;
-    height: 36px;
+    height: bruno.$bruno-height-md;
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 0 11px;
-    color: inherit;
+    gap: bruno.$bruno-space-2;
+    padding: 0 bruno.$bruno-space-3;
+    color: bruno.$bruno-text-primary;
     text-decoration: none;
-    border-radius: 6px;
+    font-size: bruno.$bruno-font-size-base;
+    background: transparent;
+    border: none;
+    border-radius: bruno.$bruno-radius-sm;
+    transition: background bruno.$bruno-transition-fast, color bruno.$bruno-transition-fast;
+    cursor: pointer;
 
     &:hover {
-      background: var(--vscode-list-hoverBackground);
+      background: bruno.$bruno-bg-tertiary;
+      color: bruno.$bruno-text-white;
     }
 
+    // Bruno active state: solid accent background (not border)
     &[aria-current="page"] {
-      color: var(--vscode-list-activeSelectionForeground);
-      background: var(--vscode-list-activeSelectionBackground);
+      color: bruno.$bruno-text-white;
+      background: bruno.$bruno-accent;
+      
+      &:hover {
+        background: bruno.$bruno-accent-hover;
+      }
     }
   }
 
   button {
     font: inherit;
     text-align: left;
-    background: transparent;
-    border: 0;
   }
 }
 
+// Bruno-style status tag
 .menuStatusTag {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-left: auto;
-  padding: 1px 5px;
-  color: var(--vscode-descriptionForeground);
-  background: color-mix(in srgb, var(--vscode-descriptionForeground) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--vscode-descriptionForeground) 28%, transparent);
-  border-radius: 999px;
-  font-size: type.$font-size-2xs;
-  line-height: 1.4;
+  padding: 2px bruno.$bruno-space-2;
+  color: bruno.$bruno-text-secondary;
+  background: transparent;
+  border: 1px solid bruno.$bruno-border;
+  border-radius: bruno.$bruno-radius-sm;
+  font-size: bruno.$bruno-font-size-xs;
+  font-weight: bruno.$bruno-font-weight-medium;
+  line-height: bruno.$bruno-line-height-tight;
 
   &[data-taken] {
-    color: var(--vscode-testing-iconPassed, #73c991);
-    background: color-mix(in srgb, var(--vscode-testing-iconPassed, #73c991) 10%, transparent);
-    border-color: color-mix(in srgb, var(--vscode-testing-iconPassed, #73c991) 28%, transparent);
+    color: bruno.$bruno-success;
+    border-color: bruno.$bruno-success;
   }
 }
 
+// Bruno-style indicator dot
 .menuIndicatorDot {
-  width: 7px;
-  height: 7px;
-  flex: 0 0 7px;
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
   margin-left: auto;
-  background: #ef4444;
+  background: bruno.$bruno-error;
   border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(244, 135, 113, 0.2);
 }
 
+// Dialog content styling
 .dismissReason {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: 14px;
-  font-size: type.$font-size-base;
+  gap: bruno.$bruno-space-2;
+  margin-top: bruno.$bruno-space-4;
 
   textarea {
     min-height: 78px;
-    padding: 8px 10px;
+    padding: bruno.$bruno-space-2 bruno.$bruno-space-3;
     resize: vertical;
-    color: var(--vscode-input-foreground);
-    background: var(--vscode-input-background);
-    border: 1px solid var(--vscode-input-border, var(--vscode-sideBar-border));
-    border-radius: 6px;
+    color: bruno.$bruno-text-primary;
+    background: bruno.$bruno-bg-primary;
+    border: 1px solid bruno.$bruno-border;
+    border-radius: bruno.$bruno-radius-md;
     outline: none;
+    font-family: inherit;
+    font-size: bruno.$bruno-font-size-base;
+    line-height: bruno.$bruno-line-height-normal;
 
     &:focus {
-      border-color: var(--vscode-focusBorder);
+      border-color: bruno.$bruno-accent;
     }
 
     &:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 }
 
+// Main content area with Bruno background
 .content {
   width: calc(100% - var(--app-content-left));
   height: 100%;
@@ -145,6 +183,7 @@
   min-height: 0;
   margin-left: var(--app-content-left);
   overflow: hidden;
+  background: bruno.$bruno-bg-primary;
 }
 
 .keepAliveContainer,
@@ -155,6 +194,7 @@
   min-height: 0;
 }
 
+// Action toolbar (top-right)
 .actionRegion {
   position: absolute;
   z-index: 12500;
@@ -165,14 +205,6 @@
   align-items: center;
   user-select: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-user-drag: none;
-  // Page actions (e.g. the overview time-range bar and the floating refresh
-  // button) must not act as a window drag handle; the dedicated drag layer in
-  // AppHeader owns window dragging. Otherwise these controls get dragged and
-  // double-click maximizes the window.
   -webkit-app-region: no-drag;
 }
 
@@ -182,16 +214,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 6px;
-  gap: 3px;
-  box-shadow: 0 0px 6px 4px var(--vscode-editor-background);
-  transform: translateX(6px);
+  padding: 6px bruno.$bruno-space-3;
+  gap: bruno.$bruno-space-2;
+  border-radius: bruno.$bruno-radius-md;
+  border: 1px solid bruno.$bruno-border;
+  background: bruno.$bruno-bg-secondary;
+  box-shadow: bruno.$bruno-shadow-sm;
 }
 
 .pageActions {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: bruno.$bruno-space-2;
 
   &:empty {
     display: none;

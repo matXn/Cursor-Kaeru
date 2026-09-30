@@ -1,4 +1,5 @@
 @use "../../styles/typography" as type;
+@use "../../styles/brand" as brand;
 
 .region {
   position: fixed;
@@ -14,12 +15,10 @@
 
 .message {
   max-width: min(520px, calc(100vw - 32px));
-  padding: 10px 16px;
+  padding: 10px 18px;
   color: var(--vscode-notifications-foreground);
-  background: var(--vscode-notifications-background);
-  border: 1px solid var(--vscode-notifications-border);
-  border-radius: var(--oa-overlay-radius);
-  box-shadow: 0 10px 30px rgb(0 0 0 / 38%);
+  border-radius: var(--oa-radius-pill);
+  box-shadow: var(--oa-tooltip-shadow);
   font-size: type.$font-size-base;
   line-height: 20px;
   text-align: center;
@@ -30,6 +29,8 @@
   cursor: text;
   animation: enter 200ms ease;
   transition: opacity 200ms ease, transform 200ms ease;
+
+  @include brand.glass(22%, 30px, 170%, var(--oa-radius-pill));
 }
 
 .leaving {

@@ -56,11 +56,11 @@
   flex: 1;
   min-height: 320px;
   box-sizing: border-box;
-  padding: 10px 12px;
+  padding: 10px 14px;
   color: var(--vscode-input-foreground);
   background: var(--vscode-input-background);
   border: 1px solid var(--vscode-input-border, var(--vscode-sideBar-border));
-  border-radius: 6px;
+  border-radius: var(--oa-radius-soft-a);
   font-family: var(--vscode-editor-font-family, monospace);
   font-size: type.$font-size-xs;
   line-height: 1.6;

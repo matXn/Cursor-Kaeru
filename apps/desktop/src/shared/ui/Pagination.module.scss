@@ -1,4 +1,4 @@
-@use "../../styles/typography" as type;
+@use "../../styles/brand" as brand;
 
 .root {
   flex: 0 0 auto;
@@ -9,8 +9,6 @@
   gap: 12px;
   padding: 0px 0 6px 0;
   color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-xs;
-  background: transparent;
 }
 
 .controls {
@@ -30,6 +28,6 @@
 
   > button {
     height: 26px;
-    padding: 0 7px;
+    padding: 0 12px;
   }
 }

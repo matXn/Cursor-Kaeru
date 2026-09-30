@@ -27,6 +27,7 @@
     color: var(--vscode-button-foreground);
     background: var(--vscode-button-background);
     border-color: var(--vscode-button-background);
+    box-shadow: 0 4px 12px -4px color-mix(in srgb, var(--oa-accent) 80%, transparent);
   }
 
   &:has(input:disabled) {
@@ -36,13 +37,14 @@
 }
 
 .control {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
   display: grid;
   place-items: center;
   color: var(--vscode-checkbox-foreground, var(--vscode-button-foreground));
   background: var(--vscode-checkbox-background, var(--vscode-input-background));
   border: 1px solid var(--vscode-checkbox-border, var(--vscode-input-border));
-  border-radius: 3px;
+  // Organic soft-squared blob shape, deliberately not a crisp rectangle.
+  border-radius: 40% 58% 46% 54%;
 }

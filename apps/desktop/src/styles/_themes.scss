@@ -1,116 +1,123 @@
+@use "./brand";
+
 @mixin vscode-theme($tokens) {
   @each $name, $value in $tokens {
     --vscode-#{$name}: #{$value};
   }
 }
 
+// Organic radii — liquid glass, never boxy.
 :root {
-  --oa-card-radius: 9px;
-  --oa-overlay-radius: 8px;
+  --oa-card-radius: var(--oa-radius-soft-a);
+  --oa-overlay-radius: var(--oa-radius-blob-b);
+  --oa-tooltip-radius: var(--oa-radius-cap);
 }
 
 :root:not([data-platform="macos"]) {
-  --oa-card-radius: 7px;
-  --oa-overlay-radius: 6px;
+  --oa-card-radius: var(--oa-radius-soft-a);
+  --oa-overlay-radius: var(--oa-radius-blob-b);
 }
 
 :root,
 :root[data-theme="default-dark"] {
-  --oa-tooltip-shadow: 0 12px 32px rgb(0 0 0 / 30%);
-  --oa-dropdown-shadow: 0 12px 28px rgb(0 0 0 / 38%);
+  --oa-app-background: #0d1117;
+  --oa-tooltip-shadow: 0 8px 24px rgba(1, 4, 9, 0.85);
+  --oa-dropdown-shadow: 0 8px 24px rgba(1, 4, 9, 0.85);
 
   @include vscode-theme((
-    foreground: #ffffffe6,
-    errorForeground: #f53b3a,
-    descriptionForeground: #FFFFFFB3,
-    focusBorder: #49b0ff,
-    textLink-foreground: #49b0ff,
-    textCodeBlock-background: #2a2a2a,
-    editor-background: #141414,
-    editor-selectionBackground: #49b0ff33,
-    editor-selectionForeground: #ffffff,
-    editorCursor-foreground: #ffffff,
-    editorLineNumber-foreground: #ffffff40,
-    editorLineNumber-activeForeground: #ffffffe6,
-    editorWidget-background: #1f1f1f,
-    editorWidget-border: #ffffff0a,
-    editorHoverWidget-background: #1f1f1f,
-    editorHoverWidget-border: #ffffff0a,
-    editorHoverWidget-foreground: #ffffffe6,
-    sideBar-border: #ffffff0a,
-    list-activeSelectionBackground: #ffffff0d,
-    list-activeSelectionForeground: #ffffffe6,
-    list-hoverBackground: #2a2a2a,
-    input-background: #2a2a2a,
-    input-foreground: #ffffffe6,
-    input-border: #ffffff0a,
-    button-background: #4489ff,
+    foreground: #c9d1d9,
+    errorForeground: #f85149,
+    descriptionForeground: #8b949e,
+    focusBorder: #58a6ff,
+    textLink-foreground: #58a6ff,
+    textCodeBlock-background: #161b22,
+    editor-background: #0d1117,
+    editor-selectionBackground: #58a6ff33,
+    editor-selectionForeground: #c9d1d9,
+    editorCursor-foreground: #c9d1d9,
+    editorLineNumber-foreground: #6e7681,
+    editorLineNumber-activeForeground: #c9d1d9,
+    editorWidget-background: #161b22,
+    editorWidget-border: #30363d,
+    editorHoverWidget-background: #161b22,
+    editorHoverWidget-border: #30363d,
+    editorHoverWidget-foreground: #c9d1d9,
+    sideBar-border: #21262d,
+    list-activeSelectionBackground: #21262d,
+    list-activeSelectionForeground: #c9d1d9,
+    list-hoverBackground: #161b2233,
+    input-background: #0d1117,
+    input-foreground: #c9d1d9,
+    input-border: #30363d,
+    button-background: #238636,
     button-foreground: #ffffff,
-    dropdown-background: #2a2a2a,
-    dropdown-foreground: #ffffffe6,
-    dropdown-border: #ffffff0a,
-    badge-background: #4489ff,
-    badge-foreground: #fffffff2,
-    scrollbarSlider-background: #ffffff14,
-    scrollbarSlider-hoverBackground: #ffffff1a,
-    scrollbarSlider-activeBackground: #ffffff26,
-    gitDecoration-addedResourceForeground: #00ec7e,
-    notifications-background: #1f1f1f,
-    notifications-foreground: #ffffffe6,
-    notifications-border: #ffffff14,
-    checkbox-background: #ffffff0d,
-    checkbox-foreground: #ffffff,
-    checkbox-border: #ffffff0a,
+    dropdown-background: #161b22,
+    dropdown-foreground: #c9d1d9,
+    dropdown-border: #30363d,
+    badge-background: #1f6feb,
+    badge-foreground: #ffffff,
+    scrollbarSlider-background: #6e768166,
+    scrollbarSlider-hoverBackground: #6e768188,
+    scrollbarSlider-activeBackground: #6e7681aa,
+    gitDecoration-addedResourceForeground: #3fb950,
+    notifications-background: #161b22,
+    notifications-foreground: #c9d1d9,
+    notifications-border: #30363d,
+    checkbox-background: #0d1117,
+    checkbox-foreground: #c9d1d9,
+    checkbox-border: #30363d,
+    panel-border: #30363d,
   ));
   color-scheme: dark;
 }
 
 :root[data-theme="default-light"] {
-  --oa-tooltip-shadow: 0 8px 22px rgb(0 0 0 / 12%);
-  --oa-dropdown-shadow: 0 8px 20px rgb(0 0 0 / 14%);
+  --oa-app-background: #e9ecf6;
+  --oa-tooltip-shadow: 0 12px 30px rgb(30 34 60 / 18%);
+  --oa-dropdown-shadow: 0 14px 34px rgb(30 34 60 / 20%);
 
   @include vscode-theme((
-    foreground: #191919,
-    errorForeground: #f53b3a,
-    descriptionForeground: #888888,
-    focusBorder: #317cff,
-    textLink-foreground: #317cff,
-    textCodeBlock-background: #f0f0f0,
-    editor-background: #f5f5f5,
-    editor-selectionBackground: #317cff40,
-    editor-selectionForeground: #191919,
+    foreground: #1b1e2c,
+    errorForeground: #d83a4e,
+    descriptionForeground: #6a7187,
+    focusBorder: #6b7bff,
+    textLink-foreground: #6b7bff,
+    textCodeBlock-background: #f1f3f8,
+    editor-background: #e9ecf6,
+    editor-selectionBackground: #6b7bff33,
+    editor-selectionForeground: #1b1e2c,
     editorCursor-foreground: #000000,
-    editorLineNumber-foreground: #1919194d,
-    editorLineNumber-activeForeground: #191919,
+    editorLineNumber-foreground: #1b1e2c4d,
+    editorLineNumber-activeForeground: #1b1e2c,
     editorWidget-background: #ffffff,
-    editorWidget-border: #00000024,
+    editorWidget-border: #00000018,
     editorHoverWidget-background: #ffffff,
-    editorHoverWidget-border: #00000024,
-    editorHoverWidget-foreground: #191919,
-    sideBar-border: #00000024,
-    list-activeSelectionBackground: #0000000f,
-    list-activeSelectionForeground: #191919,
-    list-hoverBackground: #f3f3f3,
+    editorHoverWidget-border: #00000018,
+    editorHoverWidget-foreground: #1b1e2c,
+    sideBar-border: #00000014,
+    list-activeSelectionBackground: #6b7bff26,
+    list-activeSelectionForeground: #171a2a,
+    list-hoverBackground: #171a2a0a,
     input-background: #ffffff,
-    input-foreground: #191919,
-    input-border: #00000024,
-    button-background: #317cff,
+    input-foreground: #1b1e2c,
+    input-border: #00000022,
+    button-background: #6b7bff,
     button-foreground: #ffffff,
     dropdown-background: #ffffff,
-    dropdown-foreground: #191919,
-    dropdown-border: #00000024,
-    badge-background: #317cff,
-    badge-foreground: #fffffff2,
-    scrollbarSlider-background: #00000014,
-    scrollbarSlider-hoverBackground: #1919191a,
-    scrollbarSlider-activeBackground: #19191926,
-    gitDecoration-addedResourceForeground: #00a558,
+    dropdown-foreground: #1b1e2c,
+    dropdown-border: #0000001c,
+    badge-background: #6b7bff,
+    badge-foreground: #ffffff,
+    scrollbarSlider-background: #1b1e2c1a,
+    scrollbarSlider-hoverBackground: #1b1e2c26,
+    scrollbarSlider-activeBackground: #1b1e2c33,
+    gitDecoration-addedResourceForeground: #0a9d63,
     notifications-background: #ffffff,
-    notifications-foreground: #191919,
-    notifications-border: #00000024,
-    checkbox-background: #0000000f,
+    notifications-foreground: #1b1e2c,
+    notifications-border: #00000018,
+    checkbox-background: #ffffff,
     checkbox-foreground: #ffffff,
-    checkbox-border: #00000024,
+    checkbox-border: #00000026,
   ));
   color-scheme: light;
 }

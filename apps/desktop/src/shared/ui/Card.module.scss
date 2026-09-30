@@ -1,6 +1,8 @@
+@use "../../styles/brand" as brand;
+
 .root {
   padding: 0;
-  background: var(--vscode-editorWidget-background);
-  border: 1px solid var(--vscode-sideBar-border);
-  border-radius: var(--oa-card-radius);
+  color: var(--vscode-foreground);
+
+  @include brand.glass(16%, 30px, 165%, 0);
 }

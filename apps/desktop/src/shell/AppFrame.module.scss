@@ -1,6 +1,6 @@
 .shell {
-  --app-edge: 8px;
-  --app-menu-width: 204px;
+  --app-edge: 10px;
+  --app-menu-width: 208px;
   --window-safe-top: var(--window-header-height);
   --window-menu-top: var(--window-safe-top);
   --window-corner-safe-bottom: 0px;
@@ -8,7 +8,9 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--vscode-editor-background);
+  // Transparent: the liquid-glass ambient backdrop lives on <body>. Floating
+  // glass surfaces (sidebar, toolbar) sit above it and refract the color.
+  background: transparent;
 }
 
 .windows {

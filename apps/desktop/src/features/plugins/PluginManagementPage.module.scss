@@ -31,9 +31,9 @@
   justify-content: center;
   width: 42px;
   height: 42px;
-
-  border-radius: 10px;
-
+  border-radius: 42% 58% 46% 54%;
+  background: color-mix(in srgb, var(--vscode-button-background) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--vscode-button-background) 30%, transparent);
 }
 
 .pluginIdentity {
@@ -126,7 +126,7 @@
   color: var(--vscode-descriptionForeground);
   text-align: center;
   border: 1px dashed var(--vscode-sideBar-border);
-  border-radius: var(--oa-overlay-radius);
+  border-radius: var(--oa-radius-blob-c);
 
   strong {
     color: var(--vscode-foreground);

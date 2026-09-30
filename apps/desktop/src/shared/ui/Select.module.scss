@@ -1,4 +1,5 @@
 @use "../../styles/typography" as type;
+@use "../../styles/brand" as brand;
 
 .trigger,
 .combo input {
@@ -7,9 +8,11 @@
   color: var(--vscode-input-foreground);
   background: var(--vscode-input-background);
   border: 1px solid var(--vscode-input-border, transparent);
-  border-radius: 5px;
+  border-radius: var(--oa-radius-pill);
   outline: none;
   font-size: type.$font-size-xs;
+  transition: border-color 150ms ease, background 150ms ease;
+
   &:focus {
     border-color: var(--vscode-focusBorder);
   }
@@ -20,8 +23,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 0 10px;
+  padding: 0 14px;
 }
+
 .optionContent {
   min-width: 0;
   display: flex;
@@ -36,18 +40,22 @@
     white-space: nowrap;
   }
 }
+
 .dropdownIcon {
   transition: transform 160ms ease;
 }
+
 .dropdownIconOpen {
   transform: rotate(180deg);
 }
+
 .comboRow {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .combo {
   min-width: 0;
   flex: 1;
@@ -56,19 +64,22 @@
   align-items: center;
   overflow: hidden;
   border: 1px solid var(--vscode-input-border, transparent);
-  border-radius: 6px;
+  border-radius: var(--oa-radius-pill);
   background: var(--vscode-input-background);
+
   &:focus-within {
     border-color: var(--vscode-focusBorder);
   }
 }
+
 .combo input {
   min-width: 0;
   flex: 1;
-  padding: 0 10px;
+  padding: 0 14px;
   border: 0;
   background: transparent;
 }
+
 .comboToggle {
   width: 34px;
   height: 34px;
@@ -85,9 +96,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   &:hover {
     color: var(--vscode-foreground);
   }
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;
@@ -98,23 +111,24 @@
   position: fixed;
   z-index: 14000;
   overflow: hidden;
-  padding: 4px;
-  background: var(--vscode-dropdown-background);
-  border: 1px solid var(--vscode-dropdown-border);
-  border-radius: 6px;
+  padding: 6px;
+  color: var(--vscode-dropdown-foreground);
   box-shadow: var(--oa-dropdown-shadow);
+
+  @include brand.glass(22%, 30px, 170%, var(--oa-radius-soft-b));
 
   button {
     width: 100%;
-    min-height: 30px;
+    min-height: 32px;
     display: block;
-    padding: 5px 8px;
+    padding: 5px 12px;
     color: var(--vscode-dropdown-foreground);
     text-align: left;
     background: transparent;
     border: 0;
-    border-radius: 4px;
+    border-radius: var(--oa-radius-pill);
     font-size: type.$font-size-xs;
+
     &:hover,
     &[data-active],
     &[aria-selected="true"] {

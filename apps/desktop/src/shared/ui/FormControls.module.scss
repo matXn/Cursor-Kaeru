@@ -16,12 +16,14 @@
   gap: 5px;
   line-height: 20px;
 }
+
 .hint {
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--vscode-descriptionForeground);
   cursor: help;
+
   &:hover {
     color: var(--vscode-foreground);
   }
@@ -32,13 +34,16 @@
   color: var(--vscode-input-foreground);
   background: var(--vscode-input-background);
   border: 1px solid var(--vscode-input-border, transparent);
-  border-radius: 5px;
+  border-radius: var(--oa-radius-pill);
   outline: none;
   font: inherit;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 
   &:focus {
     border-color: var(--vscode-focusBorder);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--vscode-focusBorder) 18%, transparent);
   }
+
   &:disabled {
     opacity: 0.6;
   }
@@ -46,7 +51,7 @@
 
 .input {
   height: 34px;
-  padding: 0 10px;
+  padding: 0 14px;
 
   &[type="number"] {
     appearance: textfield;
@@ -64,7 +69,7 @@
   width: 100%;
 
   input {
-    padding-right: 34px;
+    padding-right: 38px;
   }
 }
 
@@ -72,7 +77,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 30px;
+  width: 34px;
   height: 34px;
   display: grid;
   place-items: center;
