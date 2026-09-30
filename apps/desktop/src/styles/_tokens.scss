@@ -7,11 +7,11 @@
 
 :root {
   // ---- Type ---------------------------------------------------
-  // Latin from Geist, Chinese from the bundled HarmonyOS Sans SC subset; system fonts only
-  // cover characters outside the subset.
-  --font-ui: "Geist", "HarmonyOS Sans SC", ui-sans-serif, -apple-system, "Segoe UI",
+  // Latin from GitHub's Mona Sans / Monaspace Neon, Chinese from the bundled HarmonyOS Sans SC
+  // subset; system fonts only cover characters outside both.
+  --font-ui: "Mona Sans", "HarmonyOS Sans SC", ui-sans-serif, -apple-system, "Segoe UI",
     "PingFang SC", "Microsoft YaHei UI", sans-serif;
-  --font-mono: "Geist Mono", "HarmonyOS Sans SC", ui-monospace, "SF Mono", Consolas,
+  --font-mono: "Monaspace Neon", "HarmonyOS Sans SC", ui-monospace, "SF Mono", Consolas,
     "PingFang SC", "Microsoft YaHei UI", monospace;
 
   --text-xs: 11px; // badges, axis ticks

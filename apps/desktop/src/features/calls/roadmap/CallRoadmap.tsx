@@ -43,10 +43,13 @@ function StatusIcon({ status }: { status: string }) {
   </svg>;
 }
 
-// Text beside a bar, never on it: after the bar, or before it when the bar sits in the right part of the lane.
+// Text beside a bar, never on it: on whichever side of the bar has more room in the lane.
 function Label({ scale, startMs, endMs, className, children }: { scale: TimeScale; startMs: number; endMs: number; className: string; children: ReactNode }) {
-  const before = scale.at(startMs) > 0.6;
-  const style = before ? { right: `${(1 - scale.at(startMs)) * 100}%` } : { left: `${scale.at(endMs) * 100}%` };
+  const before = scale.at(startMs) > 1 - scale.at(endMs);
+  const room = before ? scale.at(startMs) : 1 - scale.at(endMs);
+  const style = before
+    ? { right: `${(1 - scale.at(startMs)) * 100}%`, maxWidth: `${room * 100}%` }
+    : { left: `${scale.at(endMs) * 100}%`, maxWidth: `${room * 100}%` };
   return <span className={className} data-anchor={before ? "end" : "start"} style={style}>{children}</span>;
 }
 

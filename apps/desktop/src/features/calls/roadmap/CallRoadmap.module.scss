@@ -205,6 +205,8 @@
   position: absolute;
   top: 50%;
   padding: 0 var(--space-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -302,6 +304,7 @@
   top: 50%;
   padding: 0 var(--space-2);
   overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--text-muted);
   font-size: var(--text-sm);
   white-space: nowrap;
