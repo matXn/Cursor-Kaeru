@@ -7,9 +7,11 @@
 
 :root {
   // ---- Type ---------------------------------------------------
-  --font-ui: "Geist", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  // Latin from Geist, Chinese from the bundled HarmonyOS Sans SC subset; system fonts only
+  // cover characters outside the subset.
+  --font-ui: "Geist", "HarmonyOS Sans SC", ui-sans-serif, -apple-system, "Segoe UI",
     "PingFang SC", "Microsoft YaHei UI", sans-serif;
-  --font-mono: "Cascadia Mono", "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas,
+  --font-mono: "Geist Mono", "HarmonyOS Sans SC", ui-monospace, "SF Mono", Consolas,
     "PingFang SC", "Microsoft YaHei UI", monospace;
 
   --text-xs: 11px; // badges, axis ticks

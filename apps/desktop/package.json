@@ -16,7 +16,8 @@
     "serve": "vite preview",
     "tauri": "tauri",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build"
+    "tauri:build": "tauri build",
+    "fonts:cjk": "node scripts/subset-cjk-font.mjs"
   },
   "license": "MIT",
   "dependencies": {
@@ -50,6 +51,7 @@
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
     "sass": "^1.102.0",
+    "subset-font": "^2.9.0",
     "typescript": "^7.0.2",
     "vite": "^8.2.0",
     "wait-on": "^9.0.1"
