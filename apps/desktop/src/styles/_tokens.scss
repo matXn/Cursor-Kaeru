@@ -49,15 +49,15 @@
 :root[data-theme="default-dark"] {
   color-scheme: dark;
 
-  --bg: #1a1a18; // window background
-  --surface: #20201e; // cards, panels, sidebar
-  --surface-raised: #2a2a27; // menus, tooltips, modals
-  --field: #161614; // inputs, editors
-  --hover: rgb(255 255 255 / 5%);
-  --selected: rgb(255 255 255 / 8%);
+  --bg: #111110; // window background
+  --surface: #171716; // cards, panels
+  --surface-raised: #211f1e; // menus, tooltips, modals
+  --field: #0c0c0b; // inputs, editors
+  --hover: rgb(255 255 255 / 4.5%);
+  --selected: rgb(255 255 255 / 7.5%);
 
-  --border: #33322f; // hairlines between regions
-  --border-strong: #46453f; // control outlines, hovered borders
+  --border: #282725; // hairlines between regions
+  --border-strong: #3a3935; // control outlines, hovered borders
 
   --text: #e6e4de;
   --text-muted: #9d9a92;
@@ -65,7 +65,7 @@
 
   --accent: #d97757; // single accent: selection, primary action, focus
   --accent-hover: #e38a6c;
-  --accent-fg: #1a1a18;
+  --accent-fg: #111110;
   --accent-soft: rgb(217 119 87 / 14%);
 
   --success: #8fb573;
@@ -75,12 +75,12 @@
   --selection: rgb(217 119 87 / 28%);
   --scrollbar: rgb(255 255 255 / 12%);
   --scrollbar-hover: rgb(255 255 255 / 22%);
-  --overlay: rgb(0 0 0 / 55%);
-  --shadow-popover: 0 8px 24px rgb(0 0 0 / 45%);
+  --overlay: rgb(0 0 0 / 62%);
+  --shadow-popover: 0 8px 24px rgb(0 0 0 / 55%);
 
   // Activity heatmap, empty to busiest. Empty sits just above the surface;
   // the top step is brighter than the accent so busy days glow.
-  --heat-0: #292826;
+  --heat-0: #21201e;
   --heat-1: #4d2a1d;
   --heat-2: #8a3f25;
   --heat-3: #d06840;
