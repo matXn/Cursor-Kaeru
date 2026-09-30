@@ -27,6 +27,7 @@ impl Store {
         end_ms: Option<i64>,
         model_hashes: Option<&str>,
         bucket_ms: Option<i64>,
+        utc_offset_ms: i64,
     ) -> Result<Overview> {
         let call_row = sqlx::query(
             "SELECT
@@ -86,10 +87,10 @@ impl Store {
         };
 
         let (token_usage_granularity, bucket_ms, series_start_ms, bucket_count) =
-            token_usage_buckets(start_ms, end_ms, bucket_ms);
+            token_usage_buckets(start_ms, end_ms, bucket_ms, utc_offset_ms);
         let rows = sqlx::query(&format!(
             "SELECT
-                (created_at_ms / {bucket_ms}) * {bucket_ms} AS bucket_start_ms,
+                ((created_at_ms + {offset}) / {bucket_ms}) * {bucket_ms} - {offset} AS bucket_start_ms,
                 COALESCE(SUM({fresh_input}), 0) AS input_tokens,
                 COALESCE(SUM(COALESCE(cache_read_tokens, 0)), 0) AS cache_read_tokens,
                 COALESCE(SUM(COALESCE(cache_write_tokens, 0)), 0) AS cache_write_tokens,
@@ -101,6 +102,7 @@ impl Store {
              GROUP BY bucket_start_ms
              ORDER BY bucket_start_ms",
             fresh_input = fresh_input_sql(),
+            offset = bucket_offset(bucket_ms, utc_offset_ms),
         ))
         .bind(start_ms.unwrap_or(series_start_ms).max(series_start_ms))
         .bind(end_ms)
@@ -145,10 +147,26 @@ impl Store {
     }
 }
 
+/// Offset that shifts bucket boundaries to local time. Minute buckets stay on UTC minutes;
+/// hour and day buckets start on the client's local hour and midnight.
+fn bucket_offset(bucket_ms: i64, utc_offset_ms: i64) -> i64 {
+    if bucket_ms >= HOUR_MS {
+        utc_offset_ms.rem_euclid(bucket_ms)
+    } else {
+        0
+    }
+}
+
+/// Start of the bucket containing `ms`, with boundaries shifted by `offset`.
+fn bucket_start(ms: i64, bucket_ms: i64, offset: i64) -> i64 {
+    (ms + offset).div_euclid(bucket_ms) * bucket_ms - offset
+}
+
 fn token_usage_buckets(
     start_ms: Option<i64>,
     end_ms: Option<i64>,
     requested_bucket_ms: Option<i64>,
+    utc_offset_ms: i64,
 ) -> (TokenUsageGranularity, i64, i64, i64) {
     if let (Some(start_ms), Some(end_ms)) = (start_ms, end_ms) {
         let duration_ms = end_ms.saturating_sub(start_ms).max(1);
@@ -174,8 +192,9 @@ fn token_usage_buckets(
         } else {
             MAX_RANGE_BUCKETS
         };
-        let last_bucket_ms = end_ms.saturating_sub(1).div_euclid(bucket_ms) * bucket_ms;
-        let first_bucket_ms = start_ms.div_euclid(bucket_ms) * bucket_ms;
+        let offset = bucket_offset(bucket_ms, utc_offset_ms);
+        let last_bucket_ms = bucket_start(end_ms.saturating_sub(1), bucket_ms, offset);
+        let first_bucket_ms = bucket_start(start_ms, bucket_ms, offset);
         let bucket_count =
             ((last_bucket_ms - first_bucket_ms).div_euclid(bucket_ms) + 1).clamp(1, max_buckets);
         let series_start_ms =
@@ -183,11 +202,11 @@ fn token_usage_buckets(
         return (granularity, bucket_ms, series_start_ms, bucket_count);
     }
 
-    let today_start_ms = Utc::now()
-        .date_naive()
-        .and_hms_opt(0, 0, 0)
-        .map(|value| value.and_utc().timestamp_millis())
-        .unwrap_or(0);
+    let today_start_ms = bucket_start(
+        Utc::now().timestamp_millis(),
+        DAY_MS,
+        bucket_offset(DAY_MS, utc_offset_ms),
+    );
     let series_start_ms = today_start_ms.saturating_sub(
         i64::try_from(OVERVIEW_DAYS - 1)
             .unwrap_or(0)
@@ -218,4 +237,33 @@ fn saturating_sum(values: &[i64]) -> i64 {
     values
         .iter()
         .fold(0_i64, |total, value| total.saturating_add(*value))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const EIGHT_HOURS_MS: i64 = 8 * HOUR_MS;
+
+    #[test]
+    fn day_buckets_start_at_local_midnight() {
+        // 2026-09-15 02:00 local (UTC+8) is 2026-09-14 18:00 UTC: a different calendar day.
+        let utc_evening = 1_789_408_800_000;
+        let offset = bucket_offset(DAY_MS, EIGHT_HOURS_MS);
+        let start = bucket_start(utc_evening, DAY_MS, offset);
+        assert_eq!((start + EIGHT_HOURS_MS).rem_euclid(DAY_MS), 0);
+        assert!(start <= utc_evening && utc_evening < start + DAY_MS);
+    }
+
+    #[test]
+    fn minute_buckets_ignore_offset() {
+        assert_eq!(bucket_offset(MINUTE_MS, EIGHT_HOURS_MS), 0);
+    }
+
+    #[test]
+    fn negative_offsets_align_too() {
+        let offset = bucket_offset(DAY_MS, -5 * HOUR_MS);
+        let start = bucket_start(1_789_408_800_000, DAY_MS, offset);
+        assert_eq!((start - 5 * HOUR_MS).rem_euclid(DAY_MS), 0);
+    }
 }

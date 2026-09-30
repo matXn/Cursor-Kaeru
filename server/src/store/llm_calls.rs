@@ -462,7 +462,7 @@ mod tests {
             .await
             .unwrap();
         let overview = store
-            .overview(None, None, Some(&format!("[\"{plugin_model}\"]")), None)
+            .overview(None, None, Some(&format!("[\"{plugin_model}\"]")), None, 0)
             .await
             .unwrap();
         assert_eq!(overview.metrics.llm_calls, 1);

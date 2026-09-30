@@ -1,4 +1,5 @@
 import type { Locale } from "../i18n/runtime";
+import { utcOffsetMs } from "./utils/localDay";
 
 export type ModelType = "openai" | "anthropic";
 
@@ -482,6 +483,7 @@ export const api = {
       if (filter.modelHashes?.length) params.set("model_hashes", JSON.stringify(filter.modelHashes));
       if (filter.bucketMs) params.set("bucket_ms", String(filter.bucketMs));
     }
+    params.set("utc_offset_ms", String(utcOffsetMs()));
     const query = params.toString();
     return request<Overview>(`/overview${query ? `?${query}` : ""}`);
   },

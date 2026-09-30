@@ -17,6 +17,9 @@ pub struct OverviewRange {
     end_ms: Option<i64>,
     model_hashes: Option<String>,
     bucket_ms: Option<i64>,
+    /// Client UTC offset; hour and day buckets start at local boundaries.
+    #[serde(default)]
+    utc_offset_ms: i64,
 }
 
 pub async fn get(
@@ -30,6 +33,7 @@ pub async fn get(
                 range.end_ms,
                 range.model_hashes.as_deref(),
                 range.bucket_ms,
+                range.utc_offset_ms,
             )
             .await?,
     ))

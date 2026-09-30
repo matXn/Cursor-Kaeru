@@ -6,30 +6,13 @@ import { appStore } from "../../shared/store/appStore";
 import controls from "../../shared/ui/Controls.module.scss";
 import { Icon } from "../../shared/ui/Icon";
 import { chevronLeftIcon, chevronRightIcon } from "../../shared/ui/icons";
+import { localDayKey, localDayRange, shiftLocalDay } from "../../shared/utils/localDay";
 import { formatCompactInteger } from "../../shared/utils/numberFormat";
 import { PageContent } from "../../shell/layout/PageContent";
 import { CallRoadmap } from "./roadmap/CallRoadmap";
 import styles from "./CallsPage.module.scss";
 
 const CALL_REFRESH_INTERVAL_MS = 2_000;
-const DAY_MS = 24 * 60 * 60_000;
-
-// Days are local calendar days, addressed as YYYY-MM-DD in the ?day= query.
-function localDayKey(date: Date) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-}
-
-function dayRange(key: string) {
-  const [year, month, day] = key.split("-").map(Number);
-  const start = new Date(year, month - 1, day);
-  const end = new Date(year, month - 1, day + 1);
-  return { startMs: start.getTime(), endMs: end.getTime() };
-}
-
-function shiftDay(key: string, days: number) {
-  const { startMs } = dayRange(key);
-  return localDayKey(new Date(startMs + days * DAY_MS + DAY_MS / 2));
-}
 
 function matches(call: LlmCall, keyword: string) {
   if (!keyword) return true;
@@ -51,7 +34,7 @@ export function CallsPage() {
 
   useEffect(() => {
     let disposed = false;
-    const range = dayRange(day);
+    const range = localDayRange(day);
     const load = () => {
       if (disposed || document.visibilityState !== "visible") return;
       void api.calls(range).then((next) => {
@@ -76,17 +59,17 @@ export function CallsPage() {
   const visible = useMemo(() => calls.filter((call) => matches(call, keyword)), [calls, keyword]);
   const tokens = visible.reduce((sum, call) => sum + (call.total_tokens ?? 0), 0);
   const failed = visible.filter((call) => call.status === "failed").length;
-  const dayLabel = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", weekday: "short" }).format(new Date(dayRange(day).startMs));
+  const dayLabel = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", weekday: "short" }).format(new Date(localDayRange(day).startMs));
   const goTo = (next: string) => setParams(next === today ? {} : { day: next });
 
   const content = <div className={styles.page}>
     <div className={styles.toolbar}>
       <div className={styles.dayNav}>
-        <button type="button" className={controls.iconButton} aria-label={t("前一天")} onClick={() => goTo(shiftDay(day, -1))}>
+        <button type="button" className={controls.iconButton} aria-label={t("前一天")} onClick={() => goTo(shiftLocalDay(day, -1))}>
           <Icon icon={chevronLeftIcon} size="1.1em" />
         </button>
         <span className={styles.day}>{dayLabel}</span>
-        <button type="button" className={controls.iconButton} aria-label={t("后一天")} disabled={live} onClick={() => goTo(shiftDay(day, 1))}>
+        <button type="button" className={controls.iconButton} aria-label={t("后一天")} disabled={live} onClick={() => goTo(shiftLocalDay(day, 1))}>
           <Icon icon={chevronRightIcon} size="1.1em" />
         </button>
         {!live && <button type="button" className={styles.todayButton} onClick={() => goTo(today)}>{t("今天")}</button>}

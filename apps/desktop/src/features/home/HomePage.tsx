@@ -7,6 +7,7 @@ import { PageContent } from "../../shell/layout/PageContent";
 import type { VirtualPageSection } from "../../shell/layout/VirtualPage";
 import { OverviewTimeRangeFilter, type OverviewRangePreset } from "./overview/OverviewTimeRangeFilter";
 import { appStore, useAppStore } from "../../shared/store/appStore";
+import { localDayKey, shiftLocalDay } from "../../shared/utils/localDay";
 import { formatTimeInput, parseTimeInput } from "../../shared/utils/parseTimeInput";
 import { modelProviderName } from "../../shared/utils/modelProvider";
 import { claudeIcon, flatColorOrganizationIcon, openAiIcon } from "../../shared/ui/icons";
@@ -23,15 +24,13 @@ const DAY_MS = 24 * HOUR_MS;
 function contributionDays(overview: Overview, endMs: number): ContributionDay[] {
   const tokensByDate = new Map<string, number>();
   for (const bucket of overview.token_usage_series) {
-    const date = new Date(bucket.bucket_start_ms).toISOString().slice(0, 10);
+    const date = localDayKey(new Date(bucket.bucket_start_ms));
     const tokens = bucket.input_tokens + bucket.cache_read_tokens + bucket.cache_write_tokens + bucket.output_tokens;
     tokensByDate.set(date, (tokensByDate.get(date) ?? 0) + tokens);
   }
-  const lastDay = new Date(Math.max(0, endMs - 1));
-  lastDay.setUTCHours(0, 0, 0, 0);
-  const firstDayMs = lastDay.getTime() - (CALENDAR_DAYS - 1) * DAY_MS;
+  const lastDay = localDayKey(new Date(Math.max(0, endMs - 1)));
   return Array.from({ length: CALENDAR_DAYS }, (_, offset) => {
-    const date = new Date(firstDayMs + offset * DAY_MS).toISOString().slice(0, 10);
+    const date = shiftLocalDay(lastDay, offset - (CALENDAR_DAYS - 1));
     return { date, tokens: tokensByDate.get(date) ?? 0 };
   });
 }
