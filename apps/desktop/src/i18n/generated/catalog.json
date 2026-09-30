@@ -373,16 +373,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 45,
           "column": 42
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 53,
-          "column": 72
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 143,
-          "column": 51
         }
       ]
     },
@@ -407,11 +397,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 43,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 132,
-          "column": 15
         }
       ]
     },
@@ -1008,6 +993,20 @@
         }
       ]
     },
+    "24c2db6ede5d1de5": {
+      "source": "{count} 工具",
+      "kind": "template",
+      "placeholders": [
+        "count"
+      ],
+      "refs": [
+        {
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 118,
+          "column": 74
+        }
+      ]
+    },
     "2555d6c7fbb7e070": {
       "source": "可以直接输入模型标识，也可以读取接口返回的模型列表。",
       "kind": "text",
@@ -1215,11 +1214,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 45,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 142,
-          "column": 15
         }
       ]
     },
@@ -1684,6 +1678,18 @@
         }
       ]
     },
+    "444ddec3d9908e63": {
+      "source": "按模型、状态或对话筛选",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/CallsPage.tsx",
+          "line": 97,
+          "column": 22
+        }
+      ]
+    },
     "461d6a57900c2ed7": {
       "source": "连通性测试失败：{error}",
       "kind": "template",
@@ -1807,11 +1813,6 @@
           "file": "features/home/metrics/HomeMetrics.tsx",
           "line": 32,
           "column": 27
-        },
-        {
-          "file": "shared/ui/DataTable.tsx",
-          "line": 15,
-          "column": 77
         }
       ]
     },
@@ -1965,6 +1966,18 @@
           "file": "features/settings/TabSettingsCard.tsx",
           "line": 60,
           "column": 41
+        }
+      ]
+    },
+    "4f439b0d01a1b6e0": {
+      "source": "这一天没有调用",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/CallsPage.tsx",
+          "line": 110,
+          "column": 78
         }
       ]
     },
@@ -2336,11 +2349,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 29,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 16,
-          "column": 15
         }
       ]
     },
@@ -2442,8 +2450,13 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 33,
+          "line": 113,
           "column": 36
+        },
+        {
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 74,
+          "column": 40
         },
         {
           "file": "shell/TopBar.tsx",
@@ -2473,11 +2486,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 44,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 137,
-          "column": 15
         }
       ]
     },
@@ -2599,6 +2607,30 @@
         }
       ]
     },
+    "6bf6d3f3d6261b75": {
+      "source": "对话",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 99,
+          "column": 52
+        }
+      ]
+    },
+    "6c9adcb20b29107a": {
+      "source": "没有符合筛选条件的调用",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/CallsPage.tsx",
+          "line": 110,
+          "column": 59
+        }
+      ]
+    },
     "6d1876364ac6457d": {
       "source": "代理方式",
       "kind": "text",
@@ -2678,12 +2710,12 @@
       "refs": [
         {
           "file": "shared/store/appStore.ts",
-          "line": 208,
+          "line": 205,
           "column": 23
         },
         {
           "file": "shared/store/appStore.ts",
-          "line": 215,
+          "line": 212,
           "column": 25
         }
       ]
@@ -3052,16 +3084,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 16,
           "column": 50
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 60,
-          "column": 48
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 66,
-          "column": 44
         }
       ]
     },
@@ -3123,15 +3145,15 @@
         }
       ]
     },
-    "8b6ff498515bcc2f": {
-      "source": "时间",
+    "8b0f9494ec4855e2": {
+      "source": "前一天",
       "kind": "text",
       "placeholders": [],
       "refs": [
         {
-          "file": "features/calls/CallTable.tsx",
-          "line": 36,
-          "column": 15
+          "file": "features/calls/CallsPage.tsx",
+          "line": 85,
+          "column": 75
         }
       ]
     },
@@ -3156,11 +3178,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 15,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 58,
-          "column": 15
         }
       ]
     },
@@ -3429,11 +3446,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 27,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 47,
-          "column": 15
         },
         {
           "file": "features/models/CursorModelEditor.tsx",
@@ -3784,16 +3796,6 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/calls/CallTable.tsx",
-          "line": 186,
-          "column": 32
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 189,
-          "column": 25
-        },
-        {
           "file": "features/models/CursorModelTestResult.tsx",
           "line": 58,
           "column": 86
@@ -3852,11 +3854,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 26,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 30,
-          "column": 15
         },
         {
           "file": "features/models/CursorModelEditor.tsx",
@@ -3946,6 +3943,20 @@
         }
       ]
     },
+    "ae412482061826a0": {
+      "source": "{count} 次异常",
+      "kind": "template",
+      "placeholders": [
+        "count"
+      ],
+      "refs": [
+        {
+          "file": "features/calls/CallsPage.tsx",
+          "line": 104,
+          "column": 60
+        }
+      ]
+    },
     "aecb952b1e6cce36": {
       "source": "关闭后隐藏 Dock 栏图标，仍可通过菜单栏图标打开应用。",
       "kind": "text",
@@ -3987,6 +3998,18 @@
           "file": "shell/AppLayout.tsx",
           "line": 26,
           "column": 123
+        }
+      ]
+    },
+    "af19ac0d4d3372f6": {
+      "source": "后一天",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/CallsPage.tsx",
+          "line": 89,
+          "column": 75
         }
       ]
     },
@@ -4124,16 +4147,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 45,
           "column": 33
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 53,
-          "column": 63
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 143,
-          "column": 42
         }
       ]
     },
@@ -4220,11 +4233,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 16,
           "column": 6
-        },
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 64,
-          "column": 15
         }
       ]
     },
@@ -4392,6 +4400,18 @@
         }
       ]
     },
+    "c2ffd768eb1cdd6c": {
+      "source": "调用时间线",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 70,
+          "column": 64
+        }
+      ]
+    },
     "c3760858cdb6d9f4": {
       "source": "请求体",
       "kind": "text",
@@ -4547,11 +4567,6 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/calls/CallTable.tsx",
-          "line": 41,
-          "column": 15
-        },
-        {
           "file": "features/models/CursorModelEditor.tsx",
           "line": 159,
           "column": 25
@@ -4654,6 +4669,18 @@
           "file": "features/settings/SettingsPage.tsx",
           "line": 161,
           "column": 7
+        }
+      ]
+    },
+    "d2bb025a2e51c410": {
+      "source": "开始",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 75,
+          "column": 40
         }
       ]
     },
@@ -4761,6 +4788,11 @@
       "kind": "text",
       "placeholders": [],
       "refs": [
+        {
+          "file": "features/calls/CallsPage.tsx",
+          "line": 92,
+          "column": 101
+        },
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
           "line": 20,
@@ -4933,6 +4965,23 @@
           "file": "features/models/LegacyModelImport.tsx",
           "line": 69,
           "column": 56
+        }
+      ]
+    },
+    "dc9591e56d502b43": {
+      "source": "进行中",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 104,
+          "column": 78
+        },
+        {
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 121,
+          "column": 76
         }
       ]
     },
@@ -5252,9 +5301,9 @@
           "column": 6
         },
         {
-          "file": "features/calls/CallTable.tsx",
-          "line": 82,
-          "column": 15
+          "file": "features/calls/roadmap/CallRoadmap.tsx",
+          "line": 76,
+          "column": 40
         }
       ]
     },
@@ -5412,11 +5461,6 @@
       "kind": "text",
       "placeholders": [],
       "refs": [
-        {
-          "file": "features/calls/CallTable.tsx",
-          "line": 183,
-          "column": 15
-        },
         {
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 318,
@@ -5596,6 +5640,20 @@
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
           "line": 96,
           "column": 19
+        }
+      ]
+    },
+    "f8f726c5007dabda": {
+      "source": "{count} 次调用",
+      "kind": "template",
+      "placeholders": [
+        "count"
+      ],
+      "refs": [
+        {
+          "file": "features/calls/CallsPage.tsx",
+          "line": 102,
+          "column": 10
         }
       ]
     },

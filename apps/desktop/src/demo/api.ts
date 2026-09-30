@@ -32,46 +32,64 @@ const models: Model[] = [
   createModel({ hash: "mock-mistral-small", order: 16, name: "Mistral Small", type: "openai", url: "https://api.mistral.ai", modelId: "mistral-small-latest", endpoint: "/v1/chat/completions" }),
 ];
 
-const calls: LlmCall[] = Array.from({ length: 24 }, (_, index) => {
-  const model = models[index % models.length];
-  const failed = index === 7 || index === 19;
-  return {
-    call_kind: "provider_llm",
-    route: "local_byok",
-    call_id: `mock-call-${String(index + 1).padStart(3, "0")}`,
-    run_id: `mock-run-${Math.floor(index / 3) + 1}`,
-    conversation_id: `mock-conversation-${Math.floor(index / 4) + 1}`,
-    provider_call_index: index + 1,
-    model_hash: model.model_hash,
-    provider_type: model.type,
-    provider_url: model.base_url,
-    request_type: model.type === "anthropic" ? "messages" : "responses",
-    request_url: model.type === "anthropic" ? `${model.base_url}/v1/messages` : `${model.base_url}${model.openai_endpoint}`,
-    model_id: model.model_id,
-    display_name: model.display_name,
-    reasoning_effort: index % 2 === 0 ? "high" : null,
-    fast: index % 3 === 0,
-    status: failed ? "failed" : "completed",
-    finish_reason: failed ? null : "stop",
-    created_at_ms: FIXED_NOW - index * 3 * 60_000,
-    ttfb_ms: 210 + index * 13,
-    ttfr_ms: 290 + index * 15,
-    ttft_ms: 370 + index * 17,
-    duration_ms: failed ? 812 : 1_420 + index * 71,
-    input_tokens: 4_800 + index * 337,
-    output_tokens: failed ? 0 : 820 + index * 43,
-    total_tokens: failed ? 4_800 + index * 337 : 5_620 + index * 380,
-    cache_read_tokens: 3_100 + index * 251,
-    cache_write_tokens: 320 + index * 19,
-    reasoning_tokens: index % 2 === 0 ? 420 + index * 11 : null,
-    message_count: 14 + (index % 8),
-    tool_count: 3 + (index % 5),
-    http_status: failed ? 429 : 200,
-    error_kind: failed ? "provider_rate_limit" : null,
-    error_message: failed ? "Mock provider rate limit" : null,
-    detailed: true,
-  };
-});
+// Agent sessions on the current day: each conversation is a burst of back-to-back tool rounds
+// with varied durations; the latest call is still running so the timeline shows live state.
+const DEMO_NOW = Date.now();
+const sessions = [
+  { startsAgoMin: 400, rounds: 6, model: 0 },
+  { startsAgoMin: 290, rounds: 9, model: 2 },
+  { startsAgoMin: 170, rounds: 4, model: 4 },
+  { startsAgoMin: 95, rounds: 7, model: 1 },
+  { startsAgoMin: 12, rounds: 5, model: 0 },
+];
+const calls: LlmCall[] = sessions.flatMap((session, sessionIndex) => {
+  let cursor = DEMO_NOW - session.startsAgoMin * 60_000;
+  return Array.from({ length: session.rounds }, (_, round): LlmCall => {
+    const index = sessionIndex * 10 + round;
+    const model = models[(session.model + (round % 3 === 2 ? 1 : 0)) % models.length];
+    const last = sessionIndex === sessions.length - 1 && round === session.rounds - 1;
+    const failed = index === 13 || index === 32;
+    const duration = failed ? 2_400 : 4_000 + ((index * 7919) % 70_000);
+    const createdAt = cursor;
+    cursor += duration + 8_000 + ((index * 104_729) % 90_000);
+    return {
+      call_kind: "provider_llm",
+      route: "local_byok",
+      call_id: `mock-call-${String(index + 1).padStart(3, "0")}`,
+      run_id: `mock-run-${sessionIndex + 1}-${Math.floor(round / 3)}`,
+      conversation_id: ["3f2a91c0", "8b1d27e4", "c05e9f13", "5a7c3b82", "e91f04d6"][sessionIndex] + "-4b1e-9c2a-demo",
+      provider_call_index: round + 1,
+      model_hash: model.model_hash,
+      provider_type: model.type,
+      provider_url: model.base_url,
+      request_type: model.type === "anthropic" ? "messages" : "responses",
+      request_url: model.type === "anthropic" ? `${model.base_url}/v1/messages` : `${model.base_url}${model.openai_endpoint}`,
+      model_id: model.model_id,
+      display_name: model.display_name,
+      reasoning_effort: index % 2 === 0 ? "high" : null,
+      fast: index % 3 === 0,
+      status: last ? "running" : failed ? "failed" : "completed",
+      finish_reason: last || failed ? null : "stop",
+      created_at_ms: createdAt,
+      ttfb_ms: 210 + index * 13,
+      ttfr_ms: 290 + index * 15,
+      ttft_ms: 370 + index * 17,
+      duration_ms: last ? null : duration,
+      input_tokens: 4_800 + index * 337,
+      output_tokens: failed ? 0 : 820 + index * 43,
+      total_tokens: failed ? 4_800 + index * 337 : 5_620 + index * 1_380,
+      cache_read_tokens: 3_100 + index * 251,
+      cache_write_tokens: 320 + index * 19,
+      reasoning_tokens: index % 2 === 0 ? 420 + index * 11 : null,
+      message_count: 14 + (index % 8),
+      tool_count: 3 + (index % 5),
+      http_status: last ? null : failed ? 429 : 200,
+      error_kind: failed ? "provider_rate_limit" : null,
+      error_message: failed ? "Mock provider rate limit" : null,
+      detailed: true,
+    };
+  });
+}).sort((a, b) => b.created_at_ms - a.created_at_ms);
 
 let harnessStatus: CursorHarnessStatus = {
   platform: "macos",
@@ -127,7 +145,11 @@ export function installDemoApi() {
       return method === "DELETE" ? empty() : json(models[0]);
     }
     if (path === "/overview") return json(createOverview(url.searchParams));
-    if (path === "/llm-calls") return json(calls);
+    if (path === "/llm-calls") {
+      const startMs = Number(url.searchParams.get("start_ms") ?? 0);
+      const endMs = Number(url.searchParams.get("end_ms") ?? Number.MAX_SAFE_INTEGER);
+      return json(calls.filter((call) => call.created_at_ms >= startMs && call.created_at_ms < endMs));
+    }
     if (path.startsWith("/llm-calls/")) return json(createCallDetail(path.slice("/llm-calls/".length)));
     if (path === "/harness/cursor/status") return json(harnessStatus);
     if (path === "/harness/cursor/ca/initialize") return json(harnessStatus);

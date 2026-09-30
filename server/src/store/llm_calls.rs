@@ -303,11 +303,21 @@ impl Store {
         }))
     }
 
-    pub async fn llm_calls(&self, limit: i64) -> Result<Vec<LlmCallSummary>> {
-        let rows = sqlx::query("SELECT * FROM llm_calls ORDER BY created_at_ms DESC LIMIT ?")
-            .bind(limit.clamp(1, 500))
-            .fetch_all(&self.pool)
-            .await?;
+    pub async fn llm_calls(
+        &self,
+        limit: i64,
+        start_ms: i64,
+        end_ms: i64,
+    ) -> Result<Vec<LlmCallSummary>> {
+        let rows = sqlx::query(
+            "SELECT * FROM llm_calls WHERE created_at_ms >= ? AND created_at_ms < ?
+             ORDER BY created_at_ms DESC LIMIT ?",
+        )
+        .bind(start_ms)
+        .bind(end_ms)
+        .bind(limit.clamp(1, 500))
+        .fetch_all(&self.pool)
+        .await?;
         rows.into_iter().map(summary_from_row).collect()
     }
 

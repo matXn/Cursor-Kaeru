@@ -512,7 +512,7 @@ export const api = {
     await writeText(text);
   },
   setCursorEnabled: (enabled: boolean) => request<CursorHarnessStatus>("/harness/cursor/enabled", { method: "PUT", body: JSON.stringify({ enabled }) }),
-  calls: () => request<LlmCall[]>("/llm-calls?limit=200"),
+  calls: (range: { startMs: number; endMs: number }) => request<LlmCall[]>(`/llm-calls?limit=500&start_ms=${range.startMs}&end_ms=${range.endMs}`),
   call: (id: string) => request<CallDetail>(`/llm-calls/${encodeURIComponent(id)}`),
   openCallDetails: async (id: string) => {
     const url = new URL(window.location.href);

@@ -281,12 +281,19 @@ impl Store {
             .transpose()
     }
 
-    pub async fn official_cursor_traces(&self, limit: i64) -> Result<Vec<CursorRunTraceSummary>> {
+    pub async fn official_cursor_traces(
+        &self,
+        limit: i64,
+        start_ms: i64,
+        end_ms: i64,
+    ) -> Result<Vec<CursorRunTraceSummary>> {
         let rows = sqlx::query(
             "SELECT * FROM cursor_run_traces
-             WHERE route = 'cursor_official'
+             WHERE route = 'cursor_official' AND received_at_ms >= ? AND received_at_ms < ?
              ORDER BY received_at_ms DESC LIMIT ?",
         )
+        .bind(start_ms)
+        .bind(end_ms)
         .bind(limit.clamp(1, 500))
         .fetch_all(&self.pool)
         .await?;

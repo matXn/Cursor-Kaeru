@@ -528,10 +528,10 @@ impl ControlService {
         })
     }
 
-    pub async fn calls(&self, limit: i64) -> Result<Vec<CallSummary>> {
+    pub async fn calls(&self, limit: i64, start_ms: i64, end_ms: i64) -> Result<Vec<CallSummary>> {
         let mut calls = self
             .store
-            .llm_calls(limit)
+            .llm_calls(limit, start_ms, end_ms)
             .await?
             .into_iter()
             .map(|call| CallSummary {
@@ -542,7 +542,7 @@ impl ControlService {
             .collect::<Vec<_>>();
         calls.extend(
             self.store
-                .official_cursor_traces(limit)
+                .official_cursor_traces(limit, start_ms, end_ms)
                 .await?
                 .into_iter()
                 .map(official_call),

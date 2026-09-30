@@ -1,0 +1,318 @@
+// Two panes sharing rows: the table on the left, the shared time axis on the right.
+.root {
+  --side-width: clamp(360px, 46%, 520px);
+  --row-h: 36px;
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--text-base);
+}
+
+.header,
+.groupRow,
+.callRow {
+  display: flex;
+  min-height: var(--row-h);
+}
+
+.side {
+  flex: 0 0 var(--side-width);
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-3);
+  border-right: 1px solid var(--border);
+}
+
+.lane {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+// ---- Header -------------------------------------------------
+.header {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.index {
+  flex: 0 0 20px;
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-align: right;
+}
+
+.name {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cell {
+  flex: 0 0 60px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  text-align: right;
+
+  .header & {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+}
+
+.tick {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+.nowMarker {
+  position: absolute;
+  bottom: -3px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+}
+
+// ---- Grid lines under every row -----------------------------
+.body {
+  position: relative;
+}
+
+.grid {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+
+  .side {
+    border-right-color: transparent;
+  }
+
+  i,
+  b {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  i {
+    background: var(--border);
+    opacity: 0.6;
+  }
+
+  b {
+    z-index: 1;
+    background: var(--accent);
+  }
+}
+
+// ---- Groups -------------------------------------------------
+.group + .group .groupRow {
+  border-top: 1px solid var(--border);
+}
+
+.groupRow {
+  position: relative;
+  z-index: 1;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  border-bottom: 1px solid var(--border);
+
+  button.side {
+    height: var(--row-h);
+    color: var(--text);
+    font: inherit;
+    text-align: left;
+    background: transparent;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--hover);
+    }
+  }
+}
+
+.chevron {
+  flex: 0 0 auto;
+  color: var(--text-faint);
+  transition: transform var(--duration);
+
+  [aria-expanded="false"] > & {
+    transform: rotate(-90deg);
+  }
+}
+
+.groupTitle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-weight: 500;
+
+  code {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 400;
+  }
+}
+
+.count {
+  min-width: 20px;
+  padding: 0 var(--space-1);
+  color: var(--text-muted);
+  background: var(--selected);
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
+.groupBar {
+  position: absolute;
+  top: 11px;
+  bottom: 11px;
+  min-width: 6px;
+  background: var(--selected);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+}
+
+.groupLabel {
+  position: absolute;
+  top: 50%;
+  padding: 0 var(--space-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+  transform: translateY(-50%);
+
+  span {
+    color: var(--text-faint);
+  }
+}
+
+// ---- Calls --------------------------------------------------
+.callRow {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--hover);
+  }
+
+  > .side,
+  > .lane {
+    min-height: var(--row-h);
+  }
+}
+
+.model {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.statusIcon {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  stroke: var(--text-faint);
+  fill: var(--text-faint);
+
+  &[data-status="completed"] {
+    stroke: var(--success);
+    fill: var(--success);
+  }
+
+  &[data-status="failed"] {
+    stroke: var(--danger);
+    fill: var(--danger);
+  }
+
+  &[data-status="running"] {
+    stroke: var(--accent);
+    stroke-dasharray: 3 2.5;
+    animation: spin 1.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.bar {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  min-width: 3px;
+  background: var(--selected);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+
+  &[data-status="failed"] {
+    background: color-mix(in srgb, var(--danger) 18%, transparent);
+    border-color: color-mix(in srgb, var(--danger) 60%, transparent);
+  }
+
+  &[data-status="running"] {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+}
+
+.barLabel {
+  position: absolute;
+  top: 50%;
+  padding: 0 var(--space-2);
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+  transform: translateY(-50%);
+  pointer-events: none;
+
+  &[data-anchor="end"] {
+    text-align: right;
+  }
+}
+
+.error {
+  color: var(--danger);
+}

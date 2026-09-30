@@ -1,10 +1,9 @@
 import { useSyncExternalStore } from "react";
-import { api, type CursorHarnessStatus, type LlmCall, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings } from "../api";
+import { api, type CursorHarnessStatus, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings } from "../api";
 import { applyTheme, isThemeId, type ThemeId } from "../theme/theme";
 
 export type AppSnapshot = {
   models: Model[];
-  calls: LlmCall[];
   overview: Overview;
   detailed: boolean;
   ports: PortSettings;
@@ -24,7 +23,6 @@ const savedTheme = (): ThemeId => {
 
 let snapshot: AppSnapshot = {
   models: [],
-  calls: [],
   overview: {
     metrics: {
       llm_calls: 0,
@@ -77,9 +75,8 @@ export const appStore = {
   async refresh() {
     update({ busy: true, error: null });
     try {
-      const [models, calls, overview, settings, ports, cursorHarness, pluginRuntime, plugins] = await Promise.all([
+      const [models, overview, settings, ports, cursorHarness, pluginRuntime, plugins] = await Promise.all([
         api.models(),
-        api.calls(),
         api.overview(),
         api.observability(),
         api.ports(),
@@ -87,7 +84,7 @@ export const appStore = {
         api.pluginRuntime(),
         api.plugins(),
       ]);
-      update({ models, calls, overview, detailed: settings.detailed, ports, cursorHarness, pluginRuntime, plugins });
+      update({ models, overview, detailed: settings.detailed, ports, cursorHarness, pluginRuntime, plugins });
     } catch (cause) {
       update({ error: cause instanceof Error ? cause.message : String(cause) });
     } finally {
@@ -232,13 +229,6 @@ export const appStore = {
     }
   },
 
-  async refreshCalls() {
-    try {
-      update({ calls: await api.calls() });
-    } catch (cause) {
-      update({ error: cause instanceof Error ? cause.message : String(cause) });
-    }
-  },
 
   async openCallDetails(callId: string) {
     await perform(() => api.openCallDetails(callId));
