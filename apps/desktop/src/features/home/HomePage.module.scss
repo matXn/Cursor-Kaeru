@@ -1,0 +1,4 @@
+// No page title: the wall headline is the top of the page.
+.content {
+  padding-top: calc(var(--topbar-height) + var(--space-8));
+}

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { formatCompactInteger, formatInteger } from "../../../shared/utils/numberFormat";
 import { Icon } from "../../../shared/ui/Icon";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
@@ -74,7 +75,8 @@ function InfoTooltip({ content }: { content: string }) {
   ><Icon icon={informationOutlineIcon} size="1.1em" /></button>;
 }
 
-export function HomeMetrics({ data }: { data: HomeMetricsData }) {
+// Range-scoped stats: the filter sits in the row header, values read left to right.
+export function HomeMetrics({ data, filter }: { data: HomeMetricsData; filter: ReactNode }) {
   const inputTokens = Math.max(0, data.promptTokens - data.cacheReadTokens - data.cacheWriteTokens);
   const outputTokens = Math.max(0, data.tokenUsage - data.promptTokens);
   const defaultCacheHitRate = calculateRate(data.cacheReadTokens, data.cacheReadTokens + inputTokens);
@@ -147,8 +149,9 @@ export function HomeMetrics({ data }: { data: HomeMetricsData }) {
     t("合计：{cost}", { cost: formatUSD(totalCost) }),
   ].join("\n");
 
-  return <div className={styles.scroller}>
-    <section className={styles.root} aria-label={t("调用统计")}>
+  return <section className={styles.root} aria-label={t("调用统计")}>
+    <div className={styles.toolbar}>{filter}</div>
+    <div className={styles.stats}>
       <article className={styles.metric}>
         <div className={styles.label}>{t("缓存命中率")}<InfoTooltip content={cacheTooltip} /></div>
         <div className={styles.body}>
@@ -180,6 +183,6 @@ export function HomeMetrics({ data }: { data: HomeMetricsData }) {
           <div className={styles.secondary}>{t("缓存读写 {cost}", { cost: formatUSD(cacheCost) })}</div>
         </div>
       </article>
-    </section>
-  </div>;
+    </div>
+  </section>;
 }

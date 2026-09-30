@@ -257,11 +257,26 @@ function createOverview(params: URLSearchParams): Overview {
   };
 }
 
+// Daily buckets get a sparse, seasonal rhythm (busy autumn and summer, quiet spring) so the
+// activity wall looks like real use; finer buckets stay continuous.
+function dayActivity(bucketStartMs: number) {
+  const day = Math.floor(bucketStartMs / 86_400_000);
+  const random = (seed: number) => {
+    const x = Math.sin(seed * 12.9898) * 43_758.5453;
+    return x - Math.floor(x);
+  };
+  const month = new Date(bucketStartMs).getUTCMonth();
+  const season = month >= 9 || (month >= 6 && month <= 8) ? 0.7 : month === 2 || month === 3 ? 0.3 : 0.08;
+  if (random(day) > season) return 0;
+  return (0.2 + random(day + 0.5) * random(day + 0.7) * 3) * (random(day + 0.9) < 0.12 ? 4 : 1);
+}
+
 function createSeries(count: number, step: number, end: number): OverviewTokenUsageBucket[] {
   return Array.from({ length: count }, (_, index) => {
-    const wave = 0.72 + ((index * 17) % 31) / 50;
+    const bucketStartMs = end - (count - index) * step;
+    const wave = (0.72 + ((index * 17) % 31) / 50) * (step >= 86_400_000 ? dayActivity(bucketStartMs) : 1);
     return {
-      bucket_start_ms: end - (count - index) * step,
+      bucket_start_ms: bucketStartMs,
       // input : cache_read = 1 : 99，使默认口径缓存命中率恰为 99%
       input_tokens: Math.round(800 * wave),
       cache_read_tokens: Math.round(79_200 * wave),

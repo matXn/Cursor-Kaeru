@@ -1,4 +1,4 @@
-import { autoUpdate, computePosition, flip, offset, shift, size } from "@floating-ui/dom";
+import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/dom";
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { parseTimeInput } from "../../../shared/utils/parseTimeInput";
@@ -6,95 +6,89 @@ import controls from "../../../shared/ui/Controls.module.scss";
 import { Icon } from "../../../shared/ui/Icon";
 import { ModelSelect, type ModelSelectOption } from "../../../shared/ui/ModelSelect";
 import { TooltipTrigger } from "../../../shared/ui/TooltipTrigger";
-import { refreshIcon } from "../../../shared/ui/icons";
+import { chevronDownIcon, refreshIcon } from "../../../shared/ui/icons";
 import styles from "./OverviewTimeRangeFilter.module.scss";
 
-export type OverviewRangePreset = "ten-minutes" | "hour" | "today" | "week" | "month" | "custom";
-export type QuickPreset = "four-hours" | "twenty-four-hours";
+export type OverviewRangePreset = "ten-minutes" | "hour" | "four-hours" | "twenty-four-hours" | "today" | "week" | "month" | "custom";
 
-export function OverviewTimeRangeFilter({ value, quick, customOpen, customStart, customEnd, modelOptions, selectedModels, busy, onSelect, onQuickSelect, onCustomOpenChange, onCustomStartChange, onCustomEndChange, onSelectedModelsChange, onCustomApply, onRefresh }: {
+export function presetLabel(preset: Exclude<OverviewRangePreset, "custom">) {
+  return {
+    "ten-minutes": t("近 10 分钟"),
+    hour: t("近 1 小时"),
+    "four-hours": t("近 4 小时"),
+    "twenty-four-hours": t("近 24 小时"),
+    today: t("今天"),
+    week: t("近 7 天"),
+    month: t("近 30 天"),
+  }[preset];
+}
+
+// Ordered by duration so the list reads top-to-bottom.
+const presets: Array<Exclude<OverviewRangePreset, "custom">> = ["ten-minutes", "hour", "four-hours", "twenty-four-hours", "today", "week", "month"];
+
+// One trigger showing the active range; presets, custom range and model filter live in its popover.
+export function OverviewTimeRangeFilter({ value, customLabel, customStart, customEnd, modelOptions, selectedModels, busy, onSelect, onCustomStartChange, onCustomEndChange, onSelectedModelsChange, onCustomApply, onRefresh }: {
   value: OverviewRangePreset;
-  quick: QuickPreset | null;
-  customOpen: boolean;
+  customLabel: string;
   customStart: string;
   customEnd: string;
   modelOptions: ModelSelectOption[];
   selectedModels: string[];
   busy: boolean;
   onSelect: (value: Exclude<OverviewRangePreset, "custom">) => void;
-  onQuickSelect: (durationMs: number) => void;
-  onCustomOpenChange: (open: boolean) => void;
   onCustomStartChange: (value: string) => void;
   onCustomEndChange: (value: string) => void;
   onSelectedModelsChange: (value: string[]) => void;
   onCustomApply: () => void;
   onRefresh: () => void;
 }) {
-  const presets: Array<{ value: Exclude<OverviewRangePreset, "custom">; label: string }> = [
-    { value: "hour", label: t("近1小时") },
-    { value: "today", label: t("近1自然日") },
-    { value: "ten-minutes", label: t("近10分钟") },
-    { value: "week", label: t("近一周") },
-    { value: "month", label: t("近一个月") },
-  ];
-  const quickPresets: Array<{ value: QuickPreset; label: string }> = [
-    { value: "four-hours", label: t("近4小时") },
-    { value: "twenty-four-hours", label: t("近24小时") },
-  ];
-  const customButton = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+  const trigger = useRef<HTMLButtonElement>(null);
   const popover = useRef<HTMLDivElement>(null);
   const popoverId = useId();
-  const [position, setPosition] = useState({ left: 0, top: 0, width: 300, maxHeight: 480 });
+  const [position, setPosition] = useState({ left: 0, top: 0 });
 
   useLayoutEffect(() => {
-    if (!customOpen || !customButton.current || !popover.current) return;
-    return autoUpdate(customButton.current, popover.current, () => void computePosition(customButton.current!, popover.current!, {
-      placement: "bottom-end",
-      middleware: [offset(5), flip({ padding: 10 }), shift({ padding: 10 }), size({
-        padding: 10,
-        apply: ({ availableHeight }) => setPosition((current) => ({
-          ...current,
-          maxHeight: Math.max(240, availableHeight),
-        })),
-      })],
-    }).then(({ x, y }) => setPosition((current) => ({ ...current, left: x, top: y }))));
-  }, [customOpen]);
+    if (!open || !trigger.current || !popover.current) return;
+    return autoUpdate(trigger.current, popover.current, () => void computePosition(trigger.current!, popover.current!, {
+      placement: "bottom-start",
+      middleware: [offset(4), flip({ padding: 10 }), shift({ padding: 10 })],
+    }).then(({ x, y }) => setPosition({ left: x, top: y })));
+  }, [open]);
 
   useEffect(() => {
-    if (!customOpen) return;
+    if (!open) return;
     const closeOutside = (event: PointerEvent) => {
       const target = event.target as Node;
-      if (!customButton.current?.contains(target) && !popover.current?.contains(target)) onCustomOpenChange(false);
+      if (!trigger.current?.contains(target) && !popover.current?.contains(target)) setOpen(false);
     };
     document.addEventListener("pointerdown", closeOutside);
     return () => document.removeEventListener("pointerdown", closeOutside);
-  }, [customOpen, onCustomOpenChange]);
+  }, [open]);
 
   const parsedStart = parseTimeInput(customStart);
   const parsedEnd = parseTimeInput(customEnd);
   const customValid = parsedStart !== null && parsedEnd !== null && parsedStart < parsedEnd;
+  const filtered = selectedModels.length > 0;
+
   return <div className={styles.root} aria-label={t("概览时间范围")}>
-    <div className={styles.presets}>
-      {presets.map((preset) => <button
-        key={preset.value}
-        type="button"
-        aria-pressed={value === preset.value}
-        onClick={() => onSelect(preset.value)}
-      >{preset.label}</button>)}
-      <button
-        ref={customButton}
-        type="button"
-        aria-haspopup="dialog"
-        aria-controls={customOpen ? popoverId : undefined}
-        aria-expanded={customOpen}
-        aria-pressed={value === "custom"}
-        onClick={() => onCustomOpenChange(!customOpen)}
-      >{t("自定义")}</button>
-    </div>
+    <button
+      ref={trigger}
+      type="button"
+      className={styles.trigger}
+      aria-haspopup="dialog"
+      aria-controls={open ? popoverId : undefined}
+      aria-expanded={open}
+      onClick={() => setOpen(!open)}
+    >
+      {value === "custom" ? customLabel : presetLabel(value)}
+      {filtered && <span className={styles.badge}>{t("{count} 个模型", { count: selectedModels.length })}</span>}
+      <Icon icon={chevronDownIcon} size="1em" />
+    </button>
     <TooltipTrigger label={t("刷新")}><button className={controls.iconButton} aria-label={t("刷新")} disabled={busy} onClick={onRefresh}>
-      <Icon className={busy ? controls.spin : ""} icon={refreshIcon} size="1.1em" />
+      <Icon className={busy ? controls.spin : ""} icon={refreshIcon} size="1em" />
     </button></TooltipTrigger>
-    {customOpen && createPortal(<div
+    {open && createPortal(<div
       id={popoverId}
       ref={popover}
       className={styles.popover}
@@ -105,25 +99,27 @@ export function OverviewTimeRangeFilter({ value, quick, customOpen, customStart,
       onKeyDown={(event) => {
         if (event.key === "Escape") {
           event.preventDefault();
-          onCustomOpenChange(false);
-          customButton.current?.focus();
+          setOpen(false);
+          trigger.current?.focus();
         }
       }}
     >
-      <div className={styles.quickPresets} aria-label={t("快捷时间范围")}>
-        {quickPresets.map((preset) => <button
-          key={preset.value}
+      <div className={styles.presets} role="listbox" aria-label={t("时间范围")}>
+        {presets.map((preset) => <button
+          key={preset}
           type="button"
-          aria-pressed={quick === preset.value}
-          onClick={() => onQuickSelect(preset.value === "four-hours" ? 4 * 60 * 60_000 : 24 * 60 * 60_000)}
-        >{preset.label}</button>)}
+          role="option"
+          aria-selected={value === preset}
+          onClick={() => { onSelect(preset); setOpen(false); }}
+        >{presetLabel(preset)}</button>)}
       </div>
-      <label><span>{t("开始时间")}</span><input type="text" placeholder={t("如：2026-08-23 09:00、1小时前")} value={customStart} onChange={(event) => onCustomStartChange(event.target.value)} /></label>
-      <label><span>{t("结束时间")}</span><input type="text" placeholder={t("如：现在、2026-08-23 18:00")} value={customEnd} onChange={(event) => onCustomEndChange(event.target.value)} /></label>
-      <div className={styles.filterRow}><ModelSelect mode="multiple" label={t("模型")} value={selectedModels} options={modelOptions} onChange={onSelectedModelsChange} /></div>
-      <div className={styles.popoverActions}>
-        <button type="button" className={controls.secondary} onClick={() => onCustomOpenChange(false)}>{t("取消")}</button>
-        <button type="button" className={controls.primary} disabled={!customValid} onClick={onCustomApply}>{t("应用")}</button>
+      <div className={styles.custom}>
+        <label><span>{t("开始时间")}</span><input type="text" placeholder={t("如：2026-08-23 09:00、1小时前")} value={customStart} onChange={(event) => onCustomStartChange(event.target.value)} /></label>
+        <label><span>{t("结束时间")}</span><input type="text" placeholder={t("如：现在、2026-08-23 18:00")} value={customEnd} onChange={(event) => onCustomEndChange(event.target.value)} /></label>
+        <ModelSelect mode="multiple" label={t("模型")} value={selectedModels} options={modelOptions} onChange={onSelectedModelsChange} />
+        <div className={styles.actions}>
+          <button type="button" className={controls.primary} disabled={!customValid} onClick={() => { onCustomApply(); setOpen(false); }}>{t("应用")}</button>
+        </div>
       </div>
     </div>, document.body)}
   </div>;

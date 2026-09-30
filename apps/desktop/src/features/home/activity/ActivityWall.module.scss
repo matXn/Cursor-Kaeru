@@ -1,67 +1,77 @@
 .root {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-5) var(--space-6) var(--space-4);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  gap: var(--space-5);
+  padding-top: var(--space-2);
 }
 
-.header {
+.headline {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-6);
-}
-
-.title {
+  gap: var(--space-3);
   margin: 0;
   color: var(--text-muted);
-  font-size: var(--text-sm);
-  font-weight: 500;
+  font-size: var(--text-md);
+  font-weight: 400;
 }
 
-.summary {
+.total {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.facts {
+  margin: var(--space-2) 0 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+
+  span {
+    color: var(--text-faint);
+  }
+}
+
+.footer {
+  min-height: 18px;
   display: flex;
-  gap: var(--space-8);
-  margin: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+}
 
-  div {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-2);
-  }
+.readout {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
 
-  dt {
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-  }
-
-  dd {
-    margin: 0;
+  strong {
     color: var(--text);
-    font-family: var(--font-mono);
-    font-size: var(--text-xl);
-    line-height: 1;
+    font-weight: 500;
   }
 }
 
 .legend {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 3px;
   color: var(--text-faint);
   font-size: var(--text-xs);
 
-  span {
-    margin: 0 var(--space-1);
-  }
-
   i {
     width: 10px;
     height: 10px;
+    margin: 0 1px;
     border-radius: 2px;
+
+    &:first-of-type {
+      margin-left: var(--space-1);
+    }
+
+    &:last-of-type {
+      margin-right: var(--space-1);
+    }
   }
 }

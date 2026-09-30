@@ -76,12 +76,13 @@
   --overlay: rgb(0 0 0 / 55%);
   --shadow-popover: 0 8px 24px rgb(0 0 0 / 45%);
 
-  // Activity heatmap, empty to busiest.
-  --heat-0: #262624;
-  --heat-1: #4a3129;
-  --heat-2: #7a4431;
-  --heat-3: #b05d40;
-  --heat-4: #d97757;
+  // Activity heatmap, empty to busiest. Empty sits just above the surface;
+  // the top step is brighter than the accent so busy days glow.
+  --heat-0: #292826;
+  --heat-1: #4d2a1d;
+  --heat-2: #8a3f25;
+  --heat-3: #d06840;
+  --heat-4: #f5a582;
 }
 
 // ---- Color: light --------------------------------------------
@@ -117,9 +118,9 @@
   --overlay: rgb(0 0 0 / 28%);
   --shadow-popover: 0 8px 24px rgb(0 0 0 / 12%);
 
-  --heat-0: #eeece6;
-  --heat-1: #f2d6c9;
-  --heat-2: #e6a88b;
-  --heat-3: #d27a57;
-  --heat-4: #c15f3c;
+  --heat-0: #ebe9e3;
+  --heat-1: #f3cdbb;
+  --heat-2: #e59a78;
+  --heat-3: #cc6841;
+  --heat-4: #9c4524;
 }

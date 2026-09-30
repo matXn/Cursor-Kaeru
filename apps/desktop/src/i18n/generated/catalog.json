@@ -21,8 +21,22 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 106,
+          "line": 108,
           "column": 5
+        }
+      ]
+    },
+    "01375d8a62c01660": {
+      "source": "活跃 {days} 天",
+      "kind": "template",
+      "placeholders": [
+        "days"
+      ],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 39,
+          "column": 10
         }
       ]
     },
@@ -46,6 +60,11 @@
       ],
       "refs": [
         {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 85,
+          "column": 52
+        },
+        {
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 266,
           "column": 39
@@ -63,7 +82,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 126,
+          "line": 128,
           "column": 5
         }
       ]
@@ -83,6 +102,18 @@
         }
       ]
     },
+    "02dcb354eba41c21": {
+      "source": "近 10 分钟",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 16,
+          "column": 20
+        }
+      ]
+    },
     "03ff62ab4b818492": {
       "source": "缓存写入：{tokens} × ${price}/1M = {cost}",
       "kind": "template",
@@ -94,7 +125,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 141,
+          "line": 143,
           "column": 5
         }
       ]
@@ -196,7 +227,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 118,
+          "line": 120,
           "column": 5
         }
       ]
@@ -210,7 +241,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 115,
+          "line": 117,
           "column": 5
         }
       ]
@@ -229,6 +260,18 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 388,
           "column": 73
+        }
+      ]
+    },
+    "07eb730af89936bf": {
+      "source": "时间范围",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 107,
+          "column": 66
         }
       ]
     },
@@ -278,7 +321,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 177,
+          "line": 180,
           "column": 40
         }
       ]
@@ -294,7 +337,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 136,
+          "line": 138,
           "column": 5
         }
       ]
@@ -416,18 +459,6 @@
         }
       ]
     },
-    "100fad4a0b3ab781": {
-      "source": "近24小时",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 42,
-          "column": 42
-        }
-      ]
-    },
     "105a9082c346f958": {
       "source": "测试中…",
       "kind": "text",
@@ -452,7 +483,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 170,
+          "line": 173,
           "column": 40
         }
       ]
@@ -486,6 +517,18 @@
         }
       ]
     },
+    "1336725e7e30069c": {
+      "source": "Token，过去一年",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 36,
+          "column": 16
+        }
+      ]
+    },
     "13a9ac7a68c5fd96": {
       "source": "CA 仅保存在本机，用于安全解析 Cursor 的 HTTPS 请求。",
       "kind": "text",
@@ -505,7 +548,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 153,
+          "line": 156,
           "column": 40
         }
       ]
@@ -575,7 +618,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 105,
+          "line": 107,
           "column": 5
         }
       ]
@@ -587,7 +630,7 @@
       "refs": [
         {
           "file": "shell/WindowControls.tsx",
-          "line": 38,
+          "line": 40,
           "column": 49
         }
       ]
@@ -611,8 +654,8 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 29,
-          "column": 14
+          "line": 64,
+          "column": 10
         }
       ]
     },
@@ -696,12 +739,12 @@
       "refs": [
         {
           "file": "shell/WindowControls.tsx",
-          "line": 62,
+          "line": 64,
           "column": 19
         },
         {
           "file": "shell/WindowControls.tsx",
-          "line": 63,
+          "line": 65,
           "column": 14
         }
       ]
@@ -739,7 +782,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 113,
+          "line": 115,
           "column": 5
         }
       ]
@@ -773,7 +816,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 96,
+          "line": 98,
           "column": 5
         }
       ]
@@ -874,6 +917,18 @@
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 426,
           "column": 50
+        }
+      ]
+    },
+    "2261b06712a3c505": {
+      "source": "近 7 天",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 21,
+          "column": 11
         }
       ]
     },
@@ -998,8 +1053,22 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 103,
+          "line": 105,
           "column": 5
+        }
+      ]
+    },
+    "2b3743723ec820a8": {
+      "source": "最长连续 {days} 天",
+      "kind": "template",
+      "placeholders": [
+        "days"
+      ],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 41,
+          "column": 10
         }
       ]
     },
@@ -1037,11 +1106,6 @@
       "kind": "text",
       "placeholders": [],
       "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 125,
-          "column": 105
-        },
         {
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 331,
@@ -1125,7 +1189,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 95,
+          "line": 97,
           "column": 5
         }
       ]
@@ -1386,7 +1450,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 163,
+          "line": 166,
           "column": 46
         }
       ]
@@ -1489,20 +1553,6 @@
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
           "line": 85,
           "column": 45
-        }
-      ]
-    },
-    "3cfae5728b92b334": {
-      "source": "Token 用量：{tokens}",
-      "kind": "template",
-      "placeholders": [
-        "tokens"
-      ],
-      "refs": [
-        {
-          "file": "features/home/activity/ContributionCalendar.tsx",
-          "line": 135,
-          "column": 16
         }
       ]
     },
@@ -1657,7 +1707,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 108,
+          "line": 110,
           "column": 5
         }
       ]
@@ -1755,7 +1805,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 31,
+          "line": 32,
           "column": 27
         },
         {
@@ -1892,9 +1942,9 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 92,
-          "column": 9
+          "file": "features/home/HomePage.tsx",
+          "line": 59,
+          "column": 22
         },
         {
           "file": "features/settings/ProxySettingsCard.tsx",
@@ -1915,18 +1965,6 @@
           "file": "features/settings/TabSettingsCard.tsx",
           "line": 60,
           "column": 41
-        }
-      ]
-    },
-    "51d04bc3d286f018": {
-      "source": "近1自然日",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 35,
-          "column": 30
         }
       ]
     },
@@ -1951,8 +1989,8 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 122,
-          "column": 70
+          "line": 118,
+          "column": 72
         }
       ]
     },
@@ -2220,7 +2258,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 147,
+          "line": 149,
           "column": 5
         }
       ]
@@ -2237,18 +2275,6 @@
         }
       ]
     },
-    "609640f72d422b57": {
-      "source": "快捷时间范围",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 113,
-          "column": 56
-        }
-      ]
-    },
     "61a4c7bac12dc125": {
       "source": "异常调用：{count}",
       "kind": "template",
@@ -2258,7 +2284,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 107,
+          "line": 109,
           "column": 5
         }
       ]
@@ -2284,7 +2310,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 117,
+          "line": 119,
           "column": 5
         }
       ]
@@ -2296,8 +2322,8 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 27,
-          "column": 14
+          "line": 62,
+          "column": 10
         }
       ]
     },
@@ -2325,8 +2351,8 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 126,
-          "column": 109
+          "line": 121,
+          "column": 140
         }
       ]
     },
@@ -2420,11 +2446,6 @@
           "column": 36
         },
         {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 21,
-          "column": 19
-        },
-        {
           "file": "shell/TopBar.tsx",
           "line": 17,
           "column": 30
@@ -2469,8 +2490,20 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 173,
+          "line": 176,
           "column": 46
+        }
+      ]
+    },
+    "670ec44baf9b6e5d": {
+      "source": "近 4 小时",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 18,
+          "column": 19
         }
       ]
     },
@@ -2522,8 +2555,8 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 121,
-          "column": 21
+          "line": 117,
+          "column": 23
         }
       ]
     },
@@ -2556,12 +2589,12 @@
       "refs": [
         {
           "file": "shell/WindowControls.tsx",
-          "line": 44,
+          "line": 46,
           "column": 19
         },
         {
           "file": "shell/WindowControls.tsx",
-          "line": 45,
+          "line": 47,
           "column": 14
         }
       ]
@@ -2621,7 +2654,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 180,
+          "line": 183,
           "column": 46
         }
       ]
@@ -2698,7 +2731,7 @@
       "refs": [
         {
           "file": "shell/WindowControls.tsx",
-          "line": 38,
+          "line": 40,
           "column": 37
         }
       ]
@@ -2722,8 +2755,8 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 151,
-          "column": 50
+          "line": 152,
+          "column": 55
         }
       ]
     },
@@ -2818,6 +2851,18 @@
         }
       ]
     },
+    "7f4bb32751aca68d": {
+      "source": "近 24 小时",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 19,
+          "column": 26
+        }
+      ]
+    },
     "7f68ebad19ba6bcd": {
       "source": "检查更新",
       "kind": "text",
@@ -2878,18 +2923,6 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 105,
           "column": 25
-        }
-      ]
-    },
-    "829827347a7f5f18": {
-      "source": "活跃天数",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 22,
-          "column": 19
         }
       ]
     },
@@ -3039,7 +3072,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 69,
+          "line": 70,
           "column": 17
         }
       ]
@@ -3087,18 +3120,6 @@
           "file": "shared/ui/Pagination.tsx",
           "line": 26,
           "column": 92
-        }
-      ]
-    },
-    "8b2ae02c20a758c6": {
-      "source": "过去一年",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 18,
-          "column": 37
         }
       ]
     },
@@ -3462,8 +3483,8 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 121,
-          "column": 70
+          "line": 117,
+          "column": 72
         }
       ]
     },
@@ -3533,18 +3554,6 @@
           "file": "features/settings/SettingsPage.tsx",
           "line": 246,
           "column": 26
-        }
-      ]
-    },
-    "9fb48101d237ff96": {
-      "source": "近一周",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 37,
-          "column": 29
         }
       ]
     },
@@ -3932,7 +3941,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 131,
+          "line": 133,
           "column": 5
         }
       ]
@@ -3956,12 +3965,12 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 94,
+          "line": 88,
           "column": 28
         },
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 94,
+          "line": 88,
           "column": 89
         },
         {
@@ -4096,7 +4105,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 114,
+          "line": 116,
           "column": 5
         }
       ]
@@ -4161,7 +4170,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 116,
+          "line": 118,
           "column": 5
         }
       ]
@@ -4352,7 +4361,7 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 76,
+          "line": 74,
           "column": 51
         }
       ]
@@ -4397,6 +4406,20 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 58,
           "column": 51
+        }
+      ]
+    },
+    "c3def7db312dcece": {
+      "source": "最忙 {day}",
+      "kind": "template",
+      "placeholders": [
+        "day"
+      ],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 44,
+          "column": 12
         }
       ]
     },
@@ -4472,8 +4495,8 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 123,
-          "column": 77
+          "line": 119,
+          "column": 45
         },
         {
           "file": "shell/TopBar.tsx",
@@ -4513,7 +4536,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 124,
+          "line": 126,
           "column": 5
         }
       ]
@@ -4569,6 +4592,18 @@
         }
       ]
     },
+    "cf9f068ebfd001f0": {
+      "source": "近 1 小时",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 17,
+          "column": 11
+        }
+      ]
+    },
     "cfae1a14d2120c57": {
       "source": "详细模式",
       "kind": "text",
@@ -4595,18 +4630,6 @@
           "file": "features/settings/SettingsPage.tsx",
           "line": 205,
           "column": 21
-        }
-      ]
-    },
-    "d0bfccc77315d887": {
-      "source": "近一个月",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 38,
-          "column": 30
         }
       ]
     },
@@ -4733,6 +4756,18 @@
         }
       ]
     },
+    "d5f5a7a010731feb": {
+      "source": "今天",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 20,
+          "column": 12
+        }
+      ]
+    },
     "d60669bb26a22f5d": {
       "source": "留空使用默认值",
       "kind": "text",
@@ -4855,18 +4890,6 @@
         }
       ]
     },
-    "da7ae985487c38e6": {
-      "source": "近1小时",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 34,
-          "column": 29
-        }
-      ]
-    },
     "daede9881787abe7": {
       "source": "备注",
       "kind": "text",
@@ -4944,7 +4967,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 111,
+          "line": 113,
           "column": 5
         }
       ]
@@ -5057,7 +5080,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 16,
+          "line": 32,
           "column": 55
         }
       ]
@@ -5083,6 +5106,18 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 220,
           "column": 26
+        }
+      ]
+    },
+    "e1829b7118cbbbe2": {
+      "source": "悬停查看某一天，点击查看当天的调用",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 59,
+          "column": 13
         }
       ]
     },
@@ -5148,7 +5183,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 160,
+          "line": 163,
           "column": 40
         }
       ]
@@ -5162,18 +5197,6 @@
           "file": "features/models/CursorModelEditor.tsx",
           "line": 154,
           "column": 54
-        }
-      ]
-    },
-    "e5043c7a2b408271": {
-      "source": "近10分钟",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 36,
-          "column": 36
         }
       ]
     },
@@ -5231,6 +5254,18 @@
         {
           "file": "features/calls/CallTable.tsx",
           "line": 82,
+          "column": 15
+        }
+      ]
+    },
+    "e7c11c61cc102f6f": {
+      "source": "没有调用",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 58,
           "column": 15
         }
       ]
@@ -5331,7 +5366,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 123,
+          "line": 125,
           "column": 5
         }
       ]
@@ -5473,8 +5508,8 @@
       "refs": [
         {
           "file": "features/home/activity/ContributionCalendar.tsx",
-          "line": 276,
-          "column": 23
+          "line": 102,
+          "column": 19
         }
       ]
     },
@@ -5485,8 +5520,8 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 122,
-          "column": 21
+          "line": 118,
+          "column": 23
         }
       ]
     },
@@ -5511,6 +5546,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 178,
           "column": 32
+        }
+      ]
+    },
+    "f729bb3d3f7ef33c": {
+      "source": "近 30 天",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
+          "line": 22,
+          "column": 12
         }
       ]
     },
@@ -5540,18 +5587,6 @@
         }
       ]
     },
-    "f784b165bd3fcb0e": {
-      "source": "近4小时",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 41,
-          "column": 35
-        }
-      ]
-    },
     "f85537d1fd2ef6f6": {
       "source": "自定义概览筛选",
       "kind": "text",
@@ -5559,7 +5594,7 @@
       "refs": [
         {
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
-          "line": 102,
+          "line": 96,
           "column": 19
         }
       ]
@@ -5699,7 +5734,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 97,
+          "line": 99,
           "column": 5
         }
       ]
@@ -5735,7 +5770,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 120,
+          "line": 122,
           "column": 5
         }
       ]
@@ -5769,11 +5804,6 @@
       "kind": "text",
       "placeholders": [],
       "refs": [
-        {
-          "file": "features/home/HomePage.tsx",
-          "line": 199,
-          "column": 25
-        },
         {
           "file": "shell/TopBar.tsx",
           "line": 16,

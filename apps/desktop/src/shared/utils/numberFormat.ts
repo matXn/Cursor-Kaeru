@@ -28,3 +28,16 @@ export function formatCompactInteger(value: number) {
   const fractionDigits = Math.abs(scaled) < 100 ? 1 : 0;
   return `${trimTrailingZeros(scaled.toFixed(fractionDigits))}${unit.suffix}`;
 }
+
+// Large totals in the unit the reader thinks in: "3142 万" in Chinese, "31.4M" in English.
+export function formatLocaleCompact(value: number, locale: string) {
+  if (!locale.startsWith("zh")) return formatCompactInteger(value);
+  const format = (fractionDigits: number) => new Intl.NumberFormat(locale, { notation: "compact", maximumFractionDigits: fractionDigits }).formatToParts(normalizeInteger(value));
+  // One decimal only while the scaled number is small ("3.1 万"), none once it reaches 100 ("2111 万").
+  const rough = format(1);
+  const scaled = Number(rough.filter((part) => part.type === "integer").map((part) => part.value).join(""));
+  const parts = scaled >= 100 ? format(0) : rough;
+  const number = parts.filter((part) => part.type !== "compact").map((part) => part.value).join("");
+  const unit = parts.find((part) => part.type === "compact")?.value;
+  return unit ? `${number} ${unit}` : number;
+}
