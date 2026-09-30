@@ -126,6 +126,9 @@ export function installDemoApi() {
     const method = (init?.method ?? (input instanceof Request ? input.method : "GET")).toUpperCase();
     const body = await readBody(input, init);
 
+    if (path === "/settings/commit") {
+      return json({ model_id: models[0].model_id, prompt: "", prompt_locale: "zh-CN", default_prompt: "Summarize the staged changes as a commit message." });
+    }
     if (path === "/plugins/runtime") {
       return json({ state: "ready", version: "demo", target: null, phase: null, downloaded_bytes: 0, total_bytes: null, error: null });
     }

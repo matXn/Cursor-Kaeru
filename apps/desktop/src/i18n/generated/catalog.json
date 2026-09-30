@@ -1645,7 +1645,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 97,
+          "line": 80,
           "column": 22
         }
       ]
@@ -1890,7 +1890,7 @@
       "refs": [
         {
           "file": "features/home/HomePage.tsx",
-          "line": 59,
+          "line": 58,
           "column": 22
         },
         {
@@ -1922,7 +1922,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 110,
+          "line": 93,
           "column": 78
         }
       ]
@@ -2365,7 +2365,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 510,
+          "line": 512,
           "column": 43
         }
       ]
@@ -2396,7 +2396,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 113,
+          "line": 96,
           "column": 36
         },
         {
@@ -2572,7 +2572,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 110,
+          "line": 93,
           "column": 59
         }
       ]
@@ -2709,7 +2709,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 505,
+          "line": 507,
           "column": 43
         }
       ]
@@ -2849,7 +2849,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 449,
+          "line": 450,
           "column": 21
         }
       ]
@@ -3060,7 +3060,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 85,
+          "line": 68,
           "column": 75
         }
       ]
@@ -3820,7 +3820,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 104,
+          "line": 87,
           "column": 60
         }
       ]
@@ -3876,7 +3876,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 89,
+          "line": 72,
           "column": 75
         }
       ]
@@ -4387,6 +4387,11 @@
           "column": 45
         },
         {
+          "file": "features/models/CursorSettingsPage.tsx",
+          "line": 327,
+          "column": 25
+        },
+        {
           "file": "shell/TopBar.tsx",
           "line": 16,
           "column": 39
@@ -4658,7 +4663,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 92,
+          "line": 75,
           "column": 101
         },
         {
@@ -5193,6 +5198,11 @@
       "placeholders": [],
       "refs": [
         {
+          "file": "features/plugins/PluginManagementPage.tsx",
+          "line": 65,
+          "column": 14
+        },
+        {
           "file": "shell/TopBar.tsx",
           "line": 17,
           "column": 32
@@ -5473,18 +5483,6 @@
         }
       ]
     },
-    "f78265089144369a": {
-      "source": "插件配置",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 65,
-          "column": 14
-        }
-      ]
-    },
     "f78413c36d36f090": {
       "source": "默认跟随操作系统；不支持的系统语言使用英文。当前：{language}",
       "kind": "template",
@@ -5520,7 +5518,7 @@
       "refs": [
         {
           "file": "features/calls/CallsPage.tsx",
-          "line": 102,
+          "line": 85,
           "column": 10
         }
       ]
