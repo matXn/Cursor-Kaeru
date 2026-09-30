@@ -155,9 +155,9 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
     const hostStyle = useMemo<CSSProperties>(
       () => ({
         ...style,
-        "--oa-scrollbar-size": `${scrollbarSize}px`,
-        "--oa-scrollbar-min-thumb-size": `${minThumbSize}px`,
-        "--oa-scrollbar-inset-top":
+        "--scroll-size": `${scrollbarSize}px`,
+        "--scroll-min-thumb": `${minThumbSize}px`,
+        "--scroll-inset-top":
           typeof scrollbarInsetTop === "number"
             ? `${scrollbarInsetTop}px`
             : scrollbarInsetTop,

@@ -1,4 +1,3 @@
-@use "../../styles/typography" as type;
 
 .title {
   min-width: 0;
@@ -28,8 +27,8 @@
   gap: 5px;
 
   small {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 
@@ -40,19 +39,19 @@
 .value {
   min-width: 0;
   max-width: 70%;
-  color: var(--vscode-descriptionForeground);
+  color: var(--text-muted);
   overflow-wrap: anywhere;
   text-align: right;
 }
 
 .headerAction {
   padding: 4px;
-  color: var(--vscode-textLink-foreground);
+  color: var(--accent);
   background: transparent;
   border: 0;
-  font-size: type.$font-size-xs;
+  font-size: var(--text-base);
 
-  &:hover { color: var(--vscode-textLink-activeForeground); }
+  &:hover { color: var(--accent-hover); }
   &:disabled { opacity: .5; }
 }
 

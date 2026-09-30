@@ -1,6 +1,4 @@
-@use "./typography" as type;
-@use "./themes";
-@use "./brand" as brand;
+@use "./tokens";
 
 @font-face {
   font-family: "Geist";
@@ -18,33 +16,16 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "PingFang-Medium";
-  src: url("../shared/assets/fonts/PingFang-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "HFKos";
-  src: url("../shared/assets/fonts/HFKos-R.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --window-header-height: 30px;
-  --oa-ui-font: "Geist", Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --oa-code-font: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
-  --oa-metrics-font: "PingFang-Medium", var(--oa-ui-font);
-  --oa-number-font: "HFKos", "PingFang-Medium", var(--oa-ui-font);
-  font-family: var(--oa-ui-font);
-  font-size: type.$font-size-base;
-  color: var(--vscode-foreground);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--text);
   font-synthesis: none;
+  font-variant-numeric: tabular-nums;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 * {
@@ -52,8 +33,8 @@
 }
 
 ::selection {
-  color: var(--vscode-editor-selectionForeground);
-  background: var(--vscode-editor-selectionBackground);
+  color: var(--text);
+  background: var(--selection);
 }
 
 html,
@@ -65,16 +46,14 @@ body,
   overflow: hidden;
 }
 
-// Liquid-glass ambient backdrop. Floating glass surfaces sit on top of this
-// so the backdrop-filter has soft color to refract.
 body {
-  @include brand.ambient-backdrop;
-  background-attachment: fixed;
+  background: var(--bg);
 }
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
   color: inherit;
 }
@@ -83,28 +62,18 @@ button {
   cursor: pointer;
 }
 
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 1px;
+}
+
 [data-tauri-drag-region] {
   -webkit-app-region: drag;
 }
 
-// ---- Liquid glass utility classes -----------------------------
-// Apply on top of component SCSS to lift a surface into glass.
-.glass-panel {
-  @include brand.glass-strong(var(--oa-radius-blob-b));
-}
-
-.glass-soft {
-  @include brand.glass(12%, 24px, 150%, var(--oa-radius-soft-a));
-}
-
-.glass-pill {
-  @include brand.glass(10%, 20px, 150%, var(--oa-radius-pill));
-}
-
-// Refined scrollbars
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--vscode-scrollbarSlider-hoverBackground) transparent;
+  scrollbar-color: var(--scrollbar) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -117,13 +86,13 @@ button {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--vscode-scrollbarSlider-background);
-  border-radius: var(--oa-radius-pill);
+  background: var(--scrollbar);
+  border-radius: var(--radius-full);
   border: 3px solid transparent;
   background-clip: padding-box;
 
   &:hover {
-    background: var(--vscode-scrollbarSlider-hoverBackground);
+    background: var(--scrollbar-hover);
     background-clip: padding-box;
   }
 }

@@ -1,5 +1,3 @@
-@use "../../../styles/typography" as type;
-@use "../../../styles/brand" as brand;
 
 .scroller {
   width: 100%;
@@ -13,10 +11,11 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   overflow: hidden;
-  border-radius: var(--oa-radius-soft-b);
-  font-family: var(--oa-metrics-font);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
 
-  @include brand.glass-strong(var(--oa-radius-soft-b));
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 .metric {
@@ -27,7 +26,7 @@
   padding: 18px;
 
   & + & {
-    border-left: 1px solid color-mix(in srgb, var(--vscode-sideBar-border) 70%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   }
 }
 
@@ -35,8 +34,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-2xs;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
   line-height: 1;
 }
 
@@ -55,7 +54,7 @@
 
   &:hover,
   &:focus-visible {
-    color: var(--vscode-foreground);
+    color: var(--text);
   }
 }
 
@@ -65,9 +64,9 @@
 
 .value {
   overflow: hidden;
-  color: var(--vscode-foreground);
-  font-family: var(--oa-number-font);
-  font-size: type.$font-size-xxl;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
   line-height: 1;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -76,7 +75,7 @@
 .secondary {
   margin-top: 12px;
   overflow: hidden;
-  color: var(--vscode-descriptionForeground);
+  color: var(--text-muted);
   font-size: 12px;
   line-height: 1.4;
   text-overflow: ellipsis;

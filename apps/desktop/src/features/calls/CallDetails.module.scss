@@ -1,8 +1,7 @@
-@use "../../styles/typography" as type;
 
 .root {
   section { min-width: 0; }
-  h4 { margin: 12px 0 6px; color: var(--vscode-descriptionForeground); font-size: type.$font-size-xs; font-weight: 500; }
+  h4 { margin: 12px 0 6px; color: var(--text-muted); font-size: var(--text-base); font-weight: 500; }
 }
 
 .details {
@@ -12,8 +11,8 @@
   padding: 8px;
   margin: 0;
   overflow: hidden;
-  border-radius: var(--oa-radius-soft-a);
-  border: 1px solid var(--vscode-sideBar-border);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
 
   > div {
     min-width: 0;
@@ -21,19 +20,19 @@
     grid-template-columns: 132px minmax(0, 1fr);
     gap: 10px;
     padding: 8px 10px;
-    background: color-mix(in srgb, var(--vscode-editorWidget-background) 60%, transparent);
-    border-radius: var(--oa-radius-cap);
+    background: color-mix(in srgb, var(--surface-raised) 60%, transparent);
+    border-radius: var(--radius);
   }
 
-  dt { color: var(--vscode-descriptionForeground); font-size: type.$font-size-xs; }
+  dt { color: var(--text-muted); font-size: var(--text-base); }
   dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
-  code { white-space: pre-wrap; font-family: var(--oa-code-font); font-size: type.$font-size-xs; }
+  code { white-space: pre-wrap; font-family: var(--font-mono); font-size: var(--text-base); }
 }
 .meta{
   margin-bottom: 10px;
 }
 .meta,
 .empty {
-  color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-xs;
+  color: var(--text-muted);
+  font-size: var(--text-base);
 }

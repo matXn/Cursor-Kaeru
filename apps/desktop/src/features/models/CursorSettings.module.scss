@@ -1,4 +1,3 @@
-@use "../../styles/typography" as type;
 
 .page {
   display: grid;
@@ -13,8 +12,8 @@
 
 .takeoverStatus {
   min-width: 39px;
-  color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-xs;
+  color: var(--text-muted);
+  font-size: var(--text-base);
   text-align: right;
   white-space: nowrap;
 }
@@ -26,27 +25,27 @@
   padding: 4px;
   overflow: hidden;
   border-radius: 6px;
-  border: 1px solid #30363d;
-  background: #161b22;
+  border: 1px solid var(--border);
+  background: var(--surface-raised);
 
   button {
     height: 28px;
     padding: 0 12px;
-    color: #8b949e;
+    color: var(--text-muted);
     background: transparent;
     border: 0;
     border-radius: 4px;
-    font-size: type.$font-size-xs;
+    font-size: var(--text-base);
     white-space: nowrap;
     transition: background 100ms ease, color 100ms ease;
 
     &:hover:not(:disabled) { 
-      color: #c9d1d9; 
-      background: #21262d; 
+      color: var(--text); 
+      background: var(--hover); 
     }
     &[aria-pressed="true"] { 
-      color: #c9d1d9; 
-      background: #30363d; 
+      color: var(--text); 
+      background: var(--selected); 
     }
     &:disabled { 
       opacity: 0.5; 
@@ -68,17 +67,17 @@
   align-items: center;
   justify-content: center;
   gap: 9px;
-  color: var(--vscode-descriptionForeground);
+  color: var(--text-muted);
   text-align: center;
-  border: 1px dashed var(--vscode-sideBar-border);
-  border-radius: var(--oa-radius-blob-c);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
   strong {
-    color: var(--vscode-foreground);
-    font-size: type.$font-size-base;
+    color: var(--text);
+    font-size: var(--text-md);
   }
   span {
     max-width: 440px;
-    font-size: type.$font-size-xs;
+    font-size: var(--text-base);
   }
   button {
     margin-top: 6px;
@@ -110,20 +109,20 @@
   align-items: center;
   gap: 4px;
   padding: 4px 2px;
-  color: var(--vscode-descriptionForeground);
+  color: var(--text-muted);
   background: none;
   border: none;
-  font-size: type.$font-size-xs;
+  font-size: var(--text-base);
   white-space: nowrap;
   cursor: pointer;
 
-  &:hover { color: var(--vscode-foreground); }
+  &:hover { color: var(--text); }
 }
 .groupChevron {
   display: flex;
   align-items: center;
   padding: 4px 0;
-  color: var(--vscode-foreground);
+  color: var(--text);
   background: none;
   border: none;
   cursor: pointer;
@@ -135,10 +134,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 2px;
-  color: var(--vscode-foreground);
+  color: var(--text);
   background: none;
   border: none;
-  font-size: type.$font-size-base;
+  font-size: var(--text-md);
   cursor: pointer;
 }
 .groupLabel {
@@ -158,7 +157,7 @@
   flex-wrap: wrap;
   gap: 10px 12px;
   padding: 10px 2px;
-  border-top: 1px solid var(--vscode-sideBar-border);
+  border-top: 1px solid var(--border);
 }
 .modelRowName {
   min-width: 0;
@@ -174,12 +173,12 @@
     white-space: nowrap;
   }
   .modelRowNameText {
-    color: var(--vscode-foreground);
-    font-size: type.$font-size-base;
+    color: var(--text);
+    font-size: var(--text-md);
   }
   .modelRowModelId {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-2xs;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
   }
 }
 .modelCard {
@@ -213,12 +212,12 @@
     white-space: nowrap;
   }
   .modelCardNameText {
-    color: var(--vscode-foreground);
-    font-size: type.$font-size-base;
+    color: var(--text);
+    font-size: var(--text-md);
   }
   .modelCardModelId {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-2xs;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
   }
 }
 .modelTypeBadge {
@@ -227,10 +226,10 @@
   align-items: center;
   gap: 4px;
   padding: 3px 7px;
-  color: var(--vscode-foreground);
-  border: 1px solid var(--vscode-sideBar-border);
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  font-size: type.$font-size-2xs;
+  font-size: var(--text-sm);
 }
 .modelCardTest {
   min-height: 31px;
@@ -250,7 +249,7 @@
   }
 }
 .deleteButton:hover {
-  color: var(--vscode-errorForeground, #f48771);
+  color: var(--danger);
 }
 .sortHandle {
   position: absolute;
@@ -265,7 +264,7 @@
   color: transparent;
   background: transparent;
   border: 1px solid transparent;
-  border-radius: var(--oa-radius-pill);
+  border-radius: var(--radius);
   opacity: 0;
   cursor: grab;
   touch-action: none;
@@ -273,9 +272,9 @@
 
   &:focus-visible,
   .modelCard:hover & {
-    color: var(--vscode-foreground);
-    background: var(--vscode-list-hoverBackground);
-    border-color: var(--vscode-sideBar-border);
+    color: var(--text);
+    background: var(--hover);
+    border-color: var(--border);
     opacity: 1;
   }
   &:active {
@@ -290,7 +289,7 @@
   opacity: 0.4;
 }
 .sortChosen {
-  border-color: var(--vscode-focusBorder);
+  border-color: var(--accent);
 }
 .sortDragging {
   cursor: grabbing;
@@ -304,10 +303,10 @@
   margin: 0;
   padding: 12px 14px;
   overflow: auto;
-  color: var(--vscode-textLink-foreground);
-  background: color-mix(in srgb, var(--vscode-textCodeBlock-background) 80%, transparent);
-  border: 1px solid var(--vscode-sideBar-border);
-  border-radius: var(--oa-radius-soft-a);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   white-space: pre-wrap;
   user-select: text;
 }
@@ -341,8 +340,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 
@@ -356,8 +355,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 

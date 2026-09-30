@@ -1,8 +1,9 @@
-@use "../../styles/brand" as brand;
 
 .root {
   padding: 0;
-  color: var(--vscode-foreground);
+  color: var(--text);
+  border-radius: var(--radius);
 
-  @include brand.glass(16%, 30px, 165%, 0);
+  background: var(--surface);
+  border: 1px solid var(--border);
 }

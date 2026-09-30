@@ -1,29 +1,28 @@
-@use "../styles/bruno-tokens" as bruno;
 
-// Bruno-style layout: solid sidebar + clean content area
+// Sidebar: layout: solid sidebar + clean content area
 .root {
   --app-region-gap: 16px;
   --app-toolbar-height: 38px;
   --app-page-max-width: 1280px;
   --app-page-padding: 20px;
-  --app-content-left: calc(var(--app-edge) + #{bruno.$bruno-sidebar-width});
+  --app-sidebar-width: 220px;
+  --app-content-left: calc(var(--app-edge) + var(--app-sidebar-width));
   --app-content-top: calc(var(--window-safe-top) + var(--app-toolbar-height) + 12px);
-  background: bruno.$bruno-bg-primary;
+  background: var(--bg);
 }
 
-// Bruno-style solid sidebar with border
+// Sidebar: solid sidebar with border
 .menuCard {
   position: fixed;
   z-index: 10;
   top: calc(var(--window-menu-top) + 8px);
   bottom: calc(var(--app-edge) + 8px);
   left: var(--app-edge);
-  width: bruno.$bruno-sidebar-width;
+  width: var(--app-sidebar-width);
   overflow: hidden;
-  background: bruno.$bruno-bg-secondary;
-  border: 1px solid bruno.$bruno-border;
-  border-radius: bruno.$bruno-radius-md;
-  box-shadow: bruno.$bruno-shadow-md;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .navigation {
@@ -32,7 +31,7 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: bruno.$bruno-space-4;
+  padding: var(--space-4);
   -webkit-user-select: none;
   user-select: none;
 }
@@ -45,18 +44,18 @@
   overflow: auto;
 }
 
-// Bruno-style group headers: uppercase, small, top border
+// Sidebar: group headers: uppercase, small, top border
 .navigationGroup {
   display: flex;
   align-items: center;
-  padding: bruno.$bruno-space-2 bruno.$bruno-space-3;
-  margin: bruno.$bruno-space-4 0 bruno.$bruno-space-2;
-  color: bruno.$bruno-text-secondary;
-  font-size: bruno.$bruno-font-size-xs;
-  font-weight: bruno.$bruno-font-weight-semibold;
+  padding: var(--space-2) var(--space-3);
+  margin: var(--space-4) 0 var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border-top: 1px solid bruno.$bruno-border;
+  border-top: 1px solid var(--border);
   
   &:first-child {
     margin-top: 0;
@@ -64,9 +63,9 @@
   }
 }
 
-// Bruno-style menu items: 32px height, 4px radius, solid active background
+// Sidebar: menu items: 32px height, 4px radius, solid active background
 .navigationRow {
-  flex: 0 0 bruno.$bruno-height-md;
+  flex: 0 0 var(--control-h);
   display: flex;
   align-items: stretch;
   margin: 2px 0;
@@ -74,33 +73,29 @@
   a,
   button {
     width: 100%;
-    height: bruno.$bruno-height-md;
+    height: var(--control-h);
     display: flex;
     align-items: center;
-    gap: bruno.$bruno-space-2;
-    padding: 0 bruno.$bruno-space-3;
-    color: bruno.$bruno-text-primary;
+    gap: var(--space-2);
+    padding: 0 var(--space-3);
+    color: var(--text);
     text-decoration: none;
-    font-size: bruno.$bruno-font-size-base;
+    font-size: var(--text-base);
     background: transparent;
     border: none;
-    border-radius: bruno.$bruno-radius-sm;
-    transition: background bruno.$bruno-transition-fast, color bruno.$bruno-transition-fast;
+    border-radius: var(--radius-sm);
+    transition: background var(--duration), color var(--duration);
     cursor: pointer;
 
     &:hover {
-      background: bruno.$bruno-bg-tertiary;
-      color: bruno.$bruno-text-white;
+      background: var(--hover);
+      color: var(--text);
     }
 
-    // Bruno active state: solid accent background (not border)
     &[aria-current="page"] {
-      color: bruno.$bruno-text-white;
-      background: bruno.$bruno-accent;
-      
-      &:hover {
-        background: bruno.$bruno-accent-hover;
-      }
+      color: var(--text);
+      background: var(--selected);
+      box-shadow: inset 2px 0 0 var(--accent);
     }
   }
 
@@ -110,71 +105,39 @@
   }
 }
 
-// Bruno-style status tag
+// Sidebar: status tag
 .menuStatusTag {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  padding: 2px bruno.$bruno-space-2;
-  color: bruno.$bruno-text-secondary;
+  padding: 2px var(--space-2);
+  color: var(--text-muted);
   background: transparent;
-  border: 1px solid bruno.$bruno-border;
-  border-radius: bruno.$bruno-radius-sm;
-  font-size: bruno.$bruno-font-size-xs;
-  font-weight: bruno.$bruno-font-weight-medium;
-  line-height: bruno.$bruno-line-height-tight;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 1.2;
 
   &[data-taken] {
-    color: bruno.$bruno-success;
-    border-color: bruno.$bruno-success;
+    color: var(--success);
+    border-color: var(--success);
   }
 }
 
-// Bruno-style indicator dot
+// Sidebar: indicator dot
 .menuIndicatorDot {
   width: 6px;
   height: 6px;
   flex: 0 0 6px;
   margin-left: auto;
-  background: bruno.$bruno-error;
+  background: var(--danger);
   border-radius: 50%;
-  box-shadow: 0 0 0 2px rgba(244, 135, 113, 0.2);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--danger) 20%, transparent);
 }
 
-// Dialog content styling
-.dismissReason {
-  display: flex;
-  flex-direction: column;
-  gap: bruno.$bruno-space-2;
-  margin-top: bruno.$bruno-space-4;
-
-  textarea {
-    min-height: 78px;
-    padding: bruno.$bruno-space-2 bruno.$bruno-space-3;
-    resize: vertical;
-    color: bruno.$bruno-text-primary;
-    background: bruno.$bruno-bg-primary;
-    border: 1px solid bruno.$bruno-border;
-    border-radius: bruno.$bruno-radius-md;
-    outline: none;
-    font-family: inherit;
-    font-size: bruno.$bruno-font-size-base;
-    line-height: bruno.$bruno-line-height-normal;
-
-    &:focus {
-      border-color: bruno.$bruno-accent;
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-}
-
-// Main content area with Bruno background
 .content {
   width: calc(100% - var(--app-content-left));
   height: 100%;
@@ -183,7 +146,7 @@
   min-height: 0;
   margin-left: var(--app-content-left);
   overflow: hidden;
-  background: bruno.$bruno-bg-primary;
+  background: var(--bg);
 }
 
 .keepAliveContainer,
@@ -214,18 +177,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px bruno.$bruno-space-3;
-  gap: bruno.$bruno-space-2;
-  border-radius: bruno.$bruno-radius-md;
-  border: 1px solid bruno.$bruno-border;
-  background: bruno.$bruno-bg-secondary;
-  box-shadow: bruno.$bruno-shadow-sm;
+  padding: 6px var(--space-3);
+  gap: var(--space-2);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .pageActions {
   display: flex;
   align-items: center;
-  gap: bruno.$bruno-space-2;
+  gap: var(--space-2);
 
   &:empty {
     display: none;

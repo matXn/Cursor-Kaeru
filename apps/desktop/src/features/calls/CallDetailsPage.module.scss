@@ -1,4 +1,3 @@
-@use "../../styles/typography" as type;
 
 .root {
   width: 100%;
@@ -22,7 +21,7 @@
 
   h1 {
     margin: 0 0 20px;
-    font-size: type.$font-size-lg;
+    font-size: var(--text-lg);
     font-weight: 630;
   }
 }

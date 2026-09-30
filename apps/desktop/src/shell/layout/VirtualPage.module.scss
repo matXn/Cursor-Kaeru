@@ -1,4 +1,3 @@
-@use "../../styles/typography" as type;
 
 .root {
   width: 100%;
@@ -27,7 +26,7 @@
   top: 0;
   margin: 0;
   padding-left: 0;
-  font-size: type.$font-size-xxl;
+  font-size: var(--text-xl);
   font-weight: bolder;
   transform: translateY(-150%);
 }

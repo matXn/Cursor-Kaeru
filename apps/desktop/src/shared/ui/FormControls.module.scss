@@ -1,12 +1,11 @@
-@use "../../styles/typography" as type;
 
 .field {
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-xs;
+  color: var(--text-muted);
+  font-size: var(--text-base);
 }
 
 .label {
@@ -21,27 +20,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--vscode-descriptionForeground);
+  color: var(--text-muted);
   cursor: help;
 
   &:hover {
-    color: var(--vscode-foreground);
+    color: var(--text);
   }
 }
 
 .input {
   width: 100%;
-  color: var(--vscode-input-foreground);
-  background: var(--vscode-input-background);
-  border: 1px solid var(--vscode-input-border, transparent);
-  border-radius: var(--oa-radius-pill);
+  color: var(--text);
+  background: var(--field);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
   outline: none;
   font: inherit;
   transition: border-color 150ms ease, box-shadow 150ms ease;
 
   &:focus {
-    border-color: var(--vscode-focusBorder);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--vscode-focusBorder) 18%, transparent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
   }
 
   &:disabled {
@@ -82,12 +81,12 @@
   display: grid;
   place-items: center;
   padding: 0;
-  color: var(--vscode-descriptionForeground);
+  color: var(--text-muted);
   background: transparent;
   border: 0;
   cursor: pointer;
 
   &:hover {
-    color: var(--vscode-foreground);
+    color: var(--text);
   }
 }

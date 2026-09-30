@@ -92,12 +92,12 @@ function applyEditorTheme(monaco: MonacoApi) {
     inherit: true,
     rules: [],
     colors: {
-      "editor.background": themeColor(rootStyles, "--vscode-input-background", light ? "#ffffff" : "#222222"),
-      "editor.foreground": themeColor(rootStyles, "--vscode-input-foreground", light ? "#202020" : "#ffffffe6"),
-      "editorCursor.foreground": themeColor(rootStyles, "--vscode-editorCursor-foreground", light ? "#202020" : "#ffffff"),
-      "editorLineNumber.foreground": themeColor(rootStyles, "--vscode-editorLineNumber-foreground", light ? "#999999" : "#ffffff40"),
-      "editorLineNumber.activeForeground": themeColor(rootStyles, "--vscode-editorLineNumber-activeForeground", light ? "#202020" : "#ffffffe6"),
-      "editor.selectionBackground": themeColor(rootStyles, "--vscode-editor-selectionBackground", light ? "#0069cc33" : "#49b0ff33"),
+      "editor.background": themeColor(rootStyles, "--field", light ? "#ffffff" : "#222222"),
+      "editor.foreground": themeColor(rootStyles, "--text", light ? "#202020" : "#ffffffe6"),
+      "editorCursor.foreground": themeColor(rootStyles, "--text", light ? "#202020" : "#ffffff"),
+      "editorLineNumber.foreground": themeColor(rootStyles, "--text-faint", light ? "#999999" : "#ffffff40"),
+      "editorLineNumber.activeForeground": themeColor(rootStyles, "--text-muted", light ? "#202020" : "#ffffffe6"),
+      "editor.selectionBackground": themeColor(rootStyles, "--selection", light ? "#0069cc33" : "#49b0ff33"),
     },
   });
   monaco.editor.setTheme("cursor-byok");
@@ -151,7 +151,7 @@ export function JsonEditor({ value, onChange, readOnly = false, autoFormat = tru
       applyEditorTheme(monaco);
       const rootStyles = getComputedStyle(root);
       const fontSize = Number.parseFloat(rootStyles.getPropertyValue("--json-editor-font-size"));
-      const fontFamily = rootStyles.getPropertyValue("--oa-code-font").trim();
+      const fontFamily = rootStyles.getPropertyValue("--font-mono").trim();
       const initialValue = autoFormatRef.current ? formatStructuredText(valueRef.current) : valueRef.current;
       const model = monaco.editor.createModel(initialValue, "json");
       const editor = monaco.editor.create(host, {

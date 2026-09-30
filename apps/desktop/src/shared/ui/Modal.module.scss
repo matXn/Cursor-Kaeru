@@ -1,5 +1,3 @@
-@use "../../styles/typography" as type;
-@use "../../styles/brand" as brand;
 
 .mask {
   position: fixed;
@@ -8,7 +6,7 @@
   display: grid;
   place-items: center;
   padding: var(--window-header-height) 24px 24px;
-  background: color-mix(in srgb, #000 45%, transparent);
+  background: var(--overlay);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -30,17 +28,18 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  color: var(--vscode-foreground);
-  border-radius: var(--oa-overlay-radius);
-  box-shadow: 0 34px 90px -26px rgb(0 0 0 / 60%);
+  color: var(--text);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-popover);
 
-  @include brand.glass(20%, 34px, 175%, var(--oa-radius-blob-a));
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
 
   header {
     flex: 0 0 auto;
     padding: 14px 22px;
-    border-bottom: 1px solid var(--vscode-editorWidget-border);
-    font-size: type.$font-size-lg;
+    border-bottom: 1px solid var(--border);
+    font-size: var(--text-lg);
     font-weight: 650;
   }
 
@@ -50,7 +49,7 @@
     justify-content: flex-end;
     gap: 8px;
     padding: 12px 22px;
-    border-top: 1px solid var(--vscode-editorWidget-border);
+    border-top: 1px solid var(--border);
   }
 }
 
@@ -69,7 +68,7 @@
 .banner {
   flex: 0 0 auto;
   padding: 12px 22px;
-  border-bottom: 1px solid var(--vscode-editorWidget-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .body {

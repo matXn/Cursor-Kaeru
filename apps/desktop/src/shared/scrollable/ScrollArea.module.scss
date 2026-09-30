@@ -1,11 +1,11 @@
 .root {
-  --oa-scrollbar-size: 8px;
-  --oa-scrollbar-min-thumb-size: 20px;
-  --oa-scrollbar-inset-top: 0px;
-  --oa-scrollbar-thumb: var(--vscode-scrollbarSlider-background, rgba(0, 0, 0, 0.1));
-  --oa-scrollbar-thumb-hover: var(--vscode-scrollbarSlider-background, rgba(0, 0, 0, 0.12));
-  --oa-scrollbar-thumb-active: var(--vscode-scrollbarSlider-background, rgba(0, 0, 0, 0.12));
-  --oa-scrollbar-hit-size: max(12px, var(--oa-scrollbar-size));
+  --scroll-size: 8px;
+  --scroll-min-thumb: 20px;
+  --scroll-inset-top: 0px;
+  --scroll-thumb: var(--scrollbar);
+  --scroll-thumb-hover: var(--scrollbar);
+  --scroll-thumb-active: var(--scrollbar);
+  --scroll-hit-size: max(12px, var(--scroll-size));
   position: relative;
   min-width: 0;
   min-height: 0;
@@ -19,7 +19,7 @@
   }
 
   &.active .thumb {
-    background: var(--oa-scrollbar-thumb-active);
+    background: var(--scroll-thumb-active);
   }
 }
 
@@ -44,11 +44,11 @@
 
 .scrollbar {
   position: absolute;
-  top: var(--oa-scrollbar-inset-top);
+  top: var(--scroll-inset-top);
   right: 0;
   bottom: 0;
   z-index: 20;
-  width: var(--oa-scrollbar-hit-size);
+  width: var(--scroll-hit-size);
   opacity: 0;
   pointer-events: none;
   transition: opacity 120ms ease;
@@ -68,13 +68,13 @@
 .thumb {
   position: absolute;
   right: 0;
-  width: var(--oa-scrollbar-size);
-  min-height: var(--oa-scrollbar-min-thumb-size);
-  background: var(--oa-scrollbar-thumb);
+  width: var(--scroll-size);
+  min-height: var(--scroll-min-thumb);
+  background: var(--scroll-thumb);
   border-radius: 999px;
   cursor: default;
 
   &:hover {
-    background: var(--oa-scrollbar-thumb-hover);
+    background: var(--scroll-thumb-hover);
   }
 }

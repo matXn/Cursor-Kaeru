@@ -1,4 +1,3 @@
-@use "../../../styles/typography" as type;
 
 .root {
   width: 100%;
@@ -19,8 +18,8 @@
   width: 100%;
   height: 18px;
   margin-top: 10px;
-  color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-2xs;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
 
   span {
     position: absolute;

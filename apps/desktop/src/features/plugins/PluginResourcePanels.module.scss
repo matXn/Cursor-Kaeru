@@ -1,4 +1,3 @@
-@use "../../styles/typography" as type;
 
 .panel {
   display: flex;
@@ -13,8 +12,8 @@
   padding: 16px;
 
   > span {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 
@@ -32,29 +31,29 @@
   gap: 10px;
 
   small {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 
   button {
     padding: 6px 12px;
-    color: var(--vscode-foreground);
-    background: color-mix(in srgb, var(--vscode-textCodeBlock-background) 80%, transparent);
-    border: 1px solid var(--vscode-sideBar-border);
-    border-radius: var(--oa-radius-cap);
-    font-family: var(--vscode-editor-font-family);
+    color: var(--text);
+    background: color-mix(in srgb, var(--surface) 80%, transparent);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
     letter-spacing: 0.08em;
     cursor: pointer;
   }
 
   button.copy {
     padding: 6px 2px;
-    color: var(--vscode-textLink-foreground);
+    color: var(--accent);
     background: none;
     border: none;
     font-family: inherit;
     letter-spacing: normal;
-    font-size: type.$font-size-xs;
+    font-size: var(--text-base);
 
     &:hover {
       text-decoration: underline;
@@ -65,10 +64,10 @@
 .fileButton {
   align-self: flex-start;
   padding: 5px 14px;
-  color: var(--vscode-button-foreground);
-  background: var(--vscode-button-background);
-  border-radius: var(--oa-radius-pill);
-  font-size: type.$font-size-xs;
+  color: var(--accent-fg);
+  background: var(--accent);
+  border-radius: var(--radius);
+  font-size: var(--text-base);
   cursor: pointer;
 
   input {
@@ -102,7 +101,7 @@
   th,
   td {
     padding: 10px 12px;
-    border-bottom: 1px solid var(--vscode-sideBar-border);
+    border-bottom: 1px solid var(--border);
     text-align: left;
   }
 
@@ -124,8 +123,8 @@
   }
 
   td span {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 
@@ -157,8 +156,8 @@
   }
 
   span {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 
@@ -169,8 +168,8 @@
 }
 
 .actionDescription {
-  color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-xs;
+  color: var(--text-muted);
+  font-size: var(--text-base);
 }
 
 .actionCardList {
@@ -194,31 +193,31 @@
   gap: 4px;
 
   span {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 
 .ready {
-  color: var(--vscode-testing-iconPassed, #73c991) !important;
+  color: var(--success) !important;
 }
 
 .cooling {
-  color: var(--vscode-editorWarning-foreground, #cca700) !important;
+  color: var(--warning) !important;
 }
 
 .invalid {
-  color: var(--vscode-errorForeground, #f48771) !important;
+  color: var(--danger) !important;
 }
 
 .success {
-  color: var(--vscode-testing-iconPassed, #73c991);
-  font-size: type.$font-size-xs;
+  color: var(--success);
+  font-size: var(--text-base);
 }
 
 .empty {
   padding: 24px;
-  color: var(--vscode-descriptionForeground);
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -226,12 +225,12 @@
   justify-content: center;
 
   span {
-    color: var(--vscode-descriptionForeground);
-    font-size: type.$font-size-xs;
+    color: var(--text-muted);
+    font-size: var(--text-base);
   }
 }
 
 .error {
-  color: var(--vscode-errorForeground, #f48771);
-  font-size: type.$font-size-xs;
+  color: var(--danger);
+  font-size: var(--text-base);
 }

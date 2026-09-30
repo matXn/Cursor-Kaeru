@@ -1,5 +1,3 @@
-@use "../../styles/typography" as type;
-@use "../../styles/brand" as brand;
 
 .root {
   min-width: 0;
@@ -10,28 +8,29 @@
   gap: 6px;
   padding: 4px;
 
-  @include brand.glass(10%, 20px, 150%, var(--oa-radius-pill));
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 .tab {
   position: relative;
   min-height: 30px;
   padding: 0 14px;
-  color: var(--vscode-descriptionForeground);
-  font-size: type.$font-size-base;
+  color: var(--text-muted);
+  font-size: var(--text-md);
   background: transparent;
   border: 0;
-  border-radius: var(--oa-radius-pill);
+  border-radius: var(--radius);
 
   &:hover {
-    color: var(--vscode-foreground);
-    background: var(--vscode-list-hoverBackground);
+    color: var(--text);
+    background: var(--hover);
   }
 
   &[aria-selected="true"] {
-    color: var(--vscode-foreground);
-    background: color-mix(in srgb, var(--vscode-editor-selectionBackground) 30%, transparent);
-    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vscode-focusBorder) 40%, transparent);
+    color: var(--text);
+    background: color-mix(in srgb, var(--selection) 30%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, transparent);
   }
 }
 

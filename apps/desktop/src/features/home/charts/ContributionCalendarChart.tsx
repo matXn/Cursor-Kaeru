@@ -3,6 +3,7 @@ import { init, Rect, type ElementEvent } from "zrender";
 import type { Locale } from "../../../i18n/runtime";
 import { useI18n } from "../../../i18n/store";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
+import { useChartTheme } from "../../../shared/theme/chartTheme";
 import styles from "./ContributionCalendarChart.module.scss";
 
 export type ContributionDay = {
@@ -34,13 +35,6 @@ type AxisLabel = {
   left: number;
 };
 
-const levelColors = [
-  "#161b22",
-  "#0e4429",
-  "#006d32",
-  "#26a641",
-  "#39d353",
-];
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 const CALENDAR_CONFIG = {
   cellAspectRatio: 0.9,
@@ -97,9 +91,12 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
   const scheduleDrawRef = useRef<() => void>(() => undefined);
   const { show: showTooltip, hide: hideTooltip } = useTooltip();
   const [axisLabels, setAxisLabels] = useState<AxisLabel[]>([]);
+  const chartTheme = useChartTheme();
+  const chartThemeRef = useRef(chartTheme);
   const layout = useMemo(() => buildCalendarLayout(data, locale), [data, locale]);
   const tokenFormatter = useMemo(() => new Intl.NumberFormat(locale), [locale]);
   layoutRef.current = layout;
+  chartThemeRef.current = chartTheme;
 
   useLayoutEffect(() => {
     const scroller = scrollerRef.current;
@@ -140,11 +137,13 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
     let lastAvailableWidth = -1;
     let lastCanvasHeight = -1;
     let lastLayout: typeof layout = null;
+    let lastTheme: typeof chartTheme | null = null;
     const draw = () => {
       const currentLayout = layoutRef.current;
+      const theme = chartThemeRef.current;
       if (!currentLayout) return;
       const availableWidth = Math.floor(scroller.getBoundingClientRect().width);
-      if (availableWidth <= 0 || (availableWidth === lastAvailableWidth && currentLayout === lastLayout)) return;
+      if (availableWidth <= 0 || (availableWidth === lastAvailableWidth && currentLayout === lastLayout && theme === lastTheme)) return;
       const gapsWidth = (currentLayout.columnCount - 1) * CALENDAR_CONFIG.cellGap;
       const cellWidth = Math.max(0, (availableWidth - gapsWidth) / currentLayout.columnCount);
       const cellHeight = cellWidth / CALENDAR_CONFIG.cellAspectRatio;
@@ -172,6 +171,7 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
         lastCanvasHeight = height;
       }
       lastLayout = currentLayout;
+      lastTheme = theme;
 
       const currentDates = new Set(currentLayout.cells.map((cell) => cell.date));
       for (const [date, rect] of cellRects) {
@@ -204,7 +204,7 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
           current.extra = extra;
           current.stopAnimation();
           current.animateTo(
-            { shape, style: { fill: levelColors[cell.level] } },
+            { shape, style: { fill: theme.heat[cell.level] } },
             { duration: CALENDAR_CONFIG.resizeTransitionMs, easing: "cubicOut" },
           );
           continue;
@@ -213,9 +213,7 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
         const rect = new Rect({
           shape,
           style: {
-            fill: levelColors[cell.level],
-            stroke: "rgba(139, 148, 158, 0.10)",
-            lineWidth: 1,
+            fill: theme.heat[cell.level],
           },
           cursor: "default",
           extra,
@@ -244,7 +242,7 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
 
   useLayoutEffect(() => {
     scheduleDrawRef.current();
-  }, [layout]);
+  }, [layout, chartTheme]);
 
   if (!layout) return null;
 

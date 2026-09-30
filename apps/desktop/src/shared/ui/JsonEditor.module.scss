@@ -1,22 +1,20 @@
-@use "../../styles/typography" as type;
-@use "../../styles/brand" as brand;
 
 .root {
-  --json-editor-font-size: #{type.$font-size-2xs};
+  --json-editor-font-size: var(--text-sm);
 
   width: 100%;
   height: 150px;
   min-width: 0;
   position: relative;
   overflow: hidden;
-  background: var(--vscode-input-background);
-  border: 1px solid var(--vscode-input-border, transparent);
-  border-radius: var(--oa-radius-soft-a);
+  background: var(--field);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
   transition: border-color 150ms ease, box-shadow 150ms ease;
 
   &:focus-within {
-    border-color: var(--vscode-focusBorder);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--vscode-focusBorder) 18%, transparent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
   }
 }
 
@@ -32,11 +30,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--vscode-descriptionForeground);
-  border-radius: var(--oa-radius-pill);
-  box-shadow: var(--oa-tooltip-shadow);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-popover);
 
-  @include brand.glass(16%, 20px, 150%, var(--oa-radius-pill));
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
 }
 
 .formatButton {
@@ -44,12 +43,12 @@
   color: inherit;
   background: transparent;
   border: 0;
-  border-radius: var(--oa-radius-pill);
-  font-size: type.$font-size-xs;
+  border-radius: var(--radius);
+  font-size: var(--text-base);
 
   &:hover {
-    color: var(--vscode-foreground);
-    background: var(--vscode-list-hoverBackground);
+    color: var(--text);
+    background: var(--hover);
   }
 }
 
