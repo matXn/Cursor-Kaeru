@@ -2,7 +2,6 @@ import { formatCompactInteger, formatInteger } from "../../../shared/utils/numbe
 import { Icon } from "../../../shared/ui/Icon";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
 import { informationOutlineIcon } from "../../../shared/ui/icons";
-import { CacheHitRateChart } from "./CacheHitRateChart";
 import styles from "./HomeMetrics.module.scss";
 
 export type HomeMetricsData = {
@@ -30,6 +29,16 @@ function formatMetricValue(value: number) {
 
 function formatRate(value: number | null) {
   return value === null ? t("暂无数据") : `${(Math.max(0, Math.min(1, value)) * 100).toFixed(2)}%`;
+}
+
+const METER_CELLS = 20;
+
+// Same cell language as the activity wall: filled cells = share of the rate.
+function RateMeter({ rate }: { rate: number }) {
+  const filled = Math.round(Math.max(0, Math.min(1, rate)) * METER_CELLS);
+  return <div className={styles.meter} aria-hidden="true">
+    {Array.from({ length: METER_CELLS }, (_, index) => <i key={index} data-filled={index < filled || undefined} />)}
+  </div>;
 }
 
 function calculateRate(numerator: number, denominator: number) {
@@ -65,7 +74,7 @@ function InfoTooltip({ content }: { content: string }) {
   ><Icon icon={informationOutlineIcon} size="1.1em" /></button>;
 }
 
-export function HomeMetrics({ data, refreshVersion = 0 }: { data: HomeMetricsData; refreshVersion?: number }) {
+export function HomeMetrics({ data }: { data: HomeMetricsData }) {
   const inputTokens = Math.max(0, data.promptTokens - data.cacheReadTokens - data.cacheWriteTokens);
   const outputTokens = Math.max(0, data.tokenUsage - data.promptTokens);
   const defaultCacheHitRate = calculateRate(data.cacheReadTokens, data.cacheReadTokens + inputTokens);
@@ -142,7 +151,10 @@ export function HomeMetrics({ data, refreshVersion = 0 }: { data: HomeMetricsDat
     <section className={styles.root} aria-label={t("调用统计")}>
       <article className={styles.metric}>
         <div className={styles.label}>{t("缓存命中率")}<InfoTooltip content={cacheTooltip} /></div>
-        <CacheHitRateChart rate={defaultCacheHitRate ?? 0} animationKey={refreshVersion} />
+        <div className={styles.body}>
+          <div className={styles.value}>{defaultCacheHitRate === null ? "--" : formatRate(defaultCacheHitRate)}</div>
+          <RateMeter rate={defaultCacheHitRate ?? 0} />
+        </div>
       </article>
       <article className={styles.metric}>
         <div className={styles.label}>{t("LLM 调用")}<InfoTooltip content={callsTooltip} /></div>

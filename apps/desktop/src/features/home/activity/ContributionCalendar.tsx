@@ -4,14 +4,14 @@ import type { Locale } from "../../../i18n/runtime";
 import { useI18n } from "../../../i18n/store";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
 import { useChartTheme } from "../../../shared/theme/chartTheme";
-import styles from "./ContributionCalendarChart.module.scss";
+import styles from "./ContributionCalendar.module.scss";
 
 export type ContributionDay = {
   date: string;
   tokens: number;
 };
 
-type ContributionCalendarChartProps = {
+type ContributionCalendarProps = {
   data: ContributionDay[];
 };
 
@@ -37,8 +37,10 @@ type AxisLabel = {
 
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 const CALENDAR_CONFIG = {
-  cellAspectRatio: 0.9,
+  cellAspectRatio: 1,
   cellGap: 3,
+  // Below this size the oldest weeks are dropped instead of shrinking cells.
+  minCellSize: 10,
   resizeTransitionMs: 180,
   rowCount: 7,
   axisLabelGap: 8,
@@ -58,6 +60,13 @@ function cellOffset(index: number, cellSize: number) {
 
 function isCellExtra(value: unknown): value is CellExtra {
   return typeof value === "object" && value !== null && (value as CellExtra).kind === "calendar-cell";
+}
+
+// Monday-first rows; only Mon/Wed/Fri are labelled to keep the gutter quiet.
+function weekdayLabels(locale: Locale) {
+  const formatter = new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" });
+  const monday = Date.UTC(2024, 0, 1);
+  return Array.from({ length: 7 }, (_, row) => row % 2 === 0 && row < 6 ? formatter.format(monday + row * DAY_IN_MS) : "");
 }
 
 function buildCalendarLayout(data: ContributionDay[], locale: Locale) {
@@ -83,7 +92,7 @@ function buildCalendarLayout(data: ContributionDay[], locale: Locale) {
   return { cells, columnCount, monthTicks };
 }
 
-export function ContributionCalendarChart({ data }: ContributionCalendarChartProps) {
+export function ContributionCalendar({ data }: ContributionCalendarProps) {
   const { locale } = useI18n();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -95,6 +104,7 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
   const chartThemeRef = useRef(chartTheme);
   const layout = useMemo(() => buildCalendarLayout(data, locale), [data, locale]);
   const tokenFormatter = useMemo(() => new Intl.NumberFormat(locale), [locale]);
+  const weekdays = useMemo(() => weekdayLabels(locale), [locale]);
   layoutRef.current = layout;
   chartThemeRef.current = chartTheme;
 
@@ -144,8 +154,12 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
       if (!currentLayout) return;
       const availableWidth = Math.floor(scroller.getBoundingClientRect().width);
       if (availableWidth <= 0 || (availableWidth === lastAvailableWidth && currentLayout === lastLayout && theme === lastTheme)) return;
-      const gapsWidth = (currentLayout.columnCount - 1) * CALENDAR_CONFIG.cellGap;
-      const cellWidth = Math.max(0, (availableWidth - gapsWidth) / currentLayout.columnCount);
+      const { cellGap, minCellSize } = CALENDAR_CONFIG;
+      const fitColumns = Math.max(1, Math.floor((availableWidth + cellGap) / (minCellSize + cellGap)));
+      const visibleColumns = Math.min(currentLayout.columnCount, fitColumns);
+      const firstColumn = currentLayout.columnCount - visibleColumns;
+      const gapsWidth = (visibleColumns - 1) * cellGap;
+      const cellWidth = Math.max(0, (availableWidth - gapsWidth) / visibleColumns);
       const cellHeight = cellWidth / CALENDAR_CONFIG.cellAspectRatio;
       const width = availableWidth;
       const height = CALENDAR_CONFIG.rowCount * cellHeight
@@ -153,8 +167,9 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
 
       let lastLabelEnd = -Infinity;
       const nextAxisLabels = currentLayout.monthTicks.flatMap((tick) => {
+        if (tick.column < firstColumn) return [];
         const left = Math.min(
-          cellOffset(tick.column, cellWidth),
+          cellOffset(tick.column - firstColumn, cellWidth),
           availableWidth - CALENDAR_CONFIG.axisLabelWidth,
         );
         if (left < lastLabelEnd + CALENDAR_CONFIG.axisLabelGap) return [];
@@ -167,28 +182,30 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
         node.style.width = "100%";
         node.style.height = `${height}px`;
         chart.resize({ width, height });
+        scroller.parentElement?.style.setProperty("--calendar-height", `${height}px`);
         lastAvailableWidth = availableWidth;
         lastCanvasHeight = height;
       }
       lastLayout = currentLayout;
       lastTheme = theme;
 
-      const currentDates = new Set(currentLayout.cells.map((cell) => cell.date));
+      const visibleCells = currentLayout.cells.filter((cell) => cell.column >= firstColumn);
+      const currentDates = new Set(visibleCells.map((cell) => cell.date));
       for (const [date, rect] of cellRects) {
         if (currentDates.has(date)) continue;
         chart.remove(rect);
         cellRects.delete(date);
       }
 
-      for (const cell of currentLayout.cells) {
-        const x = cellOffset(cell.column, cellWidth);
+      for (const cell of visibleCells) {
+        const x = cellOffset(cell.column - firstColumn, cellWidth);
         const y = cellOffset(cell.row, cellHeight);
         const shape = {
           x,
           y,
           width: cellWidth,
           height: cellHeight,
-          r: Math.min(3, Math.min(cellWidth, cellHeight) / 4),
+          r: Math.min(2, cellWidth / 4),
         };
         const extra = {
           ...cell,
@@ -247,7 +264,10 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
   if (!layout) return null;
 
   return (
-    <section className={styles.root} aria-label={t("过去一年的 Token 用量")}>
+    <div className={styles.root}>
+      <div className={styles.weekdays} aria-hidden="true">
+        {weekdays.map((label, row) => <span key={row}>{label}</span>)}
+      </div>
       <div ref={scrollerRef} className={styles.scroller}>
         <div
           ref={canvasRef}
@@ -259,6 +279,6 @@ export function ContributionCalendarChart({ data }: ContributionCalendarChartPro
           {axisLabels.map((label) => <span key={label.key} style={{ left: label.left }}>{label.text}</span>)}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

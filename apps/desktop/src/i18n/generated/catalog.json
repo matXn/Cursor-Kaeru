@@ -21,7 +21,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 97,
+          "line": 106,
           "column": 5
         }
       ]
@@ -63,7 +63,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 117,
+          "line": 126,
           "column": 5
         }
       ]
@@ -94,7 +94,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 132,
+          "line": 141,
           "column": 5
         }
       ]
@@ -196,7 +196,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 109,
+          "line": 118,
           "column": 5
         }
       ]
@@ -210,7 +210,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 106,
+          "line": 115,
           "column": 5
         }
       ]
@@ -278,7 +278,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 165,
+          "line": 177,
           "column": 40
         }
       ]
@@ -294,7 +294,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 127,
+          "line": 136,
           "column": 5
         }
       ]
@@ -340,23 +340,6 @@
           "file": "features/calls/CallTable.tsx",
           "line": 143,
           "column": 51
-        }
-      ]
-    },
-    "0c72229b7db0e1a9": {
-      "source": "模型输出",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 109,
-          "column": 47
-        },
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 173,
-          "column": 15
         }
       ]
     },
@@ -469,7 +452,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 158,
+          "line": 170,
           "column": 40
         }
       ]
@@ -522,7 +505,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 144,
+          "line": 153,
           "column": 40
         }
       ]
@@ -592,7 +575,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 96,
+          "line": 105,
           "column": 5
         }
       ]
@@ -618,6 +601,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 123,
           "column": 16
+        }
+      ]
+    },
+    "1940119f05716460": {
+      "source": "多",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 29,
+          "column": 14
         }
       ]
     },
@@ -744,7 +739,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 104,
+          "line": 113,
           "column": 5
         }
       ]
@@ -778,7 +773,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 87,
+          "line": 96,
           "column": 5
         }
       ]
@@ -790,7 +785,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 450,
+          "line": 452,
           "column": 14
         }
       ]
@@ -877,8 +872,8 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 425,
-          "column": 48
+          "line": 426,
+          "column": 50
         }
       ]
     },
@@ -996,18 +991,6 @@
         }
       ]
     },
-    "29fbbef32a6eb58b": {
-      "source": "不再显示此广告",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/AppLayout.tsx",
-          "line": 246,
-          "column": 14
-        }
-      ]
-    },
     "2a2773134a829016": {
       "source": "按历史 LLM 调用记录汇总，进行中的调用不计入。",
       "kind": "text",
@@ -1015,7 +998,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 94,
+          "line": 103,
           "column": 5
         }
       ]
@@ -1116,17 +1099,12 @@
         },
         {
           "file": "shared/ui/Modal.tsx",
-          "line": 41,
-          "column": 191
+          "line": 42,
+          "column": 200
         },
         {
           "file": "shell/AppLayout.tsx",
-          "line": 236,
-          "column": 20
-        },
-        {
-          "file": "shell/AppLayout.tsx",
-          "line": 247,
+          "line": 112,
           "column": 20
         }
       ]
@@ -1152,7 +1130,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 86,
+          "line": 95,
           "column": 5
         }
       ]
@@ -1243,7 +1221,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 235,
+          "line": 111,
           "column": 14
         }
       ]
@@ -1282,7 +1260,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 472,
+          "line": 474,
           "column": 28
         }
       ]
@@ -1294,7 +1272,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 486,
+          "line": 488,
           "column": 81
         }
       ]
@@ -1371,11 +1349,6 @@
           "file": "shared/ui/ConfirmDialog.tsx",
           "line": 4,
           "column": 110
-        },
-        {
-          "file": "shell/AppLayout.tsx",
-          "line": 248,
-          "column": 21
         }
       ]
     },
@@ -1418,7 +1391,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 151,
+          "line": 163,
           "column": 46
         }
       ]
@@ -1456,23 +1429,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 54,
           "column": 32
-        }
-      ]
-    },
-    "39f52eee100131d7": {
-      "source": "缓存输入",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 107,
-          "column": 50
-        },
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 155,
-          "column": 15
         }
       ]
     },
@@ -1541,18 +1497,6 @@
         }
       ]
     },
-    "3c94b4c75940c178": {
-      "source": "输入 Token",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/TokenTrendChart.tsx",
-          "line": 16,
-          "column": 15
-        }
-      ]
-    },
     "3cfae5728b92b334": {
       "source": "Token 用量：{tokens}",
       "kind": "template",
@@ -1561,8 +1505,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/charts/ContributionCalendarChart.tsx",
-          "line": 128,
+          "file": "features/home/activity/ContributionCalendar.tsx",
+          "line": 133,
           "column": 16
         }
       ]
@@ -1581,18 +1525,6 @@
           "file": "features/settings/SettingsPage.tsx",
           "line": 255,
           "column": 26
-        }
-      ]
-    },
-    "3da0bf1610ff5db5": {
-      "source": "推荐内容",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/ads/AdMenu.tsx",
-          "line": 45,
-          "column": 56
         }
       ]
     },
@@ -1638,7 +1570,7 @@
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 423,
-          "column": 74
+          "column": 82
         }
       ]
     },
@@ -1678,23 +1610,6 @@
         }
       ]
     },
-    "42655ed8e4108ae2": {
-      "source": "输入（非缓存）",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 106,
-          "column": 46
-        },
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 146,
-          "column": 15
-        }
-      ]
-    },
     "42a1d9e5b037c210": {
       "source": "字节数",
       "kind": "text",
@@ -1709,18 +1624,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 63,
           "column": 68
-        }
-      ]
-    },
-    "42aa8e01e98c0d8c": {
-      "source": "总耗时",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/LatencyChart.tsx",
-          "line": 18,
-          "column": 15
         }
       ]
     },
@@ -1759,7 +1662,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 99,
+          "line": 108,
           "column": 5
         }
       ]
@@ -1857,7 +1760,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 32,
+          "line": 31,
           "column": 27
         },
         {
@@ -1965,13 +1868,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "shell/ads/AdMenu.tsx",
-          "line": 55,
-          "column": 99
-        },
-        {
           "file": "shell/AppLayout.tsx",
-          "line": 202,
+          "line": 86,
           "column": 67
         }
       ]
@@ -1983,12 +1881,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 469,
+          "line": 471,
           "column": 30
         },
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 488,
+          "line": 490,
           "column": 42
         }
       ]
@@ -2087,7 +1985,7 @@
         },
         {
           "file": "shell/AppLayout.tsx",
-          "line": 222,
+          "line": 100,
           "column": 51
         }
       ]
@@ -2137,18 +2035,6 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 257,
           "column": 47
-        }
-      ]
-    },
-    "550eddc3c7fefa99": {
-      "source": "推广",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/ads/FloatingAd.tsx",
-          "line": 63,
-          "column": 48
         }
       ]
     },
@@ -2280,7 +2166,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 452,
+          "line": 454,
           "column": 21
         }
       ]
@@ -2335,20 +2221,6 @@
         }
       ]
     },
-    "5d59857bf039cac9": {
-      "source": "Cursor 助手 v{version}",
-      "kind": "template",
-      "placeholders": [
-        "version"
-      ],
-      "refs": [
-        {
-          "file": "shell/AppHeader.tsx",
-          "line": 34,
-          "column": 18
-        }
-      ]
-    },
     "5f8d556a9c47da3c": {
       "source": "已关闭开机启动",
       "kind": "text",
@@ -2361,18 +2233,6 @@
         }
       ]
     },
-    "5f9acfb945229062": {
-      "source": "你确认不想再看到此广告吗？",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/AppLayout.tsx",
-          "line": 252,
-          "column": 11
-        }
-      ]
-    },
     "5fd2ec5a6e9b654c": {
       "source": "合计：{cost}",
       "kind": "template",
@@ -2382,7 +2242,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 138,
+          "line": 147,
           "column": 5
         }
       ]
@@ -2396,23 +2256,6 @@
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 272,
           "column": 102
-        }
-      ]
-    },
-    "6078a681a306930d": {
-      "source": "缓存写入",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 108,
-          "column": 51
-        },
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 164,
-          "column": 15
         }
       ]
     },
@@ -2437,7 +2280,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 98,
+          "line": 107,
           "column": 5
         }
       ]
@@ -2463,8 +2306,20 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 108,
+          "line": 117,
           "column": 5
+        }
+      ]
+    },
+    "62f99c9a0c50d790": {
+      "source": "少",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 27,
+          "column": 14
         }
       ]
     },
@@ -2540,7 +2395,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 521,
+          "line": 510,
           "column": 43
         }
       ]
@@ -2585,6 +2440,11 @@
           "file": "features/calls/CallsPage.tsx",
           "line": 33,
           "column": 36
+        },
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 21,
+          "column": 19
         }
       ]
     },
@@ -2626,7 +2486,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 161,
+          "line": 173,
           "column": 46
         }
       ]
@@ -2679,7 +2539,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 79,
+          "line": 52,
           "column": 47
         }
       ]
@@ -2778,7 +2638,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 168,
+          "line": 180,
           "column": 46
         }
       ]
@@ -2867,7 +2727,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 516,
+          "line": 505,
           "column": 43
         }
       ]
@@ -2879,7 +2739,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 142,
+          "line": 151,
           "column": 50
         }
       ]
@@ -3021,7 +2881,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 450,
+          "line": 449,
           "column": 21
         }
       ]
@@ -3035,6 +2895,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 105,
           "column": 25
+        }
+      ]
+    },
+    "829827347a7f5f18": {
+      "source": "活跃天数",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 22,
+          "column": 19
         }
       ]
     },
@@ -3184,7 +3056,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 60,
+          "line": 69,
           "column": 17
         }
       ]
@@ -3235,6 +3107,18 @@
         }
       ]
     },
+    "8b2ae02c20a758c6": {
+      "source": "过去一年",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 18,
+          "column": 37
+        }
+      ]
+    },
     "8b6ff498515bcc2f": {
       "source": "时间",
       "kind": "text",
@@ -3254,7 +3138,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 75,
+          "line": 48,
           "column": 29
         }
       ]
@@ -3285,18 +3169,6 @@
           "file": "features/calls/CallTable.tsx",
           "line": 58,
           "column": 15
-        }
-      ]
-    },
-    "8df48894086d6fbd": {
-      "source": "原因（可选）",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/AppLayout.tsx",
-          "line": 254,
-          "column": 16
         }
       ]
     },
@@ -3369,7 +3241,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 73,
+          "line": 46,
           "column": 39
         }
       ]
@@ -3424,7 +3296,7 @@
         },
         {
           "file": "shell/AppLayout.tsx",
-          "line": 222,
+          "line": 100,
           "column": 62
         }
       ]
@@ -3518,7 +3390,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 471,
+          "line": 473,
           "column": 25
         }
       ]
@@ -3568,7 +3440,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 241,
+          "line": 117,
           "column": 11
         }
       ]
@@ -3734,18 +3606,6 @@
         }
       ]
     },
-    "a026f37e613cf48b": {
-      "source": "输出 Token",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/TokenTrendChart.tsx",
-          "line": 17,
-          "column": 15
-        }
-      ]
-    },
     "a03a1a0cb35414f8": {
       "source": "必须是 0–65535 之间的整数",
       "kind": "text",
@@ -3855,8 +3715,8 @@
         },
         {
           "file": "shared/ui/Modal.tsx",
-          "line": 41,
-          "column": 214
+          "line": 42,
+          "column": 223
         }
       ]
     },
@@ -3898,18 +3758,6 @@
         }
       ]
     },
-    "a49ffd73bc85333d": {
-      "source": "平均",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 187,
-          "column": 24
-        }
-      ]
-    },
     "a4d222236dc1003d": {
       "source": "取消测试失败：{error}",
       "kind": "template",
@@ -3931,7 +3779,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 237,
+          "line": 113,
           "column": 21
         }
       ]
@@ -4142,7 +3990,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 122,
+          "line": 131,
           "column": 5
         }
       ]
@@ -4181,12 +4029,12 @@
         },
         {
           "file": "shell/AppLayout.tsx",
-          "line": 268,
+          "line": 123,
           "column": 64
         },
         {
           "file": "shell/AppLayout.tsx",
-          "line": 268,
+          "line": 123,
           "column": 125
         }
       ]
@@ -4200,7 +4048,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 434,
+          "line": 435,
           "column": 84
         }
       ]
@@ -4306,7 +4154,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 105,
+          "line": 114,
           "column": 5
         }
       ]
@@ -4371,7 +4219,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 107,
+          "line": 116,
           "column": 5
         }
       ]
@@ -4409,18 +4257,6 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 346,
           "column": 103
-        }
-      ]
-    },
-    "b8c9b486c83b5778": {
-      "source": "不再显示广告",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/ads/AdMenu.tsx",
-          "line": 71,
-          "column": 24
         }
       ]
     },
@@ -4489,7 +4325,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 483,
+          "line": 485,
           "column": 81
         }
       ]
@@ -4538,18 +4374,6 @@
         }
       ]
     },
-    "bda62ce1d5e4ace9": {
-      "source": "可以告诉我们原因",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/AppLayout.tsx",
-          "line": 259,
-          "column": 24
-        }
-      ]
-    },
     "bda74b5674b6a57d": {
       "source": "初始化插件",
       "kind": "text",
@@ -4588,20 +4412,6 @@
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
           "line": 76,
           "column": 51
-        }
-      ]
-    },
-    "bfc01caf9fe0c841": {
-      "source": "缓存命中率 {rate}",
-      "kind": "template",
-      "placeholders": [
-        "rate"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/CacheHitRateChart.tsx",
-          "line": 58,
-          "column": 62
         }
       ]
     },
@@ -4756,7 +4566,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 115,
+          "line": 124,
           "column": 5
         }
       ]
@@ -4947,7 +4757,7 @@
         },
         {
           "file": "shared/ui/Modal.tsx",
-          "line": 99,
+          "line": 100,
           "column": 153
         }
       ]
@@ -5081,7 +4891,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 188,
+          "line": 72,
           "column": 54
         }
       ]
@@ -5168,18 +4978,6 @@
         }
       ]
     },
-    "ddde16f8839da3ce": {
-      "source": "总请求",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 105,
-          "column": 14
-        }
-      ]
-    },
     "de8184da1ef88d03": {
       "source": "已配置",
       "kind": "text",
@@ -5199,7 +4997,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 460,
+          "line": 462,
           "column": 11
         }
       ]
@@ -5211,7 +5009,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 102,
+          "line": 111,
           "column": 5
         }
       ]
@@ -5245,7 +5043,7 @@
         },
         {
           "file": "shell/AppLayout.tsx",
-          "line": 77,
+          "line": 50,
           "column": 29
         }
       ]
@@ -5317,27 +5115,15 @@
         }
       ]
     },
-    "e1295adecbb77755": {
-      "source": "关闭广告",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/ads/FloatingAd.tsx",
-          "line": 64,
-          "column": 66
-        }
-      ]
-    },
     "e14115de7f7c5795": {
       "source": "过去一年的 Token 用量",
       "kind": "text",
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/charts/ContributionCalendarChart.tsx",
-          "line": 252,
-          "column": 50
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 16,
+          "column": 55
         }
       ]
     },
@@ -5362,18 +5148,6 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 220,
           "column": 26
-        }
-      ]
-    },
-    "e18516550b9a5105": {
-      "source": "无用量",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 135,
-          "column": 15
         }
       ]
     },
@@ -5422,7 +5196,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 74,
+          "line": 47,
           "column": 44
         }
       ]
@@ -5451,7 +5225,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 148,
+          "line": 160,
           "column": 40
         }
       ]
@@ -5586,8 +5360,8 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 427,
-          "column": 98
+          "line": 428,
+          "column": 100
         }
       ]
     },
@@ -5622,7 +5396,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 114,
+          "line": 123,
           "column": 5
         }
       ]
@@ -5692,18 +5466,6 @@
         }
       ]
     },
-    "ee239f3943293f87": {
-      "source": "周日",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 54,
-          "column": 25
-        }
-      ]
-    },
     "ee6b89a6a740a4c4": {
       "source": "端口被占用时会自动选择新的随机端口并保存。修改后需要重启软件才会生效。",
       "kind": "text",
@@ -5725,7 +5487,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
-          "line": 433,
+          "line": 434,
           "column": 84
         }
       ]
@@ -5775,8 +5537,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/charts/ContributionCalendarChart.tsx",
-          "line": 258,
+          "file": "features/home/activity/ContributionCalendar.tsx",
+          "line": 267,
           "column": 23
         }
       ]
@@ -5829,7 +5591,7 @@
         },
         {
           "file": "shell/AppLayout.tsx",
-          "line": 78,
+          "line": 51,
           "column": 46
         }
       ]
@@ -5895,18 +5657,6 @@
           "file": "shared/ui/ModelSelect.tsx",
           "line": 168,
           "column": 21
-        }
-      ]
-    },
-    "f9aa11dbb15ce647": {
-      "source": "周六",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/charts/DailyTokenUsageChart.tsx",
-          "line": 53,
-          "column": 25
         }
       ]
     },
@@ -6019,7 +5769,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 88,
+          "line": 97,
           "column": 5
         }
       ]
@@ -6055,7 +5805,7 @@
       "refs": [
         {
           "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 111,
+          "line": 120,
           "column": 5
         }
       ]
@@ -6091,7 +5841,7 @@
       "refs": [
         {
           "file": "features/home/HomePage.tsx",
-          "line": 201,
+          "line": 199,
           "column": 25
         }
       ]
@@ -6103,7 +5853,7 @@
       "refs": [
         {
           "file": "shell/AppLayout.tsx",
-          "line": 80,
+          "line": 53,
           "column": 48
         }
       ]

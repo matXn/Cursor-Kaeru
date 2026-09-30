@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { api, pluginText, type Overview } from "../../shared/api";
-import { ContributionCalendarChart } from "./charts/ContributionCalendarChart";
-import { DailyTokenUsageChart } from "./charts/DailyTokenUsageChart";
+import { ActivityWall, type ActivityWallData } from "./activity/ActivityWall";
 import { HomeMetrics } from "./metrics/HomeMetrics";
 import { PageContent } from "../../shell/layout/PageContent";
 import type { VirtualPageSection } from "../../shell/layout/VirtualPage";
@@ -18,7 +17,7 @@ type TimeRange = { startMs: number; endMs: number };
 const CALENDAR_DAYS = 365;
 const DAY_MS = 24 * 60 * 60_000;
 
-function contributionCalendarData(overview: Overview, endMs: number) {
+function activityWallData(overview: Overview, endMs: number): ActivityWallData {
   const tokensByDate = new Map<string, number>();
   for (const bucket of overview.token_usage_series) {
     const date = new Date(bucket.bucket_start_ms).toISOString().slice(0, 10);
@@ -28,10 +27,16 @@ function contributionCalendarData(overview: Overview, endMs: number) {
   const lastDay = new Date(Math.max(0, endMs - 1));
   lastDay.setUTCHours(0, 0, 0, 0);
   const firstDayMs = lastDay.getTime() - (CALENDAR_DAYS - 1) * DAY_MS;
-  return Array.from({ length: CALENDAR_DAYS }, (_, offset) => {
+  const days = Array.from({ length: CALENDAR_DAYS }, (_, offset) => {
     const date = new Date(firstDayMs + offset * DAY_MS).toISOString().slice(0, 10);
     return { date, tokens: tokensByDate.get(date) ?? 0 };
   });
+  return { days, tokens: overview.metrics.token_usage, calls: overview.metrics.llm_calls };
+}
+
+// The activity wall always covers the past year in daily buckets, independent of the range filter.
+function yearRange(now = Date.now()): TimeRange {
+  return { startMs: now - CALENDAR_DAYS * DAY_MS, endMs: now };
 }
 
 function presetRange(preset: Exclude<OverviewRangePreset, "custom">, now = new Date()): TimeRange {
@@ -66,6 +71,7 @@ export function HomePage() {
   const [rangeOverview, setRangeOverview] = useState<Overview | null>(null);
   const [rangeBusy, setRangeBusy] = useState(false);
   const [refreshVersion, setRefreshVersion] = useState(0);
+  const [year, setYear] = useState<{ overview: Overview; endMs: number } | null>(null);
   const selectedRange = preset === "custom" ? customRange : presetRange(preset);
 
   useEffect(() => {
@@ -83,15 +89,16 @@ export function HomePage() {
     return () => { active = false; };
   }, [preset, customRange, overview, refreshVersion, appliedModels]);
 
+  useEffect(() => {
+    let active = true;
+    const range = yearRange();
+    void api.overview({ ...range, bucketMs: DAY_MS }).then((next) => {
+      if (active) setYear({ overview: next, endMs: range.endMs });
+    });
+    return () => { active = false; };
+  }, [overview, refreshVersion]);
+
   const filteredOverview = rangeOverview ?? overview;
-  const dailyTokenUsage = filteredOverview.token_usage_series.map((bucket) => ({
-    bucketStartMs: bucket.bucket_start_ms,
-    inputTokens: bucket.input_tokens,
-    cacheReadTokens: bucket.cache_read_tokens,
-    cacheWriteTokens: bucket.cache_write_tokens,
-    outputTokens: bucket.output_tokens,
-  }));
-  const contribution = contributionCalendarData(filteredOverview, selectedRange?.endMs ?? Date.now());
   const metrics = {
     llmCalls: filteredOverview.metrics.llm_calls,
     successfulCalls: filteredOverview.metrics.successful_calls,
@@ -158,24 +165,15 @@ export function HomePage() {
     )),
   ];
   const sections: VirtualPageSection[] = [
-    {
-      key: "daily-token-usage",
-      estimatedHeight: 240,
-      content: <DailyTokenUsageChart
-        data={dailyTokenUsage}
-        granularity={filteredOverview.token_usage_granularity}
-      />,
-    },
+    ...(year ? [{
+      key: "activity",
+      estimatedHeight: 280,
+      content: <ActivityWall data={activityWallData(year.overview, year.endMs)} />,
+    }] : []),
     {
       key: "metrics",
-      estimatedHeight: 130,
-      content: <HomeMetrics data={metrics} refreshVersion={refreshVersion} />,
-    },
-
-    {
-      key: "activity",
-      estimatedHeight: 106,
-      content: <ContributionCalendarChart data={contribution} />,
+      estimatedHeight: 96,
+      content: <HomeMetrics data={metrics} />,
     },
   ];
 

@@ -1,42 +1,43 @@
-
 .scroller {
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  container-type: inline-size;
 }
 
 .root {
   width: 100%;
-  height: 132px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  // 1px gaps over a border-colored background draw the dividers for any column count.
+  gap: 1px;
   overflow: hidden;
-  border-radius: var(--radius);
-  font-family: var(--font-mono);
-
-  background: var(--surface);
+  background: var(--border);
   border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
 .metric {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 18px;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+}
 
-  & + & {
-    border-left: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+@container (width < 640px) {
+  .root {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 .label {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--space-1);
   color: var(--text-muted);
   font-size: var(--text-sm);
   line-height: 1;
+  white-space: nowrap;
 }
 
 .info {
@@ -49,17 +50,20 @@
   color: inherit;
   background: transparent;
   border: 0;
-  transition: color 150ms ease;
   opacity: 0.5;
+  transition: opacity var(--duration);
 
   &:hover,
   &:focus-visible {
-    color: var(--text);
+    opacity: 1;
   }
 }
 
 .body {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .value {
@@ -73,13 +77,30 @@
 }
 
 .secondary {
-  margin-top: 12px;
   overflow: hidden;
   color: var(--text-muted);
-  font-size: 12px;
+  font-size: var(--text-sm);
   line-height: 1.4;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.meter {
+  height: calc(var(--text-sm) * 1.4);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  i {
+    width: 6px;
+    height: 10px;
+    border-radius: 1px;
+    background: var(--heat-0);
+
+    &[data-filled] {
+      background: var(--accent);
+    }
+  }
 }
 
 .tooltipText {
