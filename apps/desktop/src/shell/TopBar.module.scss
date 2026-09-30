@@ -26,7 +26,7 @@
   inset: 0;
 }
 
-.brand,
+.icon,
 .navigation,
 .status {
   position: relative;
@@ -35,17 +35,11 @@
   align-items: center;
 }
 
-.brand {
-  gap: var(--space-2);
-  color: var(--text);
-  font-size: var(--text-base);
-  font-weight: 500;
+.icon {
+  align-self: center;
+  width: 16px;
+  height: 16px;
   pointer-events: none;
-
-  img {
-    width: 16px;
-    height: 16px;
-  }
 }
 
 .navigation {
@@ -115,32 +109,6 @@
 
   .harness[data-taken] & {
     background: var(--success);
-  }
-}
-
-.iconButton {
-  position: relative;
-  width: var(--control-h);
-  height: var(--control-h);
-  display: grid;
-  place-items: center;
-  padding: 0;
-  color: var(--text-muted);
-  background: transparent;
-  border: 0;
-  border-radius: var(--radius);
-  -webkit-app-region: no-drag;
-  transition: background var(--duration), color var(--duration);
-
-  &:hover {
-    color: var(--text);
-    background: var(--hover);
-  }
-
-  .dot {
-    position: absolute;
-    top: 5px;
-    right: 5px;
   }
 }
 
