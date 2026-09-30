@@ -2,13 +2,13 @@
 
 FROM node:22-bookworm-slim AS web
 WORKDIR /src/apps/desktop
-COPY apps/desktop/package.json apps/desktop/package-lock.json ./
-RUN --mount=type=cache,target=/root/.npm npm ci
+COPY apps/desktop/package.json apps/desktop/pnpm-lock.yaml apps/desktop/pnpm-workspace.yaml ./
+RUN --mount=type=cache,target=/root/.local/share/pnpm corepack enable && pnpm install --frozen-lockfile
 COPY apps/desktop/index.html apps/desktop/tsconfig.json apps/desktop/tsconfig.node.json apps/desktop/vite.config.ts ./
 COPY apps/desktop/plugins/ plugins/
 COPY apps/desktop/public/ public/
 COPY apps/desktop/src/ src/
-RUN npm run build
+RUN pnpm run build
 
 FROM rust:1-bookworm AS server
 WORKDIR /src

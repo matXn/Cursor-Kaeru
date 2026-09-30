@@ -644,18 +644,6 @@
         }
       ]
     },
-    "19658d9fa9aa8de4": {
-      "source": "安装中…",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 158,
-          "column": 27
-        }
-      ]
-    },
     "19bb071f8c362695": {
       "source": "提示词设置",
       "kind": "text",
@@ -953,20 +941,6 @@
         }
       ]
     },
-    "23e49479e15e6770": {
-      "source": "发现新版本 {version}",
-      "kind": "template",
-      "placeholders": [
-        "version"
-      ],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 96,
-          "column": 29
-        }
-      ]
-    },
     "2400fbd0aeab9e13": {
       "source": "已下载 {downloaded}",
       "kind": "template",
@@ -993,20 +967,6 @@
         }
       ]
     },
-    "24c2db6ede5d1de5": {
-      "source": "{count} 工具",
-      "kind": "template",
-      "placeholders": [
-        "count"
-      ],
-      "refs": [
-        {
-          "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 118,
-          "column": 74
-        }
-      ]
-    },
     "2555d6c7fbb7e070": {
       "source": "可以直接输入模型标识，也可以读取接口返回的模型列表。",
       "kind": "text",
@@ -1028,8 +988,8 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 154,
-          "column": 13
+          "line": 131,
+          "column": 17
         }
       ]
     },
@@ -1200,7 +1160,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 116,
+          "line": 95,
           "column": 17
         }
       ]
@@ -1545,7 +1505,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 85,
+          "line": 82,
           "column": 45
         }
       ]
@@ -1725,7 +1685,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 128,
+          "line": 107,
           "column": 17
         }
       ]
@@ -1765,20 +1725,6 @@
           "file": "shared/ui/Pagination.tsx",
           "line": 20,
           "column": 12
-        }
-      ]
-    },
-    "492042ed1fdc29ed": {
-      "source": "版本 {version} 可以安装",
-      "kind": "template",
-      "placeholders": [
-        "version"
-      ],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 153,
-          "column": 13
         }
       ]
     },
@@ -2250,6 +2196,18 @@
         }
       ]
     },
+    "5f76b2bf82dd2c5d": {
+      "source": "版本",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/AppLifecycleSettingsCard.tsx",
+          "line": 130,
+          "column": 18
+        }
+      ]
+    },
     "5f8d556a9c47da3c": {
       "source": "已关闭开机启动",
       "kind": "text",
@@ -2257,7 +2215,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 59,
+          "line": 56,
           "column": 40
         }
       ]
@@ -2412,18 +2370,6 @@
         }
       ]
     },
-    "651f274470153a05": {
-      "source": "软件更新",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 151,
-          "column": 18
-        }
-      ]
-    },
     "652ec5d40c29fd6a": {
       "source": "速度 {speed} tokens/s · 首字 {firstText} ms · 总耗时 {duration} ms · 输出 {tokens} tokens{estimated} · 返回：{output}",
       "kind": "template",
@@ -2455,12 +2401,12 @@
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 74,
+          "line": 81,
           "column": 40
         },
         {
           "file": "shell/TopBar.tsx",
-          "line": 17,
+          "line": 15,
           "column": 30
         }
       ]
@@ -2522,12 +2468,12 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 139,
+          "line": 118,
           "column": 18
         },
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 145,
+          "line": 124,
           "column": 16
         }
       ]
@@ -2614,7 +2560,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 99,
+          "line": 107,
           "column": 52
         }
       ]
@@ -2653,18 +2599,6 @@
         }
       ]
     },
-    "6e86570183c3cdd0": {
-      "source": "当前已是最新版本",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 96,
-          "column": 78
-        }
-      ]
-    },
     "6f90a03ab63027e0": {
       "source": "cursor kaeru 已接管",
       "kind": "text",
@@ -2672,7 +2606,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 36,
+          "line": 31,
           "column": 18
         }
       ]
@@ -2833,20 +2767,6 @@
         }
       ]
     },
-    "7d9f043f8f7ab45c": {
-      "source": "发现新版本 {version}，可在设置中安装",
-      "kind": "template",
-      "placeholders": [
-        "version"
-      ],
-      "refs": [
-        {
-          "file": "App.tsx",
-          "line": 62,
-          "column": 21
-        }
-      ]
-    },
     "7e0891860c9e6374": {
       "source": "TAB 服务地址不能为空",
       "kind": "text",
@@ -2892,18 +2812,6 @@
           "file": "features/home/overview/OverviewTimeRangeFilter.tsx",
           "line": 19,
           "column": 26
-        }
-      ]
-    },
-    "7f68ebad19ba6bcd": {
-      "source": "检查更新",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 162,
-          "column": 37
         }
       ]
     },
@@ -3007,12 +2915,12 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 115,
+          "line": 94,
           "column": 18
         },
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 121,
+          "line": 100,
           "column": 16
         }
       ]
@@ -3053,7 +2961,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 72,
+          "line": 69,
           "column": 25
         }
       ]
@@ -3267,20 +3175,6 @@
         }
       ]
     },
-    "92e26b27d5ea8f0e": {
-      "source": "检查更新失败：{error}",
-      "kind": "template",
-      "placeholders": [
-        "error"
-      ],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 99,
-          "column": 15
-        }
-      ]
-    },
     "9305c0e13642cab4": {
       "source": "未接管",
       "kind": "text",
@@ -3483,7 +3377,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 72,
+          "line": 69,
           "column": 40
         }
       ]
@@ -3614,7 +3508,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 112,
+          "line": 91,
           "column": 29
         }
       ]
@@ -3626,12 +3520,12 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 127,
+          "line": 106,
           "column": 18
         },
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 133,
+          "line": 112,
           "column": 16
         }
       ]
@@ -3643,7 +3537,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 36,
+          "line": 31,
           "column": 42
         }
       ]
@@ -3831,20 +3725,6 @@
         }
       ]
     },
-    "a80b53f8848e6d27": {
-      "source": "安装更新失败：{error}",
-      "kind": "template",
-      "placeholders": [
-        "error"
-      ],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 108,
-          "column": 15
-        }
-      ]
-    },
     "a98585871c5313ff": {
       "source": "显示名称",
       "kind": "text",
@@ -3886,7 +3766,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 59,
+          "line": 56,
           "column": 25
         }
       ]
@@ -3900,18 +3780,6 @@
           "file": "features/models/CursorModelEditor.tsx",
           "line": 161,
           "column": 118
-        }
-      ]
-    },
-    "ac69f68b7010ec79": {
-      "source": "下载并安装",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 158,
-          "column": 39
         }
       ]
     },
@@ -3964,7 +3832,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 140,
+          "line": 119,
           "column": 17
         }
       ]
@@ -4157,7 +4025,7 @@
       "refs": [
         {
           "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 85,
+          "line": 82,
           "column": 25
         }
       ]
@@ -4407,7 +4275,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 70,
+          "line": 77,
           "column": 64
         }
       ]
@@ -4520,7 +4388,7 @@
         },
         {
           "file": "shell/TopBar.tsx",
-          "line": 18,
+          "line": 16,
           "column": 39
         }
       ]
@@ -4679,7 +4547,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 75,
+          "line": 82,
           "column": 40
         }
       ]
@@ -4893,7 +4761,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 27,
+          "line": 25,
           "column": 52
         }
       ]
@@ -4975,12 +4843,12 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 104,
+          "line": 113,
           "column": 78
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 121,
+          "line": 128,
           "column": 76
         }
       ]
@@ -5050,7 +4918,7 @@
         },
         {
           "file": "shell/TopBar.tsx",
-          "line": 20,
+          "line": 18,
           "column": 33
         }
       ]
@@ -5302,7 +5170,7 @@
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 76,
+          "line": 83,
           "column": 40
         }
       ]
@@ -5326,7 +5194,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 19,
+          "line": 17,
           "column": 32
         }
       ]
@@ -5745,11 +5613,6 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 112,
           "column": 19
-        },
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 162,
-          "column": 25
         }
       ]
     },
@@ -5864,7 +5727,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 16,
+          "line": 14,
           "column": 25
         }
       ]
