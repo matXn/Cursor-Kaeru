@@ -5,10 +5,8 @@
   inset: 0;
   display: grid;
   place-items: center;
-  padding: var(--window-header-height) 24px 24px;
+  padding: var(--topbar-height) 24px 24px;
   background: var(--overlay);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 .dragLayer {
@@ -17,14 +15,14 @@
   top: 0;
   right: 0;
   left: 0;
-  height: var(--window-header-height);
+  height: var(--topbar-height);
 }
 
 .dialog {
   position: relative;
   z-index: 1;
   width: min(620px, calc(100vw - 48px));
-  max-height: calc(100vh - var(--window-header-height) - 24px);
+  max-height: calc(100vh - var(--topbar-height) - 24px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -40,7 +38,7 @@
     padding: 14px 22px;
     border-bottom: 1px solid var(--border);
     font-size: var(--text-lg);
-    font-weight: 650;
+    font-weight: 500;
   }
 
   footer {
@@ -62,7 +60,7 @@
 }
 
 .fullHeight {
-  height: calc(100vh - var(--window-header-height) - 24px);
+  height: calc(100vh - var(--topbar-height) - 24px);
 }
 
 .banner {

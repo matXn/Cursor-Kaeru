@@ -8,24 +8,20 @@
   overflow: hidden;
 }
 
+// Left side of the page title row (actions sit on the right, see AppLayout).
 .title {
   position: absolute;
   z-index: 21;
-  top: var(--app-content-top);
+  top: calc(var(--topbar-height) + var(--space-6));
   left: max(var(--app-page-padding), calc((100% - var(--app-page-max-width)) / 2));
+  height: var(--app-toolbar-height);
+  display: flex;
+  align-items: center;
   margin: 0;
-  padding-left:0;
-  font-size: var(--text-xl);
-  font-weight: bolder;
-  transform: translateY(-150%);
+  font-size: var(--text-lg);
+  font-weight: 500;
   -webkit-user-select: none;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-user-drag: none;
-  -webkit-app-region: drag;
 }
 
 .fixedContent {

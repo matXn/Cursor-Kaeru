@@ -1,10 +1,13 @@
+// Stand-in for the native lights in browser previews; sits in the top bar's left inset.
 .root {
-  position: relative;
+  position: absolute;
   z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-left: 4px;
   pointer-events: none;
 }
 

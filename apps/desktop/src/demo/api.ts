@@ -108,6 +108,10 @@ export function installDemoApi() {
     const method = (init?.method ?? (input instanceof Request ? input.method : "GET")).toUpperCase();
     const body = await readBody(input, init);
 
+    if (path === "/plugins/runtime") {
+      return json({ state: "ready", version: "demo", target: null, phase: null, downloaded_bytes: 0, total_bytes: null, error: null });
+    }
+    if (path === "/plugins" && method === "GET") return json([]);
     if (path === "/models" && method === "GET") return json(models);
     if (path === "/models" && method === "POST") return json(models);
     if (path === "/models/order") return json(models);

@@ -1,18 +1,7 @@
 .shell {
-  --app-edge: 10px;
-  --app-menu-width: 208px;
-  --window-safe-top: var(--window-header-height);
-  --window-menu-top: var(--window-safe-top);
-  --window-corner-safe-bottom: 0px;
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  // Transparent: the liquid-glass ambient backdrop lives on <body>. Floating
-  // glass surfaces (sidebar, toolbar) sit above it and refract the color.
-  background: transparent;
-}
-
-.windows {
-  --window-corner-safe-bottom: 6px;
+  background: var(--bg);
 }

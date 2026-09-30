@@ -1,0 +1,152 @@
+.root {
+  position: fixed;
+  z-index: 12000;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--topbar-height);
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-6);
+  padding: 0 var(--space-2) 0 var(--space-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  -webkit-user-select: none;
+  user-select: none;
+
+  // Leave room for the native traffic lights drawn over the webview.
+  &[data-platform="macos"] {
+    padding-left: 78px;
+  }
+}
+
+// Everything not interactive drags the window.
+.dragLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.brand,
+.navigation,
+.status {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  gap: var(--space-2);
+  color: var(--text);
+  font-size: var(--text-base);
+  font-weight: 500;
+  pointer-events: none;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.navigation {
+  align-items: stretch;
+  gap: var(--space-5);
+
+  a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--text-muted);
+    font-size: var(--text-base);
+    text-decoration: none;
+    -webkit-app-region: no-drag;
+    transition: color var(--duration);
+
+    &:hover {
+      color: var(--text);
+    }
+
+    &[aria-current="page"] {
+      color: var(--text);
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -1px;
+        left: 0;
+        height: 2px;
+        background: var(--accent);
+      }
+    }
+  }
+}
+
+.status {
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.harness {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: var(--control-h-sm);
+  padding: 0 var(--space-2);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border-radius: var(--radius);
+  -webkit-app-region: no-drag;
+  transition: background var(--duration), color var(--duration);
+
+  &:hover {
+    color: var(--text);
+    background: var(--hover);
+  }
+}
+
+.harnessDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--text-faint);
+
+  .harness[data-taken] & {
+    background: var(--success);
+  }
+}
+
+.iconButton {
+  position: relative;
+  width: var(--control-h);
+  height: var(--control-h);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius);
+  -webkit-app-region: no-drag;
+  transition: background var(--duration), color var(--duration);
+
+  &:hover {
+    color: var(--text);
+    background: var(--hover);
+  }
+
+  .dot {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+}
