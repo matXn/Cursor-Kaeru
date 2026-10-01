@@ -25,7 +25,7 @@ export function TopBar({ platform, nativeDesktop }: { platform: DesktopPlatform;
     {!nativeDesktop && platform === "macos" && <MacTrafficLights />}
     <img className={styles.icon} src={appIcon} alt="" aria-hidden="true" />
     <nav className={styles.navigation} aria-label={t("主菜单")}>
-      {pages.map((page) => <NavLink key={page.path} to={page.path} end={page.path === "/"}><Icon className={styles.glyph} icon={page.glyph} size="1.15em" />{page.label}</NavLink>)}
+      {pages.map((page) => <NavLink key={page.path} to={page.path} end={page.path === "/"}><span className={styles.glyph}><Icon icon={page.glyph} size="1.15em" /></span>{page.label}</NavLink>)}
     </nav>
     <div className={styles.status}>
       {cursorHarness && <NavLink to="/harness/cursor" className={styles.harness} data-taken={taken || undefined}>
