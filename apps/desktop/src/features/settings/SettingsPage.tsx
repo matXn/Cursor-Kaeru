@@ -315,5 +315,5 @@ export function SettingsPage() {
       </ConfirmDialog>
     </div>
   );
-  return <PageContent title={t("设置")} sections={[{ key: "settings", estimatedHeight: 1200, content }]} />;
+  return <PageContent title="SETTINGS" sections={[{ key: "settings", estimatedHeight: 1200, content }]} />;
 }

@@ -93,5 +93,5 @@ export function CallsPage() {
         : <p className={styles.empty}>{calls.length > 0 ? t("没有符合筛选条件的调用") : t("这一天没有调用")}</p>}
     </div>
   </div>;
-  return <PageContent fixed title={t("调用")} contentClassName={styles.pageContent} sections={[{ key: "calls", estimatedHeight: 720, content }]} />;
+  return <PageContent fixed title="CALLS" contentClassName={styles.pageContent} sections={[{ key: "calls", estimatedHeight: 720, content }]} />;
 }

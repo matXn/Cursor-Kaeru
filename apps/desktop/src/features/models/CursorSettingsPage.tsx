@@ -324,7 +324,7 @@ export function CursorSettingsPage() {
       </div>
     </PageActions>
     <PageActions><TooltipTrigger label={caReady ? t("添加模型") : t("请先初始化 CA")}><button className={controls.iconButton} aria-label={t("添加模型")} disabled={!caReady || cursorBusy} onClick={openNew}><Icon icon={addIcon} size="1.1em" /></button></TooltipTrigger></PageActions>
-    <PageContent title={t("模型")} sections={[{ key: "cursor-settings", estimatedHeight: estimatedModelHeight, content }]} />
+    <PageContent title="MODELS" sections={[{ key: "cursor-settings", estimatedHeight: estimatedModelHeight, content }]} />
     <ConfirmDialog
       open={confirmDisableTakeover}
       title={t("关闭接管Cursor？")}

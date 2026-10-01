@@ -18,12 +18,13 @@
   display: flex;
   align-items: center;
   margin: 0;
-  // Page names are pressed into the plate, like the overview number.
-  color: var(--bg);
-  font-size: var(--text-2xl);
+  // English page marking, same voice as the instrument labels; the nav already names the page.
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
   font-weight: 500;
-  letter-spacing: -0.01em;
-  text-shadow: var(--deboss-text-sm);
+  letter-spacing: 0.14em;
+  text-shadow: var(--letterpress);
   -webkit-user-select: none;
   user-select: none;
 }

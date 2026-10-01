@@ -2295,11 +2295,6 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/calls/CallsPage.tsx",
-          "line": 96,
-          "column": 36
-        },
-        {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
           "line": 84,
           "column": 40
@@ -4273,11 +4268,6 @@
           "column": 45
         },
         {
-          "file": "features/models/CursorSettingsPage.tsx",
-          "line": 327,
-          "column": 25
-        },
-        {
           "file": "shell/TopBar.tsx",
           "line": 16,
           "column": 39
@@ -4803,11 +4793,6 @@
           "column": 64
         },
         {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 318,
-          "column": 30
-        },
-        {
           "file": "shell/TopBar.tsx",
           "line": 18,
           "column": 33
@@ -5059,11 +5044,6 @@
       "kind": "text",
       "placeholders": [],
       "refs": [
-        {
-          "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 65,
-          "column": 14
-        },
         {
           "file": "shell/TopBar.tsx",
           "line": 17,

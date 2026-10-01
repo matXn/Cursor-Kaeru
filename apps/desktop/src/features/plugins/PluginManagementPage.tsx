@@ -62,7 +62,7 @@ export function PluginManagementPage() {
 
   return <>
     <PageContent
-      title={t("插件")}
+      title="PLUGINS"
       sections={[{ key: "installed-plugins", estimatedHeight, content }]}
     />
     <RuntimeProgressModal

@@ -20,7 +20,7 @@ export function Nameplate() {
     return () => { disposed = true; };
   }, []);
 
-  return <footer className={`deboss ${styles.root}`} aria-label="cursor kaeru">
+  return <footer className={styles.root} aria-label="cursor kaeru">
     <span>CURSOR KAERU</span>
     <span>{!version ? "—" : /^\d/.test(version) ? `v${version}` : version.toUpperCase()}</span>
     <span>{utcOffsetLabel()}</span>

@@ -3,8 +3,9 @@
 // colors, radii, font sizes, or shadows.
 //
 // Style: plain, serious engineering tool. Hairline borders, one accent, flat controls.
-// Deboss: the page is a matte, grained plate; only the protagonists (the hero number,
-// the activity wall, page titles, the nameplate) are pressed into it. Never raised,
+// Deboss: the page is a matte, grained plate. Only large shapes (the hero number, the
+// activity wall) are pressed into it; deboss is unreadable on small or CJK text, which
+// keeps its ink color and gets a 1px letterpress edge instead. Never raised,
 // never glossy. Dark theme presses lightly into near-black; light theme is a
 // gray-green plate pressed with one ink.
 
@@ -92,7 +93,8 @@
 
   // Deboss: text the color of the plate, lit from the top-left.
   --deboss-text: -2px -2px 2px rgb(0 0 0 / 80%), 2px 2px 2px rgb(255 255 255 / 8%);
-  --deboss-text-sm: -1px -1px 1px rgb(0 0 0 / 90%), 1px 1px 0 rgb(255 255 255 / 16%);
+  // Letterpress: small text keeps its ink color; only a 1px edge says it is cut in.
+  --letterpress: 0 -1px 0 rgb(0 0 0 / 85%);
   // Pocket: a recess cut into the plate, holding the wall.
   --pocket-bg: #0d0d0c;
   --pocket-shadow: inset 2px 2px 5px rgb(0 0 0 / 70%), inset -1px -1px 1px rgb(255 255 255 / 5%);
@@ -144,7 +146,7 @@
   --heat-4: #2e3935;
 
   --deboss-text: -2px -2px 2px rgb(0 0 0 / 22%), 2px 2px 2px rgb(255 255 255 / 45%);
-  --deboss-text-sm: -1px -1px 1px rgb(0 0 0 / 24%), 1px 1px 1px rgb(255 255 255 / 45%);
+  --letterpress: 0 1px 0 rgb(255 255 255 / 40%);
   --pocket-bg: #a7b2ae;
   --pocket-shadow: inset 2px 2px 4px rgb(0 0 0 / 22%), inset -1px -1px 1px rgb(255 255 255 / 45%);
   --cell-shade: rgb(0 0 0 / 28%);
