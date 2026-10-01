@@ -12,6 +12,18 @@
         }
       ]
     },
+    "007c7a2b15e0caf3": {
+      "source": "Cursor Kaeru 未接管 · 需初始化 CA",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "shell/TakeoverToggle.tsx",
+          "line": 54,
+          "column": 44
+        }
+      ]
+    },
     "00929f23850e4ff0": {
       "source": "成功调用：{count}",
       "kind": "template",
@@ -2315,7 +2327,7 @@
         },
         {
           "file": "shell/TopBar.tsx",
-          "line": 17,
+          "line": 15,
           "column": 30
         }
       ]
@@ -2492,9 +2504,9 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "shell/TopBar.tsx",
-          "line": 33,
-          "column": 42
+          "file": "shell/TakeoverToggle.tsx",
+          "line": 54,
+          "column": 20
         }
       ]
     },
@@ -3216,6 +3228,18 @@
         }
       ]
     },
+    "9a472c155274b2c6": {
+      "source": "正在接管 Cursor…",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "shell/TakeoverToggle.tsx",
+          "line": 55,
+          "column": 38
+        }
+      ]
+    },
     "9a84733cc9ab1706": {
       "source": "资源详情",
       "kind": "text",
@@ -3276,6 +3300,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 274,
           "column": 9
+        }
+      ]
+    },
+    "9db72fe0ec38188e": {
+      "source": "正在关闭接管…",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "shell/TakeoverToggle.tsx",
+          "line": 55,
+          "column": 23
         }
       ]
     },
@@ -3995,9 +4031,9 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "shell/TopBar.tsx",
-          "line": 33,
-          "column": 18
+          "file": "shell/TakeoverToggle.tsx",
+          "line": 56,
+          "column": 9
         }
       ]
     },
@@ -4283,7 +4319,7 @@
         },
         {
           "file": "shell/TopBar.tsx",
-          "line": 18,
+          "line": 16,
           "column": 39
         }
       ]
@@ -4656,7 +4692,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 27,
+          "line": 25,
           "column": 52
         }
       ]
@@ -4808,7 +4844,7 @@
         },
         {
           "file": "shell/TopBar.tsx",
-          "line": 20,
+          "line": 18,
           "column": 33
         }
       ]
@@ -4901,6 +4937,18 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 19,
           "column": 6
+        }
+      ]
+    },
+    "e16bf5bf36c2bc9d": {
+      "source": "再次点击以关闭接管",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "shell/TakeoverToggle.tsx",
+          "line": 57,
+          "column": 12
         }
       ]
     },
@@ -5060,7 +5108,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 19,
+          "line": 17,
           "column": 32
         }
       ]
@@ -5581,7 +5629,7 @@
       "refs": [
         {
           "file": "shell/TopBar.tsx",
-          "line": 16,
+          "line": 14,
           "column": 25
         }
       ]

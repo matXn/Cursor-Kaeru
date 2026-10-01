@@ -1,17 +1,15 @@
 import { NavLink } from "react-router-dom";
 import appIcon from "../shared/assets/logo.svg";
 import type { DesktopPlatform } from "../shared/native/platform";
-import { useAppStore } from "../shared/store/appStore";
 import { Icon } from "../shared/ui/Icon";
 import { callsGlyph, modelsGlyph, overviewGlyph, pluginsGlyph, settingsGlyph } from "../shared/ui/glyphs";
 import { MacTrafficLights } from "./MacTrafficLights";
+import { TakeoverToggle } from "./TakeoverToggle";
 import { WindowControls } from "./WindowControls";
 import styles from "./TopBar.module.scss";
 
 // Single window-wide bar: drag region, primary navigation, takeover status, window controls.
 export function TopBar({ platform, nativeDesktop }: { platform: DesktopPlatform; nativeDesktop: boolean }) {
-  const { cursorHarness } = useAppStore();
-  const taken = cursorHarness?.settings_applied ?? false;
   const pages = [
     { path: "/", label: t("概览"), glyph: overviewGlyph },
     { path: "/calls", label: t("调用"), glyph: callsGlyph },
@@ -28,10 +26,7 @@ export function TopBar({ platform, nativeDesktop }: { platform: DesktopPlatform;
       {pages.map((page) => <NavLink key={page.path} to={page.path} end={page.path === "/"}><span className={styles.glyph}><Icon icon={page.glyph} size="18px" /></span>{page.label}</NavLink>)}
     </nav>
     <div className={styles.status}>
-      {cursorHarness && <NavLink to="/harness/cursor" className={styles.harness} data-taken={taken || undefined}>
-        <span className={styles.harnessDot} aria-hidden="true" />
-        {taken ? t("Cursor Kaeru 已接管") : t("Cursor Kaeru 未接管")}
-      </NavLink>}
+      <TakeoverToggle />
       {platform !== "macos" && <WindowControls native={nativeDesktop} />}
     </div>
   </header>;
