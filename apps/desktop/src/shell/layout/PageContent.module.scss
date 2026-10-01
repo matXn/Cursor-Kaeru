@@ -18,13 +18,6 @@
   display: flex;
   align-items: center;
   margin: 0;
-  // English page marking, same voice as the instrument labels; the nav already names the page.
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--text-md);
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-shadow: var(--letterpress);
   -webkit-user-select: none;
   user-select: none;
 }

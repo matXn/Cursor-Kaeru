@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { api, pluginText, type PluginDescriptor, type PluginImportFile, type PluginRuntimePhase, type PluginRuntimeStatus } from "../../shared/api";
 import { useI18n } from "../../i18n/store";
 import { PageContent } from "../../shell/layout/PageContent";
+import { PageTitle } from "../../shell/layout/PageTitle";
 import { appStore, useAppStore } from "../../shared/store/appStore";
 import { ActionMenu, type ActionMenuItem } from "../../shared/ui/ActionMenu";
 import { Button } from "../../shared/ui/Button";
@@ -62,7 +63,7 @@ export function PluginManagementPage() {
 
   return <>
     <PageContent
-      title="PLUGINS"
+      title={<PageTitle index={4} name="Plugins" />}
       sections={[{ key: "installed-plugins", estimatedHeight, content }]}
     />
     <RuntimeProgressModal

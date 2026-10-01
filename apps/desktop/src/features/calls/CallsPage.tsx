@@ -9,6 +9,7 @@ import { chevronLeftIcon, chevronRightIcon } from "../../shared/ui/icons";
 import { localDayKey, localDayRange, shiftLocalDay } from "../../shared/utils/localDay";
 import { formatCompactInteger } from "../../shared/utils/numberFormat";
 import { PageContent } from "../../shell/layout/PageContent";
+import { PageTitle } from "../../shell/layout/PageTitle";
 import { CallRoadmap } from "./roadmap/CallRoadmap";
 import styles from "./CallsPage.module.scss";
 
@@ -93,5 +94,5 @@ export function CallsPage() {
         : <p className={styles.empty}>{calls.length > 0 ? t("没有符合筛选条件的调用") : t("这一天没有调用")}</p>}
     </div>
   </div>;
-  return <PageContent fixed title="CALLS" contentClassName={styles.pageContent} sections={[{ key: "calls", estimatedHeight: 720, content }]} />;
+  return <PageContent fixed title={<PageTitle index={2} name="Calls" />} contentClassName={styles.pageContent} sections={[{ key: "calls", estimatedHeight: 720, content }]} />;
 }
