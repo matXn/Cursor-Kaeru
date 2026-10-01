@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../i18n/store";
 import { formatCompactInteger, formatInteger, formatLocaleCompact } from "../../../shared/utils/numberFormat";
 import { Icon } from "../../../shared/ui/Icon";
-import { activeDaysGlyph, peakGlyph, registrationGlyph, streakGlyph } from "../../../shared/ui/glyphs";
+import { activeDaysGlyph, peakGlyph, streakGlyph } from "../../../shared/ui/glyphs";
 import { ContributionCalendar, type ContributionDay } from "./ContributionCalendar";
 import styles from "./ActivityWall.module.scss";
 
@@ -37,8 +37,6 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
   const [number, unit = ""] = formatLocaleCompact(total, locale).split(" ");
 
   return <section className={styles.root} aria-label={t("过去一年的 Token 用量")}>
-    <Icon className={styles.registration} icon={registrationGlyph} size="1.7em" />
-    <p className={styles.range}>{days[0]?.date} → {days.at(-1)?.date}</p>
     <header className={styles.header}>
       <h2 className={styles.headline} title={formatInteger(total)}>
         <span className={`deboss ${styles.total}`}>{number}</span>

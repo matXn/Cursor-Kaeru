@@ -27,6 +27,3 @@ export const tokensGlyph = glyph('<path d="M12 4l8 4-8 4-8-4z"/><path d="M4 12l8
 export const valueGlyph = glyph('<path d="M3.5 12.2V5.5a2 2 0 0 1 2-2h6.7l8.3 8.3a2 2 0 0 1 0 2.8l-5.9 5.9a2 2 0 0 1-2.8 0z"/><circle cx="8.5" cy="8.5" r="1.5"/>');
 export const rangeGlyph = glyph('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 9.5h16M8.5 3.5v3M15.5 3.5v3M8 14h8"/>');
 
-// ---- Marks --------------------------------------------------------
-// Printer's registration mark.
-export const registrationGlyph = glyph('<circle cx="12" cy="12" r="5"/><path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/>');
