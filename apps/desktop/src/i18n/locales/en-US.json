@@ -17,6 +17,7 @@
   "07c657ed4747126e": "Anthropic extra parameters",
   "07eb730af89936bf": "Time range",
   "08791ba06e7441de": "{accounts} accounts · {models} models",
+  "0916e37d9f76b94c": "+{delta} since last view",
   "092b520558eff5f2": "Not tested",
   "099008ea7a42ebd1": "All custom Header values must be strings",
   "0b96da34f6fbdd3b": "Cache read: {tokens} × ${price}/1M = {cost}",

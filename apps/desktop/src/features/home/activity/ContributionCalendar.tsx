@@ -62,8 +62,11 @@ function labels() {
   };
 }
 
-export function ContributionCalendar({ days, onHover, onSelect }: {
+export function ContributionCalendar({ days, freshFrom, freshRun, onHover, onSelect }: {
   days: ContributionDay[];
+  // Days on or after this date with usage flash once, after the headline has rolled.
+  freshFrom: string | null;
+  freshRun: number;
   onHover: (day: ContributionDay | null) => void;
   onSelect: (day: ContributionDay) => void;
 }) {
@@ -127,7 +130,7 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
       </defs>
       {months.map((month) => <text key={month.key} className={styles.label} x={month.x} y={12}>{month.text}</text>)}
       {text.weekdays.map((day) => <text key={day.row} className={styles.label} x={0} y={HEADER + day.row * STEP + CELL * 0.8}>{day.text}</text>)}
-      <g filter="url(#contribution-recess)">
+      <g key={freshRun} filter="url(#contribution-recess)">
       {visible.map((cell) => <rect
         key={cell.date}
         className={styles.cell}
@@ -138,6 +141,7 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
         rx={Math.round(CELL * 0.22)}
         fill={`var(--heat-${cell.level})`}
         data-today={cell.date === today || undefined}
+        data-fresh={(freshFrom !== null && cell.date >= freshFrom && cell.tokens > 0) || undefined}
         onMouseEnter={() => onHover(cell)}
         onClick={() => onSelect(cell)}
       />)}

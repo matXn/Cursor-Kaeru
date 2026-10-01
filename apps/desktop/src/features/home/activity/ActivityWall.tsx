@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../i18n/store";
 import { formatCompactInteger, formatInteger, formatLocaleCompact } from "../../../shared/utils/numberFormat";
 import { Icon } from "../../../shared/ui/Icon";
 import { activeDaysGlyph, peakGlyph, streakGlyph } from "../../../shared/ui/glyphs";
 import { ContributionCalendar, type ContributionDay } from "./ContributionCalendar";
+import { readLastSeen, writeLastSeen } from "./lastSeen";
+import { RollingNumber } from "./RollingNumber";
 import styles from "./ActivityWall.module.scss";
 
 const HEAT_LEVELS = [0, 1, 2, 3, 4];
@@ -26,6 +28,8 @@ function logLine(day: ContributionDay) {
   return `${day.date} ${name} — ${day.tokens > 0 ? `${formatCompactInteger(day.tokens)} TOKEN` : "IDLE"}`;
 }
 
+type Roll = { from: string | null; runId: number; delta: number; freshFrom: string | null };
+
 // Past-year story: a debossed headline number, three gauges, the wall pressed into the page.
 export function ActivityWall({ days }: { days: ContributionDay[] }) {
   const { locale } = useI18n();
@@ -35,12 +39,35 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
   const activeDays = days.filter((day) => day.tokens > 0).length;
   const busiest = days.reduce<ContributionDay | null>((best, day) => day.tokens > (best?.tokens ?? 0) ? day : best, null);
   const [number, unit = ""] = formatLocaleCompact(total, locale).split(" ");
+  const [roll, setRoll] = useState<Roll>({ from: null, runId: 0, delta: 0, freshFrom: null });
+
+  // Each time the overview is shown (kept-alive pages re-run effects when they become visible)
+  // and whenever the total moves while it is open: roll from what was seen last.
+  // The first view ever rolls up from zero.
+  useEffect(() => {
+    const today = days.at(-1)?.date;
+    if (!today) return;
+    const seen = readLastSeen();
+    writeLastSeen({ total, day: today });
+    if (seen?.total === total) return;
+    const [seenNumber, seenUnit = ""] = seen ? formatLocaleCompact(seen.total, locale).split(" ") : [];
+    const from = seen && seenUnit === unit ? seenNumber : number.replace(/\d/g, "0");
+    setRoll((current) => ({
+      from,
+      runId: current.runId + 1,
+      delta: seen ? total - seen.total : 0,
+      freshFrom: seen ? seen.day : null,
+    }));
+  }, [total]);
 
   return <section className={styles.root} aria-label={t("过去一年的 Token 用量")}>
     <header className={styles.header}>
       <h2 className={styles.headline} title={formatInteger(total)}>
-        <span className={`deboss ${styles.total}`}>{number}</span>
-        <span className={styles.unit}>{unit} Token</span>
+        <RollingNumber className={`deboss ${styles.total}`} value={number} from={roll.from} runId={roll.runId} />
+        <span className={styles.unitStack}>
+          {roll.delta > 0 && <span key={roll.runId} className={styles.delta}>{t("较上次查看 +{delta}", { delta: formatLocaleCompact(roll.delta, locale) })}</span>}
+          <span className={styles.unit}>{unit} Token</span>
+        </span>
       </h2>
       <dl className={styles.facts}>
         <div><dt><Icon icon={activeDaysGlyph} size="1.3em" />ACTIVE</dt><dd>{activeDays}d</dd></div>
@@ -51,6 +78,8 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
     <div className={styles.pocket}>
       <ContributionCalendar
         days={days}
+        freshFrom={roll.freshFrom}
+        freshRun={roll.runId}
         onHover={setHovered}
         onSelect={(day) => navigate(`/calls?day=${day.date}`)}
       />

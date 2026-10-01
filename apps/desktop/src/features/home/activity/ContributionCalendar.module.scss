@@ -34,3 +34,23 @@
     stroke: var(--text);
   }
 }
+
+// New usage since the last view: a ring of the brightest heat flares twice, then fades.
+.cell[data-fresh] {
+  stroke: var(--heat-4);
+  stroke-width: 2;
+  stroke-opacity: 0;
+  animation: fresh 900ms ease-out 1400ms 2;
+}
+
+@keyframes fresh {
+  30% {
+    stroke-opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cell[data-fresh] {
+    animation: none;
+  }
+}
