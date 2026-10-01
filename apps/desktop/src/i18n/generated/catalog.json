@@ -19,7 +19,7 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 55,
+          "line": 45,
           "column": 44
         }
       ]
@@ -2545,7 +2545,7 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 55,
+          "line": 45,
           "column": 20
         }
       ]
@@ -3289,8 +3289,8 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 56,
-          "column": 51
+          "line": 46,
+          "column": 15
         }
       ]
     },
@@ -3354,18 +3354,6 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 298,
           "column": 9
-        }
-      ]
-    },
-    "9db72fe0ec38188e": {
-      "source": "正在关闭接管…",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/TakeoverToggle.tsx",
-          "line": 56,
-          "column": 36
         }
       ]
     },
@@ -4086,7 +4074,7 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 57,
+          "line": 47,
           "column": 9
         }
       ]
@@ -5005,18 +4993,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 19,
           "column": 6
-        }
-      ]
-    },
-    "e16bf5bf36c2bc9d": {
-      "source": "再次点击以关闭接管",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/TakeoverToggle.tsx",
-          "line": 58,
-          "column": 12
         }
       ]
     },
