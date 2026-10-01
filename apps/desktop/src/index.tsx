@@ -4,8 +4,11 @@ import { I18nRoot } from "./i18n/I18nRoot";
 import { initializeI18n } from "./i18n/store";
 import { appStore } from "./shared/store/appStore";
 import { applyTheme } from "./shared/theme/theme";
-// GitHub typefaces (OFL): Mona Sans (variable weight and width) for UI text, Monaspace Neon for numbers and code.
-import "@fontsource-variable/mona-sans/wdth.css";
+// GitHub typefaces (OFL): Mona Sans for UI text, Monaspace Neon for numbers and code.
+// Outfit (OFL) for page titles only.
+import "@fontsource/mona-sans/400.css";
+import "@fontsource/mona-sans/500.css";
+import "@fontsource/outfit/500.css";
 import "@fontsource/monaspace-neon/400.css";
 import "@fontsource/monaspace-neon/500.css";
 import "./styles/globals.scss";

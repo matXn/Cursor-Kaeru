@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../i18n/store";
 import { formatCompactInteger, formatInteger, formatLocaleCompact } from "../../../shared/utils/numberFormat";
+import { Icon } from "../../../shared/ui/Icon";
+import { activeDaysGlyph, peakGlyph, registrationGlyph, streakGlyph } from "../../../shared/ui/glyphs";
 import { ContributionCalendar, type ContributionDay } from "./ContributionCalendar";
 import styles from "./ActivityWall.module.scss";
 
@@ -35,7 +37,7 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
   const [number, unit = ""] = formatLocaleCompact(total, locale).split(" ");
 
   return <section className={styles.root} aria-label={t("过去一年的 Token 用量")}>
-    <span className={styles.registration} aria-hidden="true" />
+    <Icon className={styles.registration} icon={registrationGlyph} size="1.7em" />
     <p className={styles.range}>{days[0]?.date} → {days.at(-1)?.date}</p>
     <header className={styles.header}>
       <h2 className={styles.headline} title={formatInteger(total)}>
@@ -43,9 +45,9 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
         <span className={styles.unit}>{unit} Token</span>
       </h2>
       <dl className={styles.facts}>
-        <div><dt>ACTIVE</dt><dd>{activeDays}d</dd></div>
-        <div><dt>STREAK</dt><dd>{longestStreak(days)}d</dd></div>
-        <div><dt>PEAK</dt><dd>{busiest ? busiest.date.slice(5) : "—"}</dd></div>
+        <div><dt><Icon icon={activeDaysGlyph} size="1.3em" />ACTIVE</dt><dd>{activeDays}d</dd></div>
+        <div><dt><Icon icon={streakGlyph} size="1.3em" />STREAK</dt><dd>{longestStreak(days)}d</dd></div>
+        <div><dt><Icon icon={peakGlyph} size="1.3em" />PEAK</dt><dd>{busiest ? busiest.date.slice(5) : "—"}</dd></div>
       </dl>
     </header>
     <div className={styles.pocket}>

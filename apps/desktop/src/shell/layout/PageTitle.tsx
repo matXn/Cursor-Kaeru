@@ -1,10 +1,12 @@
+import type { IconifyIcon } from "@iconify/react";
+import { Icon } from "../../shared/ui/Icon";
 import styles from "./PageTitle.module.scss";
 
-// Page marking: a page number and the English name set in Mona Sans Expanded.
+// Page marking: the page's glyph and its English name in Outfit.
 // The nav already says the page's Chinese name, so the title does not repeat it.
-export function PageTitle({ index, name }: { index: number; name: string }) {
+export function PageTitle({ glyph, name }: { glyph: IconifyIcon; name: string }) {
   return <h1 className={styles.root}>
-    <span className={styles.index}>{String(index).padStart(2, "0")}</span>
-    <span className={styles.name}>{name}</span>
+    <Icon className={styles.glyph} icon={glyph} size="0.9em" />
+    <span>{name}</span>
   </h1>;
 }

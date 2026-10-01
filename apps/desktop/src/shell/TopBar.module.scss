@@ -55,7 +55,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: 6px;
     color: var(--text-muted);
     font-size: var(--text-base);
     text-decoration: none;
@@ -80,6 +80,14 @@
         background: var(--accent);
       }
     }
+  }
+}
+
+.glyph {
+  opacity: 0.8;
+
+  [aria-current="page"] > & {
+    opacity: 1;
   }
 }
 

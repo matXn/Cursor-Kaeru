@@ -7,6 +7,7 @@ import { Icon } from "../../../shared/ui/Icon";
 import { ModelSelect, type ModelSelectOption } from "../../../shared/ui/ModelSelect";
 import { TooltipTrigger } from "../../../shared/ui/TooltipTrigger";
 import { chevronDownIcon, refreshIcon } from "../../../shared/ui/icons";
+import { rangeGlyph } from "../../../shared/ui/glyphs";
 import styles from "./OverviewTimeRangeFilter.module.scss";
 
 export type OverviewRangePreset = "ten-minutes" | "hour" | "four-hours" | "twenty-four-hours" | "today" | "week" | "month" | "custom";
@@ -81,6 +82,7 @@ export function OverviewTimeRangeFilter({ value, customLabel, customStart, custo
       aria-expanded={open}
       onClick={() => setOpen(!open)}
     >
+      <Icon icon={rangeGlyph} size="1.2em" />
       {value === "custom" ? customLabel : presetLabel(value)}
       {filtered && <span className={styles.badge}>{t("{count} 个模型", { count: selectedModels.length })}</span>}
       <Icon icon={chevronDownIcon} size="1em" />

@@ -11,10 +11,13 @@ importers:
       '@floating-ui/dom':
         specifier: ^1.8.0
         version: 1.8.0
-      '@fontsource-variable/mona-sans':
+      '@fontsource/mona-sans':
         specifier: ^5.3.0
         version: 5.3.0
       '@fontsource/monaspace-neon':
+        specifier: ^5.3.0
+        version: 5.3.0
+      '@fontsource/outfit':
         specifier: ^5.3.0
         version: 5.3.0
       '@iconify/json':
@@ -181,11 +184,14 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@fontsource-variable/mona-sans@5.3.0':
-    resolution: {integrity: sha512-PkxRB3KI4z9Gjpk7vVqgO3GMSyQuOIIj4TaRDbvbcDj8SzWwI38jvLTQxJM/cTRorhcT7h8qjcllR+qjRtM/Fg==}
+  '@fontsource/mona-sans@5.3.0':
+    resolution: {integrity: sha512-+K4yLnbbtNfYuR1Znpq9kWEJUYD1W0yQ5DhWde93lC3O8VHXtydoM0bHZBvO6DofIYEXgZlZU14A9yFClisL+g==}
 
   '@fontsource/monaspace-neon@5.3.0':
     resolution: {integrity: sha512-a4B4L4nmW+mW42gDb6JUugy2fA3DC0QKi2yRMXKzuNsN+wHhUvrqgYndIBMds+Evq/cWaMJgd06x14dHuBNxwA==}
+
+  '@fontsource/outfit@5.3.0':
+    resolution: {integrity: sha512-0AVHzTTVJSxWDOxPKSfMeHhZeBFDU3cmgrcOb76ZEyhGo0+xgyG3GsLF3h9+X8w0IX7G4jzjJgFQEBiWdX6VgA==}
 
   '@hapi/address@5.1.1':
     resolution: {integrity: sha512-A+po2d/dVoY7cYajycYI43ZbYMXukuopIsqCjh5QzsBCipDtdofHntljDlpccMjIfTy6UOkg+5KPriwYch2bXA==}
@@ -1373,9 +1379,11 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@fontsource-variable/mona-sans@5.3.0': {}
+  '@fontsource/mona-sans@5.3.0': {}
 
   '@fontsource/monaspace-neon@5.3.0': {}
+
+  '@fontsource/outfit@5.3.0': {}
 
   '@hapi/address@5.1.1':
     dependencies:

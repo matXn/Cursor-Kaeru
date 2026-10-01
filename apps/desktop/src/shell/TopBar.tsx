@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import appIcon from "../../src-tauri/icons/32x32.png";
 import type { DesktopPlatform } from "../shared/native/platform";
 import { useAppStore } from "../shared/store/appStore";
+import { Icon } from "../shared/ui/Icon";
+import { callsGlyph, modelsGlyph, overviewGlyph, pluginsGlyph, settingsGlyph } from "../shared/ui/glyphs";
 import { MacTrafficLights } from "./MacTrafficLights";
 import { WindowControls } from "./WindowControls";
 import styles from "./TopBar.module.scss";
@@ -11,11 +13,11 @@ export function TopBar({ platform, nativeDesktop }: { platform: DesktopPlatform;
   const { cursorHarness } = useAppStore();
   const taken = cursorHarness?.settings_applied ?? false;
   const pages = [
-    { path: "/", label: t("概览") },
-    { path: "/calls", label: t("调用") },
-    { path: "/harness/cursor", label: t("模型") },
-    { path: "/plugins", label: t("插件") },
-    { path: "/settings", label: t("设置") },
+    { path: "/", label: t("概览"), glyph: overviewGlyph },
+    { path: "/calls", label: t("调用"), glyph: callsGlyph },
+    { path: "/harness/cursor", label: t("模型"), glyph: modelsGlyph },
+    { path: "/plugins", label: t("插件"), glyph: pluginsGlyph },
+    { path: "/settings", label: t("设置"), glyph: settingsGlyph },
   ];
 
   return <header className={styles.root} data-platform={platform}>
@@ -23,7 +25,7 @@ export function TopBar({ platform, nativeDesktop }: { platform: DesktopPlatform;
     {!nativeDesktop && platform === "macos" && <MacTrafficLights />}
     <img className={styles.icon} src={appIcon} alt="" aria-hidden="true" />
     <nav className={styles.navigation} aria-label={t("主菜单")}>
-      {pages.map((page) => <NavLink key={page.path} to={page.path} end={page.path === "/"}>{page.label}</NavLink>)}
+      {pages.map((page) => <NavLink key={page.path} to={page.path} end={page.path === "/"}><Icon className={styles.glyph} icon={page.glyph} size="1.15em" />{page.label}</NavLink>)}
     </nav>
     <div className={styles.status}>
       {cursorHarness && <NavLink to="/harness/cursor" className={styles.harness} data-taken={taken || undefined}>

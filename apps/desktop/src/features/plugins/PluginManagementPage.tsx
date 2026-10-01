@@ -3,6 +3,7 @@ import { api, pluginText, type PluginDescriptor, type PluginImportFile, type Plu
 import { useI18n } from "../../i18n/store";
 import { PageContent } from "../../shell/layout/PageContent";
 import { PageTitle } from "../../shell/layout/PageTitle";
+import { pluginsGlyph } from "../../shared/ui/glyphs";
 import { appStore, useAppStore } from "../../shared/store/appStore";
 import { ActionMenu, type ActionMenuItem } from "../../shared/ui/ActionMenu";
 import { Button } from "../../shared/ui/Button";
@@ -63,7 +64,7 @@ export function PluginManagementPage() {
 
   return <>
     <PageContent
-      title={<PageTitle index={4} name="Plugins" />}
+      title={<PageTitle glyph={pluginsGlyph} name="Plugins" />}
       sections={[{ key: "installed-plugins", estimatedHeight, content }]}
     />
     <RuntimeProgressModal

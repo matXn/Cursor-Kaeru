@@ -3,6 +3,7 @@ import { formatCompactInteger, formatInteger } from "../../../shared/utils/numbe
 import { Icon } from "../../../shared/ui/Icon";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
 import { informationOutlineIcon } from "../../../shared/ui/icons";
+import { cacheHitGlyph, callCountGlyph, tokensGlyph, valueGlyph } from "../../../shared/ui/glyphs";
 import styles from "./HomeMetrics.module.scss";
 
 export type HomeMetricsData = {
@@ -153,14 +154,14 @@ export function HomeMetrics({ data, filter }: { data: HomeMetricsData; filter: R
     <div className={styles.toolbar}>{filter}</div>
     <div className={styles.stats}>
       <article className={styles.metric}>
-        <div className={styles.label}>CACHE HIT<InfoTooltip content={cacheTooltip} /></div>
+        <div className={styles.label}><Icon icon={cacheHitGlyph} size="1.3em" />CACHE HIT<InfoTooltip content={cacheTooltip} /></div>
         <div className={styles.body}>
           <div className={styles.value}>{defaultCacheHitRate === null ? "--" : formatRate(defaultCacheHitRate)}</div>
           <RateMeter rate={defaultCacheHitRate ?? 0} />
         </div>
       </article>
       <article className={styles.metric}>
-        <div className={styles.label}>CALLS<InfoTooltip content={callsTooltip} /></div>
+        <div className={styles.label}><Icon icon={callCountGlyph} size="1.3em" />CALLS<InfoTooltip content={callsTooltip} /></div>
         <div className={styles.body}>
           <div className={styles.value} title={formatInteger(data.llmCalls)}>{formatCompactInteger(data.llmCalls)}</div>
           <div className={styles.secondary}>{t("成功 {successful} / 异常 {failed}", {
@@ -170,14 +171,14 @@ export function HomeMetrics({ data, filter }: { data: HomeMetricsData; filter: R
         </div>
       </article>
       <article className={styles.metric}>
-        <div className={styles.label}>TOKENS<InfoTooltip content={tokensTooltip} /></div>
+        <div className={styles.label}><Icon icon={tokensGlyph} size="1.3em" />TOKENS<InfoTooltip content={tokensTooltip} /></div>
         <div className={styles.body}>
           <div className={styles.value} title={formatInteger(data.tokenUsage)}>{formatCompactInteger(data.tokenUsage)}</div>
           <div className={styles.secondary}>{t("提示词 {tokens}", { tokens: formatCompactInteger(data.promptTokens) })}</div>
         </div>
       </article>
       <article className={styles.metric}>
-        <div className={styles.label}>EST. VALUE<InfoTooltip content={costTooltip} /></div>
+        <div className={styles.label}><Icon icon={valueGlyph} size="1.3em" />EST. VALUE<InfoTooltip content={costTooltip} /></div>
         <div className={styles.body}>
           <div className={styles.value} title={formatUSD(totalCost)}>{formatUSD(totalCost)}</div>
           <div className={styles.secondary}>{t("缓存读写 {cost}", { cost: formatUSD(cacheCost) })}</div>

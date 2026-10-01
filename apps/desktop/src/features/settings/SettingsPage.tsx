@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api, type ProxySettings, type ProxySettingsInput, type StatisticsStorage, type StatisticsStorageScope, type TabSettings } from "../../shared/api";
 import { PageContent } from "../../shell/layout/PageContent";
 import { PageTitle } from "../../shell/layout/PageTitle";
+import { settingsGlyph } from "../../shared/ui/glyphs";
 import { LegacyModelImport } from "../models/LegacyModelImport";
 import { AppLifecycleSettingsCard } from "./AppLifecycleSettingsCard";
 import { CommitSettingsCard } from "./CommitSettingsCard";
@@ -316,5 +317,5 @@ export function SettingsPage() {
       </ConfirmDialog>
     </div>
   );
-  return <PageContent title={<PageTitle index={5} name="Settings" />} sections={[{ key: "settings", estimatedHeight: 1200, content }]} />;
+  return <PageContent title={<PageTitle glyph={settingsGlyph} name="Settings" />} sections={[{ key: "settings", estimatedHeight: 1200, content }]} />;
 }
