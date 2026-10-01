@@ -5,6 +5,8 @@ import type {
   Model,
   Overview,
   OverviewTokenUsageBucket,
+  PluginDescriptor,
+  PluginResourceView,
   ProxySettings,
   StatisticsStorage,
   TabSettings,
@@ -35,6 +37,67 @@ const models: Model[] = [
 // Agent sessions on the current day: each conversation is a burst of back-to-back tool rounds
 // with varied durations; the latest call is still running so the timeline shows live state.
 const DEMO_NOW = Date.now();
+const HOUR = 3_600_000;
+
+const pluginIcon = (color: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="${color}"/></svg>`)}`;
+
+function demoAccount(id: string, displayName: string, description: string, metrics: PluginResourceView["metrics"], cooling = false): PluginResourceView {
+  return {
+    id,
+    displayName,
+    description,
+    metrics,
+    createdAtMs: DEMO_NOW - 20 * 24 * HOUR,
+    state: cooling ? { status: "cooling", retryAtMs: DEMO_NOW + 2 * HOUR, message: null } : { status: "ready" },
+  };
+}
+
+function demoPlugin(id: string, name: string, color: string, resourceType: string, accounts: PluginResourceView[]): PluginDescriptor {
+  return {
+    id,
+    name,
+    version: "0.1.7",
+    author: "@leookun",
+    icon: pluginIcon(color),
+    providers: [{ id: "main", pluginId: id, displayName: name, description: null, providerType: "openai", resourceType, hasModels: true, configured: true, models: [] }],
+    resources: [{
+      type: resourceType,
+      displayName: { "zh-CN": "账号", "en-US": "Accounts" },
+      add: [],
+      import: null,
+      canRefresh: true,
+      canRemove: true,
+      actions: [],
+      resources: accounts,
+    }],
+  };
+}
+
+// Quota shapes mirror what each built-in plugin presents (remaining share 0–100, reset time).
+const plugins: PluginDescriptor[] = [
+  demoPlugin("dev.cursorbyok.examples.codex-auth", "Codex", "#10a37f", "account", [
+    demoAccount("codex-1", "tozzy@example.com", "ChatGPT Plus", [
+      { id: "weekly", label: { "zh-CN": "周额度", "en-US": "Weekly quota" }, unit: "percent", value: 62, resetAtMs: DEMO_NOW + 3 * 24 * HOUR + 5 * HOUR },
+      { id: "five-hour", label: { "zh-CN": "5 小时窗口", "en-US": "5-hour window" }, unit: "percent", value: 81, resetAtMs: DEMO_NOW + 2 * HOUR + 14 * 60_000 },
+      { id: "reset-credits", label: { "zh-CN": "重置卡", "en-US": "Reset cards" }, unit: "count", value: 2 },
+    ]),
+    demoAccount("codex-2", "work@example.com", "ChatGPT Pro", [
+      { id: "weekly", label: { "zh-CN": "周额度", "en-US": "Weekly quota" }, unit: "percent", value: 34, resetAtMs: DEMO_NOW + 5 * 24 * HOUR },
+      { id: "five-hour", label: { "zh-CN": "5 小时窗口", "en-US": "5-hour window" }, unit: "percent", value: 12, resetAtMs: DEMO_NOW + 38 * 60_000 },
+    ]),
+  ]),
+  demoPlugin("dev.cursorbyok.examples.grok-auth", "Grok", "#1f1f1f", "account", [
+    demoAccount("grok-1", "tozzy@x.com", "SuperGrok", [
+      { id: "credits", label: { "zh-CN": "积分额度", "en-US": "Credits" }, unit: "percent", value: 0, resetAtMs: DEMO_NOW + 2 * HOUR },
+    ], true),
+  ]),
+  demoPlugin("dev.cursorbyok.examples.antigravity-auth", "Antigravity", "#4285f4", "account", [
+    demoAccount("ag-1", "tozzy@gmail.com", "Google AI Pro", [
+      { id: "claude", label: "Claude", unit: "percent", value: 74, resetAtMs: DEMO_NOW + 4 * HOUR },
+      { id: "gemini", label: "Gemini", unit: "percent", value: 100, resetAtMs: DEMO_NOW + 4 * HOUR },
+    ]),
+  ]),
+];
 const sessions = [
   { startsAgoMin: 400, rounds: 6, model: 0 },
   { startsAgoMin: 290, rounds: 9, model: 2 },
@@ -132,7 +195,7 @@ export function installDemoApi() {
     if (path === "/plugins/runtime") {
       return json({ state: "ready", version: "demo", target: null, phase: null, downloaded_bytes: 0, total_bytes: null, error: null });
     }
-    if (path === "/plugins" && method === "GET") return json([]);
+    if (path === "/plugins" && method === "GET") return json(plugins);
     if (path === "/models" && method === "GET") return json(models);
     if (path === "/models" && method === "POST") return json(models);
     if (path === "/models/order") return json(models);

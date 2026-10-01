@@ -20,6 +20,7 @@ import { ConfirmDialog } from "../../shared/ui/ConfirmDialog";
 import { FormField, TextInput } from "../../shared/ui/FormControls";
 import { Modal } from "../../shared/ui/Modal";
 import { Switch } from "../../shared/ui/Switch";
+import { QuotaMeter } from "./quota/QuotaMeter";
 import styles from "./PluginResourcePanels.module.scss";
 
 const PAGE_SIZE = 10;
@@ -387,15 +388,13 @@ function ResourceRow({ item, actions, canRefresh, disabled, onAction, onRefresh,
 }) {
   const { locale } = useI18n();
   return <Card className={styles.resourceRow}>
-    <div>
+    <div className={styles.resourceIdentity}>
       <strong>{item.displayName}</strong>
       {item.description && <span>{pluginText(item.description, locale)}</span>}
-      {item.metrics.map((metric) => <span key={metric.id}>
-        {metric.unit === "percent"
-          ? t("{label} 剩余 {percent}%", { label: pluginText(metric.label, locale), percent: Math.round(metric.value) })
-          : `${pluginText(metric.label, locale)}: ${metric.value}`}
-      </span>)}
     </div>
+    {item.metrics.length > 0 && <div className={styles.quota}>
+      {item.metrics.map((metric) => <QuotaMeter key={metric.id} metric={metric} />)}
+    </div>}
     <div className={styles.actions}>
       <StateBadge state={item.state} />
       {actions.map((action) => <Button key={action.id} size="small" disabled={disabled} onClick={() => onAction(action)}>{pluginText(action.displayName, locale)}</Button>)}

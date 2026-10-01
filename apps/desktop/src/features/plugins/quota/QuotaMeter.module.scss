@@ -1,0 +1,102 @@
+.root {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.label {
+  overflow: hidden;
+  color: var(--text-faint);
+  font-family: var(--font-title);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.reset {
+  flex: none;
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.percent,
+.count {
+  flex: none;
+  min-width: 3.2em;
+  color: var(--text);
+  font-size: var(--text-xl);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+
+  [data-level="low"] & {
+    color: var(--warning);
+  }
+
+  [data-level="empty"] & {
+    color: var(--danger);
+    font-size: var(--text-md);
+  }
+}
+
+// Same recessed cells as the wall; lit cells are what is left.
+.cells {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(20, minmax(0, 1fr));
+  gap: 2px;
+
+  i {
+    height: 12px;
+    border-radius: 2px;
+    background: var(--heat-0);
+    box-shadow: inset 1px 1px 1px rgb(0 0 0 / 35%);
+
+    &[data-lit] {
+      background: var(--heat-3);
+      box-shadow: none;
+    }
+
+    // The leading lit cell is the brightest, like a needle on a gauge.
+    &[data-lit]:has(+ :not([data-lit])),
+    &[data-lit]:last-child {
+      background: var(--heat-4);
+    }
+  }
+
+  [data-level="low"] & i[data-lit] {
+    background: var(--warning);
+  }
+}
+
+[data-compact] {
+  gap: 4px;
+
+  .percent,
+  .count {
+    font-size: var(--text-md);
+  }
+
+  .cells i {
+    height: 8px;
+  }
+}

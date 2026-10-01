@@ -12,6 +12,7 @@ import { Modal } from "../../shared/ui/Modal";
 import { useMessage } from "../../shared/ui/message";
 import { TruncatedButton } from "../../shared/ui/TruncatedButton";
 import { PluginAddPanel, PluginSettingsPanel } from "./PluginResourcePanels";
+import { QuotaMeter } from "./quota/QuotaMeter";
 import styles from "./PluginManagementPage.module.scss";
 
 export function PluginManagementPage() {
@@ -131,6 +132,28 @@ function PluginCards({ plugins, onOpen }: {
   </div>;
 }
 
+const CARD_ACCOUNTS = 3;
+
+// Each account's tightest window (lowest remaining share), so a nearly used-up account stands out.
+function AccountQuotas({ plugin }: { plugin: PluginDescriptor }) {
+  const accounts = plugin.resources.flatMap((resource) => resource.resources)
+    .map((account) => ({
+      account,
+      tightest: account.metrics
+        .filter((metric) => metric.unit === "percent")
+        .sort((a, b) => a.value - b.value)[0],
+    }))
+    .filter((entry) => entry.tightest);
+  if (accounts.length === 0) return null;
+  return <div className={styles.accountQuotas}>
+    {accounts.slice(0, CARD_ACCOUNTS).map(({ account, tightest }) => <div key={account.id} className={styles.accountQuota}>
+      <span className={styles.accountName} title={account.displayName}>{account.displayName}</span>
+      <QuotaMeter metric={tightest!} compact />
+    </div>)}
+    {accounts.length > CARD_ACCOUNTS && <span className={styles.moreAccounts}>{t("还有 {count} 个账号", { count: accounts.length - CARD_ACCOUNTS })}</span>}
+  </div>;
+}
+
 function PluginCard({ plugin, onOpen }: {
   plugin: PluginDescriptor;
   onOpen: (pluginId: string, mode: "add" | "settings") => void;
@@ -229,6 +252,7 @@ function PluginCard({ plugin, onOpen }: {
           <span className={styles.pluginAuthor}>{plugin.author}</span>
         )}
       </div>
+      <AccountQuotas plugin={plugin} />
       <div className={styles.cardActions}>
         <TruncatedButton
           size="small"
