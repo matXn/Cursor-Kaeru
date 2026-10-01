@@ -19,8 +19,8 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 45,
-          "column": 44
+          "line": 26,
+          "column": 41
         }
       ]
     },
@@ -2545,8 +2545,8 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 45,
-          "column": 20
+          "line": 26,
+          "column": 17
         }
       ]
     },
@@ -3279,18 +3279,6 @@
           "file": "features/models/CursorGates.tsx",
           "line": 22,
           "column": 188
-        }
-      ]
-    },
-    "9a472c155274b2c6": {
-      "source": "正在接管 Cursor…",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/TakeoverToggle.tsx",
-          "line": 46,
-          "column": 15
         }
       ]
     },
@@ -4074,8 +4062,8 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 47,
-          "column": 9
+          "line": 25,
+          "column": 7
         }
       ]
     },
