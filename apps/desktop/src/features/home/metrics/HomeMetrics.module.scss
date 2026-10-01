@@ -48,8 +48,10 @@
   display: flex;
   align-items: center;
   gap: var(--space-1);
-  color: var(--text-muted);
-  font-size: var(--text-sm);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
   line-height: 1;
   white-space: nowrap;
 }
@@ -83,8 +85,8 @@
 .value {
   overflow: hidden;
   color: var(--text);
-  font-family: var(--font-mono);
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
+  letter-spacing: -0.02em;
   line-height: 1;
   text-overflow: ellipsis;
   white-space: nowrap;

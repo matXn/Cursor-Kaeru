@@ -2,8 +2,11 @@
 // Components reference these custom properties; they never hardcode
 // colors, radii, font sizes, or shadows.
 //
-// Style: plain, serious engineering tool. Warm neutral surfaces, hairline
-// borders, one accent, no gradients, no blur, shadows only on floating layers.
+// Style: plain, serious engineering tool. Hairline borders, one accent, flat controls.
+// Deboss: the page is a matte, grained plate; only the protagonists (the hero number,
+// the activity wall, page titles, the nameplate) are pressed into it. Never raised,
+// never glossy. Dark theme presses lightly into near-black; light theme is a
+// gray-green plate pressed with one ink.
 
 :root {
   // ---- Type ---------------------------------------------------
@@ -20,7 +23,8 @@
   --text-md: 14px; // section titles
   --text-lg: 16px; // page titles
   --text-xl: 20px; // metric values
-  --text-2xl: 28px; // hero numbers
+  --text-2xl: 28px; // metric numbers
+  --text-hero: 104px; // the one debossed number per page
 
   // ---- Space (4px grid) --------------------------------------
   --space-1: 4px;
@@ -85,44 +89,65 @@
   --heat-2: #8a3f25;
   --heat-3: #d06840;
   --heat-4: #f5a582;
+
+  // Deboss: text the color of the plate, lit from the top-left.
+  --deboss-text: -2px -2px 2px rgb(0 0 0 / 80%), 2px 2px 2px rgb(255 255 255 / 8%);
+  --deboss-text-sm: -1px -1px 1px rgb(0 0 0 / 90%), 1px 1px 0 rgb(255 255 255 / 16%);
+  // Pocket: a recess cut into the plate, holding the wall.
+  --pocket-bg: #0d0d0c;
+  --pocket-shadow: inset 2px 2px 5px rgb(0 0 0 / 70%), inset -1px -1px 1px rgb(255 255 255 / 5%);
+  // Per-cell recess inside the pocket (SVG filter colors).
+  --cell-shade: rgb(0 0 0 / 75%);
+  --cell-light: rgb(255 255 255 / 6%);
+  --grain-opacity: 0.08;
 }
 
-// ---- Color: light --------------------------------------------
+// ---- Color: light: gray-green plate, one ink -----------------
 :root[data-theme="default-light"] {
   color-scheme: light;
 
-  --bg: #f7f6f2;
-  --surface: #ffffff;
-  --surface-raised: #ffffff;
-  --field: #ffffff;
-  --hover: rgb(0 0 0 / 4%);
-  --selected: rgb(0 0 0 / 7%);
+  --bg: #a7b2ae;
+  --surface: #adb8b4;
+  --surface-raised: #b9c3bf;
+  --field: #b3bdb9;
+  --hover: rgb(30 40 37 / 6%);
+  --selected: rgb(30 40 37 / 10%);
 
-  --border: #e3e1da;
-  --border-strong: #cfccc3;
+  --border: rgb(30 40 37 / 14%);
+  --border-strong: rgb(30 40 37 / 26%);
 
-  --text: #1f1e1c;
-  --text-muted: #6b6860;
-  --text-faint: #9a978f;
+  --text: #232c29;
+  --text-muted: #45514d;
+  --text-faint: #65716d;
 
-  --accent: #c15f3c;
-  --accent-hover: #a94f30;
-  --accent-fg: #ffffff;
-  --accent-soft: rgb(193 95 60 / 10%);
+  // The ink is the accent: primary actions, focus, the current page.
+  --accent: #2e3935;
+  --accent-hover: #1f2825;
+  --accent-fg: #dfe6e3;
+  --accent-soft: rgb(30 40 37 / 10%);
 
-  --success: #4f7f35;
-  --warning: #a8741a;
-  --danger: #c2412f;
+  --success: #3c6a2c;
+  --warning: #85600f;
+  --danger: #973222;
 
-  --selection: rgb(193 95 60 / 20%);
-  --scrollbar: rgb(0 0 0 / 14%);
-  --scrollbar-hover: rgb(0 0 0 / 26%);
-  --overlay: rgb(0 0 0 / 28%);
-  --shadow-popover: 0 8px 24px rgb(0 0 0 / 12%);
+  --selection: rgb(30 40 37 / 18%);
+  --scrollbar: rgb(30 40 37 / 18%);
+  --scrollbar-hover: rgb(30 40 37 / 32%);
+  --overlay: rgb(30 40 37 / 30%);
+  --shadow-popover: 0 8px 24px rgb(20 30 26 / 22%);
 
-  --heat-0: #ebe9e3;
-  --heat-1: #f3cdbb;
-  --heat-2: #e59a78;
-  --heat-3: #cc6841;
-  --heat-4: #9c4524;
+  // One ink at increasing density over the plate.
+  --heat-0: #a2ada9;
+  --heat-1: #909b97;
+  --heat-2: #798581;
+  --heat-3: #5b6663;
+  --heat-4: #2e3935;
+
+  --deboss-text: -2px -2px 2px rgb(0 0 0 / 22%), 2px 2px 2px rgb(255 255 255 / 45%);
+  --deboss-text-sm: -1px -1px 1px rgb(0 0 0 / 24%), 1px 1px 1px rgb(255 255 255 / 45%);
+  --pocket-bg: #a7b2ae;
+  --pocket-shadow: inset 2px 2px 4px rgb(0 0 0 / 22%), inset -1px -1px 1px rgb(255 255 255 / 45%);
+  --cell-shade: rgb(0 0 0 / 28%);
+  --cell-light: rgb(255 255 255 / 45%);
+  --grain-opacity: 0.2;
 }

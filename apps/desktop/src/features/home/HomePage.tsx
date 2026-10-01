@@ -3,6 +3,7 @@ import { api, pluginText, type Overview } from "../../shared/api";
 import { ActivityWall } from "./activity/ActivityWall";
 import type { ContributionDay } from "./activity/ContributionCalendar";
 import { HomeMetrics } from "./metrics/HomeMetrics";
+import { Nameplate } from "./Nameplate";
 import { PageContent } from "../../shell/layout/PageContent";
 import type { VirtualPageSection } from "../../shell/layout/VirtualPage";
 import { OverviewTimeRangeFilter, type OverviewRangePreset } from "./overview/OverviewTimeRangeFilter";
@@ -168,6 +169,7 @@ export function HomePage() {
       estimatedHeight: 110,
       content: <HomeMetrics data={metrics} filter={filter} />,
     },
+    { key: "nameplate", estimatedHeight: 80, content: <Nameplate /> },
   ];
 
   return <PageContent sections={sections} contentClassName={styles.content} />;

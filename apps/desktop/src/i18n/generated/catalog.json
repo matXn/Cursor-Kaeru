@@ -26,20 +26,6 @@
         }
       ]
     },
-    "01375d8a62c01660": {
-      "source": "活跃 {days} 天",
-      "kind": "template",
-      "placeholders": [
-        "days"
-      ],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 39,
-          "column": 10
-        }
-      ]
-    },
     "01f3e69a5a9b2c9b": {
       "source": "访问模型服务所需的密钥。",
       "kind": "text",
@@ -314,18 +300,6 @@
         }
       ]
     },
-    "09ebc2643631ba25": {
-      "source": "价值估算",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 180,
-          "column": 40
-        }
-      ]
-    },
     "0b96da34f6fbdd3b": {
       "source": "缓存读取：{tokens} × ${price}/1M = {cost}",
       "kind": "template",
@@ -461,18 +435,6 @@
         }
       ]
     },
-    "124be3f86f197802": {
-      "source": "Token 消耗",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 173,
-          "column": 40
-        }
-      ]
-    },
     "12ae77e6202d063e": {
       "source": "自定义 Headers",
       "kind": "text",
@@ -502,18 +464,6 @@
         }
       ]
     },
-    "1336725e7e30069c": {
-      "source": "Token，过去一年",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 36,
-          "column": 16
-        }
-      ]
-    },
     "13a9ac7a68c5fd96": {
       "source": "CA 仅保存在本机，用于安全解析 Cursor 的 HTTPS 请求。",
       "kind": "text",
@@ -523,18 +473,6 @@
           "file": "features/models/CursorGates.tsx",
           "line": 21,
           "column": 65
-        }
-      ]
-    },
-    "13b61c5f697b6700": {
-      "source": "缓存命中率",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 156,
-          "column": 40
         }
       ]
     },
@@ -629,18 +567,6 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 123,
           "column": 16
-        }
-      ]
-    },
-    "1940119f05716460": {
-      "source": "多",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 64,
-          "column": 10
         }
       ]
     },
@@ -1014,20 +940,6 @@
           "file": "features/home/metrics/HomeMetrics.tsx",
           "line": 105,
           "column": 5
-        }
-      ]
-    },
-    "2b3743723ec820a8": {
-      "source": "最长连续 {days} 天",
-      "kind": "template",
-      "placeholders": [
-        "days"
-      ],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 41,
-          "column": 10
         }
       ]
     },
@@ -1890,7 +1802,7 @@
       "refs": [
         {
           "file": "features/home/HomePage.tsx",
-          "line": 58,
+          "line": 59,
           "column": 22
         },
         {
@@ -2286,18 +2198,6 @@
         }
       ]
     },
-    "62f99c9a0c50d790": {
-      "source": "少",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 62,
-          "column": 10
-        }
-      ]
-    },
     "6320b4a8722a851f": {
       "source": "状态",
       "kind": "text",
@@ -2401,7 +2301,7 @@
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 81,
+          "line": 84,
           "column": 40
         },
         {
@@ -2560,7 +2460,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 107,
+          "line": 110,
           "column": 52
         }
       ]
@@ -4275,7 +4175,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 77,
+          "line": 80,
           "column": 64
         }
       ]
@@ -4294,20 +4194,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 58,
           "column": 51
-        }
-      ]
-    },
-    "c3def7db312dcece": {
-      "source": "最忙 {day}",
-      "kind": "template",
-      "placeholders": [
-        "day"
-      ],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 44,
-          "column": 12
         }
       ]
     },
@@ -4552,7 +4438,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 82,
+          "line": 85,
           "column": 40
         }
       ]
@@ -4848,12 +4734,12 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 113,
+          "line": 116,
           "column": 78
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 128,
+          "line": 131,
           "column": 76
         }
       ]
@@ -5002,7 +4888,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 32,
+          "line": 37,
           "column": 55
         }
       ]
@@ -5038,8 +4924,8 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 59,
-          "column": 13
+          "line": 60,
+          "column": 39
         }
       ]
     },
@@ -5095,18 +4981,6 @@
           "file": "features/settings/CommitSettingsCard.tsx",
           "line": 195,
           "column": 24
-        }
-      ]
-    },
-    "e3fee05f688708b4": {
-      "source": "LLM 调用",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 163,
-          "column": 40
         }
       ]
     },
@@ -5175,20 +5049,8 @@
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 83,
+          "line": 86,
           "column": 40
-        }
-      ]
-    },
-    "e7c11c61cc102f6f": {
-      "source": "没有调用",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/activity/ActivityWall.tsx",
-          "line": 58,
-          "column": 15
         }
       ]
     },
@@ -5430,7 +5292,7 @@
       "refs": [
         {
           "file": "features/home/activity/ContributionCalendar.tsx",
-          "line": 102,
+          "line": 100,
           "column": 19
         }
       ]

@@ -10,7 +10,16 @@
 
 .label {
   fill: var(--text-faint);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
+}
+
+.shade {
+  flood-color: var(--cell-shade);
+}
+
+.light {
+  flood-color: var(--cell-light);
 }
 
 .cell {

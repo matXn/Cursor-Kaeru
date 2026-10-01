@@ -17,10 +17,10 @@
       // 在应用样式加载前按主题参数铺底色，避免切换 poster 时闪出错误颜色
       (function () {
         var light = new URLSearchParams(location.search).get("theme") === "default-light";
-        document.documentElement.style.setProperty("--boot-bg", light ? "#f7f6f2" : "#111110");
+        document.documentElement.style.setProperty("--boot-bg", light ? "#a7b2ae" : "#111110");
         var meta = document.createElement("meta");
         meta.name = "theme-color";
-        meta.content = light ? "#f7f6f2" : "#111110";
+        meta.content = light ? "#a7b2ae" : "#111110";
         document.head.appendChild(meta);
       })();
     </script>

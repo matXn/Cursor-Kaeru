@@ -28,6 +28,10 @@
   display: flex;
   align-items: center;
   margin: 0;
-  font-size: var(--text-lg);
+  // Page names are pressed into the plate, like the overview number.
+  color: var(--bg);
+  font-size: var(--text-2xl);
   font-weight: 500;
+  letter-spacing: -0.01em;
+  text-shadow: var(--deboss-text-sm);
 }

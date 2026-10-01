@@ -1,8 +1,39 @@
 .root {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
-  padding-top: var(--space-2);
+}
+
+// Printer's registration mark in the top-right corner of the plate.
+.registration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--text-faint);
+  background:
+    linear-gradient(currentColor, currentColor) 50% 0 / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) 50% 100% / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 50% / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) 100% 50% / 8px 1px no-repeat;
+}
+
+.range {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--space-2));
 }
 
 .headline {
@@ -10,28 +41,53 @@
   align-items: baseline;
   gap: var(--space-3);
   margin: 0;
-  color: var(--text-muted);
-  font-size: var(--text-md);
   font-weight: 400;
 }
 
 .total {
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: var(--text-2xl);
+  font-size: var(--text-hero);
   font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+}
+
+.unit {
+  color: var(--text-muted);
+  font-size: var(--text-lg);
 }
 
 .facts {
-  margin: var(--space-2) 0 0;
-  color: var(--text-muted);
-  font-size: var(--text-sm);
+  display: flex;
+  gap: var(--space-8);
+  margin: 0;
+  font-family: var(--font-mono);
 
-  span {
-    color: var(--text-faint);
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
   }
+
+  dt {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--text);
+    font-size: var(--text-xl);
+    line-height: 1;
+  }
+}
+
+// The recess holding the wall.
+.pocket {
+  padding: var(--space-5) var(--space-6);
+  background: var(--pocket-bg);
+  border-radius: 12px;
+  box-shadow: var(--pocket-shadow);
 }
 
 .footer {
@@ -45,12 +101,9 @@
 
 .readout {
   color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-
-  strong {
-    color: var(--text);
-    font-weight: 500;
-  }
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
 }
 
 .legend {
@@ -58,6 +111,7 @@
   align-items: center;
   gap: 3px;
   color: var(--text-faint);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
 
   i {

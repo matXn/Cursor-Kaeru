@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../i18n/store";
-import { formatInteger, formatLocaleCompact } from "../../../shared/utils/numberFormat";
+import { formatCompactInteger, formatInteger, formatLocaleCompact } from "../../../shared/utils/numberFormat";
 import { ContributionCalendar, type ContributionDay } from "./ContributionCalendar";
 import styles from "./ActivityWall.module.scss";
 
 const HEAT_LEVELS = [0, 1, 2, 3, 4];
+const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "UTC" });
 
 function longestStreak(days: ContributionDay[]) {
   let best = 0;
@@ -17,51 +18,51 @@ function longestStreak(days: ContributionDay[]) {
   return best;
 }
 
-// Past-year story: one headline number, a line of facts, the wall, and a hover readout.
+// Log-style reading of one day: "2026-07-04 SAT — 312K TOKEN".
+function logLine(day: ContributionDay) {
+  const name = weekday.format(new Date(`${day.date}T00:00:00Z`)).toUpperCase();
+  return `${day.date} ${name} — ${day.tokens > 0 ? `${formatCompactInteger(day.tokens)} TOKEN` : "IDLE"}`;
+}
+
+// Past-year story: a debossed headline number, three gauges, the wall pressed into the page.
 export function ActivityWall({ days }: { days: ContributionDay[] }) {
   const { locale } = useI18n();
   const navigate = useNavigate();
   const [hovered, setHovered] = useState<ContributionDay | null>(null);
-  const dayFormatter = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", weekday: "short", timeZone: "UTC" });
-  const shortDay = new Intl.DateTimeFormat(locale, { month: "short", day: "numeric", timeZone: "UTC" });
-  const formatDay = (day: ContributionDay, formatter: Intl.DateTimeFormat) => formatter.format(new Date(`${day.date}T00:00:00Z`));
   const total = days.reduce((sum, day) => sum + day.tokens, 0);
   const activeDays = days.filter((day) => day.tokens > 0).length;
   const busiest = days.reduce<ContributionDay | null>((best, day) => day.tokens > (best?.tokens ?? 0) ? day : best, null);
+  const [number, unit = ""] = formatLocaleCompact(total, locale).split(" ");
 
   return <section className={styles.root} aria-label={t("过去一年的 Token 用量")}>
-    <header>
-      <h2 className={styles.headline}>
-        <span className={styles.total} title={formatInteger(total)}>{formatLocaleCompact(total, locale)}</span>
-        <span>{t("Token，过去一年")}</span>
+    <span className={styles.registration} aria-hidden="true" />
+    <p className={styles.range}>{days[0]?.date} → {days.at(-1)?.date}</p>
+    <header className={styles.header}>
+      <h2 className={styles.headline} title={formatInteger(total)}>
+        <span className={`deboss ${styles.total}`}>{number}</span>
+        <span className={styles.unit}>{unit} Token</span>
       </h2>
-      <p className={styles.facts}>
-        {t("活跃 {days} 天", { days: activeDays })}
-        <span aria-hidden="true"> · </span>
-        {t("最长连续 {days} 天", { days: longestStreak(days) })}
-        {busiest && <>
-          <span aria-hidden="true"> · </span>
-          {t("最忙 {day}", { day: formatDay(busiest, shortDay) })}
-        </>}
-      </p>
+      <dl className={styles.facts}>
+        <div><dt>ACTIVE</dt><dd>{activeDays}d</dd></div>
+        <div><dt>STREAK</dt><dd>{longestStreak(days)}d</dd></div>
+        <div><dt>PEAK</dt><dd>{busiest ? busiest.date.slice(5) : "—"}</dd></div>
+      </dl>
     </header>
-    <ContributionCalendar
-      days={days}
-      onHover={setHovered}
-      onSelect={(day) => navigate(`/calls?day=${day.date}`)}
-    />
+    <div className={styles.pocket}>
+      <ContributionCalendar
+        days={days}
+        onHover={setHovered}
+        onSelect={(day) => navigate(`/calls?day=${day.date}`)}
+      />
+    </div>
     <footer className={styles.footer}>
       <span className={styles.readout} aria-live="polite">
-        {hovered
-          ? <><strong>{formatDay(hovered, dayFormatter)}</strong> · {hovered.tokens > 0
-            ? `${formatLocaleCompact(hovered.tokens, locale)} Token`
-            : t("没有调用")}</>
-          : t("悬停查看某一天，点击查看当天的调用")}
+        {hovered ? logLine(hovered) : t("悬停查看某一天，点击查看当天的调用")}
       </span>
       <span className={styles.legend} aria-hidden="true">
-        {t("少")}
+        Less
         {HEAT_LEVELS.map((level) => <i key={level} style={{ background: `var(--heat-${level})` }} />)}
-        {t("多")}
+        More
       </span>
     </footer>
   </section>;

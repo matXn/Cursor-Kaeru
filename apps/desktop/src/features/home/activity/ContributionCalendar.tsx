@@ -1,6 +1,4 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { Locale } from "../../../i18n/runtime";
-import { useI18n } from "../../../i18n/store";
 import styles from "./ContributionCalendar.module.scss";
 
 export type ContributionDay = {
@@ -46,9 +44,10 @@ function buildCells(days: ContributionDay[]) {
   return { cells, columnCount: cells.at(-1)!.column + 1 };
 }
 
-function labels(locale: Locale) {
-  const weekday = new Intl.DateTimeFormat(locale, { weekday: "short", timeZone: "UTC" });
-  const month = new Intl.DateTimeFormat(locale, { month: "short", timeZone: "UTC" });
+// Axis labels are English in every locale, like the rest of the instrument markings.
+function labels() {
+  const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "UTC" });
+  const month = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" });
   const monday = Date.UTC(2024, 0, 1);
   return {
     weekdays: [0, 2, 4].map((row) => ({ row, text: weekday.format(monday + row * DAY_MS) })),
@@ -61,11 +60,10 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
   onHover: (day: ContributionDay | null) => void;
   onSelect: (day: ContributionDay) => void;
 }) {
-  const { locale } = useI18n();
   const root = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const { cells, columnCount } = useMemo(() => buildCells(days), [days]);
-  const text = useMemo(() => labels(locale), [locale]);
+  const text = useMemo(labels, []);
 
   useLayoutEffect(() => {
     const node = root.current;
@@ -102,8 +100,25 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
       aria-label={t("过去一年的 Token 用量日历")}
       onMouseLeave={() => onHover(null)}
     >
+      {/* Each cell is a small recess: shade on the top-left inner edge, light on the bottom-right. */}
+      <defs>
+        <filter id="contribution-recess" x="-20%" y="-20%" width="140%" height="140%">
+          <feComponentTransfer in="SourceAlpha" result="hole"><feFuncA type="table" tableValues="1 0" /></feComponentTransfer>
+          <feOffset in="hole" dx="1" dy="1" result="shadeOffset" />
+          <feGaussianBlur in="shadeOffset" stdDeviation="0.8" result="shadeBlur" />
+          <feFlood className={styles.shade} />
+          <feComposite in2="shadeBlur" operator="in" />
+          <feComposite in2="SourceAlpha" operator="in" result="shade" />
+          <feOffset in="hole" dx="-1" dy="-1" result="lightOffset" />
+          <feFlood className={styles.light} />
+          <feComposite in2="lightOffset" operator="in" />
+          <feComposite in2="SourceAlpha" operator="in" result="light" />
+          <feMerge><feMergeNode in="SourceGraphic" /><feMergeNode in="shade" /><feMergeNode in="light" /></feMerge>
+        </filter>
+      </defs>
       {months.map((month) => <text key={month.key} className={styles.label} x={month.x} y={10}>{month.text}</text>)}
       {text.weekdays.map((day) => <text key={day.row} className={styles.label} x={0} y={HEADER + day.row * STEP + 9}>{day.text}</text>)}
+      <g filter="url(#contribution-recess)">
       {visible.map((cell) => <rect
         key={cell.date}
         className={styles.cell}
@@ -117,6 +132,7 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
         onMouseEnter={() => onHover(cell)}
         onClick={() => onSelect(cell)}
       />)}
+      </g>
     </svg>}
   </div>;
 }
