@@ -285,7 +285,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 68,
+          "line": 73,
           "column": 79
         }
       ]
@@ -734,6 +734,18 @@
         }
       ]
     },
+    "1cf533cfacd38c1d": {
+      "source": "登录系统后自动启动 Cursor Kaeru。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/AppLifecycleSettingsCard.tsx",
+          "line": 95,
+          "column": 17
+        }
+      ]
+    },
     "1d19efc260a0a18f": {
       "source": "使用重置卡",
       "kind": "text",
@@ -1076,18 +1088,6 @@
           "file": "features/home/metrics/HomeMetrics.tsx",
           "line": 98,
           "column": 5
-        }
-      ]
-    },
-    "2e88fb2e243de97e": {
-      "source": "登录系统后自动启动 cursor kaeru。",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 95,
-          "column": 17
         }
       ]
     },
@@ -2486,6 +2486,18 @@
         }
       ]
     },
+    "6cf885a88a5cbf40": {
+      "source": "Cursor Kaeru 未接管",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "shell/TopBar.tsx",
+          "line": 33,
+          "column": 42
+        }
+      ]
+    },
     "6d1876364ac6457d": {
       "source": "代理方式",
       "kind": "text",
@@ -2505,18 +2517,6 @@
           "file": "features/settings/ProxySettingsCard.tsx",
           "line": 69,
           "column": 46
-        }
-      ]
-    },
-    "6f90a03ab63027e0": {
-      "source": "cursor kaeru 已接管",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/TopBar.tsx",
-          "line": 33,
-          "column": 18
         }
       ]
     },
@@ -3439,18 +3439,6 @@
         }
       ]
     },
-    "a22c87fb0d7d6236": {
-      "source": "cursor kaeru 未接管",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "shell/TopBar.tsx",
-          "line": 33,
-          "column": 42
-        }
-      ]
-    },
     "a3030bf8f16dc63c": {
       "source": "保存",
       "kind": "text",
@@ -3998,6 +3986,18 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 348,
           "column": 103
+        }
+      ]
+    },
+    "b8fef6ca6fd586fc": {
+      "source": "Cursor Kaeru 已接管",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "shell/TopBar.tsx",
+          "line": 33,
+          "column": 18
         }
       ]
     },
@@ -4887,7 +4887,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 63,
+          "line": 67,
           "column": 55
         }
       ]
@@ -4923,7 +4923,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 89,
+          "line": 98,
           "column": 39
         }
       ]

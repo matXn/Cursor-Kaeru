@@ -28,6 +28,18 @@
   line-height: 0.85;
 }
 
+// Sits right under the number it explains; quiet until you read it.
+.yardstick {
+  margin: var(--space-2) 0 0 2px;
+  color: var(--text);
+  font-size: var(--text-base);
+  opacity: 0.55;
+
+  b {
+    font-weight: 500;
+  }
+}
+
 .unitStack {
   display: flex;
   flex-direction: column;

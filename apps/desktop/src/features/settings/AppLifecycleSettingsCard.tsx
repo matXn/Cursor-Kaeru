@@ -92,7 +92,7 @@ export function AppLifecycleSettingsCard() {
     <div className={styles.row}>
       <div>
         <strong>{t("开机启动")}</strong>
-        <small>{t("登录系统后自动启动 cursor kaeru。")}</small>
+        <small>{t("登录系统后自动启动 Cursor Kaeru。")}</small>
       </div>
       <Switch
         checked={autostart}

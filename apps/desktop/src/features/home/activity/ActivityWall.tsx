@@ -5,6 +5,7 @@ import { formatCompactInteger, formatInteger, formatLocaleCompact } from "../../
 import { Icon } from "../../../shared/ui/Icon";
 import { activeDaysGlyph, peakGlyph, streakGlyph } from "../../../shared/ui/glyphs";
 import { ContributionCalendar, type ContributionDay } from "./ContributionCalendar";
+import { randomBook } from "./books";
 import { readLastSeen, writeLastSeen } from "./lastSeen";
 import { RollingNumber } from "./RollingNumber";
 import styles from "./ActivityWall.module.scss";
@@ -39,6 +40,9 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
   const activeDays = days.filter((day) => day.tokens > 0).length;
   const busiest = days.reduce<ContributionDay | null>((best, day) => day.tokens > (best?.tokens ?? 0) ? day : best, null);
   const [number, unit = ""] = formatLocaleCompact(total, locale).split(" ");
+  const [book, setBook] = useState(randomBook);
+  // A new yardstick each time the overview is opened; it stays put while you look at it.
+  useEffect(() => setBook(randomBook()), []);
   const [roll, setRoll] = useState<Roll>({ from: null, runId: 0, delta: 0, freshFrom: null });
 
   // Each time the overview is shown (kept-alive pages re-run effects when they become visible)
@@ -62,6 +66,7 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
 
   return <section className={styles.root} aria-label={t("过去一年的 Token 用量")}>
     <header className={styles.header}>
+      <div>
       <h2 className={styles.headline} title={formatInteger(total)}>
         <RollingNumber className={`deboss ${styles.total}`} value={number} from={roll.from} runId={roll.runId} />
         <span className={styles.unitStack}>
@@ -69,6 +74,10 @@ export function ActivityWall({ days }: { days: ContributionDay[] }) {
           <span className={styles.unit}>{unit} Token</span>
         </span>
       </h2>
+      {total >= book.tokens && <p className={styles.yardstick}>
+        You've used <b>~{formatInteger(Math.round(total / book.tokens))}×</b> more tokens than {book.title}.
+      </p>}
+      </div>
       <dl className={styles.facts}>
         <div><dt><Icon icon={activeDaysGlyph} size="1.3em" />ACTIVE</dt><dd>{activeDays}d</dd></div>
         <div><dt><Icon icon={streakGlyph} size="1.3em" />STREAK</dt><dd>{longestStreak(days)}d</dd></div>

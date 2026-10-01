@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "cursor kaeru",
+  "productName": "Cursor Kaeru",
   "version": "0.1.7",
   "identifier": "dev.cursorbyok.desktop",
   "build": {

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import appIcon from "../../src-tauri/icons/icon.svg";
+import appIcon from "../shared/assets/logo.svg";
 import type { DesktopPlatform } from "../shared/native/platform";
 import { useAppStore } from "../shared/store/appStore";
 import { Icon } from "../shared/ui/Icon";
@@ -25,12 +25,12 @@ export function TopBar({ platform, nativeDesktop }: { platform: DesktopPlatform;
     {!nativeDesktop && platform === "macos" && <MacTrafficLights />}
     <img className={styles.icon} src={appIcon} alt="" aria-hidden="true" />
     <nav className={styles.navigation} aria-label={t("主菜单")}>
-      {pages.map((page) => <NavLink key={page.path} to={page.path} end={page.path === "/"}><span className={styles.glyph}><Icon icon={page.glyph} size="16px" /></span>{page.label}</NavLink>)}
+      {pages.map((page) => <NavLink key={page.path} to={page.path} end={page.path === "/"}><span className={styles.glyph}><Icon icon={page.glyph} size="18px" /></span>{page.label}</NavLink>)}
     </nav>
     <div className={styles.status}>
       {cursorHarness && <NavLink to="/harness/cursor" className={styles.harness} data-taken={taken || undefined}>
         <span className={styles.harnessDot} aria-hidden="true" />
-        {taken ? t("cursor kaeru 已接管") : t("cursor kaeru 未接管")}
+        {taken ? t("Cursor Kaeru 已接管") : t("Cursor Kaeru 未接管")}
       </NavLink>}
       {platform !== "macos" && <WindowControls native={nativeDesktop} />}
     </div>

@@ -1,6 +1,6 @@
 import type { IconifyIcon } from "@iconify/react";
 
-// cursor kaeru's own line glyphs: 24px grid, 1.75 stroke, round caps and joins to match
+// Cursor Kaeru's own line glyphs: 24px grid, 1.75 stroke, round caps and joins to match
 // the Outfit titles. Monochrome via currentColor; rendered through <Icon>.
 const glyph = (body: string): IconifyIcon => ({
   body: `<g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${body}</g>`,

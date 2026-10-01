@@ -1,4 +1,4 @@
-# cursor kaeru
+# Cursor Kaeru
 
 在本机运行的 Cursor 模型网关：接住 Cursor Agent 的请求，转发到你自己配置的 OpenAI / Anthropic 兼容服务，并保留工具调用、Skills、MCP 和多轮对话。
 
@@ -17,7 +17,7 @@
 
 ## 下载
 
-在 [Releases](../../releases) 下载 Windows 安装包 `cursor kaeru_<版本>_x64-setup.exe`。应用不会自动更新，新版本请回到这里下载覆盖安装。
+在 [Releases](../../releases) 下载 Windows 安装包 `Cursor Kaeru_<版本>_x64-setup.exe`。应用不会自动更新，新版本请回到这里下载覆盖安装。
 
 ## 相对上游的改动
 
@@ -61,7 +61,7 @@ Tab 补全走独立的 TAB 服务，在 **设置 → TAB 设置** 里选择：�
 ## 数据流转
 
 ```text
-Cursor ──Agent 请求/工具结果──▶ cursor kaeru（本机）──OpenAI/Anthropic 请求──▶ 你配置的模型 API
+Cursor ──Agent 请求/工具结果──▶ Cursor Kaeru（本机）──OpenAI/Anthropic 请求──▶ 你配置的模型 API
                                     │
                                     └─ SQLite：模型配置、API Key、调用记录（只在本机）
 ```

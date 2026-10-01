@@ -68,7 +68,7 @@ impl StartupDiagnostics {
 
 pub(crate) fn report_logging_failure(error: &(dyn Error + 'static)) {
     let details = error_chain(error);
-    eprintln!("cursor kaeru failed to initialize logging: {details}");
+    eprintln!("Cursor Kaeru failed to initialize logging: {details}");
     show_fatal_dialog(&details, None);
 }
 
@@ -82,12 +82,12 @@ fn show_fatal_dialog(details: &str, log_directory: Option<&std::path::Path>) {
             .to_owned(),
     };
     let description = format!(
-        "cursor kaeru 无法启动 / failed to start.\n\n错误 / Error:\n{details}\n\n{log_guidance}"
+        "Cursor Kaeru 无法启动 / failed to start.\n\n错误 / Error:\n{details}\n\n{log_guidance}"
     );
 
     let _ = MessageDialog::new()
         .set_level(MessageLevel::Error)
-        .set_title("cursor kaeru 启动失败 / Startup Error")
+        .set_title("Cursor Kaeru 启动失败 / Startup Error")
         .set_description(description)
         .set_buttons(MessageButtons::Ok)
         .show();
