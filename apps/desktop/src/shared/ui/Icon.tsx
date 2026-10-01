@@ -4,7 +4,7 @@ import styles from "./Icon.module.scss";
 export interface IconProps {
   icon?: IconData;
   src?: string;
-  size?: `${number}em`;
+  size?: `${number}em` | `${number}px`;
   className?: string;
 }
 
