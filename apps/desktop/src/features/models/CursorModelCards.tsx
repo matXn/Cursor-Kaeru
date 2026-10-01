@@ -264,7 +264,7 @@ function ModelGrid({
       const testing = testingModelHashes.has(model.model_hash);
       return <Card className={styles.modelCard} data-model-hash={model.model_hash} key={model.model_hash}>
         {sortableEnabled && <button type="button" className={styles.sortHandle} disabled={disabled} aria-label={t("拖动排序")} title={t("拖动排序")} onClick={(event) => event.stopPropagation()}>
-          <Icon icon={dragIcon} size="1.25em" />
+          <Icon icon={dragIcon} size="14px" />
         </button>}
         <div className={styles.modelCardContent}>
           <div className={styles.modelCardTop}>
