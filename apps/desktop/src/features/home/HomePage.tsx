@@ -65,7 +65,7 @@ function formatRange(range: TimeRange | null) {
 export function HomePage() {
   const { overview, busy, models, plugins } = useAppStore();
   const { locale } = useI18n();
-  const [preset, setPreset] = useState<OverviewRangePreset>("month");
+  const [preset, setPreset] = useState<OverviewRangePreset>("hour");
   const [customRange, setCustomRange] = useState<TimeRange | null>(null);
   const [customStart, setCustomStart] = useState(() => formatTimeInput(new Date(Date.now() - HOUR_MS)));
   const [customEnd, setCustomEnd] = useState(() => formatTimeInput(new Date()));

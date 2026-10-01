@@ -20,14 +20,14 @@
   // Page titles and English instrument labels: a round geometric face, Latin only.
   --font-title: "Outfit", var(--font-ui);
 
-  --text-xs: 11px; // badges, axis ticks
-  --text-sm: 12px; // secondary text, labels, table meta
-  --text-base: 13px; // body, controls, tables
-  --text-md: 14px; // section titles
-  --text-lg: 16px; // page titles
-  --text-xl: 20px; // metric values
-  --text-2xl: 28px; // metric numbers
-  --text-hero: 104px; // the one debossed number per page
+  --text-xs: 12px; // badges, axis ticks
+  --text-sm: 13px; // secondary text, labels, table meta
+  --text-base: 14px; // body, controls, tables
+  --text-md: 15px; // section titles
+  --text-lg: 17px; // page titles
+  --text-xl: 24px; // metric values
+  --text-2xl: 34px; // metric numbers
+  --text-hero: 128px; // the one debossed number per page
 
   // ---- Space (4px grid) --------------------------------------
   --space-1: 4px;
@@ -44,9 +44,9 @@
   --radius-lg: 6px; // modals and popovers
   --radius-full: 999px; // switches, status dots
 
-  --control-h-sm: 24px;
-  --control-h: 28px;
-  --control-h-lg: 32px;
+  --control-h-sm: 26px;
+  --control-h: 30px;
+  --control-h-lg: 34px;
 
   --duration: 120ms;
 }

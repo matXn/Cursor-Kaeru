@@ -9,12 +9,19 @@ export type ContributionDay = {
 type Cell = ContributionDay & { column: number; row: number; level: number };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-// Fixed GitHub-like grid: cells never stretch; narrow windows drop the oldest weeks.
-const CELL = 10;
-const GAP = 3;
-const STEP = CELL + GAP;
-const GUTTER = 28;
-const HEADER = 18;
+// GitHub-like grid of square cells that grow with the window up to MAX_CELL; below
+// MIN_CELL the oldest weeks are dropped instead of shrinking further.
+const MIN_CELL = 10;
+const MAX_CELL = 18;
+const GUTTER = 34;
+const HEADER = 22;
+
+function cellSize(width: number, columns: number) {
+  // Gutters stay about a fifth of a cell, so the grid keeps its rhythm at every size.
+  const step = (width - GUTTER) / columns;
+  const cell = Math.max(MIN_CELL, Math.min(MAX_CELL, Math.floor(step * 0.82)));
+  return { cell, gap: Math.max(3, Math.round(cell * 0.22)) };
+}
 
 function parseDate(date: string) {
   return new Date(`${date}T00:00:00Z`);
@@ -73,6 +80,8 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
     return () => observer.disconnect();
   }, []);
 
+  const { cell: CELL, gap: GAP } = cellSize(width, columnCount);
+  const STEP = CELL + GAP;
   const fitColumns = Math.max(1, Math.floor((width - GUTTER + GAP) / STEP));
   const visibleColumns = Math.min(columnCount, fitColumns);
   const firstColumn = columnCount - visibleColumns;
@@ -116,8 +125,8 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
           <feMerge><feMergeNode in="SourceGraphic" /><feMergeNode in="shade" /><feMergeNode in="light" /></feMerge>
         </filter>
       </defs>
-      {months.map((month) => <text key={month.key} className={styles.label} x={month.x} y={10}>{month.text}</text>)}
-      {text.weekdays.map((day) => <text key={day.row} className={styles.label} x={0} y={HEADER + day.row * STEP + 9}>{day.text}</text>)}
+      {months.map((month) => <text key={month.key} className={styles.label} x={month.x} y={12}>{month.text}</text>)}
+      {text.weekdays.map((day) => <text key={day.row} className={styles.label} x={0} y={HEADER + day.row * STEP + CELL * 0.8}>{day.text}</text>)}
       <g filter="url(#contribution-recess)">
       {visible.map((cell) => <rect
         key={cell.date}
@@ -126,7 +135,7 @@ export function ContributionCalendar({ days, onHover, onSelect }: {
         y={HEADER + cell.row * STEP}
         width={CELL}
         height={CELL}
-        rx={2}
+        rx={Math.round(CELL * 0.22)}
         fill={`var(--heat-${cell.level})`}
         data-today={cell.date === today || undefined}
         onMouseEnter={() => onHover(cell)}
