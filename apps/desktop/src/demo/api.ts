@@ -93,8 +93,10 @@ const plugins: PluginDescriptor[] = [
   ]),
   demoPlugin("dev.cursorbyok.examples.antigravity-auth", "Antigravity", "#4285f4", "account", [
     demoAccount("ag-1", "tozzy@gmail.com", "Google AI Pro", [
-      { id: "claude", label: "Claude", unit: "percent", value: 74, resetAtMs: DEMO_NOW + 4 * HOUR },
-      { id: "gemini", label: "Gemini", unit: "percent", value: 100, resetAtMs: DEMO_NOW + 4 * HOUR },
+      { id: "gemini-5h", label: { "zh-CN": "Gemini 模型 · 5 小时", "en-US": "Gemini models · 5 hours" }, unit: "percent", value: 95, resetAtMs: DEMO_NOW + 3 * HOUR },
+      { id: "gemini-weekly", label: { "zh-CN": "Gemini 模型 · 每周", "en-US": "Gemini models · weekly" }, unit: "percent", value: 62, resetAtMs: DEMO_NOW + 4 * 24 * HOUR },
+      { id: "3p-5h", label: { "zh-CN": "Claude / GPT 模型 · 5 小时", "en-US": "Claude / GPT models · 5 hours" }, unit: "percent", value: 70, resetAtMs: DEMO_NOW + 2 * HOUR + 30 * 60_000 },
+      { id: "3p-weekly", label: { "zh-CN": "Claude / GPT 模型 · 每周", "en-US": "Claude / GPT models · weekly" }, unit: "percent", value: 31, resetAtMs: DEMO_NOW + 4 * 24 * HOUR },
     ]),
   ]),
 ];

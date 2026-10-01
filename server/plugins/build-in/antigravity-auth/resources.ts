@@ -12,7 +12,10 @@ import type {
 } from "cursor-byok:resource";
 import {
   ANTIGRAVITY_CLIENT_HEADERS,
+  ANTIGRAVITY_DAILY_ENDPOINT,
   ANTIGRAVITY_ENDPOINTS,
+  ANTIGRAVITY_PROD_ENDPOINT,
+  ANTIGRAVITY_SANDBOX_ENDPOINT,
   ANTIGRAVITY_USER_AGENT,
 } from "./models.ts";
 import { CLIENT_ID, CLIENT_SECRET } from "./google_oauth.ts";
@@ -39,14 +42,87 @@ export type QuotaMetric = {
   resetAtMs: number | null;
 };
 
+/** Google 的两组额度:Gemini 模型,以及 Claude/GPT 等第三方模型(bucketId 前缀 3p)。 */
+export type QuotaGroup = "gemini" | "3p";
+export type QuotaPeriod = "5h" | "weekly";
+
+/** retrieveUserQuotaSummary 的一个桶:某组模型在某个时间窗口里的剩余额度。 */
+export type QuotaWindow = QuotaMetric & {
+  group: QuotaGroup;
+  period: QuotaPeriod;
+};
+
 export type AccountQuota = {
   planLabel: string | null;
   limitReached: boolean;
   coolingUntilMs: number | null;
   updatedAtMs: number;
+  /** fetchAvailableModels 的逐模型 5 小时额度,按组取最低;summary 不可用时才展示。 */
   claude?: QuotaMetric | null;
   gemini?: QuotaMetric | null;
+  /** 5 小时 + 每周窗口;Ultra 等没有周上限的套餐只有 5 小时桶。 */
+  windows?: QuotaWindow[] | null;
 };
+
+// 只有 daily 主机返回真实的周额度与 5 小时额度;prod 主机对所有桶都固定返回 1.0。
+// 写成函数:models.ts 与本模块互相引用,模块顶层读这些常量会撞上未初始化。
+const quotaSummaryEndpoints = () => [
+  ANTIGRAVITY_DAILY_ENDPOINT,
+  ANTIGRAVITY_SANDBOX_ENDPOINT,
+  ANTIGRAVITY_PROD_ENDPOINT,
+];
+
+/** 解析 retrieveUserQuotaSummary:groups[].buckets[],bucketId 形如 gemini-5h / 3p-weekly。 */
+export function parseQuotaSummary(body: unknown): QuotaWindow[] {
+  const groups = Array.isArray(object(body)?.groups) ? object(body)!.groups as unknown[] : [];
+  const windows: QuotaWindow[] = [];
+  for (const group of groups) {
+    const buckets = object(group)?.buckets;
+    if (!Array.isArray(buckets)) continue;
+    for (const raw of buckets) {
+      const bucket = object(raw);
+      const id = text(bucket?.bucketId)?.toLowerCase() ?? "";
+      const match = /^(gemini|3p)-(5h|weekly)$/.exec(id);
+      if (!match || typeof bucket?.remainingFraction !== "number") continue;
+      const resetTime = text(bucket.resetTime);
+      windows.push({
+        group: match[1] as QuotaGroup,
+        period: match[2] as QuotaPeriod,
+        remainingPercent: Math.round(Math.min(1, Math.max(0, bucket.remainingFraction)) * 100),
+        resetAtMs: resetTime ? Date.parse(resetTime) || null : null,
+      });
+    }
+  }
+  return windows;
+}
+
+async function fetchQuotaSummary(
+  accessToken: string,
+  projectId: string,
+  network: PluginContext["network"],
+): Promise<QuotaWindow[] | null> {
+  for (const endpoint of quotaSummaryEndpoints()) {
+    try {
+      const response = await network.fetch(`${endpoint}/v1internal:retrieveUserQuotaSummary`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+          "content-type": "application/json",
+          accept: "application/json",
+          "user-agent": ANTIGRAVITY_USER_AGENT,
+          ...ANTIGRAVITY_CLIENT_HEADERS,
+        },
+        body: JSON.stringify({ project: projectId }),
+      });
+      if (response.status < 200 || response.status >= 300) continue;
+      const windows = parseQuotaSummary(JSON.parse(response.body));
+      if (windows.length > 0) return windows;
+    } catch {
+      // 试下一个主机
+    }
+  }
+  return null;
+}
 
 export type AccountData = {
   accessToken: string;
@@ -111,6 +187,7 @@ export async function queryAccountQuota(
   network: PluginContext["network"],
 ): Promise<{ quota: AccountQuota | null; projectId: string }> {
   const { projectId, planLabel } = await fetchAccountProjectAndTier(accessToken, network);
+  const windows = await fetchQuotaSummary(accessToken, projectId, network);
 
   for (const endpoint of ANTIGRAVITY_ENDPOINTS) {
     try {
@@ -172,6 +249,7 @@ export async function queryAccountQuota(
           gemini: geminiFraction !== null
             ? { remainingPercent: Math.round(geminiFraction * 100), resetAtMs: geminiResetAtMs }
             : null,
+          windows,
         },
       };
     } catch {
@@ -188,6 +266,7 @@ export async function queryAccountQuota(
       updatedAtMs: Date.now(),
       claude: null,
       gemini: null,
+      windows,
     },
   };
 }
@@ -343,27 +422,49 @@ export function quotaExhaustedPatch(
   };
 }
 
+const GROUP_LABEL: Record<QuotaGroup, { "en-US": string; "zh-CN": string }> = {
+  gemini: { "en-US": "Gemini models", "zh-CN": "Gemini 模型" },
+  "3p": { "en-US": "Claude / GPT models", "zh-CN": "Claude / GPT 模型" },
+};
+const PERIOD_LABEL: Record<QuotaPeriod, { "en-US": string; "zh-CN": string }> = {
+  "5h": { "en-US": "5 hours", "zh-CN": "5 小时" },
+  weekly: { "en-US": "weekly", "zh-CN": "每周" },
+};
+
+function windowMetric(window: QuotaWindow): ResourceMetric {
+  const group = GROUP_LABEL[window.group];
+  const period = PERIOD_LABEL[window.period];
+  return {
+    id: `${window.group}-${window.period}`,
+    label: { "en-US": `${group["en-US"]} · ${period["en-US"]}`, "zh-CN": `${group["zh-CN"]} · ${period["zh-CN"]}` },
+    unit: "percent",
+    value: window.remainingPercent,
+    ...(window.resetAtMs ? { resetAtMs: window.resetAtMs } : {}),
+  };
+}
+
+function modelMetric(id: QuotaGroup, metric: QuotaMetric): ResourceMetric {
+  return {
+    id: id === "3p" ? "claude" : "gemini",
+    label: GROUP_LABEL[id],
+    unit: "percent",
+    value: metric.remainingPercent,
+    ...(metric.resetAtMs ? { resetAtMs: metric.resetAtMs } : {}),
+  };
+}
+
 export function presentAccount(resource: ResourceSnapshot): ResourceView {
   const data = accountData(resource);
-  const metrics: ResourceMetric[] = [];
-  if (data.quota?.claude) {
-    metrics.push({
-      id: "claude",
-      label: { "en-US": "Claude", "zh-CN": "Claude" },
-      unit: "percent",
-      value: data.quota.claude.remainingPercent,
-      ...(data.quota.claude.resetAtMs ? { resetAtMs: data.quota.claude.resetAtMs } : {}),
-    });
-  }
-  if (data.quota?.gemini) {
-    metrics.push({
-      id: "gemini",
-      label: { "en-US": "Gemini", "zh-CN": "Gemini" },
-      unit: "percent",
-      value: data.quota.gemini.remainingPercent,
-      ...(data.quota.gemini.resetAtMs ? { resetAtMs: data.quota.gemini.resetAtMs } : {}),
-    });
-  }
+  const order = ["gemini-5h", "gemini-weekly", "3p-5h", "3p-weekly"];
+  // 有 summary 时展示 5 小时与每周两个窗口;否则退回逐模型的 5 小时额度。
+  const metrics: ResourceMetric[] = data.quota?.windows?.length
+    ? [...data.quota.windows]
+      .sort((a, b) => order.indexOf(`${a.group}-${a.period}`) - order.indexOf(`${b.group}-${b.period}`))
+      .map(windowMetric)
+    : [
+      ...(data.quota?.gemini ? [modelMetric("gemini", data.quota.gemini)] : []),
+      ...(data.quota?.claude ? [modelMetric("3p", data.quota.claude)] : []),
+    ];
   return {
     displayName: data.displayName,
     ...(data.quota?.planLabel ? { description: data.quota.planLabel } : {}),
