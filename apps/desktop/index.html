@@ -13,8 +13,9 @@
         margin: 0;
       }
 
-      /* Only the root is painted before styles load; body carries the glass once they do. */
-      html {
+      /* Only the root is painted before styles load; body carries the glass once they do.
+         Over real acrylic (Windows) nothing is painted: the window itself is the glass. */
+      html:not([data-material="acrylic"]) {
         background-color: var(--bg, var(--startup-background, #1a1614));
       }
     </style>
@@ -27,6 +28,7 @@
           const light = theme === "default-light";
           const background = light ? "#c4c0bc" : "#1a1614";
           document.documentElement.dataset.theme = theme;
+          if (window.__KAERU_MATERIAL__) document.documentElement.dataset.material = window.__KAERU_MATERIAL__;
           document.documentElement.style.setProperty("--startup-background", background);
           document.documentElement.style.colorScheme = light ? "light" : "dark";
           document.querySelector('meta[name="theme-color"]')?.setAttribute("content", background);

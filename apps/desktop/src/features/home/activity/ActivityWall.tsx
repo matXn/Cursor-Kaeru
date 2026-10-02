@@ -20,8 +20,9 @@ function logLine(day: ContributionDay) {
 
 type Roll = { from: string | null; runId: number; delta: number; freshFrom: string | null };
 
-// Past-year story on the page grid. Columns 1–8 carry the engraved total and its unit;
-// `aside` (the range block) takes 9–12 and `filter` heads it. The wall spans the full width.
+// Past-year story on the page grid. Columns 1–8 carry the engraved total, its unit at the
+// number's foot and the yardstick on its own row below; `aside` (the range block) takes
+// 9–12 across both rows and `filter` heads it. The wall spans the full width.
 export function ActivityWall({ days, filter, aside }: { days: ContributionDay[]; filter: ReactNode; aside: ReactNode }) {
   const { locale } = useI18n();
   const navigate = useNavigate();
@@ -65,15 +66,17 @@ export function ActivityWall({ days, filter, aside }: { days: ContributionDay[];
         <h2 className={styles.total} title={formatInteger(total)}>
           {loaded && <RollingNumber className={styles.engraved} value={number} from={roll.from} runId={roll.runId} />}
         </h2>
-        {loaded && total >= book.tokens && <p className={styles.yardstick}>
-          You've used <b>~{formatInteger(Math.round(total / book.tokens))}×</b> more tokens than {book.title}.
-        </p>}
       </Cell>
       <Cell from={7} to={9} className={styles.unitStack}>
         {roll.delta > 0 && <span key={roll.runId} className={styles.delta}>{t("较上次查看 +{delta}", { delta: formatLocaleCompact(roll.delta, locale) })}</span>}
         {loaded && <span className={styles.unit}>{unit} Token</span>}
       </Cell>
-      <Cell from={9} to={13}>{aside}</Cell>
+      <Cell from={9} to={13} style={{ gridRow: "span 2" }}>{aside}</Cell>
+      <Cell from={1} to={9}>
+        {loaded && total >= book.tokens && <p className={styles.yardstick}>
+          You've used <b>~{formatInteger(Math.round(total / book.tokens))}×</b> more tokens than {book.title}.
+        </p>}
+      </Cell>
 
       {loaded && <Cell from={1} to={13} className={styles.pocket}>
         <ContributionCalendar

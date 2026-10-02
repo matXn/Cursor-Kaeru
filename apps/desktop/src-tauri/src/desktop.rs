@@ -14,9 +14,13 @@ use axum::{
     Router,
 };
 use tauri::{
-    async_runtime::JoinHandle, webview::Color, AppHandle, Manager, RunEvent, WebviewUrl,
-    WebviewWindow, WebviewWindowBuilder,
+    async_runtime::JoinHandle, AppHandle, Manager, RunEvent, WebviewUrl, WebviewWindow,
+    WebviewWindowBuilder,
 };
+#[cfg(not(target_os = "windows"))]
+use tauri::webview::Color;
+#[cfg(target_os = "windows")]
+use tauri::window::{Effect, EffectsBuilder};
 use tauri_plugin_opener::OpenerExt;
 use tokio_util::sync::CancellationToken;
 
@@ -127,12 +131,22 @@ fn create_main_window(
         .inner_size(820.0, 558.0)
         .min_inner_size(820.0, 558.0)
         .center()
-        // Dark glass (--bg in _tokens.scss), shown before the page paints.
-        .background_color(Color(26, 22, 20, 255))
         .decorations(cfg!(target_os = "macos"))
         .shadow(true)
         .resizable(true)
         .visible(false);
+
+    // Windows: the window is real acrylic, the desktop blurring through a transparent page.
+    // The page learns it through `__KAERU_MATERIAL__` and drops its painted stand-in.
+    #[cfg(target_os = "windows")]
+    let builder = builder
+        .transparent(true)
+        .effects(EffectsBuilder::new().effect(Effect::Acrylic).build())
+        .initialization_script("window.__KAERU_MATERIAL__ = \"acrylic\";");
+
+    // Elsewhere: dark glass (--bg in _tokens.scss), shown before the page paints.
+    #[cfg(not(target_os = "windows"))]
+    let builder = builder.background_color(Color(26, 22, 20, 255));
 
     #[cfg(target_os = "macos")]
     let builder = builder

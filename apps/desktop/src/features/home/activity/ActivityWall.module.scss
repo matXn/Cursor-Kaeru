@@ -36,12 +36,12 @@
   filter: var(--engrave);
 }
 
-// Sits right under the number it explains; quiet until you read it.
+// Sits right under the number it explains; quiet until you read it. Its own row, so in a
+// narrow window it wraps instead of running into the unit.
 .yardstick {
   margin: var(--space-3) 0 0 2px;
   color: var(--text);
   font-size: var(--text-base);
-  white-space: nowrap;
   opacity: 0.55;
 
   b {
@@ -51,12 +51,10 @@
 
 // Unit at the foot of the number, in the next column group.
 .unitStack {
-  align-self: stretch;
+  align-self: end;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: var(--space-1);
-  padding-bottom: calc(var(--text-base) * 1.5 + var(--space-3));
 }
 
 .unit {
