@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { desktopPlatform } from "../shared/native/platform";
+import { EngraveFilters } from "../shared/ui/EngraveFilters";
 import styles from "./AppFrame.module.scss";
 import { TopBar } from "./TopBar";
 
@@ -11,6 +12,7 @@ export function AppFrame() {
 
   return (
     <div className={styles.shell}>
+      <EngraveFilters />
       <TopBar platform={currentPlatform} nativeDesktop={nativeDesktop} />
       <Outlet />
     </div>

@@ -10,17 +10,20 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        background: var(--boot-bg, #111110);
+      }
+
+      html {
+        background: var(--boot-bg, #1a1614);
       }
     </style>
     <script>
       // 在应用样式加载前按主题参数铺底色，避免切换 poster 时闪出错误颜色
       (function () {
         var light = new URLSearchParams(location.search).get("theme") === "default-light";
-        document.documentElement.style.setProperty("--boot-bg", light ? "#a7b2ae" : "#111110");
+        document.documentElement.style.setProperty("--boot-bg", light ? "#c4c0bc" : "#1a1614");
         var meta = document.createElement("meta");
         meta.name = "theme-color";
-        meta.content = light ? "#a7b2ae" : "#111110";
+        meta.content = light ? "#c4c0bc" : "#1a1614";
         document.head.appendChild(meta);
       })();
     </script>

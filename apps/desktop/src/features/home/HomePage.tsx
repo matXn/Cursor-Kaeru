@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { api, pluginText, type Overview } from "../../shared/api";
 import { ActivityWall } from "./activity/ActivityWall";
 import type { ContributionDay } from "./activity/ContributionCalendar";
-import { HomeMetrics } from "./metrics/HomeMetrics";
+import { YearFacts } from "./activity/YearFacts";
+import { RangeBlock } from "./metrics/RangeBlock";
 import { Nameplate } from "./Nameplate";
+import { GridGuides } from "../../shell/layout/Grid";
 import { PageContent } from "../../shell/layout/PageContent";
 import type { VirtualPageSection } from "../../shell/layout/VirtualPage";
 import { OverviewTimeRangeFilter, type OverviewRangePreset } from "./overview/OverviewTimeRangeFilter";
@@ -61,7 +63,8 @@ function formatRange(range: TimeRange | null) {
   return `${format(range.startMs)} – ${format(range.endMs)}`;
 }
 
-// Overview: the past-year wall is the page; range-scoped stats sit quietly below it.
+// Overview on the page grid: the past year's total and wall, the range block beside the
+// total, then four facts about the year.
 export function HomePage() {
   const { overview, busy, models, plugins } = useAppStore();
   const { locale } = useI18n();
@@ -158,19 +161,23 @@ export function HomePage() {
     onCustomApply={applyCustom}
     onRefresh={() => void refresh()}
   />;
+  const days = year ? contributionDays(year.overview, year.endMs) : [];
   const sections: VirtualPageSection[] = [
-    ...(year ? [{
-      key: "activity",
-      estimatedHeight: 220,
-      content: <ActivityWall days={contributionDays(year.overview, year.endMs)} />,
-    }] : []),
     {
-      key: "metrics",
-      estimatedHeight: 110,
-      content: <HomeMetrics data={metrics} filter={filter} />,
+      key: "year",
+      estimatedHeight: 520,
+      content: <ActivityWall days={days} filter={filter} aside={<RangeBlock data={metrics} />} />,
     },
+    ...(year ? [{
+      key: "facts",
+      estimatedHeight: 110,
+      content: <YearFacts days={days} metrics={year.overview.metrics} />,
+    }] : []),
     { key: "nameplate", estimatedHeight: 80, content: <Nameplate /> },
   ];
 
-  return <PageContent sections={sections} contentClassName={styles.content} />;
+  return <div className={styles.root}>
+    <GridGuides />
+    <PageContent sections={sections} contentClassName={styles.content} />
+  </div>;
 }

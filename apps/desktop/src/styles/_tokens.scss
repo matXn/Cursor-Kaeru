@@ -2,12 +2,11 @@
 // Components reference these custom properties; they never hardcode
 // colors, radii, font sizes, or shadows.
 //
-// Style: plain, serious engineering tool. Hairline borders, one accent, flat controls.
-// Deboss: the page is a matte, grained plate. Only large shapes (the hero number, the
-// activity wall) are pressed into it; deboss is unreadable on small or CJK text, which
-// keeps its ink color and gets a 1px letterpress edge instead. Never raised,
-// never glossy. Dark theme presses lightly into near-black; light theme is a
-// gray-green plate pressed with one ink.
+// Style: Swiss grid on frosted glass. The window is a pane of grained glass with a warm
+// light behind its left edge (--stage); pages sit on a 12-column grid, split by strong
+// rules into blocks and by hairlines into rows. Only large shapes (the hero number, the
+// activity wall) are cut into the glass; small and CJK text keeps its ink color and gets
+// a 1px letterpress edge instead. One solid ember block per page is the only emphasis.
 
 :root {
   // ---- Type ---------------------------------------------------
@@ -27,7 +26,7 @@
   --text-lg: 17px; // page titles
   --text-xl: 24px; // metric values
   --text-2xl: 34px; // metric numbers
-  --text-hero: 128px; // the one debossed number per page
+  --text-hero: clamp(128px, 16vw, 232px); // the one engraved number per page
 
   // ---- Space (4px grid) --------------------------------------
   --space-1: 4px;
@@ -56,7 +55,13 @@
 :root[data-theme="default-dark"] {
   color-scheme: dark;
 
-  --bg: #111110; // window background
+  // The glass as a flat color (for anything that needs one), and as painted over the light:
+  // a warm lamp just past the window's left edge, sized in px so every window width sees
+  // the same glow.
+  --bg: #1a1614;
+  --stage: linear-gradient(rgb(22 20 19 / 55%), rgb(22 20 19 / 55%)),
+    radial-gradient(circle at -100px 60%, #ffb27d 0, #ef8a56 170px, #a65a3b 350px, #4a2f26 600px, #1f1816 920px);
+  --topbar-glass: rgb(26 22 20 / 55%);
   --surface: #171716; // cards, panels
   --surface-raised: #211f1e; // menus, tooltips, modals
   --field: #0c0c0b; // inputs, editors
@@ -87,71 +92,89 @@
 
   // Activity heatmap, empty to busiest. Empty sits just above the surface;
   // the top step is brighter than the accent so busy days glow.
-  --heat-0: #21201e;
+  --heat-0: rgb(255 255 255 / 5%);
   --heat-1: #4d2a1d;
   --heat-2: #8a3f25;
   --heat-3: #d06840;
   --heat-4: #f5a582;
 
-  // Deboss: text the color of the plate, lit from the top-left.
-  --deboss-text: -2px -2px 2px rgb(0 0 0 / 80%), 2px 2px 2px rgb(255 255 255 / 8%);
   // Letterpress: small text keeps its ink color; only a 1px edge says it is cut in.
   --letterpress: 0 -1px 0 rgb(0 0 0 / 85%);
   // Pocket: a recess cut into the plate, holding the wall.
-  --pocket-bg: #0d0d0c;
-  --pocket-shadow: inset 2px 2px 5px rgb(0 0 0 / 70%), inset -1px -1px 1px rgb(255 255 255 / 5%);
+  --pocket-bg: rgb(0 0 0 / 32%);
+  --pocket-shadow: inset 2px 2px 5px rgb(0 0 0 / 55%), inset -1px -1px 1px rgb(255 255 255 / 8%);
   // Per-cell recess inside the pocket (SVG filter colors).
   --cell-shade: rgb(0 0 0 / 75%);
   --cell-light: rgb(255 255 255 / 6%);
   --grain-opacity: 0.08;
+
+  // Swiss grid: strong rules split blocks, hairlines (--border) split rows,
+  // column guides are faint light shafts.
+  --rule: rgb(255 255 255 / 22%);
+  --guide: rgb(255 255 255 / 3%);
+  // Engraved hero number: the recess floor is a faint tint of the glass; the walls come
+  // from the SVG lighting filter in shared/ui/EngraveFilters.tsx.
+  --engrave: url(#engrave-dark);
+  --engrave-floor: rgb(0 0 0 / 18%);
+  // The one solid block per page.
+  --block-bg: #d9683f;
+  --block-fg: #1c0f09;
 }
 
-// ---- Color: light: gray-green plate, one ink -----------------
+// ---- Color: light: pale frosted glass, same warm light -------
 :root[data-theme="default-light"] {
   color-scheme: light;
 
-  --bg: #a7b2ae;
-  --surface: #adb8b4;
-  --surface-raised: #b9c3bf;
-  --field: #b3bdb9;
-  --hover: rgb(30 40 37 / 6%);
-  --selected: rgb(30 40 37 / 10%);
+  --bg: #c4c0bc;
+  --stage: linear-gradient(rgb(238 234 229 / 56%), rgb(238 234 229 / 56%)),
+    radial-gradient(circle at -100px 60%, #ffd3ae 0, #f39a66 180px, #c98a6c 370px, #aaa098 660px, #8f8b87 1000px);
+  --topbar-glass: rgb(214 209 204 / 55%);
+  --surface: #cdc8c3;
+  --surface-raised: #dcd7d2;
+  --field: #d3cec9;
+  --hover: rgb(40 25 15 / 6%);
+  --selected: rgb(40 25 15 / 10%);
 
-  --border: rgb(30 40 37 / 14%);
-  --border-strong: rgb(30 40 37 / 26%);
+  --border: rgb(40 25 15 / 13%);
+  --border-strong: rgb(40 25 15 / 24%);
 
-  --text: #232c29;
-  --text-muted: #45514d;
-  --text-faint: #65716d;
+  --text: #1d1b19;
+  --text-muted: #514c46;
+  --text-faint: #7a746c;
 
-  // The ink is the accent: primary actions, focus, the current page.
-  --accent: #2e3935;
-  --accent-hover: #1f2825;
-  --accent-fg: #dfe6e3;
-  --accent-soft: rgb(30 40 37 / 10%);
+  --accent: #b4512c;
+  --accent-hover: #9d4524;
+  --accent-fg: #fff6f0;
+  --accent-soft: rgb(180 81 44 / 12%);
 
   --success: #3c6a2c;
   --warning: #85600f;
-  --danger: #973222;
+  --danger: #a3352a;
 
-  --selection: rgb(30 40 37 / 18%);
-  --scrollbar: rgb(30 40 37 / 18%);
-  --scrollbar-hover: rgb(30 40 37 / 32%);
-  --overlay: rgb(30 40 37 / 30%);
-  --shadow-popover: 0 8px 24px rgb(20 30 26 / 22%);
+  --selection: rgb(180 81 44 / 20%);
+  --scrollbar: rgb(40 25 15 / 18%);
+  --scrollbar-hover: rgb(40 25 15 / 32%);
+  --overlay: rgb(40 25 15 / 30%);
+  --shadow-popover: 0 8px 24px rgb(40 20 10 / 22%);
 
-  // One ink at increasing density over the plate.
-  --heat-0: #a2ada9;
-  --heat-1: #909b97;
-  --heat-2: #798581;
-  --heat-3: #5b6663;
-  --heat-4: #2e3935;
+  // Ember ink at increasing density over pale glass.
+  --heat-0: rgb(255 255 255 / 30%);
+  --heat-1: #e8b8a0;
+  --heat-2: #d98a66;
+  --heat-3: #bf5f3b;
+  --heat-4: #8a3e22;
 
-  --deboss-text: -2px -2px 2px rgb(0 0 0 / 22%), 2px 2px 2px rgb(255 255 255 / 45%);
   --letterpress: 0 1px 0 rgb(255 255 255 / 40%);
-  --pocket-bg: #a7b2ae;
-  --pocket-shadow: inset 2px 2px 4px rgb(0 0 0 / 22%), inset -1px -1px 1px rgb(255 255 255 / 45%);
+  --pocket-bg: rgb(70 45 30 / 9%);
+  --pocket-shadow: inset 2px 2px 5px rgb(0 0 0 / 14%), inset -1px -1px 1px rgb(255 255 255 / 65%);
   --cell-shade: rgb(0 0 0 / 28%);
   --cell-light: rgb(255 255 255 / 45%);
-  --grain-opacity: 0.2;
+  --grain-opacity: 0.14;
+
+  --rule: rgb(0 0 0 / 45%);
+  --guide: rgb(0 0 0 / 3.5%);
+  --engrave: url(#engrave-light);
+  --engrave-floor: rgb(70 40 25 / 16%);
+  --block-bg: #d9683f;
+  --block-fg: #1c0f09;
 }

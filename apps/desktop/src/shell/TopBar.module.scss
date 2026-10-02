@@ -9,7 +9,9 @@
   align-items: stretch;
   gap: var(--space-6);
   padding: 0 var(--space-2) 0 var(--space-5);
-  background: var(--bg);
+  // Frosted: pages scroll under the bar and blur through it.
+  background: var(--topbar-glass);
+  backdrop-filter: blur(24px) saturate(1.4);
   // Hairline drawn inside the bar so the content box stays a full, even 44px and
   // every 16px item centers on a whole pixel (no half-pixel blur at 125% scaling).
   box-shadow: inset 0 -1px 0 var(--border);

@@ -1,4 +1,10 @@
-// No page title: the wall headline is the top of the page.
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+// No page title: the grid's opening rule is the top of the page.
 .content {
-  padding-top: calc(var(--topbar-height) + var(--space-8));
+  padding-top: calc(var(--topbar-height) + var(--space-6));
 }

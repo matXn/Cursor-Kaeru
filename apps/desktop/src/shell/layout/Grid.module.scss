@@ -1,0 +1,41 @@
+// Column metrics shared by the grid and its guides.
+.grid,
+.guides {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-5);
+}
+
+.grid {
+  align-items: start;
+}
+
+.rule,
+.hair {
+  grid-column: 1 / -1;
+}
+
+.rule {
+  border-top: 1px solid var(--rule);
+}
+
+.hair {
+  border-top: 1px solid var(--border);
+}
+
+// Same box as the page content column (see VirtualPage), fixed behind it.
+.guides {
+  position: absolute;
+  inset: var(--topbar-height) 0 0;
+  width: calc(100% - var(--app-page-padding) * 2);
+  max-width: var(--app-page-max-width);
+  margin: 0 auto;
+  pointer-events: none;
+
+  // Feathered on both sides and faded out top and bottom: light, not bars.
+  i {
+    background: linear-gradient(90deg, transparent, var(--guide) 35%, var(--guide) 65%, transparent);
+    mask-image: linear-gradient(transparent, #000 18%, #000 70%, transparent);
+    filter: blur(6px);
+  }
+}

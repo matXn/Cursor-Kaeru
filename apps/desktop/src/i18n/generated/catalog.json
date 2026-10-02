@@ -19,7 +19,7 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 26,
+          "line": 27,
           "column": 41
         }
       ]
@@ -32,8 +32,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 109,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 97,
           "column": 5
         }
       ]
@@ -79,8 +79,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 129,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 117,
           "column": 5
         }
       ]
@@ -122,8 +122,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 144,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 132,
           "column": 5
         }
       ]
@@ -224,8 +224,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 121,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 109,
           "column": 5
         }
       ]
@@ -238,8 +238,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 118,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 106,
           "column": 5
         }
       ]
@@ -298,7 +298,7 @@
         {
           "file": "features/home/activity/ActivityWall.tsx",
           "line": 73,
-          "column": 79
+          "column": 77
         }
       ]
     },
@@ -326,6 +326,18 @@
         }
       ]
     },
+    "09ebc2643631ba25": {
+      "source": "价值估算",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 144,
+          "column": 14
+        }
+      ]
+    },
     "0b96da34f6fbdd3b": {
       "source": "缓存读取：{tokens} × ${price}/1M = {cost}",
       "kind": "template",
@@ -336,8 +348,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 139,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 127,
           "column": 5
         }
       ]
@@ -566,8 +578,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 108,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 96,
           "column": 5
         }
       ]
@@ -706,8 +718,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 116,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 104,
           "column": 5
         }
       ]
@@ -740,8 +752,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 99,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 87,
           "column": 5
         }
       ]
@@ -989,9 +1001,23 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 106,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 94,
           "column": 5
+        }
+      ]
+    },
+    "2b3743723ec820a8": {
+      "source": "最长连续 {days} 天",
+      "kind": "template",
+      "placeholders": [
+        "days"
+      ],
+      "refs": [
+        {
+          "file": "features/home/activity/YearFacts.tsx",
+          "line": 25,
+          "column": 96
         }
       ]
     },
@@ -1111,8 +1137,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 98,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 86,
           "column": 5
         }
       ]
@@ -1355,9 +1381,9 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 167,
-          "column": 46
+          "file": "features/home/activity/YearFacts.tsx",
+          "line": 32,
+          "column": 13
         }
       ]
     },
@@ -1624,8 +1650,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 111,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 99,
           "column": 5
         }
       ]
@@ -1708,8 +1734,13 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 33,
+          "file": "features/home/activity/YearFacts.tsx",
+          "line": 26,
+          "column": 156
+        },
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 31,
           "column": 27
         }
       ]
@@ -1854,7 +1885,7 @@
       "refs": [
         {
           "file": "features/home/HomePage.tsx",
-          "line": 59,
+          "line": 61,
           "column": 22
         },
         {
@@ -2206,8 +2237,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 150,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 138,
           "column": 5
         }
       ]
@@ -2232,8 +2263,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 110,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 98,
           "column": 5
         }
       ]
@@ -2258,8 +2289,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 120,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 108,
           "column": 5
         }
       ]
@@ -2396,20 +2427,6 @@
         }
       ]
     },
-    "65cb9a7b4f620b6b": {
-      "source": "提示词 {tokens}",
-      "kind": "template",
-      "placeholders": [
-        "tokens"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 177,
-          "column": 46
-        }
-      ]
-    },
     "670ec44baf9b6e5d": {
       "source": "近 4 小时",
       "kind": "text",
@@ -2460,6 +2477,18 @@
           "file": "features/models/CursorGates.tsx",
           "line": 40,
           "column": 113
+        }
+      ]
+    },
+    "698ae0907a5bdb75": {
+      "source": "缓存命中",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 142,
+          "column": 14
         }
       ]
     },
@@ -2545,7 +2574,7 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 26,
+          "line": 27,
           "column": 17
         }
       ]
@@ -2568,20 +2597,6 @@
         {
           "file": "features/settings/ProxySettingsCard.tsx",
           "line": 69,
-          "column": 46
-        }
-      ]
-    },
-    "7005693f4f050bce": {
-      "source": "缓存读写 {cost}",
-      "kind": "template",
-      "placeholders": [
-        "cost"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 184,
           "column": 46
         }
       ]
@@ -2681,8 +2696,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 153,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 147,
           "column": 55
         }
       ]
@@ -2976,8 +2991,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 71,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 59,
           "column": 17
         }
       ]
@@ -3037,6 +3052,18 @@
           "file": "features/calls/CallsPage.tsx",
           "line": 70,
           "column": 75
+        }
+      ]
+    },
+    "8b2ae02c20a758c6": {
+      "source": "过去一年",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ActivityWall.tsx",
+          "line": 60,
+          "column": 66
         }
       ]
     },
@@ -3746,6 +3773,18 @@
         }
       ]
     },
+    "ad54a1cdf247bcb0": {
+      "source": "每个活跃日的 Token",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/YearFacts.tsx",
+          "line": 37,
+          "column": 143
+        }
+      ]
+    },
     "ad6a60ee93d3ba3e": {
       "source": "正在加载调用详情…",
       "kind": "text",
@@ -3768,8 +3807,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 134,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 122,
           "column": 5
         }
       ]
@@ -3958,8 +3997,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 117,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 105,
           "column": 5
         }
       ]
@@ -4013,8 +4052,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 119,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 107,
           "column": 5
         }
       ]
@@ -4062,7 +4101,7 @@
       "refs": [
         {
           "file": "shell/TakeoverToggle.tsx",
-          "line": 25,
+          "line": 26,
           "column": 7
         }
       ]
@@ -4384,8 +4423,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 127,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 115,
           "column": 5
         }
       ]
@@ -4858,8 +4897,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 114,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 102,
           "column": 5
         }
       ]
@@ -4967,8 +5006,8 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 67,
-          "column": 55
+          "line": 56,
+          "column": 31
         }
       ]
     },
@@ -5003,8 +5042,8 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 98,
-          "column": 39
+          "line": 89,
+          "column": 41
         }
       ]
     },
@@ -5243,8 +5282,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 126,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 114,
           "column": 5
         }
       ]
@@ -5603,8 +5642,8 @@
       ],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 100,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 88,
           "column": 5
         }
       ]
@@ -5639,8 +5678,8 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/home/metrics/HomeMetrics.tsx",
-          "line": 123,
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 111,
           "column": 5
         }
       ]

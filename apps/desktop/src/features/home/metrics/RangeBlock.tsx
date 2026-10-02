@@ -1,12 +1,10 @@
-import type { ReactNode } from "react";
 import { formatCompactInteger, formatInteger } from "../../../shared/utils/numberFormat";
 import { Icon } from "../../../shared/ui/Icon";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
 import { informationOutlineIcon } from "../../../shared/ui/icons";
-import { cacheHitGlyph, callCountGlyph, tokensGlyph, valueGlyph } from "../../../shared/ui/glyphs";
-import styles from "./HomeMetrics.module.scss";
+import styles from "./RangeBlock.module.scss";
 
-export type HomeMetricsData = {
+export type RangeMetrics = {
   llmCalls: number;
   successfulCalls: number;
   failedCalls: number;
@@ -31,16 +29,6 @@ function formatMetricValue(value: number) {
 
 function formatRate(value: number | null) {
   return value === null ? t("暂无数据") : `${(Math.max(0, Math.min(1, value)) * 100).toFixed(2)}%`;
-}
-
-const METER_CELLS = 20;
-
-// Same cell language as the activity wall: filled cells = share of the rate.
-function RateMeter({ rate }: { rate: number }) {
-  const filled = Math.round(Math.max(0, Math.min(1, rate)) * METER_CELLS);
-  return <div className={styles.meter} aria-hidden="true">
-    {Array.from({ length: METER_CELLS }, (_, index) => <i key={index} data-filled={index < filled || undefined} />)}
-  </div>;
 }
 
 function calculateRate(numerator: number, denominator: number) {
@@ -76,8 +64,9 @@ function InfoTooltip({ content }: { content: string }) {
   ><Icon icon={informationOutlineIcon} size="1.1em" /></button>;
 }
 
-// Range-scoped stats: the filter sits in the row header, values read left to right.
-export function HomeMetrics({ data, filter }: { data: HomeMetricsData; filter: ReactNode }) {
+// The page's one solid block: calls in the selected range, with cache hit, tokens and value
+// as rows beneath. The range filter lives in the column label above it.
+export function RangeBlock({ data }: { data: RangeMetrics }) {
   const inputTokens = Math.max(0, data.promptTokens - data.cacheReadTokens - data.cacheWriteTokens);
   const outputTokens = Math.max(0, data.tokenUsage - data.promptTokens);
   const defaultCacheHitRate = calculateRate(data.cacheReadTokens, data.cacheReadTokens + inputTokens);
@@ -93,7 +82,6 @@ export function HomeMetrics({ data, filter }: { data: HomeMetricsData; filter: R
     cacheWrite: priceTokens(data.cacheWriteTokens, TOKEN_PRICE_PER_MILLION.cacheWrite),
   };
   const totalCost = costs.input + costs.output + costs.cacheRead + costs.cacheWrite;
-  const cacheCost = costs.cacheRead + costs.cacheWrite;
   const cacheTooltip = [
     t("当前：{rate}", { rate: formatRate(defaultCacheHitRate) }),
     t("公式：缓存读取 /（缓存读取 + 非缓存输入）"),
@@ -150,40 +138,20 @@ export function HomeMetrics({ data, filter }: { data: HomeMetricsData; filter: R
     t("合计：{cost}", { cost: formatUSD(totalCost) }),
   ].join("\n");
 
+  const rows = [
+    { label: t("缓存命中"), value: defaultCacheHitRate === null ? "--" : formatRate(defaultCacheHitRate), tooltip: cacheTooltip },
+    { label: "Token", value: formatCompactInteger(data.tokenUsage), title: formatInteger(data.tokenUsage), tooltip: tokensTooltip },
+    { label: t("价值估算"), value: formatUSD(totalCost), tooltip: costTooltip },
+  ];
+
   return <section className={styles.root} aria-label={t("调用统计")}>
-    <div className={styles.toolbar}>{filter}</div>
-    <div className={styles.stats}>
-      <article className={styles.metric}>
-        <div className={styles.label}><Icon icon={cacheHitGlyph} size="1.3em" />CACHE HIT<InfoTooltip content={cacheTooltip} /></div>
-        <div className={styles.body}>
-          <div className={styles.value}>{defaultCacheHitRate === null ? "--" : formatRate(defaultCacheHitRate)}</div>
-          <RateMeter rate={defaultCacheHitRate ?? 0} />
-        </div>
-      </article>
-      <article className={styles.metric}>
-        <div className={styles.label}><Icon icon={callCountGlyph} size="1.3em" />CALLS<InfoTooltip content={callsTooltip} /></div>
-        <div className={styles.body}>
-          <div className={styles.value} title={formatInteger(data.llmCalls)}>{formatCompactInteger(data.llmCalls)}</div>
-          <div className={styles.secondary}>{t("成功 {successful} / 异常 {failed}", {
-            successful: formatCompactInteger(data.successfulCalls),
-            failed: formatCompactInteger(data.failedCalls),
-          })}</div>
-        </div>
-      </article>
-      <article className={styles.metric}>
-        <div className={styles.label}><Icon icon={tokensGlyph} size="1.3em" />TOKENS<InfoTooltip content={tokensTooltip} /></div>
-        <div className={styles.body}>
-          <div className={styles.value} title={formatInteger(data.tokenUsage)}>{formatCompactInteger(data.tokenUsage)}</div>
-          <div className={styles.secondary}>{t("提示词 {tokens}", { tokens: formatCompactInteger(data.promptTokens) })}</div>
-        </div>
-      </article>
-      <article className={styles.metric}>
-        <div className={styles.label}><Icon icon={valueGlyph} size="1.3em" />EST. VALUE<InfoTooltip content={costTooltip} /></div>
-        <div className={styles.body}>
-          <div className={styles.value} title={formatUSD(totalCost)}>{formatUSD(totalCost)}</div>
-          <div className={styles.secondary}>{t("缓存读写 {cost}", { cost: formatUSD(cacheCost) })}</div>
-        </div>
-      </article>
-    </div>
+    <div className={styles.key}>CALLS<InfoTooltip content={callsTooltip} /></div>
+    <div className={styles.value} title={formatInteger(data.llmCalls)}>{formatCompactInteger(data.llmCalls)}</div>
+    <dl className={styles.rows}>
+      {rows.map((row) => <div key={row.label}>
+        <dt>{row.label}<InfoTooltip content={row.tooltip} /></dt>
+        <dd title={row.title}>{row.value}</dd>
+      </div>)}
+    </dl>
   </section>;
 }

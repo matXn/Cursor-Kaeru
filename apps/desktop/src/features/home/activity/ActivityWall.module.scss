@@ -1,38 +1,47 @@
-.root {
-  position: relative;
+// Column labels under the opening rule: one small caption per column group.
+.label,
+.filter {
+  min-height: 34px;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+  align-items: center;
+  color: var(--text-muted);
+  font-family: var(--font-title);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
 }
 
-.header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-8);
-  flex-wrap: wrap;
+// The range filter heads the block below it; its trigger sits flush with the column line.
+.filter {
+  margin-left: calc(-1 * var(--space-2));
 }
 
 .headline {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  margin: 0;
-  font-weight: 400;
+  padding-top: var(--space-5);
 }
 
 .total {
+  margin: 0 0 0 -0.04em;
   font-size: var(--text-hero);
-  font-weight: 500;
-  letter-spacing: -0.05em;
-  line-height: 0.85;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.86;
+  white-space: nowrap;
+}
+
+// Cut into the glass: the floor is a faint tint, the walls come from the lighting filter.
+.engraved {
+  color: var(--engrave-floor);
+  filter: var(--engrave);
 }
 
 // Sits right under the number it explains; quiet until you read it.
 .yardstick {
-  margin: var(--space-2) 0 0 2px;
+  margin: var(--space-3) 0 0 2px;
   color: var(--text);
   font-size: var(--text-base);
+  white-space: nowrap;
   opacity: 0.55;
 
   b {
@@ -40,15 +49,21 @@
   }
 }
 
+// Unit at the foot of the number, in the next column group.
 .unitStack {
+  align-self: stretch;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: var(--space-1);
+  padding-bottom: calc(var(--text-base) * 1.5 + var(--space-3));
 }
 
 .unit {
   color: var(--text-muted);
-  font-size: var(--text-lg);
+  font-size: 22px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 // Appears as the counter settles.
@@ -66,42 +81,12 @@
   }
 }
 
-.facts {
-  display: flex;
-  gap: var(--space-8);
-  margin: 0;
-  font-family: var(--font-mono);
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  dt {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--text-faint);
-    font-family: var(--font-title);
-    font-size: var(--text-xs);
-    font-weight: 500;
-    letter-spacing: 0.06em;
-  }
-
-  dd {
-    margin: 0;
-    color: var(--text);
-    font-size: var(--text-xl);
-    line-height: 1;
-  }
-}
-
 // The recess holding the wall.
 .pocket {
-  padding: var(--space-5) var(--space-6);
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-5);
   background: var(--pocket-bg);
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: var(--pocket-shadow);
 }
 
@@ -111,6 +96,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
+  margin-top: var(--space-3);
   font-size: var(--text-sm);
 }
 
