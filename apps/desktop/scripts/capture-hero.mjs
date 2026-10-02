@@ -14,14 +14,21 @@ const url = process.env.HERO_URL ?? "http://localhost:5178/product-demo/demo/her
 const settleMs = 9000;
 const port = 9333;
 
+// Chrome first: Edge can force-dark the capture when Windows is in dark mode.
 const browser = [
+  "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
   "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
   "C:/Program Files/Microsoft/Edge/Application/msedge.exe",
-  "C:/Program Files/Google/Chrome/Application/chrome.exe",
   "/usr/bin/google-chrome",
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
 ].find(existsSync);
 if (!browser) throw new Error("no Edge or Chrome found");
+
+// A browser left over from an earlier run would answer on this port and be captured instead.
+if (await fetch(`http://127.0.0.1:${port}/json/version`).then(() => true, () => false)) {
+  throw new Error(`something already listens on :${port}; close that browser first`);
+}
 
 const child = spawn(browser, [
   "--headless=new",
@@ -29,6 +36,8 @@ const child = spawn(browser, [
   `--remote-debugging-port=${port}`,
   `--user-data-dir=${mkdtempSync(join(tmpdir(), "kaeru-hero-"))}`,
   "--hide-scrollbars",
+  // Capture what the page draws, not what the browser would do to it at night.
+  "--disable-features=WebContentsForceDark,Translate",
   "--window-size=2000,1200",
   "about:blank",
 ], { stdio: "ignore" });
@@ -57,11 +66,15 @@ try {
   });
 
   await send("Emulation.setDeviceMetricsOverride", { width: 2000, height: 1200, deviceScaleFactor: 1, mobile: false });
+  await send("Emulation.setAutoDarkModeOverride", { enabled: false });
+  await send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: "light" }] });
   await send("Page.navigate", { url });
   await sleep(settleMs);
   const shot = await send("Page.captureScreenshot", { format: "png" });
   writeFileSync(output, Buffer.from(shot.result.data, "base64"));
   console.log(`wrote ${output}`);
+  // Edge relaunches itself, so the spawned process is not the browser: ask it to quit.
+  await send("Browser.close");
   socket.close();
 } finally {
   child.kill();

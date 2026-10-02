@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light">
 <title>Cursor Kaeru · README hero</title>
 <!--
   Source of docs/hero.png: the demo app in a frosted-glass window in front of a warm room.
@@ -24,11 +25,15 @@
   .wall::before { left: 640px; }
   .wall::after { left: 1560px; }
 
-  /* The column at the left edge. */
+  /* A flat concrete slab at the left edge: straight vertical faces, no rounding. */
   .pillar {
     position: absolute; left: 0; top: 0; bottom: 270px; width: 92px;
-    background: linear-gradient(90deg, #6d6867, #8a8583 70%, #77716f);
-    box-shadow: 8px 0 30px rgb(40 20 10 / 35%);
+    background: linear-gradient(180deg, #8b8684, #7f7a78);
+    border-right: 2px solid rgb(50 38 34 / 45%);
+  }
+  .pillar::after {
+    content: ""; position: absolute; left: 100%; top: 0; bottom: 0; width: 18px;
+    background: linear-gradient(90deg, rgb(40 20 12 / 16%), transparent);
   }
 
   /* Floor: pale concrete catching the glow of the sphere. */
