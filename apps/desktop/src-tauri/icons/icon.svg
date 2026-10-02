@@ -1,15 +1,14 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- OS icon (taskbar, tray, installer): the nine-cell mark in grayscale on a near-black tile,
-       to sit next to Cursor's own monochrome icon. Same diagonal ramp as the in-app mark
-       (src/shared/assets/logo.svg). Source for `pnpm tauri icon src-tauri/icons/icon.svg`. -->
-  <rect width="512" height="512" rx="112" fill="#141414"/>
-  <rect x="96" y="96" width="88" height="88" rx="20" fill="#4d4d4d"/>
-  <rect x="212" y="96" width="88" height="88" rx="20" fill="#808080"/>
-  <rect x="328" y="96" width="88" height="88" rx="20" fill="#b3b3b3"/>
-  <rect x="96" y="212" width="88" height="88" rx="20" fill="#808080"/>
-  <rect x="212" y="212" width="88" height="88" rx="20" fill="#b3b3b3"/>
-  <rect x="328" y="212" width="88" height="88" rx="20" fill="#f2f2f2"/>
-  <rect x="96" y="328" width="88" height="88" rx="20" fill="#b3b3b3"/>
-  <rect x="212" y="328" width="88" height="88" rx="20" fill="#f2f2f2"/>
-  <rect x="328" y="328" width="88" height="88" rx="20" fill="#f2f2f2"/>
+  <!-- 3x3 activity grid in the app's heat ramp: deep clay top-left, glowing peach bottom-right.
+       App icon (desktop, taskbar, installer); the tray uses tray.svg.
+       Source for `pnpm tauri icon src-tauri/icons/icon.svg`. -->
+  <rect x="24" y="24" width="144" height="144" rx="18" fill="#6e3320"/>
+  <rect x="184" y="24" width="144" height="144" rx="18" fill="#a84b2b"/>
+  <rect x="344" y="24" width="144" height="144" rx="18" fill="#d97757"/>
+  <rect x="24" y="184" width="144" height="144" rx="18" fill="#a84b2b"/>
+  <rect x="184" y="184" width="144" height="144" rx="18" fill="#d97757"/>
+  <rect x="344" y="184" width="144" height="144" rx="18" fill="#f5a582"/>
+  <rect x="24" y="344" width="144" height="144" rx="18" fill="#d97757"/>
+  <rect x="184" y="344" width="144" height="144" rx="18" fill="#f5a582"/>
+  <rect x="344" y="344" width="144" height="144" rx="18" fill="#f5a582"/>
 </svg>

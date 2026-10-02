@@ -19,7 +19,7 @@ pub fn create(app: &mut App) -> tauri::Result<()> {
     let menu = Menu::with_items(app, &[&open, &separator, &quit])?;
 
     TrayIconBuilder::with_id("main")
-        .icon(tauri::include_image!("./icons/32x32.png"))
+        .icon(tauri::include_image!("./icons/tray.png"))
         .tooltip("Cursor Kaeru")
         .menu(&menu)
         .show_menu_on_left_click(cfg!(target_os = "macos"))

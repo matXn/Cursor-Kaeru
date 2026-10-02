@@ -23,11 +23,31 @@
   }
 }
 
-// The mark: off shows the ring, on shows the disc and check.
+.label {
+  animation: label-in 200ms ease-out;
+}
+
+@keyframes label-in {
+  from {
+    opacity: 0;
+  }
+}
+
+// The mark: off shows the ring, on shows the disc and check. Switching cross-fades the two
+// and draws the check in, short enough to feel like a switch rather than a wait.
+$ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
 .mark {
   flex: none;
   width: 18px;
   height: 18px;
+  overflow: visible;
+}
+
+.ring,
+.disc {
+  transform-origin: center;
+  transition: opacity 180ms ease, transform 240ms $ease;
 }
 
 .ring {
@@ -36,7 +56,8 @@
   stroke-width: 1.75;
 
   [data-state="on"] & {
-    display: none;
+    opacity: 0;
+    transform: scale(1.15);
   }
 }
 
@@ -44,7 +65,8 @@
   fill: var(--heat-3);
 
   [data-state="off"] & {
-    display: none;
+    opacity: 0;
+    transform: scale(0.7);
   }
 }
 
@@ -54,8 +76,23 @@
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 220ms ease-out 80ms;
 
   [data-state="off"] & {
-    display: none;
+    stroke-dashoffset: 1;
+    transition-duration: 120ms;
+    transition-delay: 0ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring,
+  .disc,
+  .check,
+  .label {
+    animation: none !important;
+    transition: none !important;
   }
 }

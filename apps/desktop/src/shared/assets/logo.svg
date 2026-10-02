@@ -1,7 +1,7 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- 3x3 activity grid in the app's heat ramp, deep clay top-left to glowing peach bottom-right;
        gutters are a third of a cell so the mark stays airy at small sizes.
-       The in-app mark; the OS icon (src-tauri/icons/icon.svg) is its monochrome twin. -->
+       The in-app mark; the app icon (src-tauri/icons/icon.svg) is its compact twin. -->
   <rect x="36" y="36" width="120" height="120" rx="24" fill="#6e3320"/>
   <rect x="196" y="36" width="120" height="120" rx="24" fill="#a84b2b"/>
   <rect x="356" y="36" width="120" height="120" rx="24" fill="#d97757"/>

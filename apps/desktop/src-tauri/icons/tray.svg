@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tray icon: the nine-cell mark in grayscale on a near-black tile, to sit next to
+       Cursor's own monochrome icon in the notification area. Rendered to tray.png. -->
+  <rect width="512" height="512" rx="112" fill="#141414"/>
+  <rect x="96" y="96" width="88" height="88" rx="20" fill="#4d4d4d"/>
+  <rect x="212" y="96" width="88" height="88" rx="20" fill="#808080"/>
+  <rect x="328" y="96" width="88" height="88" rx="20" fill="#b3b3b3"/>
+  <rect x="96" y="212" width="88" height="88" rx="20" fill="#808080"/>
+  <rect x="212" y="212" width="88" height="88" rx="20" fill="#b3b3b3"/>
+  <rect x="328" y="212" width="88" height="88" rx="20" fill="#f2f2f2"/>
+  <rect x="96" y="328" width="88" height="88" rx="20" fill="#b3b3b3"/>
+  <rect x="212" y="328" width="88" height="88" rx="20" fill="#f2f2f2"/>
+  <rect x="328" y="328" width="88" height="88" rx="20" fill="#f2f2f2"/>
+</svg>

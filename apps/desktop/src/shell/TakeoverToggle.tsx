@@ -3,6 +3,7 @@ import { appStore, useAppStore } from "../shared/store/appStore";
 import styles from "./TakeoverToggle.module.scss";
 
 // Takeover switch in the top bar: an empty ring when off, a lit disc with a check when on.
+// One click either way; the two cross-fade.
 export function TakeoverToggle() {
   const { cursorHarness, cursorBusy } = useAppStore();
   const navigate = useNavigate();
@@ -36,8 +37,8 @@ export function TakeoverToggle() {
     <svg className={styles.mark} viewBox="0 0 24 24" aria-hidden="true">
       <circle className={styles.ring} cx="12" cy="12" r="8" />
       <circle className={styles.disc} cx="12" cy="12" r="9" />
-      <path className={styles.check} d="M8 12.4l2.7 2.7L16.2 9.6" />
+      <path className={styles.check} d="M8 12.4l2.7 2.7L16.2 9.6" pathLength={1} />
     </svg>
-    <span>{label}</span>
+    <span key={label} className={styles.label}>{label}</span>
   </button>;
 }
