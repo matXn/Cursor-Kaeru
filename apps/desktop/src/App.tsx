@@ -19,11 +19,11 @@ export function App() {
     <TooltipProvider>
       <HashRouter>
         <Routes>
-          <Route path="calls/:callId" element={<CallDetailsPage />} />
           <Route element={<AppFrame />}>
             <Route element={<AppLayout />}>
               <Route index element={<HomePage />} />
               <Route path="calls" element={<CallsPage />} />
+              <Route path="calls/:callId" element={<CallDetailsPage />} />
               <Route path="harness/cursor" element={<CursorSettingsPage />} />
               <Route path="plugins" element={<PluginManagementPage />} />
               <Route path="settings" element={<SettingsPage />} />

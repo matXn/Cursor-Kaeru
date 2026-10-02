@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useI18n } from "../../i18n/store";
 import { api, type LlmCall } from "../../shared/api";
-import { appStore } from "../../shared/store/appStore";
 import controls from "../../shared/ui/Controls.module.scss";
 import { Icon } from "../../shared/ui/Icon";
 import { chevronLeftIcon, chevronRightIcon } from "../../shared/ui/icons";
@@ -27,6 +26,7 @@ function matches(call: LlmCall, keyword: string) {
 export function CallsPage() {
   const { locale } = useI18n();
   const [params, setParams] = useSearchParams();
+  const navigate = useNavigate();
   const today = localDayKey(new Date());
   const day = params.get("day") ?? today;
   const live = day === today;
@@ -91,7 +91,7 @@ export function CallsPage() {
     </div>
     <div className={styles.scroll}>
       {visible.length > 0
-        ? <CallRoadmap calls={visible} nowMs={nowMs} live={live} onOpen={(call) => void appStore.openCallDetails(call.call_id)} />
+        ? <CallRoadmap calls={visible} nowMs={nowMs} live={live} onOpen={(call) => navigate(`/calls/${encodeURIComponent(call.call_id)}`)} />
         : <p className={styles.empty}>{calls.length > 0 ? t("没有符合筛选条件的调用") : t("这一天没有调用")}</p>}
     </div>
   </div>;
