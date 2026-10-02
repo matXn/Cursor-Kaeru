@@ -5,7 +5,8 @@
 <meta name="color-scheme" content="light">
 <title>Cursor Kaeru · README hero</title>
 <!--
-  Source of docs/hero.png: the demo app in a frosted-glass window in front of a warm room.
+  Source of docs/hero.png: the demo app in a frosted-glass window in front of a warm room,
+  light theme on the left and dark on the right, split along one slanted seam.
   Serve the demo (`pnpm exec vite --config vite.demo.config.ts`), then run `pnpm run hero:capture` (writes docs/hero.png at 2000×1200).
 -->
 <style>
@@ -65,7 +66,7 @@
   .window {
     position: absolute; left: 360px; top: 150px; width: 1420px; height: 930px;
     border-radius: 12px; overflow: hidden;
-    background: linear-gradient(135deg, rgb(244 236 230 / 46%), rgb(226 216 210 / 40%));
+    /* Only blur here: each theme lays its own tint, as it does over the real acrylic window. */
     backdrop-filter: blur(46px) saturate(1.35);
     box-shadow:
       inset 0 1px 0 rgb(255 255 255 / 70%),
@@ -73,7 +74,11 @@
       0 50px 110px rgb(50 20 10 / 40%),
       0 8px 24px rgb(50 20 10 / 22%);
   }
-  .window iframe { display: block; width: 100%; height: 100%; border: 0; background: transparent; color-scheme: light; }
+  .window iframe { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border: 0; background: transparent; }
+  /* One slanted seam: (60%, 0) to (44%, 100%). */
+  .light { color-scheme: light; clip-path: polygon(0 0, 60% 0, 44% 100%, 0 100%); }
+  .dark { color-scheme: dark; clip-path: polygon(60% 0, 100% 0, 100% 100%, 44% 100%); }
+  .seam { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 </style>
 </head>
 <body>
@@ -85,8 +90,19 @@
     <div class="sphere"></div>
     <div class="grain"></div>
     <div class="window">
-      <iframe src="./index.html?theme=default-light&platform=windows&material=acrylic" title="Cursor Kaeru"></iframe>
+      <iframe class="dark" title="Cursor Kaeru, dark"></iframe>
+      <iframe class="light" src="./index.html?theme=default-light&platform=windows&material=acrylic" title="Cursor Kaeru, light"></iframe>
+      <svg class="seam" viewBox="0 0 1420 930" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="852" y1="0" x2="624.8" y2="930" stroke="rgb(255 255 255 / 55%)" stroke-width="1.5"/>
+        <line x1="853.6" y1="0" x2="626.4" y2="930" stroke="rgb(40 20 10 / 25%)" stroke-width="1"/>
+      </svg>
     </div>
   </div>
+<script>
+  // The demo keeps its theme in localStorage, which both frames would share. Loading the dark
+  // one through the IPv6 loopback gives it its own origin, so each frame keeps its own theme.
+  const query = "?platform=windows&material=acrylic";
+  document.querySelector(".dark").src = `${location.protocol}//[::1]:${location.port}/product-demo/demo/index.html${query}&theme=default-dark`;
+</script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 
 本项目是 [cursor-byok](https://github.com/leookun/cursor-byok)（MIT）的个人改版，与 Cursor 及其开发者无关。感谢 cursor-byok 的项目维护者。
 
-![Cursor Kaeru 概览](docs/hero.png)
+![Cursor Kaeru 概览（左浅色、右深色）](docs/hero.png)
 
 ## 与上游的差异
 
