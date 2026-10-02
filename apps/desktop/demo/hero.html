@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Cursor Kaeru · README hero</title>
+<!--
+  Source of docs/hero.png: the demo app in a frosted-glass window in front of a warm room.
+  Serve the demo (`pnpm exec vite --config vite.demo.config.ts`), then run `pnpm run hero:capture` (writes docs/hero.png at 2000×1200).
+-->
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 2000px; height: 1200px; overflow: hidden; background: #6f5750; }
+
+  .scene { position: relative; width: 2000px; height: 1200px; overflow: hidden; }
+
+  /* Concrete wall: warm terracotta in the light, a few formwork seams. */
+  .wall {
+    position: absolute; inset: 0 0 270px 0;
+    background:
+      radial-gradient(ellipse 900px 700px at 230px 640px, rgb(255 176 120 / 55%), transparent 70%),
+      linear-gradient(180deg, #7a574d 0%, #94685a 38%, #8d6558 64%, #7b5e57 100%);
+  }
+  .wall::before, .wall::after { content: ""; position: absolute; top: 0; bottom: 0; width: 2px; background: rgb(60 30 20 / 18%); box-shadow: 1px 0 0 rgb(255 220 200 / 10%); }
+  .wall::before { left: 640px; }
+  .wall::after { left: 1560px; }
+
+  /* The column at the left edge. */
+  .pillar {
+    position: absolute; left: 0; top: 0; bottom: 270px; width: 92px;
+    background: linear-gradient(90deg, #6d6867, #8a8583 70%, #77716f);
+    box-shadow: 8px 0 30px rgb(40 20 10 / 35%);
+  }
+
+  /* Floor: pale concrete catching the glow of the sphere. */
+  .floor {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 270px;
+    background:
+      radial-gradient(ellipse 700px 160px at 250px 40px, rgb(255 150 95 / 60%), transparent 70%),
+      linear-gradient(180deg, #9a8f8b 0%, #857d7b 40%, #6f6967 100%);
+  }
+  .floor::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: rgb(255 230 215 / 22%); }
+
+  /* The lamp: a big warm sphere, half hidden behind the window. */
+  .glow {
+    position: absolute; left: -380px; top: 130px; width: 1100px; height: 1100px; border-radius: 50%;
+    background: radial-gradient(circle, rgb(255 160 100 / 45%), transparent 62%);
+  }
+  .sphere {
+    position: absolute; left: -45px; top: 330px; width: 590px; height: 590px; border-radius: 50%;
+    background: radial-gradient(circle at 62% 38%, #ffd9bd 0%, #f9b184 28%, #ee8d58 62%, #d9703f 100%);
+    box-shadow: 0 0 140px 30px rgb(255 140 80 / 45%);
+  }
+
+  .grain {
+    position: absolute; inset: 0; opacity: .34; mix-blend-mode: multiply; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* The window: a pane of frosted glass; the app inside draws nothing behind itself. */
+  .window {
+    position: absolute; left: 360px; top: 150px; width: 1420px; height: 930px;
+    border-radius: 12px; overflow: hidden;
+    background: linear-gradient(135deg, rgb(244 236 230 / 46%), rgb(226 216 210 / 40%));
+    backdrop-filter: blur(46px) saturate(1.35);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 70%),
+      inset 0 0 0 1px rgb(255 255 255 / 28%),
+      0 50px 110px rgb(50 20 10 / 40%),
+      0 8px 24px rgb(50 20 10 / 22%);
+  }
+  .window iframe { display: block; width: 100%; height: 100%; border: 0; background: transparent; color-scheme: light; }
+</style>
+</head>
+<body>
+  <div class="scene">
+    <div class="wall"></div>
+    <div class="pillar"></div>
+    <div class="floor"></div>
+    <div class="glow"></div>
+    <div class="sphere"></div>
+    <div class="grain"></div>
+    <div class="window">
+      <iframe src="./index.html?theme=default-light&platform=windows&material=acrylic" title="Cursor Kaeru"></iframe>
+    </div>
+  </div>
+</body>
+</html>

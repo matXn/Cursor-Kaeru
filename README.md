@@ -4,6 +4,8 @@
 
 本项目是 [cursor-byok](https://github.com/leookun/cursor-byok)（MIT）的个人改版，与 Cursor 及其开发者无关。感谢 cursor-byok 的项目维护者。
 
+![Cursor Kaeru 概览](docs/hero.png)
+
 ## 与上游的差异
 
 协议解析、工具调用、Skills / MCP、多轮对话与调用记录等核心能力均来自上游，行为未作修改。差异集中在界面与配置方式：

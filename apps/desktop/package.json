@@ -18,7 +18,8 @@
     "tauri:dev": "tauri dev",
     "tauri:build": "tauri build",
     "fonts:cjk": "node scripts/subset-cjk-font.mjs",
-    "logos:providers": "node scripts/provider-logos.mjs"
+    "logos:providers": "node scripts/provider-logos.mjs",
+    "hero:capture": "node scripts/capture-hero.mjs"
   },
   "license": "MIT",
   "dependencies": {

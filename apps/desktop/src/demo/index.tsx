@@ -8,6 +8,9 @@ const theme = params.get("theme") === "default-light" ? "default-light" : "defau
 
 const platform = params.get("platform");
 document.documentElement.dataset.platform = platform === "windows" || platform === "linux" ? platform : "macos";
+// `?material=acrylic` draws the page the way it looks over the Windows acrylic window:
+// nothing painted behind it, so whatever sits behind the frame shows through.
+if (params.get("material") === "acrylic") document.documentElement.dataset.material = "acrylic";
 localStorage.setItem("cursor-byok.locale", locale);
 localStorage.setItem("cursor-byok.theme", theme);
 

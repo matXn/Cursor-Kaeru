@@ -15,7 +15,7 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 export function applyTheme(themeId: ThemeId) {
   document.documentElement.dataset.theme = themeId;
   // Acrylic tints itself from the window's own light/dark mode; keep it on the app's theme.
-  if (document.documentElement.dataset.material === "acrylic") {
+  if (document.documentElement.dataset.material === "acrylic" && "__TAURI_INTERNALS__" in window) {
     void getCurrentWindow().setTheme(themeId === "default-light" ? "light" : "dark");
   }
 }
