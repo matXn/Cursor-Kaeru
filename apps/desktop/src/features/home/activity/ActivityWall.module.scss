@@ -29,6 +29,8 @@
   margin: 0 0 0 -0.04em;
   font-size: var(--text-hero);
   font-weight: 600;
+  // Proportional figures: Mona Sans's tabular zero is slashed, the display one is not.
+  font-variant-numeric: proportional-nums;
   letter-spacing: -0.06em;
   line-height: 0.86;
   white-space: nowrap;

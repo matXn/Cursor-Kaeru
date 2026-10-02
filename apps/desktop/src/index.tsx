@@ -8,6 +8,8 @@ import { applyTheme } from "./shared/theme/theme";
 // Outfit (OFL) for page titles only.
 import "@fontsource/mona-sans/400.css";
 import "@fontsource/mona-sans/500.css";
+// Display numbers and titles only (the engraved total, the range block, page titles).
+import "@fontsource/mona-sans/600.css";
 import "@fontsource/outfit/500.css";
 import "@fontsource/monaspace-neon/400.css";
 import "@fontsource/monaspace-neon/500.css";
