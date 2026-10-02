@@ -49,15 +49,16 @@ body,
   overflow: hidden;
 }
 
-// The window is one pane of glass; pages draw nothing behind themselves. Over real acrylic
-// (Windows) body only lays the tint; elsewhere it paints a stand-in: glass over a warm light.
+// The window is one pane of glass with a warm lamp at its left edge; pages draw nothing
+// behind themselves. Over real acrylic (Windows) body lays the lamp and a tint on the
+// blurred desktop; elsewhere it paints a stand-in for the whole thing.
 body {
   background-color: var(--bg);
   background-image: var(--stage);
 }
 
 :root[data-material="acrylic"] body {
-  background: var(--acrylic-tint);
+  background: var(--acrylic-stage);
 }
 
 // Frosted glass: a fixed film of grain over the whole window, strength per theme.

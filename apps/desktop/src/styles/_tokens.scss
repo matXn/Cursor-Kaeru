@@ -62,8 +62,10 @@
   --stage: linear-gradient(rgb(22 20 19 / 55%), rgb(22 20 19 / 55%)),
     radial-gradient(circle at -100px 60%, #ffb27d 0, #ef8a56 170px, #a65a3b 350px, #4a2f26 600px, #1f1816 920px);
   --topbar-glass: rgb(26 22 20 / 55%);
-  // Over real acrylic: a warm tint that keeps text legible on any wallpaper.
-  --acrylic-tint: rgb(24 20 18 / 58%);
+  // Over real acrylic: a warm lamp at the left edge, then a tint that keeps text legible on
+  // any wallpaper. The lamp is translucent so the blurred desktop still shows through it.
+  --acrylic-stage: radial-gradient(circle at -100px 60%, rgb(255 178 125 / 60%) 0, rgb(239 138 86 / 40%) 170px, rgb(166 90 59 / 20%) 360px, transparent 640px),
+    linear-gradient(rgb(24 20 18 / 58%), rgb(24 20 18 / 58%));
   --surface: #171716; // cards, panels
   --surface-raised: #211f1e; // menus, tooltips, modals
   --field: #0c0c0b; // inputs, editors
@@ -113,7 +115,7 @@
   // Swiss grid: strong rules split blocks, hairlines (--border) split rows,
   // column guides are faint light shafts.
   --rule: rgb(255 255 255 / 22%);
-  --guide: rgb(255 255 255 / 3%);
+  --guide: rgb(255 255 255 / 1.5%);
   // Engraved hero number: the recess floor is a faint tint of the glass; the walls come
   // from the SVG lighting filter in shared/ui/EngraveFilters.tsx.
   --engrave: url(#engrave-dark);
@@ -131,7 +133,8 @@
   --stage: linear-gradient(rgb(238 234 229 / 56%), rgb(238 234 229 / 56%)),
     radial-gradient(circle at -100px 60%, #ffd3ae 0, #f39a66 180px, #c98a6c 370px, #aaa098 660px, #8f8b87 1000px);
   --topbar-glass: rgb(214 209 204 / 55%);
-  --acrylic-tint: rgb(238 233 228 / 52%);
+  --acrylic-stage: radial-gradient(circle at -100px 60%, rgb(255 211 174 / 70%) 0, rgb(243 154 102 / 45%) 180px, rgb(201 138 108 / 22%) 380px, transparent 680px),
+    linear-gradient(rgb(238 233 228 / 52%), rgb(238 233 228 / 52%));
   --surface: #cdc8c3;
   --surface-raised: #dcd7d2;
   --field: #d3cec9;
@@ -175,7 +178,7 @@
   --grain-opacity: 0.14;
 
   --rule: rgb(0 0 0 / 45%);
-  --guide: rgb(0 0 0 / 3.5%);
+  --guide: rgb(0 0 0 / 2%);
   --engrave: url(#engrave-light);
   --engrave-floor: rgb(70 40 25 / 16%);
   --block-bg: #d9683f;

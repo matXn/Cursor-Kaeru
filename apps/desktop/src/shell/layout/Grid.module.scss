@@ -36,6 +36,6 @@
   i {
     background: linear-gradient(90deg, transparent, var(--guide) 35%, var(--guide) 65%, transparent);
     mask-image: linear-gradient(transparent, #000 18%, #000 70%, transparent);
-    filter: blur(6px);
+    filter: blur(10px);
   }
 }
