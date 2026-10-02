@@ -1,0 +1,89 @@
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+// No title row: the grid's opening rule is the top of the page.
+.content {
+  padding-top: calc(var(--topbar-height) + var(--space-6));
+}
+
+.header {
+  margin-bottom: var(--space-8);
+}
+
+.label {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-muted);
+  font-family: var(--font-title);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-faint);
+
+  &[data-on] {
+    background: var(--accent);
+  }
+}
+
+.title {
+  margin: var(--space-3) 0 0 -0.04em;
+  font-family: var(--font-ui);
+  font-size: clamp(64px, 8vw, 104px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+}
+
+// Page tools, flush right on the title's baseline.
+.tools {
+  align-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-1);
+
+  > button:not([class]),
+  > .primary {
+    height: var(--control-h-sm);
+    padding: 0 var(--space-3);
+    color: var(--text-muted);
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    transition: background var(--duration), color var(--duration);
+
+    &:hover:not(:disabled) {
+      color: var(--text);
+      background: var(--hover);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  > .primary {
+    color: var(--accent-fg);
+    background: var(--accent);
+
+    &:hover:not(:disabled) {
+      color: var(--accent-fg);
+      background: var(--accent-hover);
+    }
+  }
+}

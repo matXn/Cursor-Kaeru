@@ -11,6 +11,8 @@ import styles from "./AppLayout.module.scss";
 import { PageActionsTarget } from "./PageActions";
 
 const keptAlivePages = ["/", "/calls", "/settings", "/harness/cursor", "/plugins"];
+// Pages drawn on the grid carry their own header, refresh included.
+const gridPages = ["/", "/harness/cursor"];
 
 // Page area below the top bar: the page title row's action slots plus the kept-alive page.
 export function AppLayout() {
@@ -23,7 +25,7 @@ export function AppLayout() {
     <main className={styles.content}>
       <div className={styles.actionRegion}>
         <div ref={setLeftActionTarget} className={styles.pageActions} />
-        {location.pathname !== "/" && <TooltipTrigger label={t("刷新")}><button className={controls.iconButton} aria-label={t("刷新")} disabled={busy} onClick={() => void appStore.refresh()}>
+        {!gridPages.includes(location.pathname) && <TooltipTrigger label={t("刷新")}><button className={controls.iconButton} aria-label={t("刷新")} disabled={busy} onClick={() => void appStore.refresh()}>
           <Icon className={busy ? controls.spin : ""} icon={refreshIcon} size="1.1em" />
         </button></TooltipTrigger>}
         <div ref={setRightActionTarget} className={styles.pageActions} />

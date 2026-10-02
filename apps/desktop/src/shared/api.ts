@@ -3,11 +3,31 @@ import { utcOffsetMs } from "./utils/localDay";
 
 export type ModelType = "openai" | "anthropic";
 
+/** A model service: where requests go and how they are authenticated, shared by its models. */
+export interface Provider {
+  provider_id: string;
+  sort_order: number;
+  name: string;
+  type: ModelType;
+  base_url: string;
+  use_full_url: boolean;
+  api_key: string;
+  openai_endpoint: string;
+  custom_headers_enabled: boolean;
+  custom_headers: Record<string, string>;
+  created_at_ms: number;
+  updated_at_ms: number;
+}
+
+export type ProviderInput = Omit<Provider, "provider_id" | "created_at_ms" | "updated_at_ms">;
+
+/** A model resolved with its provider's connection, as the runtime uses it. */
 export interface Model {
   model_hash: string;
+  provider_id: string;
+  provider_name: string;
   sort_order: number;
   display_name: string;
-  group_name: string | null;
   type: ModelType;
   base_url: string;
   use_full_url: boolean;
@@ -31,22 +51,16 @@ export interface Model {
   updated_at_ms: number;
 }
 
+/** What a model itself owns; the connection comes from its provider. */
 export interface ModelInput {
   sort_order: number;
+  provider_id: string;
   display_name: string;
-  group_name: string | null;
-  type: ModelType;
-  base_url: string;
-  use_full_url: boolean;
-  api_key: string;
   tooltip_data: string;
   model_id: string;
   reasoning_effort: string | null;
-  openai_endpoint: string;
   openai_extra_params_enabled: boolean;
   openai_extra_params: Record<string, unknown>;
-  custom_headers_enabled: boolean;
-  custom_headers: Record<string, string>;
   anthropic_extra_params_enabled: boolean;
   anthropic_extra_params: Record<string, unknown>;
   context_window_tokens: number | null;
@@ -54,6 +68,26 @@ export interface ModelInput {
   anthropic_max_tokens: number | null;
   anthropic_thinking_effort: string | null;
   thinking_budget_tokens: number | null;
+}
+
+export function modelInput(model: Model): ModelInput {
+  return {
+    sort_order: model.sort_order,
+    provider_id: model.provider_id,
+    display_name: model.display_name,
+    tooltip_data: model.tooltip_data,
+    model_id: model.model_id,
+    reasoning_effort: model.reasoning_effort,
+    openai_extra_params_enabled: model.openai_extra_params_enabled,
+    openai_extra_params: model.openai_extra_params,
+    anthropic_extra_params_enabled: model.anthropic_extra_params_enabled,
+    anthropic_extra_params: model.anthropic_extra_params,
+    context_window_tokens: model.context_window_tokens,
+    max_completion_tokens: model.max_completion_tokens,
+    anthropic_max_tokens: model.anthropic_max_tokens,
+    anthropic_thinking_effort: model.anthropic_thinking_effort,
+    thinking_budget_tokens: model.thinking_budget_tokens,
+  };
 }
 
 export interface ModelDiscoveryInput {
@@ -475,6 +509,11 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  providers: () => request<Provider[]>("/providers"),
+  createProvider: (provider: ProviderInput) => request<Provider>("/providers", { method: "POST", body: JSON.stringify(provider) }),
+  updateProvider: (id: string, provider: ProviderInput) => request<Provider>(`/providers/${encodeURIComponent(id)}`, { method: "PUT", body: JSON.stringify(provider) }),
+  deleteProvider: (id: string) => request<void>(`/providers/${encodeURIComponent(id)}`, { method: "DELETE" }),
+  reorderProviders: (providerIds: string[]) => request<Provider[]>("/providers/order", { method: "PUT", body: JSON.stringify({ provider_ids: providerIds }) }),
   models: () => request<Model[]>("/models"),
   createModels: (models: ModelInput[]) => request<Model[]>("/models", { method: "POST", body: JSON.stringify({ models }) }),
   reorderModels: (modelHashes: string[]) => request<Model[]>("/models/order", { method: "PUT", body: JSON.stringify({ model_hashes: modelHashes }) }),

@@ -12,7 +12,6 @@ import { OverviewTimeRangeFilter, type OverviewRangePreset } from "./overview/Ov
 import { appStore, useAppStore } from "../../shared/store/appStore";
 import { localDayKey, shiftLocalDay } from "../../shared/utils/localDay";
 import { formatTimeInput, parseTimeInput } from "../../shared/utils/parseTimeInput";
-import { modelProviderName } from "../../shared/utils/modelProvider";
 import { claudeIcon, flatColorOrganizationIcon, openAiIcon } from "../../shared/ui/icons";
 import { useI18n } from "../../i18n/store";
 import styles from "./HomePage.module.scss";
@@ -139,7 +138,7 @@ export function HomePage() {
     ...models.map((model) => ({
       value: model.model_hash,
       label: model.display_name,
-      group: modelProviderName(model),
+      group: model.provider_name,
       icon: iconFor(model.type),
     })),
     ...plugins.flatMap((plugin) => plugin.providers.flatMap((provider) =>

@@ -6,6 +6,7 @@ import type {
   Overview,
   OverviewTokenUsageBucket,
   PluginDescriptor,
+  Provider,
   PluginResourceView,
   ProxySettings,
   StatisticsStorage,
@@ -14,6 +15,32 @@ import type {
 
 const API_ROOT = "/__byok-api__/api";
 const FIXED_NOW = Date.UTC(2026, 7, 27, 8, 0, 0);
+
+// One provider per address; models below pick theirs by URL.
+const providerNames: Record<string, string> = {
+  "https://api.anthropic.com": "Anthropic",
+  "https://api.openai.com": "OpenAI",
+  "https://api.deepseek.com": "DeepSeek",
+  "https://generativelanguage.googleapis.com": "Google AI Studio",
+  "https://dashscope.aliyuncs.com/compatible-mode": "阿里云百炼",
+  "https://api.moonshot.cn": "Moonshot",
+  "https://open.bigmodel.cn": "智谱",
+  "https://api.mistral.ai": "Mistral",
+};
+const providers: Provider[] = Object.entries(providerNames).map(([url, name], index) => ({
+  provider_id: `mock-provider-${index + 1}`,
+  sort_order: index + 1,
+  name,
+  type: url === "https://api.anthropic.com" ? "anthropic" : "openai",
+  base_url: url,
+  use_full_url: false,
+  api_key: `sk-demo-${(index + 1) * 1371}a9f`,
+  openai_endpoint: url === "https://api.anthropic.com" ? "" : url === "https://api.openai.com" ? "/v1/responses" : "/v1/chat/completions",
+  custom_headers_enabled: false,
+  custom_headers: {},
+  created_at_ms: FIXED_NOW - index * 86_400_000,
+  updated_at_ms: FIXED_NOW,
+}));
 
 const models: Model[] = [
   createModel({ hash: "mock-claude-sonnet", order: 1, name: "Claude Sonnet 4", type: "anthropic", url: "https://api.anthropic.com", modelId: "claude-sonnet-4-20250514" }),
@@ -198,6 +225,10 @@ export function installDemoApi() {
       return json({ state: "ready", version: "demo", target: null, phase: null, downloaded_bytes: 0, total_bytes: null, error: null });
     }
     if (path === "/plugins" && method === "GET") return json(plugins);
+    if (path === "/providers" && method === "GET") return json(providers);
+    if (path === "/providers" && method === "POST") return json(providers[0]);
+    if (path === "/providers/order") return json(providers);
+    if (/^\/providers\/[^/]+$/.test(path)) return method === "DELETE" ? empty() : json(providers[0]);
     if (path === "/models" && method === "GET") return json(models);
     if (path === "/models" && method === "POST") return json(models);
     if (path === "/models/order") return json(models);
@@ -285,15 +316,17 @@ function createModel({ hash, order, name, type, url, modelId, endpoint = "/v1/re
   modelId: string;
   endpoint?: string;
 }): Model {
+  const provider = providers.find((candidate) => candidate.base_url === url)!;
   return {
     model_hash: hash,
+    provider_id: provider.provider_id,
+    provider_name: provider.name,
     sort_order: order,
     display_name: name,
-    group_name: null,
     type,
     base_url: url,
     use_full_url: false,
-    api_key: "demo-key",
+    api_key: provider.api_key,
     tooltip_data: `${name} Mock 通道`,
     model_id: modelId,
     reasoning_effort: type === "openai" ? "high" : null,

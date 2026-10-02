@@ -4,6 +4,8 @@ mod fake_provider;
 #[path = "support/fixtures.rs"]
 mod fixtures;
 
+use fixtures::CreateTestModel;
+
 use std::{
     collections::{BTreeMap, HashSet},
     sync::Arc,
@@ -20,10 +22,7 @@ use cursor_server::{
         },
     },
     cursor::{TransportCommand, TransportRegistry},
-    model::{
-        MessageContent, ModelConfigInput, ModelType, ProjectedContent, ToolCall,
-        OPENAI_CHAT_ENDPOINT,
-    },
+    model::{MessageContent, ModelType, ProjectedContent, ToolCall, OPENAI_CHAT_ENDPOINT},
     provider::{FinishReason, ModelEvent},
     run::consume_model_cycle,
 };
@@ -828,10 +827,9 @@ async fn unknown_exec_id_is_ignored() {
 async fn one_run_can_auto_compact_again_after_more_tool_output() {
     let (_directory, store) = fixtures::temp_store().await;
     let model = store
-        .create_model(&ModelConfigInput {
+        .create_test_model(&fixtures::TestModel {
             sort_order: 0,
             display_name: "Repeated compaction".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://example.com/v1/chat/completions".into(),
             use_full_url: true,

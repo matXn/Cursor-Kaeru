@@ -4,6 +4,8 @@ mod fake_provider;
 #[path = "support/fixtures.rs"]
 mod fixtures;
 
+use fixtures::CreateTestModel;
+
 use std::sync::Arc;
 
 use bytes::Bytes;
@@ -12,8 +14,8 @@ use cursor_server::{
     cursor::protocol::{connect, proto::agent::v1 as pb},
     cursor::{TransportCommand, TransportRegistry},
     model::{
-        CanonicalMessage, ConversationId, ModelConfigInput, ModelSpec, ModelType, Origin,
-        PreparedRun, PromptSpec, Role, RunAction, RunId, RunKind, Usage, OPENAI_CHAT_ENDPOINT,
+        CanonicalMessage, ConversationId, ModelSpec, ModelType, Origin, PreparedRun, PromptSpec,
+        Role, RunAction, RunId, RunKind, Usage, OPENAI_CHAT_ENDPOINT,
     },
     provider::{FinishReason, ModelEvent},
     run::{self, CommandResult, CommitCause, RunEngine, RunEvent, RunOutcome, RunPhase},
@@ -1082,10 +1084,9 @@ async fn injected_user_context_detaches_subagents_without_cancelling_them() {
 async fn injected_user_context_interrupts_automatic_compaction() {
     let (_directory, store) = fixtures::temp_store().await;
     let model = store
-        .create_model(&ModelConfigInput {
+        .create_test_model(&fixtures::TestModel {
             sort_order: 0,
             display_name: "Test Model".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://example.com/v1/chat/completions".into(),
             use_full_url: true,

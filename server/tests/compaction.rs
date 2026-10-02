@@ -4,6 +4,8 @@ mod fake_provider;
 #[path = "support/fixtures.rs"]
 mod fixtures;
 
+use fixtures::CreateTestModel;
+
 use std::{collections::HashMap, sync::Arc, time::Duration};
 
 use cursor_server::{
@@ -13,8 +15,8 @@ use cursor_server::{
         TransportCommand, TransportRegistry,
     },
     model::{
-        ContentPart, ConversationId, MessageContent, ModelConfigInput, ModelType, Origin,
-        ProjectedContent, Role, Usage, OPENAI_CHAT_ENDPOINT,
+        ContentPart, ConversationId, MessageContent, ModelType, Origin, ProjectedContent, Role,
+        Usage, OPENAI_CHAT_ENDPOINT,
     },
     provider::{FinishReason, ModelEvent},
 };
@@ -24,10 +26,9 @@ use prost::Message;
 async fn summarize_replaces_model_history_and_preserves_cursor_history() {
     let (_directory, store) = fixtures::temp_store().await;
     let model = store
-        .create_model(&ModelConfigInput {
+        .create_test_model(&fixtures::TestModel {
             sort_order: 0,
             display_name: "Test Model".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://example.com/v1/chat/completions".into(),
             use_full_url: true,
@@ -196,10 +197,9 @@ async fn summarize_replaces_model_history_and_preserves_cursor_history() {
 async fn automatic_compaction_preflights_provider_input_and_records_rebuilt_tokens() {
     let (_directory, store) = fixtures::temp_store().await;
     let model = store
-        .create_model(&ModelConfigInput {
+        .create_test_model(&fixtures::TestModel {
             sort_order: 0,
             display_name: "Auto Compact Model".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://example.com/v1/chat/completions".into(),
             use_full_url: true,
@@ -311,10 +311,9 @@ async fn automatic_compaction_preflights_provider_input_and_records_rebuilt_toke
 async fn incremental_preflight_uses_conversation_anchor_across_model_switch() {
     let (_directory, store) = fixtures::temp_store().await;
     let model_a = store
-        .create_model(&ModelConfigInput {
+        .create_test_model(&fixtures::TestModel {
             sort_order: 0,
             display_name: "Anchor Model A".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://example.com/v1/chat/completions".into(),
             use_full_url: true,
@@ -338,10 +337,9 @@ async fn incremental_preflight_uses_conversation_anchor_across_model_switch() {
         .await
         .unwrap();
     let model_b = store
-        .create_model(&ModelConfigInput {
+        .create_test_model(&fixtures::TestModel {
             sort_order: 1,
             display_name: "Anchor Model B".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://example.com/v1/chat/completions".into(),
             use_full_url: true,
@@ -413,10 +411,9 @@ async fn incremental_preflight_uses_conversation_anchor_across_model_switch() {
 async fn irreducibly_oversized_current_input_fails_before_provider_dispatch() {
     let (_directory, store) = fixtures::temp_store().await;
     let model = store
-        .create_model(&ModelConfigInput {
+        .create_test_model(&fixtures::TestModel {
             sort_order: 0,
             display_name: "Overflow Model".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://example.com/v1/chat/completions".into(),
             use_full_url: true,

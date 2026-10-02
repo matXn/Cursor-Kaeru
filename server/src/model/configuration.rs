@@ -82,34 +82,76 @@ impl FromStr for ModelType {
     }
 }
 
+/// A model service: where requests go and how they are authenticated. Every model under
+/// it shares these; a model itself only says which upstream model to call and how.
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct ModelConfigInput {
+pub struct ProviderConfigInput {
     #[serde(default)]
     pub sort_order: i64,
-    pub display_name: String,
-    /// 供应商分组的自定义显示名;同一 base_url 主机下的模型共享。
-    #[serde(default)]
-    pub group_name: Option<String>,
+    pub name: String,
     #[serde(rename = "type")]
     pub model_type: ModelType,
     pub base_url: String,
     #[serde(default)]
     pub use_full_url: bool,
     pub api_key: String,
+    #[serde(default)]
+    pub openai_endpoint: String,
+    #[serde(default)]
+    pub custom_headers_enabled: bool,
+    #[serde(default = "empty_object")]
+    pub custom_headers: serde_json::Value,
+}
+
+#[derive(Clone, Debug, Serialize)]
+pub struct ProviderConfig {
+    pub provider_id: String,
+    pub sort_order: i64,
+    pub name: String,
+    #[serde(rename = "type")]
+    pub model_type: ModelType,
+    pub base_url: String,
+    pub use_full_url: bool,
+    pub api_key: String,
+    pub openai_endpoint: String,
+    pub custom_headers_enabled: bool,
+    pub custom_headers: serde_json::Value,
+    pub created_at_ms: i64,
+    pub updated_at_ms: i64,
+}
+
+impl ProviderConfig {
+    pub fn input(&self) -> ProviderConfigInput {
+        ProviderConfigInput {
+            sort_order: self.sort_order,
+            name: self.name.clone(),
+            model_type: self.model_type,
+            base_url: self.base_url.clone(),
+            use_full_url: self.use_full_url,
+            api_key: self.api_key.clone(),
+            openai_endpoint: self.openai_endpoint.clone(),
+            custom_headers_enabled: self.custom_headers_enabled,
+            custom_headers: self.custom_headers.clone(),
+        }
+    }
+}
+
+/// One model under a provider. Options that only apply to the other protocol are dropped
+/// on save, so a provider switching protocol cannot leave stale values behind.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct ModelConfigInput {
+    #[serde(default)]
+    pub sort_order: i64,
+    pub provider_id: String,
+    pub display_name: String,
     pub tooltip_data: String,
     pub model_id: String,
     #[serde(default)]
     pub reasoning_effort: Option<String>,
     #[serde(default)]
-    pub openai_endpoint: String,
-    #[serde(default)]
     pub openai_extra_params_enabled: bool,
     #[serde(default = "empty_object")]
     pub openai_extra_params: serde_json::Value,
-    #[serde(default)]
-    pub custom_headers_enabled: bool,
-    #[serde(default = "empty_object")]
-    pub custom_headers: serde_json::Value,
     #[serde(default)]
     pub anthropic_extra_params_enabled: bool,
     #[serde(default = "empty_object")]
@@ -122,12 +164,15 @@ pub struct ModelConfigInput {
     pub thinking_budget_tokens: Option<u64>,
 }
 
+/// A model as the runtime sees it: its own options resolved together with its provider's
+/// address, key and headers.
 #[derive(Clone, Debug, Serialize)]
 pub struct ModelConfig {
     pub model_hash: String,
+    pub provider_id: String,
+    pub provider_name: String,
     pub sort_order: i64,
     pub display_name: String,
-    pub group_name: Option<String>,
     #[serde(rename = "type")]
     pub model_type: ModelType,
     pub base_url: String,
@@ -206,20 +251,44 @@ impl ModelConfig {
     }
 }
 
-pub fn normalize_model_input(input: &ModelConfigInput) -> Result<ModelConfigInput> {
-    let display_name = required(&input.display_name, "model display name")?;
-    let group_name = input
-        .group_name
-        .as_deref()
-        .map(str::trim)
-        .filter(|value| !value.is_empty())
-        .map(String::from);
-    let base_url = normalize_request_url(&input.base_url)?;
-    let api_key = required(&input.api_key, "model API key")?;
-    let tooltip_data = required(&input.tooltip_data, "model tooltip")?;
-    let model_id = required(&input.model_id, "model id")?;
+pub fn normalize_provider_input(input: &ProviderConfigInput) -> Result<ProviderConfigInput> {
+    let normalized = ProviderConfigInput {
+        sort_order: input.sort_order.max(0),
+        name: required(&input.name, "provider name")?,
+        model_type: input.model_type,
+        base_url: normalize_request_url(&input.base_url)?,
+        use_full_url: input.use_full_url,
+        api_key: required(&input.api_key, "provider API key")?,
+        openai_endpoint: match input.model_type {
+            ModelType::OpenAi => normalize_openai_endpoint(&input.openai_endpoint)?,
+            ModelType::Anthropic => String::new(),
+        },
+        custom_headers_enabled: input.custom_headers_enabled,
+        custom_headers: input.custom_headers.clone(),
+    };
+    validate_headers(&normalized.custom_headers)?;
+    normalized.request_url()?;
+    Ok(normalized)
+}
+
+impl ProviderConfigInput {
+    pub fn request_url(&self) -> Result<String> {
+        resolve_request_url(
+            self.model_type,
+            &self.base_url,
+            &self.openai_endpoint,
+            self.use_full_url,
+        )
+    }
+}
+
+/// Normalizes a model for the protocol of the provider it sits under.
+pub fn normalize_model_input(
+    input: &ModelConfigInput,
+    model_type: ModelType,
+) -> Result<ModelConfigInput> {
     let reasoning_effort = normalize_effort(input.reasoning_effort.as_deref(), true)?;
-    let anthropic_thinking_effort = match input.model_type {
+    let anthropic_thinking_effort = match model_type {
         ModelType::Anthropic => Some(
             normalize_effort(
                 input.anthropic_thinking_effort.as_deref().or(Some("xhigh")),
@@ -229,40 +298,28 @@ pub fn normalize_model_input(input: &ModelConfigInput) -> Result<ModelConfigInpu
         ),
         ModelType::OpenAi => None,
     };
-    let openai_endpoint = match input.model_type {
-        ModelType::OpenAi => normalize_openai_endpoint(&input.openai_endpoint)?,
-        ModelType::Anthropic => String::new(),
-    };
     validate_object(&input.openai_extra_params, "OpenAI extra params")?;
     validate_object(&input.anthropic_extra_params, "Anthropic extra params")?;
-    validate_headers(&input.custom_headers)?;
 
-    let normalized = ModelConfigInput {
+    Ok(ModelConfigInput {
         sort_order: input.sort_order.max(0),
-        display_name,
-        group_name,
-        model_type: input.model_type,
-        base_url,
-        use_full_url: input.use_full_url,
-        api_key,
-        tooltip_data,
-        model_id,
-        reasoning_effort: (input.model_type == ModelType::OpenAi)
+        provider_id: required(&input.provider_id, "model provider")?,
+        display_name: required(&input.display_name, "model display name")?,
+        tooltip_data: required(&input.tooltip_data, "model tooltip")?,
+        model_id: required(&input.model_id, "model id")?,
+        reasoning_effort: (model_type == ModelType::OpenAi)
             .then_some(reasoning_effort)
             .flatten(),
-        openai_endpoint,
-        openai_extra_params_enabled: input.model_type == ModelType::OpenAi
+        openai_extra_params_enabled: model_type == ModelType::OpenAi
             && input.openai_extra_params_enabled,
-        openai_extra_params: if input.model_type == ModelType::OpenAi {
+        openai_extra_params: if model_type == ModelType::OpenAi {
             input.openai_extra_params.clone()
         } else {
             empty_object()
         },
-        custom_headers_enabled: input.custom_headers_enabled,
-        custom_headers: input.custom_headers.clone(),
-        anthropic_extra_params_enabled: input.model_type == ModelType::Anthropic
+        anthropic_extra_params_enabled: model_type == ModelType::Anthropic
             && input.anthropic_extra_params_enabled,
-        anthropic_extra_params: if input.model_type == ModelType::Anthropic {
+        anthropic_extra_params: if model_type == ModelType::Anthropic {
             input.anthropic_extra_params.clone()
         } else {
             empty_object()
@@ -272,32 +329,21 @@ pub fn normalize_model_input(input: &ModelConfigInput) -> Result<ModelConfigInpu
         anthropic_max_tokens: positive(input.anthropic_max_tokens, "Anthropic max tokens")?,
         anthropic_thinking_effort,
         thinking_budget_tokens: positive(input.thinking_budget_tokens, "thinking budget")?,
-    };
-    resolve_request_url(
-        normalized.model_type,
-        &normalized.base_url,
-        &normalized.openai_endpoint,
-        normalized.use_full_url,
-    )?;
-    Ok(normalized)
+    })
 }
 
-pub fn model_hash(input: &ModelConfigInput) -> Result<String> {
-    let normalized = normalize_model_input(input)?;
-    let request_url = resolve_request_url(
-        normalized.model_type,
-        &normalized.base_url,
-        &normalized.openai_endpoint,
-        normalized.use_full_url,
-    )?;
+/// The identity Cursor and the call log know a model by: where it is sent, with which key,
+/// under which name. Same parts as before providers existed, so migrated models keep their
+/// hash. Both inputs must already be normalized.
+pub fn model_hash(provider: &ProviderConfigInput, model: &ModelConfigInput) -> Result<String> {
     let mut parts = vec![
-        request_url,
-        normalized.model_id,
-        normalized.api_key,
-        normalized.display_name,
+        provider.request_url()?,
+        model.model_id.clone(),
+        provider.api_key.clone(),
+        model.display_name.clone(),
     ];
-    if normalized.model_type == ModelType::OpenAi {
-        parts.push(normalized.openai_endpoint);
+    if provider.model_type == ModelType::OpenAi {
+        parts.push(provider.openai_endpoint.clone());
     }
     let digest = Sha256::digest(parts.join("\n").as_bytes());
     Ok(hex::encode(&digest[..8]))

@@ -1,8 +1,9 @@
 import { useSyncExternalStore } from "react";
-import { api, type CursorHarnessStatus, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings } from "../api";
+import { api, type CursorHarnessStatus, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings, type Provider, type ProviderInput } from "../api";
 import { applyTheme, isThemeId, type ThemeId } from "../theme/theme";
 
 export type AppSnapshot = {
+  providers: Provider[];
   models: Model[];
   overview: Overview;
   detailed: boolean;
@@ -22,6 +23,7 @@ const savedTheme = (): ThemeId => {
 };
 
 let snapshot: AppSnapshot = {
+  providers: [],
   models: [],
   overview: {
     metrics: {
@@ -78,7 +80,8 @@ export const appStore = {
   async refresh() {
     update({ busy: true, error: null });
     try {
-      const [models, overview, settings, ports, cursorHarness, pluginRuntime, plugins] = await Promise.all([
+      const [providers, models, overview, settings, ports, cursorHarness, pluginRuntime, plugins] = await Promise.all([
+        api.providers(),
         api.models(),
         api.overview(),
         api.observability(),
@@ -87,7 +90,7 @@ export const appStore = {
         api.pluginRuntime(),
         api.plugins(),
       ]);
-      update({ models, overview, detailed: settings.detailed, ports, cursorHarness, pluginRuntime, plugins });
+      update({ providers, models, overview, detailed: settings.detailed, ports, cursorHarness, pluginRuntime, plugins });
     } catch (cause) {
       update({ error: cause instanceof Error ? cause.message : String(cause) });
     } finally {
@@ -167,6 +170,34 @@ export const appStore = {
     try { update({ cursorHarness: await api.setCursorEnabled(enabled) }); }
     catch (cause) { update({ error: cause instanceof Error ? cause.message : String(cause) }); }
     finally { update({ cursorBusy: false }); }
+  },
+  async createProvider(provider: ProviderInput) {
+    update({ cursorBusy: true, error: null });
+    try {
+      const created = await api.createProvider(provider);
+      await appStore.refresh();
+      return created;
+    } catch (cause) {
+      update({ error: cause instanceof Error ? cause.message : String(cause) });
+      return null;
+    } finally { update({ cursorBusy: false }); }
+  },
+  async updateProvider(id: string, provider: ProviderInput) {
+    update({ cursorBusy: true, error: null });
+    try {
+      const updated = await api.updateProvider(id, provider);
+      await appStore.refresh();
+      return updated;
+    } catch (cause) {
+      update({ error: cause instanceof Error ? cause.message : String(cause) });
+      return null;
+    } finally { update({ cursorBusy: false }); }
+  },
+  async deleteProvider(id: string) {
+    await perform(async () => {
+      await api.deleteProvider(id);
+      await appStore.refresh();
+    });
   },
   async createModels(models: ModelInput[]) {
     update({ cursorBusy: true, error: null });

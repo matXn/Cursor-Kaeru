@@ -5,8 +5,9 @@ use serde::Deserialize;
 
 use crate::{
     model::{
-        model_hash, normalize_model_input, normalize_request_url, ModelConfigInput, ModelType,
-        OPENAI_CHAT_ENDPOINT, OPENAI_RESPONSES_ENDPOINT,
+        model_hash, normalize_model_input, normalize_provider_input, normalize_request_url,
+        ModelConfigInput, ModelType, ProviderConfigInput, OPENAI_CHAT_ENDPOINT,
+        OPENAI_RESPONSES_ENDPOINT,
     },
     Error, Result,
 };
@@ -19,9 +20,15 @@ pub struct LegacyModelImportPlan {
 
 pub struct LegacyModelImportEntry {
     pub model_hash: String,
+    /// The connection the model was configured with; import reuses or creates a provider for it.
+    pub provider: ProviderConfigInput,
     pub input: ModelConfigInput,
     pub existing: bool,
 }
+
+/// Stands in for the provider until import decides which one the model lands under; the
+/// hash does not depend on it.
+const PENDING_PROVIDER: &str = "pending";
 
 pub struct LegacyModelImportOutcome {
     pub imported: usize,
@@ -90,13 +97,15 @@ impl Store {
             .collect::<HashSet<_>>();
         let mut seen = HashSet::with_capacity(inputs.len());
         let mut models = Vec::with_capacity(inputs.len());
-        for input in inputs {
-            let input = normalize_model_input(&input)?;
-            let hash = model_hash(&input)?;
+        for (provider, input) in inputs {
+            let provider = normalize_provider_input(&provider)?;
+            let input = normalize_model_input(&input, provider.model_type)?;
+            let hash = model_hash(&provider, &input)?;
             if seen.insert(hash.clone()) {
                 models.push(LegacyModelImportEntry {
                     existing: existing.contains(&hash),
                     model_hash: hash,
+                    provider,
                     input,
                 });
             }
@@ -111,9 +120,9 @@ impl Store {
             .models
             .into_iter()
             .filter(|model| !model.existing)
-            .map(|model| model.input)
+            .map(|model| (model.provider, model.input))
             .collect::<Vec<_>>();
-        let imported = self.create_models_if_missing(&missing).await?;
+        let imported = self.import_models(&missing).await?;
         Ok(LegacyModelImportOutcome {
             imported,
             skipped: total - imported,
@@ -122,7 +131,7 @@ impl Store {
     }
 }
 
-fn load_v0049_model_config(path: &Path) -> Result<Vec<ModelConfigInput>> {
+fn load_v0049_model_config(path: &Path) -> Result<Vec<(ProviderConfigInput, ModelConfigInput)>> {
     let raw = match std::fs::read(path) {
         Ok(raw) => raw,
         Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
@@ -143,7 +152,7 @@ fn load_v0049_model_config(path: &Path) -> Result<Vec<ModelConfigInput>> {
     legacy.model_adapters.into_iter().map(model_input).collect()
 }
 
-fn model_input(model: LegacyModel) -> Result<ModelConfigInput> {
+fn model_input(model: LegacyModel) -> Result<(ProviderConfigInput, ModelConfigInput)> {
     let model_type = match model.model_type.trim().to_ascii_lowercase().as_str() {
         "openai" => ModelType::OpenAi,
         "anthropic" => ModelType::Anthropic,
@@ -155,14 +164,24 @@ fn model_input(model: LegacyModel) -> Result<ModelConfigInput> {
     };
     let (base_url, openai_endpoint, use_full_url) =
         legacy_request_configuration(model_type, &model.base_url, &model.openai_endpoint)?;
-    Ok(ModelConfigInput {
+    let provider = ProviderConfigInput {
         sort_order: model.sort,
-        display_name: model.display_name.clone(),
-        group_name: None,
+        name: provider_host(&base_url),
         model_type,
         base_url,
         use_full_url,
         api_key: model.api_key,
+        openai_endpoint,
+        custom_headers_enabled: model.custom_headers_enabled,
+        custom_headers: enabled_json_object(
+            model.custom_headers_enabled,
+            &model.custom_headers_json,
+        )?,
+    };
+    let input = ModelConfigInput {
+        sort_order: model.sort,
+        provider_id: PENDING_PROVIDER.into(),
+        display_name: model.display_name.clone(),
         tooltip_data: if model.tooltip_data.trim().is_empty() {
             model.display_name
         } else {
@@ -170,16 +189,10 @@ fn model_input(model: LegacyModel) -> Result<ModelConfigInput> {
         },
         model_id: model.model_id,
         reasoning_effort: optional_string(model.reasoning_effort),
-        openai_endpoint,
         openai_extra_params_enabled: model.openai_extra_params_enabled,
         openai_extra_params: enabled_json_object(
             model_type == ModelType::OpenAi && model.openai_extra_params_enabled,
             &model.openai_extra_params_json,
-        )?,
-        custom_headers_enabled: model.custom_headers_enabled,
-        custom_headers: enabled_json_object(
-            model.custom_headers_enabled,
-            &model.custom_headers_json,
         )?,
         anthropic_extra_params_enabled: model.anthropic_extra_params_enabled,
         anthropic_extra_params: enabled_json_object(
@@ -191,7 +204,16 @@ fn model_input(model: LegacyModel) -> Result<ModelConfigInput> {
         anthropic_max_tokens: positive(model.anthropic_max_tokens),
         anthropic_thinking_effort: optional_string(model.anthropic_thinking_effort),
         thinking_budget_tokens: positive(model.thinking_budget_tokens),
-    })
+    };
+    Ok((provider, input))
+}
+
+/// ProviderConfig name for an imported model: the host it talks to.
+fn provider_host(base_url: &str) -> String {
+    reqwest::Url::parse(base_url.trim())
+        .ok()
+        .and_then(|url| url.host_str().map(String::from))
+        .unwrap_or_else(|| base_url.trim().to_string())
 }
 
 fn legacy_request_configuration(

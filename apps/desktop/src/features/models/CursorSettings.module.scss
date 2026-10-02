@@ -1,58 +1,5 @@
-
-.page {
-  display: grid;
-  gap: 16px;
-}
-
-.takeoverActions {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.takeoverStatus {
-  min-width: 39px;
-  color: var(--text-muted);
-  font-size: var(--text-base);
-  text-align: right;
-  white-space: nowrap;
-}
-
-.groupActions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px;
-  overflow: hidden;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--surface-raised);
-
-  button {
-    height: 28px;
-    padding: 0 12px;
-    color: var(--text-muted);
-    background: transparent;
-    border: 0;
-    border-radius: 4px;
-    font-size: var(--text-base);
-    white-space: nowrap;
-    transition: background 100ms ease, color 100ms ease;
-
-    &:hover:not(:disabled) { 
-      color: var(--text); 
-      background: var(--hover); 
-    }
-    &[aria-pressed="true"] { 
-      color: var(--text); 
-      background: var(--selected); 
-    }
-    &:disabled { 
-      opacity: 0.5; 
-      cursor: not-allowed; 
-    }
-  }
-}
+// Editors, the model picker and the empty states of the models page; the table itself
+// lives in ProviderTable.module.scss.
 
 .gateActions {
   display: flex;
@@ -84,216 +31,6 @@
   }
 }
 
-.modelGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 12px;
-
-}
-.modelGroups {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 10px;
-}
-.groupCard {
-  padding: 4px 12px 8px;
-}
-.groupHeader {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.groupSettings {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 2px;
-  color: var(--text-muted);
-  background: none;
-  border: none;
-  font-size: var(--text-base);
-  white-space: nowrap;
-  cursor: pointer;
-
-  &:hover { color: var(--text); }
-}
-.groupChevron {
-  display: flex;
-  align-items: center;
-  padding: 4px 0;
-  color: var(--text);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.groupToggle {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 2px;
-  color: var(--text);
-  background: none;
-  border: none;
-  font-size: var(--text-md);
-  cursor: pointer;
-}
-.groupLabel {
-  flex: 1;
-  overflow: hidden;
-  text-align: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.modelList {
-  display: flex;
-  flex-direction: column;
-}
-.modelRow {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px 12px;
-  padding: 10px 2px;
-  border-top: 1px solid var(--border);
-}
-.modelRowName {
-  min-width: 0;
-  flex: 1 1 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-
-  .modelRowNameText,
-  .modelRowModelId {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .modelRowNameText {
-    color: var(--text);
-    font-size: var(--text-md);
-  }
-  .modelRowModelId {
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-  }
-}
-.modelCard {
-  position: relative;
-  padding: 16px;
-}
-.modelCardContent {
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 12px;
-}
-.modelCardTop {
-  min-width: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-.modelCardName {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  .modelCardNameText,
-  .modelCardModelId {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .modelCardNameText {
-    color: var(--text);
-    font-size: var(--text-md);
-  }
-  .modelCardModelId {
-    color: var(--text-muted);
-    font-size: var(--text-sm);
-  }
-}
-.modelTypeBadge {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 7px;
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: var(--text-sm);
-}
-.modelCardTest {
-  min-height: 31px;
-  display: flex;
-  align-items: center;
-}
-.modelCardActions {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  gap: 8px;
-
-  // 空间不足时按钮收缩显示省略号,而不是换行。
-  > button {
-    min-width: 0;
-    flex: 0 1 auto;
-  }
-}
-.deleteButton:hover {
-  color: var(--danger);
-}
-// Grip lives in the card's left padding, full height, so it never covers the name.
-.sortHandle {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  width: 16px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  color: transparent;
-  background: transparent;
-  border: 0;
-  border-radius: var(--radius) 0 0 var(--radius);
-  opacity: 0;
-  cursor: grab;
-  touch-action: none;
-  transition: opacity 160ms ease, color 160ms ease, border-color 160ms ease, background-color 160ms ease;
-
-  &:focus-visible,
-  .modelCard:hover & {
-    color: var(--text-muted);
-    background: var(--hover);
-    opacity: 1;
-  }
-  &:active {
-    cursor: grabbing;
-  }
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.3;
-  }
-}
-.sortGhost {
-  opacity: 0.4;
-}
-.sortChosen {
-  border-color: var(--accent);
-}
-.sortDragging {
-  cursor: grabbing;
-}
 .editor {
   display: flex;
   flex-direction: column;
@@ -330,21 +67,6 @@
   flex-direction: column;
   gap: 7px;
 }
-.switches {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  label {
-    min-width: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    color: var(--text-muted);
-    font-size: var(--text-base);
-  }
-}
-
 .jsonOption {
   display: flex;
   flex-direction: column;
@@ -358,6 +80,34 @@
     color: var(--text-muted);
     font-size: var(--text-base);
   }
+}
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pickerNote {
+  margin: var(--space-4) 0;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.pickerList {
+  max-height: 46vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.pickerExisting {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-faint);
 }
 
 @media (max-width: 720px) {

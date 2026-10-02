@@ -4,6 +4,8 @@ mod fake_provider;
 #[path = "support/fixtures.rs"]
 mod fixtures;
 
+use fixtures::CreateTestModel;
+
 use std::sync::Arc;
 
 use axum::{
@@ -17,7 +19,7 @@ use cursor_server::{
         protocol::{connect, proto::aiserver::v1 as ai},
         transport::TransportRegistry,
     },
-    model::{ContentPart, ModelConfigInput, ModelType, ProjectedContent, OPENAI_CHAT_ENDPOINT},
+    model::{ContentPart, ModelType, ProjectedContent, OPENAI_CHAT_ENDPOINT},
     network::NetworkClients,
     provider::{FinishReason, ModelEvent},
     store::{CommitPromptLocale, CommitSettings, DEFAULT_COMMIT_PROMPT_ZH_CN},
@@ -39,11 +41,10 @@ async fn commit_router(
     cursor::router(registry, clients).unwrap()
 }
 
-fn model_input(model_id: &str) -> ModelConfigInput {
-    ModelConfigInput {
+fn model_input(model_id: &str) -> fixtures::TestModel {
+    fixtures::TestModel {
         sort_order: 1,
         display_name: "Qwen Flash".into(),
-        group_name: None,
         model_type: ModelType::OpenAi,
         base_url: "https://example.com/v1".into(),
         use_full_url: false,
@@ -94,7 +95,7 @@ fn diff_request(diff: &str) -> ai::WriteGitCommitMessageRequest {
 async fn commit_message_is_generated_through_configured_model() {
     let (_directory, store) = fixtures::temp_store().await;
     let created = store
-        .create_model(&model_input("qwen/qwen3-flash"))
+        .create_test_model(&model_input("qwen/qwen3-flash"))
         .await
         .unwrap();
     store
@@ -141,7 +142,7 @@ async fn commit_message_is_generated_through_configured_model() {
 async fn custom_prompt_and_model_from_commit_settings_are_used() {
     let (_directory, store) = fixtures::temp_store().await;
     let created = store
-        .create_model(&model_input("qwen/qwen3-coder"))
+        .create_test_model(&model_input("qwen/qwen3-coder"))
         .await
         .unwrap();
     store
@@ -175,7 +176,7 @@ async fn custom_prompt_and_model_from_commit_settings_are_used() {
 async fn empty_diffs_are_rejected_when_generating() {
     let (_directory, store) = fixtures::temp_store().await;
     let created = store
-        .create_model(&model_input("qwen/qwen3-flash"))
+        .create_test_model(&model_input("qwen/qwen3-flash"))
         .await
         .unwrap();
     store
@@ -201,7 +202,7 @@ async fn empty_diffs_are_rejected_when_generating() {
 async fn tool_call_events_are_rejected() {
     let (_directory, store) = fixtures::temp_store().await;
     let created = store
-        .create_model(&model_input("qwen/qwen3-flash"))
+        .create_test_model(&model_input("qwen/qwen3-flash"))
         .await
         .unwrap();
     store

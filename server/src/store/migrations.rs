@@ -456,10 +456,114 @@ mod tests {
             .unwrap();
 
             assert_eq!(checksum_after, checksum_before);
-            assert_eq!(versions, vec![1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            assert_eq!(versions, vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
             assert_eq!(checkpoint_table_exists, 1);
             assert_eq!(argument_error_column_exists, 1);
         }
+    }
+
+    /// 0010 把同一连接(协议、地址、Key、Headers)的模型合并成一个服务商,
+    /// 名称取分组名、没有分组名时取主机名,主机名重复时附上第一个模型名;模型哈希保持不变。
+    #[tokio::test]
+    async fn providers_migration_folds_models_by_connection() {
+        let pool = SqlitePoolOptions::new()
+            .max_connections(1)
+            .connect("sqlite::memory:")
+            .await
+            .unwrap();
+        let historical = migrator_with_line_endings(MigrationLineEndings::Lf);
+        let before_providers = Migrator {
+            migrations: Cow::Owned(historical.iter().take(9).cloned().collect()),
+            ..Migrator::DEFAULT
+        };
+        before_providers.run(&pool).await.unwrap();
+        for (hash, group, base_url, key, model_id) in [
+            (
+                "hash-a",
+                Some("My Relay"),
+                "https://relay.example/v1",
+                "key-1",
+                "model-a",
+            ),
+            (
+                "hash-b",
+                None,
+                "https://relay.example/v1",
+                "key-1",
+                "model-b",
+            ),
+            (
+                "hash-c",
+                None,
+                "https://api.other.example/v1",
+                "key-2",
+                "model-c",
+            ),
+            (
+                "hash-d",
+                None,
+                "https://api.other.example/v1",
+                "key-3",
+                "model-d",
+            ),
+        ] {
+            sqlx::query(
+                "INSERT INTO model_configs (model_hash, display_name, group_name, model_type,
+                    base_url, api_key, tooltip_data, model_id, openai_endpoint, created_at_ms,
+                    updated_at_ms)
+                 VALUES (?, ?, ?, 'openai', ?, ?, ?, ?, '/v1/responses', 0, 0)",
+            )
+            .bind(hash)
+            .bind(model_id)
+            .bind(group)
+            .bind(base_url)
+            .bind(key)
+            .bind(model_id)
+            .bind(model_id)
+            .execute(&pool)
+            .await
+            .unwrap();
+        }
+
+        run(&pool, Path::new("providers-migration.db"))
+            .await
+            .unwrap();
+
+        let providers: Vec<(String, String)> =
+            sqlx::query_as("SELECT name, base_url FROM providers ORDER BY name")
+                .fetch_all(&pool)
+                .await
+                .unwrap();
+        assert_eq!(
+            providers,
+            vec![
+                ("My Relay".into(), "https://relay.example/v1".into()),
+                (
+                    "api.other.example · model-c".into(),
+                    "https://api.other.example/v1".into()
+                ),
+                (
+                    "api.other.example · model-d".into(),
+                    "https://api.other.example/v1".into()
+                ),
+            ]
+        );
+        let grouped: Vec<(String, String)> = sqlx::query_as(
+            "SELECT model.model_hash, provider.name FROM model_configs AS model
+             JOIN providers AS provider USING (provider_id) ORDER BY model.model_hash",
+        )
+        .fetch_all(&pool)
+        .await
+        .unwrap();
+        assert_eq!(
+            grouped,
+            vec![
+                ("hash-a".into(), "My Relay".into()),
+                ("hash-b".into(), "My Relay".into()),
+                ("hash-c".into(), "api.other.example · model-c".into()),
+                ("hash-d".into(), "api.other.example · model-d".into()),
+            ]
+        );
     }
 
     #[test]

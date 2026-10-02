@@ -9,6 +9,8 @@ mod llm_calls;
 mod messages;
 mod migrations;
 mod models;
+#[cfg(test)]
+pub(crate) use models::tests as model_fixtures;
 mod overview;
 mod runs;
 mod settings;

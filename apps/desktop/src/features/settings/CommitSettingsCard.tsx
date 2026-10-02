@@ -9,7 +9,6 @@ import { claudeIcon, flatColorOrganizationIcon, openAiIcon } from "../../shared/
 import { TitledCard } from "../../shared/ui/TitledCard";
 import { useMessage } from "../../shared/ui/message";
 import controls from "../../shared/ui/Controls.module.scss";
-import { modelProviderName } from "../../shared/utils/modelProvider";
 import styles from "./CommitSettingsCard.module.scss";
 
 function errorText(cause: unknown) {
@@ -63,7 +62,7 @@ export function CommitSettingsCard() {
         label: model.display_name && model.display_name !== model.model_id
           ? `${model.display_name}（${model.model_id}）`
           : model.display_name || model.model_id,
-        group: modelProviderName(model),
+        group: model.provider_name,
         icon: model.type === "anthropic" ? claudeIcon : openAiIcon,
       });
     }

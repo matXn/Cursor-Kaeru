@@ -1,4 +1,4 @@
-//! Implements model configuration endpoints.
+//! Implements provider and model configuration endpoints.
 use axum::{
     extract::{Path, State},
     http::StatusCode,
@@ -7,7 +7,7 @@ use axum::{
 use serde::Deserialize;
 
 use crate::{
-    model::{ModelConfig, ModelConfigInput},
+    model::{ModelConfig, ModelConfigInput, ProviderConfig, ProviderConfigInput},
     Result,
 };
 
@@ -24,6 +24,50 @@ pub struct SaveModels {
 #[derive(Deserialize)]
 pub struct ModelOrder {
     pub model_hashes: Vec<String>,
+}
+
+#[derive(Deserialize)]
+pub struct ProviderOrder {
+    pub provider_ids: Vec<String>,
+}
+
+pub async fn list_providers(
+    State(service): State<ControlService>,
+) -> Result<Json<Vec<ProviderConfig>>> {
+    Ok(Json(service.providers().await?))
+}
+
+pub async fn create_provider(
+    State(service): State<ControlService>,
+    Json(input): Json<ProviderConfigInput>,
+) -> Result<(StatusCode, Json<ProviderConfig>)> {
+    Ok((
+        StatusCode::CREATED,
+        Json(service.create_provider(&input).await?),
+    ))
+}
+
+pub async fn update_provider(
+    State(service): State<ControlService>,
+    Path(provider_id): Path<String>,
+    Json(input): Json<ProviderConfigInput>,
+) -> Result<Json<ProviderConfig>> {
+    Ok(Json(service.update_provider(&provider_id, &input).await?))
+}
+
+pub async fn remove_provider(
+    State(service): State<ControlService>,
+    Path(provider_id): Path<String>,
+) -> Result<StatusCode> {
+    service.delete_provider(&provider_id).await?;
+    Ok(StatusCode::NO_CONTENT)
+}
+
+pub async fn reorder_providers(
+    State(service): State<ControlService>,
+    Json(input): Json<ProviderOrder>,
+) -> Result<Json<Vec<ProviderConfig>>> {
+    Ok(Json(service.reorder_providers(&input.provider_ids).await?))
 }
 
 pub async fn list(State(service): State<ControlService>) -> Result<Json<Vec<ModelConfig>>> {

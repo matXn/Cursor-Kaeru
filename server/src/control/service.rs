@@ -18,7 +18,7 @@ use crate::{
         ContentPart, CursorRunTraceArtifact, CursorRunTraceSummary, LlmCallRequest,
         LlmCallResponseChunk, LlmCallSummary, ModelConfig, ModelConfigInput, ModelInvocation,
         ModelRequest, ModelSpec, ModelType, Overview, ProjectedContent, ProjectedMessage,
-        PromptSpec, ProviderType, Role,
+        PromptSpec, ProviderConfig, ProviderConfigInput, ProviderType, Role,
     },
     plugin::{PluginDescriptor, PluginRegistry, PluginRuntime, PluginRuntimeStatus},
     provider::{is_valid_response_event, ModelEvent, Provider},
@@ -278,6 +278,30 @@ impl ControlService {
         self.store.models().await
     }
 
+    pub async fn providers(&self) -> Result<Vec<ProviderConfig>> {
+        self.store.providers().await
+    }
+
+    pub async fn create_provider(&self, input: &ProviderConfigInput) -> Result<ProviderConfig> {
+        self.store.create_provider(input).await
+    }
+
+    pub async fn update_provider(
+        &self,
+        provider_id: &str,
+        input: &ProviderConfigInput,
+    ) -> Result<ProviderConfig> {
+        self.store.update_provider(provider_id, input).await
+    }
+
+    pub async fn delete_provider(&self, provider_id: &str) -> Result<()> {
+        self.store.delete_provider(provider_id).await
+    }
+
+    pub async fn reorder_providers(&self, provider_ids: &[String]) -> Result<Vec<ProviderConfig>> {
+        self.store.reorder_providers(provider_ids).await
+    }
+
     pub async fn overview(
         &self,
         start_ms: Option<i64>,
@@ -522,7 +546,7 @@ impl ControlService {
                     model_hash: model.model_hash,
                     display_name: model.input.display_name,
                     model_id: model.input.model_id,
-                    model_type: model.input.model_type,
+                    model_type: model.provider.model_type,
                     existing: model.existing,
                 })
                 .collect(),

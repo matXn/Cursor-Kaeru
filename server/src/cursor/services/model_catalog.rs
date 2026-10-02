@@ -492,23 +492,11 @@ fn available_model(model: &ModelConfig) -> AvailableModel {
             display_name: "Cursor".into(),
         }),
         model_picker_badges: vec![ModelPickerBadge {
-            label: model
-                .group_name
-                .clone()
-                .unwrap_or_else(|| provider_host(&model.base_url)),
+            label: model.provider_name.clone(),
             variant: 1,
             dismiss_on_selection: false,
         }],
     }
-}
-
-/// 徽章回退标签:base_url 的主机名。入库时已校验为带主机的 HTTP(S) URL,
-/// 解析失败仅是理论分支,此时原样返回 base_url。
-fn provider_host(base_url: &str) -> String {
-    reqwest::Url::parse(base_url.trim())
-        .ok()
-        .and_then(|url| url.host_str().map(str::to_lowercase))
-        .unwrap_or_else(|| base_url.trim().into())
 }
 
 fn model_parameters(
@@ -775,9 +763,10 @@ mod tests {
     fn model() -> ModelConfig {
         ModelConfig {
             model_hash: "local-model-hash".into(),
+            provider_id: "provider".into(),
+            provider_name: "provider.example".into(),
             sort_order: 0,
             display_name: "Local Model".into(),
-            group_name: None,
             model_type: ModelType::OpenAi,
             base_url: "https://provider.example/v1/chat/completions".into(),
             use_full_url: true,
