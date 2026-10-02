@@ -20,9 +20,9 @@ function logLine(day: ContributionDay) {
 
 type Roll = { from: string | null; runId: number; delta: number; freshFrom: string | null };
 
-// Past-year story on the page grid. Columns 1–8 carry the engraved total, its unit at the
-// number's foot and the yardstick on its own row below; `aside` (the range block) takes
-// 9–12 across both rows and `filter` heads it. The wall spans the full width.
+// Past-year story on the page grid. Columns 1–8 carry the engraved total with its unit right
+// at its foot, and the yardstick on its own row below; `aside` (the range block) takes 9–12
+// across both rows and `filter` heads it. The wall spans the full width.
 export function ActivityWall({ days, filter, aside }: { days: ContributionDay[]; filter: ReactNode; aside: ReactNode }) {
   const { locale } = useI18n();
   const navigate = useNavigate();
@@ -57,19 +57,17 @@ export function ActivityWall({ days, filter, aside }: { days: ContributionDay[];
   return <section aria-label={t("过去一年的 Token 用量")}>
     <Grid>
       <Rule />
-      <Cell from={1} to={4} className={styles.label}>Nº 01</Cell>
-      <Cell from={4} to={7} className={styles.label}>Activity · {t("过去一年")}</Cell>
-      <Cell from={7} to={9} className={styles.label}>Token</Cell>
+      <Cell from={1} to={9} className={styles.label}>Activity · {t("过去一年")}</Cell>
       <Cell from={9} to={13} className={styles.filter}>{filter}</Cell>
 
-      <Cell from={1} to={7} className={styles.headline}>
+      <Cell from={1} to={9} className={styles.headline}>
         <h2 className={styles.total} title={formatInteger(total)}>
           {loaded && <RollingNumber className={styles.engraved} value={number} from={roll.from} runId={roll.runId} />}
         </h2>
-      </Cell>
-      <Cell from={7} to={9} className={styles.unitStack}>
-        {roll.delta > 0 && <span key={roll.runId} className={styles.delta}>{t("较上次查看 +{delta}", { delta: formatLocaleCompact(roll.delta, locale) })}</span>}
-        {loaded && <span className={styles.unit}>{unit} Token</span>}
+        <span className={styles.unitStack}>
+          {roll.delta > 0 && <span key={roll.runId} className={styles.delta}>{t("较上次查看 +{delta}", { delta: formatLocaleCompact(roll.delta, locale) })}</span>}
+          {loaded && <span className={styles.unit}>{unit} Token</span>}
+        </span>
       </Cell>
       <Cell from={9} to={13} style={{ gridRow: "span 2" }}>{aside}</Cell>
       <Cell from={1} to={9}>

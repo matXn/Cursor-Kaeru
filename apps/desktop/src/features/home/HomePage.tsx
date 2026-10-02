@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api, pluginText, type Overview } from "../../shared/api";
 import { ActivityWall } from "./activity/ActivityWall";
 import type { ContributionDay } from "./activity/ContributionCalendar";
@@ -36,6 +36,10 @@ function contributionDays(overview: Overview, endMs: number): ContributionDay[] 
     const date = shiftLocalDay(lastDay, offset - (CALENDAR_DAYS - 1));
     return { date, tokens: tokensByDate.get(date) ?? 0 };
   });
+}
+
+function sameOverview(current: Overview | null, next: Overview) {
+  return current !== null && JSON.stringify(current) === JSON.stringify(next);
 }
 
 const presetDurations: Record<Exclude<OverviewRangePreset, "custom" | "today">, number> = {
@@ -85,7 +89,7 @@ export function HomePage() {
     let active = true;
     setRangeBusy(true);
     void api.overview({ ...selectedRange, modelHashes: appliedModels }).then((next) => {
-      if (active) setRangeOverview(next);
+      if (active) setRangeOverview((current) => sameOverview(current, next) ? current : next);
     }).finally(() => {
       if (active) setRangeBusy(false);
     });
@@ -97,7 +101,9 @@ export function HomePage() {
     let active = true;
     const endMs = Date.now();
     void api.overview({ startMs: endMs - CALENDAR_DAYS * DAY_MS, endMs, bucketMs: DAY_MS }).then((next) => {
-      if (active) setYear({ overview: next, endMs });
+      // Showing the page again refetches; keep the old state when nothing moved, so the
+      // engraved number and the wall are not rebuilt and repainted for the same data.
+      if (active) setYear((current) => current && sameOverview(current.overview, next) && localDayKey(new Date(current.endMs)) === localDayKey(new Date(endMs)) ? current : { overview: next, endMs });
     });
     return () => { active = false; };
   }, [overview, refreshVersion]);
@@ -161,7 +167,7 @@ export function HomePage() {
     onCustomApply={applyCustom}
     onRefresh={() => void refresh()}
   />;
-  const days = year ? contributionDays(year.overview, year.endMs) : [];
+  const days = useMemo(() => year ? contributionDays(year.overview, year.endMs) : [], [year]);
   const sections: VirtualPageSection[] = [
     {
       key: "year",

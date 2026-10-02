@@ -17,7 +17,11 @@
   margin-left: calc(-1 * var(--space-2));
 }
 
+// Number and unit sit together on one baseline row; the unit never wraps away from it.
 .headline {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-4);
   padding-top: var(--space-5);
 }
 
@@ -52,9 +56,9 @@
   }
 }
 
-// Unit at the foot of the number, in the next column group.
+// Unit at the foot of the number.
 .unitStack {
-  align-self: end;
+  flex: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);

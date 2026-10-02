@@ -32,10 +32,11 @@
   margin: 0 auto;
   pointer-events: none;
 
-  // Feathered on both sides and faded out top and bottom: light, not bars.
+  // Feathered on both sides by the gradient itself (no blur filter: it would repaint all
+  // twelve full-height shafts whenever the page is shown) and faded out top and bottom.
   i {
-    background: linear-gradient(90deg, transparent, var(--guide) 35%, var(--guide) 65%, transparent);
+    margin: 0 -10px;
+    background: linear-gradient(90deg, transparent, var(--guide) 45%, var(--guide) 55%, transparent);
     mask-image: linear-gradient(transparent, #000 18%, #000 70%, transparent);
-    filter: blur(10px);
   }
 }
