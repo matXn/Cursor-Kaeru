@@ -28,6 +28,9 @@
   letter-spacing: -0.06em;
   line-height: 0.86;
   white-space: nowrap;
+  // The lighting filter also shades a selection, which breaks into one box per digit
+  // window; the exact total is in the tooltip instead.
+  user-select: none;
 }
 
 // Cut into the glass: the floor is a faint tint, the walls come from the lighting filter.

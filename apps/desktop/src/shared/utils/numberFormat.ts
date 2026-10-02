@@ -29,15 +29,31 @@ export function formatCompactInteger(value: number) {
   return `${trimTrailingZeros(scaled.toFixed(fractionDigits))}${unit.suffix}`;
 }
 
-// Large totals in the unit the reader thinks in: "3142 万" in Chinese, "31.4M" in English.
+const chineseUnits = [
+  { value: 1_000_000_000_000, suffix: " 万亿" },
+  { value: 100_000_000, suffix: " 亿" },
+  { value: 10_000, suffix: " 万" },
+] as const;
+
+// Three significant digits ("1.03", "12.4", "103"), choosing the decimals after rounding so
+// 9.996 reads "10.0", not "10.00". From 100 up the whole number shows ("2490").
+function threeDigits(scaled: number) {
+  if (Number(scaled.toFixed(2)) < 10) return scaled.toFixed(2);
+  if (Number(scaled.toFixed(1)) < 100) return scaled.toFixed(1);
+  return scaled.toFixed(0);
+}
+
+// Large totals in the unit the reader thinks in, three significant digits:
+// "1.03 亿", "99.9 亿", "100 亿" and "2490 万" in Chinese; "1.03B", "24.9M" in English.
 export function formatLocaleCompact(value: number, locale: string) {
-  if (!locale.startsWith("zh")) return formatCompactInteger(value);
-  const format = (fractionDigits: number) => new Intl.NumberFormat(locale, { notation: "compact", maximumFractionDigits: fractionDigits }).formatToParts(normalizeInteger(value));
-  // One decimal only while the scaled number is small ("3.1 万"), none once it reaches 100 ("2111 万").
-  const rough = format(1);
-  const scaled = Number(rough.filter((part) => part.type === "integer").map((part) => part.value).join(""));
-  const parts = scaled >= 100 ? format(0) : rough;
-  const number = parts.filter((part) => part.type !== "compact").map((part) => part.value).join("");
-  const unit = parts.find((part) => part.type === "compact")?.value;
-  return unit ? `${number} ${unit}` : number;
+  const number = normalizeInteger(value);
+  const sign = number < 0 ? "-" : "";
+  const magnitude = Math.abs(number);
+  const units = locale.startsWith("zh") ? chineseUnits : compactUnits;
+  // Largest unit whose rounded figure reaches 1, so 9999.6 万 carries over to "1.00 亿".
+  for (const unit of units) {
+    const figure = threeDigits(magnitude / unit.value);
+    if (Number(figure) >= 1) return `${sign}${figure}${unit.suffix}`;
+  }
+  return formatInteger(number);
 }
