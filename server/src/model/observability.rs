@@ -228,6 +228,8 @@ mod overview {
     #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize)]
     pub struct OverviewMetrics {
         pub llm_calls: i64,
+        /// Distinct Cursor conversations with a finished call in the range.
+        pub conversations: i64,
         pub successful_calls: i64,
         pub failed_calls: i64,
         pub token_usage: i64,
@@ -265,9 +267,20 @@ mod overview {
         }
     }
 
+    /// Tokens one model used in the range; models are told apart by display name.
+    #[derive(Clone, Debug, PartialEq, Eq, Serialize)]
+    pub struct ModelShare {
+        pub display_name: String,
+        pub tokens: i64,
+    }
+
     #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize)]
     pub struct Overview {
         pub metrics: OverviewMetrics,
+        /// Local hour of day (0–23) with the most tokens in the range; none without usage.
+        pub peak_hour: Option<i64>,
+        /// Every model with usage in the range, most tokens first.
+        pub model_share: Vec<ModelShare>,
         pub token_usage_granularity: TokenUsageGranularity,
         pub token_usage_series: Vec<TokenUsageBucket>,
     }

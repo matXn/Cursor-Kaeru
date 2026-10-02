@@ -423,7 +423,8 @@ fn summary_from_row(row: sqlx::sqlite::SqliteRow) -> Result<LlmCallSummary> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::model::ProviderType;
+    use crate::model::{ModelShare, ProviderType};
+    use chrono::Timelike;
 
     /// 插件模型不在 model_configs 中,调用记录必须照常落库并可按其稳定 ID 筛选。
     #[tokio::test]
@@ -467,6 +468,79 @@ mod tests {
             .unwrap();
         assert_eq!(overview.metrics.llm_calls, 1);
         assert_eq!(overview.metrics.successful_calls, 1);
+    }
+
+    /// 概览按对话去重计数,按显示名汇总模型 Token(多的在前),并给出用量最多的本地小时。
+    #[tokio::test]
+    async fn overview_counts_conversations_and_ranks_models() {
+        let directory = tempfile::tempdir().unwrap();
+        let store = Store::connect(&format!(
+            "sqlite://{}",
+            directory.path().join("test.db").display()
+        ))
+        .await
+        .unwrap();
+        let hour_before = chrono::Utc::now().hour();
+        for (call_id, conversation_id, display_name, output_tokens) in [
+            ("call-1", "conversation-a", "Opus", 100_u64),
+            ("call-2", "conversation-a", "Sonnet", 30),
+            ("call-3", "conversation-b", "Opus", 20),
+        ] {
+            store
+                .start_llm_call(&NewLlmCall {
+                    call_id: call_id.into(),
+                    run_id: format!("run-{call_id}"),
+                    conversation_id: conversation_id.into(),
+                    provider_call_index: 0,
+                    model_hash: display_name.into(),
+                    provider_type: ProviderType::Plugin,
+                    provider_url: "plugin://test".into(),
+                    request_type: ProviderType::Plugin,
+                    request_url: "plugin://test".into(),
+                    model_id: display_name.to_lowercase(),
+                    display_name: display_name.into(),
+                    reasoning_effort: None,
+                    fast: false,
+                    message_count: 1,
+                    tool_count: 0,
+                    detailed: false,
+                })
+                .await
+                .unwrap();
+            store
+                .record_llm_usage(
+                    call_id,
+                    Usage {
+                        output_tokens: Some(output_tokens),
+                        ..Default::default()
+                    },
+                )
+                .await
+                .unwrap();
+            store
+                .finish_llm_call(call_id, "completed", None, 10, None, None)
+                .await
+                .unwrap();
+        }
+        let hour_after = chrono::Utc::now().hour();
+
+        let overview = store.overview(None, None, None, None, 0).await.unwrap();
+        assert_eq!(overview.metrics.conversations, 2);
+        assert_eq!(
+            overview.model_share,
+            vec![
+                ModelShare {
+                    display_name: "Opus".into(),
+                    tokens: 120
+                },
+                ModelShare {
+                    display_name: "Sonnet".into(),
+                    tokens: 30
+                },
+            ]
+        );
+        let peak_hour = overview.peak_hour.unwrap();
+        assert!(peak_hour == i64::from(hour_before) || peak_hour == i64::from(hour_after));
     }
 
     #[tokio::test]

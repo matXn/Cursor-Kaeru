@@ -338,6 +338,7 @@ export function configuredPluginModels(plugins: PluginDescriptor[]): PluginModel
 
 export interface OverviewMetrics {
   llm_calls: number;
+  conversations: number;
   successful_calls: number;
   failed_calls: number;
   token_usage: number;
@@ -358,8 +359,17 @@ export interface OverviewTokenUsageBucket {
   output_tokens: number;
 }
 
+export interface ModelShare {
+  display_name: string;
+  tokens: number;
+}
+
 export interface Overview {
   metrics: OverviewMetrics;
+  /** Local hour of day (0–23) with the most tokens; null without usage. */
+  peak_hour: number | null;
+  /** Every model with usage in the range, most tokens first. */
+  model_share: ModelShare[];
   token_usage_granularity: TokenUsageGranularity;
   token_usage_series: OverviewTokenUsageBucket[];
 }

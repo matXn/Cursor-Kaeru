@@ -1,9 +1,10 @@
-import { formatCompactInteger, formatInteger } from "../../../shared/utils/numberFormat";
+import { formatInteger } from "../../../shared/utils/numberFormat";
 import { Icon } from "../../../shared/ui/Icon";
-import { activeDaysGlyph, callCountGlyph, peakGlyph, tokensGlyph } from "../../../shared/ui/glyphs";
-import type { OverviewMetrics } from "../../../shared/api";
+import { activeDaysGlyph, conversationsGlyph, favoriteModelGlyph, peakHourGlyph } from "../../../shared/ui/glyphs";
+import type { Overview } from "../../../shared/api";
 import { Cell, Grid, Rule } from "../../../shell/layout/Grid";
 import type { ContributionDay } from "./ContributionCalendar";
+import { ModelShare } from "./ModelShare";
 import styles from "./YearFacts.module.scss";
 
 function longestStreak(days: ContributionDay[]) {
@@ -16,33 +17,52 @@ function longestStreak(days: ContributionDay[]) {
   return best;
 }
 
-// Four facts about the past year, three columns each, under a strong rule.
-export function YearFacts({ days, metrics }: { days: ContributionDay[]; metrics: OverviewMetrics }) {
-  const active = days.filter((day) => day.tokens > 0);
-  const total = active.reduce((sum, day) => sum + day.tokens, 0);
-  const busiest = active.reduce<ContributionDay | null>((best, day) => day.tokens > (best?.tokens ?? 0) ? day : best, null);
+function percent(part: number, whole: number) {
+  return `${whole > 0 ? ((part / whole) * 100).toFixed(1) : "0.0"}%`;
+}
+
+// Four facts about the past year, three columns each, under a strong rule; the share of
+// tokens by model runs underneath them.
+export function YearFacts({ days, overview }: { days: ContributionDay[]; overview: Overview }) {
+  const shareTotal = overview.model_share.reduce((sum, model) => sum + model.tokens, 0);
+  const favorite = overview.model_share[0];
   const facts = [
-    { glyph: activeDaysGlyph, label: "Active days", value: formatInteger(active.length), note: t("最长连续 {days} 天", { days: longestStreak(days) }) },
-    { glyph: peakGlyph, label: "Peak day", value: busiest ? busiest.date.slice(5) : "—", note: busiest ? `${formatCompactInteger(busiest.tokens)} Token` : t("暂无数据") },
     {
-      glyph: callCountGlyph,
-      label: "Calls",
-      value: formatCompactInteger(metrics.llm_calls),
-      title: formatInteger(metrics.llm_calls),
-      note: t("成功 {successful} / 异常 {failed}", {
-        successful: formatCompactInteger(metrics.successful_calls),
-        failed: formatCompactInteger(metrics.failed_calls),
-      }),
+      glyph: conversationsGlyph,
+      label: "Conversations",
+      value: formatInteger(overview.metrics.conversations),
+      note: t("Cursor 对话"),
     },
-    { glyph: tokensGlyph, label: "Daily average", value: active.length ? formatCompactInteger(Math.round(total / active.length)) : "—", note: t("每个活跃日的 Token") },
+    {
+      glyph: favoriteModelGlyph,
+      label: "Favorite model",
+      value: favorite?.display_name ?? "—",
+      note: favorite ? t("占全部 Token 的 {share}", { share: percent(favorite.tokens, shareTotal) }) : t("暂无数据"),
+    },
+    {
+      glyph: peakHourGlyph,
+      label: "Peak hour",
+      value: overview.peak_hour === null ? "—" : `${String(overview.peak_hour).padStart(2, "0")}:00`,
+      note: t("一天里最忙的一小时"),
+    },
+    {
+      glyph: activeDaysGlyph,
+      label: "Active days",
+      value: formatInteger(days.filter((day) => day.tokens > 0).length),
+      note: t("最长连续 {days} 天", { days: longestStreak(days) }),
+    },
   ];
 
   return <Grid className={styles.root}>
     <Rule />
     {facts.map((fact, index) => <Cell key={fact.label} from={index * 3 + 1} to={index * 3 + 4} className={styles.fact}>
       <div className={styles.label}><Icon icon={fact.glyph} size="1.2em" />{fact.label}</div>
-      <div className={styles.value} title={fact.title}>{fact.value}</div>
+      <div className={styles.value} title={fact.value}>{fact.value}</div>
       <div className={styles.note}>{fact.note}</div>
     </Cell>)}
+    {overview.model_share.length > 0 && <>
+      <div className={styles.hair}><Rule hair /></div>
+      <Cell from={1} to={13}><ModelShare models={overview.model_share} /></Cell>
+    </>}
   </Grid>;
 }

@@ -329,19 +329,24 @@ function createOverview(params: URLSearchParams): Overview {
     output: sum.output + bucket.output_tokens,
   }), { input: 0, cacheRead: 0, cacheWrite: 0, output: 0 });
   const llmCalls = Math.max(12, Math.round(count * 5.4));
+  const tokenUsage = totals.input + totals.cacheRead + totals.cacheWrite + totals.output;
+  const shares: Array<[string, number]> = [["Claude Opus 4", 0.586], ["Claude Sonnet 4", 0.196], ["GPT-5.2", 0.153], ["DeepSeek V3.2", 0.049], ["Gemini 2.5 Pro", 0.011], ["Grok", 0.005]];
 
   return {
     metrics: {
       llm_calls: llmCalls,
+      conversations: Math.max(1, Math.round(llmCalls / 14)),
       successful_calls: llmCalls - Math.max(1, Math.floor(llmCalls * 0.008)),
       failed_calls: Math.max(1, Math.floor(llmCalls * 0.008)),
-      token_usage: totals.input + totals.cacheRead + totals.cacheWrite + totals.output,
+      token_usage: tokenUsage,
       prompt_tokens: totals.input + totals.cacheRead + totals.cacheWrite,
       input_tokens: totals.input,
       cache_read_tokens: totals.cacheRead,
       cache_write_tokens: totals.cacheWrite,
       output_tokens: totals.output,
     },
+    peak_hour: 17,
+    model_share: shares.map(([display_name, share]) => ({ display_name, tokens: Math.round(tokenUsage * share) })),
     token_usage_granularity: granularity,
     token_usage_series: series,
   };

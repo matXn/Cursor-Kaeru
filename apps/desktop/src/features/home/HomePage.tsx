@@ -64,7 +64,7 @@ function formatRange(range: TimeRange | null) {
 }
 
 // Overview on the page grid: the past year's total and wall, the range block beside the
-// total, then four facts about the year.
+// total, then four facts about the year and its share of tokens by model.
 export function HomePage() {
   const { overview, busy, models, plugins } = useAppStore();
   const { locale } = useI18n();
@@ -171,7 +171,7 @@ export function HomePage() {
     ...(year ? [{
       key: "facts",
       estimatedHeight: 110,
-      content: <YearFacts days={days} metrics={year.overview.metrics} />,
+      content: <YearFacts days={days} overview={year.overview} />,
     }] : []),
     { key: "nameplate", estimatedHeight: 80, content: <Nameplate /> },
   ];

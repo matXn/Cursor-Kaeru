@@ -26,6 +26,7 @@ let snapshot: AppSnapshot = {
   overview: {
     metrics: {
       llm_calls: 0,
+      conversations: 0,
       successful_calls: 0,
       failed_calls: 0,
       token_usage: 0,
@@ -35,6 +36,8 @@ let snapshot: AppSnapshot = {
       cache_write_tokens: 0,
       output_tokens: 0,
     },
+    peak_hour: null,
+    model_share: [],
     token_usage_granularity: "day",
     token_usage_series: [],
   },

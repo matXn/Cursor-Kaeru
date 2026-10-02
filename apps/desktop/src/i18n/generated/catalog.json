@@ -297,7 +297,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 73,
+          "line": 71,
           "column": 77
         }
       ]
@@ -1016,8 +1016,8 @@
       "refs": [
         {
           "file": "features/home/activity/YearFacts.tsx",
-          "line": 25,
-          "column": 96
+          "line": 52,
+          "column": 13
         }
       ]
     },
@@ -1372,21 +1372,6 @@
         }
       ]
     },
-    "37cb98ff4d5dcfcc": {
-      "source": "成功 {successful} / 异常 {failed}",
-      "kind": "template",
-      "placeholders": [
-        "successful",
-        "failed"
-      ],
-      "refs": [
-        {
-          "file": "features/home/activity/YearFacts.tsx",
-          "line": 32,
-          "column": 13
-        }
-      ]
-    },
     "382f2e3419a02fef": {
       "source": "仅清理详细记录",
       "kind": "text",
@@ -1735,8 +1720,8 @@
       "refs": [
         {
           "file": "features/home/activity/YearFacts.tsx",
-          "line": 26,
-          "column": 156
+          "line": 40,
+          "column": 100
         },
         {
           "file": "features/home/metrics/RangeBlock.tsx",
@@ -2362,7 +2347,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 512,
+          "line": 522,
           "column": 43
         }
       ]
@@ -2620,12 +2605,12 @@
       "refs": [
         {
           "file": "shared/store/appStore.ts",
-          "line": 205,
+          "line": 208,
           "column": 23
         },
         {
           "file": "shared/store/appStore.ts",
-          "line": 212,
+          "line": 215,
           "column": 25
         }
       ]
@@ -2685,7 +2670,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 507,
+          "line": 517,
           "column": 43
         }
       ]
@@ -2767,6 +2752,18 @@
         }
       ]
     },
+    "7ec748fe2d1017dc": {
+      "source": "各模型的 Token 占比",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ModelShare.tsx",
+          "line": 20,
+          "column": 54
+        }
+      ]
+    },
     "7f3c8312816fe26a": {
       "source": "刷新中…",
       "kind": "text",
@@ -2825,7 +2822,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 450,
+          "line": 460,
           "column": 21
         }
       ]
@@ -2839,6 +2836,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 108,
           "column": 25
+        }
+      ]
+    },
+    "83a75fc8b96eeddd": {
+      "source": "Cursor 对话",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/YearFacts.tsx",
+          "line": 34,
+          "column": 13
         }
       ]
     },
@@ -3062,7 +3071,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 60,
+          "line": 61,
           "column": 66
         }
       ]
@@ -3773,18 +3782,6 @@
         }
       ]
     },
-    "ad54a1cdf247bcb0": {
-      "source": "每个活跃日的 Token",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/activity/YearFacts.tsx",
-          "line": 37,
-          "column": 143
-        }
-      ]
-    },
     "ad6a60ee93d3ba3e": {
       "source": "正在加载调用详情…",
       "kind": "text",
@@ -4203,6 +4200,18 @@
         }
       ]
     },
+    "bb44ca0cb2cb710a": {
+      "source": "一天里最忙的一小时",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/YearFacts.tsx",
+          "line": 46,
+          "column": 13
+        }
+      ]
+    },
     "bb7efdcb6af6e805": {
       "source": "默认暗色",
       "kind": "text",
@@ -4537,6 +4546,32 @@
           "file": "features/settings/SettingsPage.tsx",
           "line": 163,
           "column": 7
+        }
+      ]
+    },
+    "d2813cb0eec9a7ae": {
+      "source": "占全部 Token 的 {share}",
+      "kind": "template",
+      "placeholders": [
+        "share"
+      ],
+      "refs": [
+        {
+          "file": "features/home/activity/YearFacts.tsx",
+          "line": 40,
+          "column": 24
+        }
+      ]
+    },
+    "d2909f1647e7c891": {
+      "source": "其他",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/activity/ModelShare.tsx",
+          "line": 16,
+          "column": 29
         }
       ]
     },
@@ -5006,7 +5041,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 56,
+          "line": 57,
           "column": 31
         }
       ]
@@ -5042,7 +5077,7 @@
       "refs": [
         {
           "file": "features/home/activity/ActivityWall.tsx",
-          "line": 89,
+          "line": 92,
           "column": 41
         }
       ]

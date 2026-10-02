@@ -39,3 +39,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+// Hairline between the facts and the model share, with the facts' breathing room above it.
+.hair {
+  grid-column: 1 / -1;
+  margin-top: var(--space-5);
+}

@@ -7,7 +7,7 @@ use chrono::Utc;
 use sqlx::Row;
 
 use crate::{
-    model::{Overview, OverviewMetrics, TokenUsageBucket, TokenUsageGranularity},
+    model::{ModelShare, Overview, OverviewMetrics, TokenUsageBucket, TokenUsageGranularity},
     Result,
 };
 
@@ -32,6 +32,7 @@ impl Store {
         let call_row = sqlx::query(
             "SELECT
                 COUNT(*) AS llm_calls,
+                COUNT(DISTINCT conversation_id) AS conversations,
                 COALESCE(SUM(status = 'completed'), 0) AS successful_calls,
                 COALESCE(SUM(status != 'completed'), 0) AS failed_calls
              FROM llm_calls
@@ -76,6 +77,7 @@ impl Store {
         let prompt_tokens = saturating_sum(&[input_tokens, cache_read_tokens, cache_write_tokens]);
         let metrics = OverviewMetrics {
             llm_calls: call_row.try_get("llm_calls")?,
+            conversations: call_row.try_get("conversations")?,
             successful_calls: call_row.try_get("successful_calls")?,
             failed_calls: call_row.try_get("failed_calls")?,
             token_usage: prompt_tokens.saturating_add(output_tokens),
@@ -85,6 +87,58 @@ impl Store {
             cache_write_tokens,
             output_tokens,
         };
+
+        let model_share = sqlx::query(&format!(
+            "SELECT display_name, COALESCE(SUM({tokens}), 0) AS tokens
+             FROM llm_calls
+             WHERE (? IS NULL OR created_at_ms >= ?)
+               AND (? IS NULL OR created_at_ms < ?)
+               AND (? IS NULL OR model_hash IN (SELECT value FROM json_each(?)))
+             GROUP BY display_name
+             HAVING tokens > 0
+             ORDER BY tokens DESC, display_name",
+            tokens = call_tokens_sql(),
+        ))
+        .bind(start_ms)
+        .bind(start_ms)
+        .bind(end_ms)
+        .bind(end_ms)
+        .bind(model_hashes)
+        .bind(model_hashes)
+        .fetch_all(&self.pool)
+        .await?
+        .into_iter()
+        .map(|row| {
+            Ok(ModelShare {
+                display_name: row.try_get("display_name")?,
+                tokens: row.try_get("tokens")?,
+            })
+        })
+        .collect::<Result<Vec<_>>>()?;
+        let peak_hour = sqlx::query(&format!(
+            "SELECT ((created_at_ms + ?) % {DAY_MS} + {DAY_MS}) % {DAY_MS} / {HOUR_MS} AS hour,
+                COALESCE(SUM({tokens}), 0) AS tokens
+             FROM llm_calls
+             WHERE (? IS NULL OR created_at_ms >= ?)
+               AND (? IS NULL OR created_at_ms < ?)
+               AND (? IS NULL OR model_hash IN (SELECT value FROM json_each(?)))
+             GROUP BY hour
+             HAVING tokens > 0
+             ORDER BY tokens DESC, hour
+             LIMIT 1",
+            tokens = call_tokens_sql(),
+        ))
+        .bind(utc_offset_ms)
+        .bind(start_ms)
+        .bind(start_ms)
+        .bind(end_ms)
+        .bind(end_ms)
+        .bind(model_hashes)
+        .bind(model_hashes)
+        .fetch_optional(&self.pool)
+        .await?
+        .map(|row| row.try_get("hour"))
+        .transpose()?;
 
         let (token_usage_granularity, bucket_ms, series_start_ms, bucket_count) =
             token_usage_buckets(start_ms, end_ms, bucket_ms, utc_offset_ms);
@@ -141,6 +195,8 @@ impl Store {
 
         Ok(Overview {
             metrics,
+            peak_hour,
+            model_share,
             token_usage_granularity,
             token_usage_series,
         })
@@ -227,6 +283,14 @@ fn fresh_input_sql() -> &'static str {
             - COALESCE(cache_read_tokens, 0)
             - COALESCE(cache_write_tokens, 0))
      END"
+}
+
+/// All tokens one call used: fresh input, cache reads and writes, and output.
+fn call_tokens_sql() -> String {
+    format!(
+        "({fresh_input}) + MAX(0, COALESCE(cache_read_tokens, 0)) + MAX(0, COALESCE(cache_write_tokens, 0)) + MAX(0, COALESCE(output_tokens, 0))",
+        fresh_input = fresh_input_sql(),
+    )
 }
 
 fn non_negative(value: i64) -> i64 {

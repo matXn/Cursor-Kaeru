@@ -19,8 +19,11 @@ export const settingsGlyph = glyph('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><cir
 
 // ---- Overview gauges --------------------------------------------
 export const activeDaysGlyph = glyph('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 9.5h16M8.5 3.5v3M15.5 3.5v3M9 14.5l2 2 4-4"/>');
-export const peakGlyph = glyph('<path d="M3.5 19.5l6-10 3.5 5.5 2.5-3.5 5 8z"/><path d="M9.5 9.5v-5l3 1.5-3 1.5"/>');
-export const callCountGlyph = glyph('<path d="M7 19.5v-15M4 7.5l3-3 3 3M17 4.5v15M14 16.5l3 3 3-3"/>');
-export const tokensGlyph = glyph('<path d="M12 4l8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4M4 16l8 4 8-4"/>');
+// A speech bubble with two lines of talk.
+export const conversationsGlyph = glyph('<path d="M5.5 5h13a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H11l-4.5 3.5V17h-1a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M8 9.5h8M8 12.5h5"/>');
+// The models cube with a spark on its corner.
+export const favoriteModelGlyph = glyph('<path d="M11 4.5l6.5 3.75v7.5L11 19.5l-6.5-3.75v-7.5z"/><path d="M4.5 8.25L11 12l6.5-3.75M11 12v7.5"/><path d="M19.5 2.5v4M17.5 4.5h4"/>');
+// A clock face, hands near four.
+export const peakHourGlyph = glyph('<circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2.5"/>');
 export const rangeGlyph = glyph('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 9.5h16M8.5 3.5v3M15.5 3.5v3M8 14h8"/>');
 
