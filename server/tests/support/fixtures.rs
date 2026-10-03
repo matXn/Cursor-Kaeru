@@ -51,14 +51,29 @@ pub trait CreateTestModel {
         &self,
         model: &TestModel,
     ) -> impl std::future::Future<Output = cursor_server::Result<ModelConfig>>;
+
+    /// The same, under a provider of the given name.
+    fn create_test_model_in(
+        &self,
+        provider_name: &str,
+        model: &TestModel,
+    ) -> impl std::future::Future<Output = cursor_server::Result<ModelConfig>>;
 }
 
 impl CreateTestModel for Store {
     async fn create_test_model(&self, model: &TestModel) -> cursor_server::Result<ModelConfig> {
+        self.create_test_model_in("Test Provider", model).await
+    }
+
+    async fn create_test_model_in(
+        &self,
+        provider_name: &str,
+        model: &TestModel,
+    ) -> cursor_server::Result<ModelConfig> {
         let provider = self
             .create_provider(&ProviderConfigInput {
                 sort_order: 0,
-                name: "Test Provider".into(),
+                name: provider_name.into(),
                 model_type: model.model_type,
                 base_url: model.base_url.clone(),
                 use_full_url: model.use_full_url,

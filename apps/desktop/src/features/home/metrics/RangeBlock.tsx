@@ -1,4 +1,5 @@
 import { formatCompactInteger, formatInteger } from "../../../shared/utils/numberFormat";
+import { useAppStore } from "../../../shared/store/appStore";
 import { Icon } from "../../../shared/ui/Icon";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
 import { informationOutlineIcon } from "../../../shared/ui/icons";
@@ -13,13 +14,6 @@ export type RangeMetrics = {
   cacheReadTokens: number;
   cacheWriteTokens: number;
 };
-
-const TOKEN_PRICE_PER_MILLION = {
-  input: 5,
-  output: 25,
-  cacheRead: 0.5,
-  cacheWrite: 6.25,
-} as const;
 
 function formatMetricValue(value: number) {
   const full = formatInteger(value);
@@ -67,6 +61,7 @@ function InfoTooltip({ content }: { content: string }) {
 // The page's one solid block: calls in the selected range, with cache hit, tokens and value
 // as rows beneath. The range filter lives in the column label above it.
 export function RangeBlock({ data }: { data: RangeMetrics }) {
+  const { pricing } = useAppStore();
   const inputTokens = Math.max(0, data.promptTokens - data.cacheReadTokens - data.cacheWriteTokens);
   const outputTokens = Math.max(0, data.tokenUsage - data.promptTokens);
   const defaultCacheHitRate = calculateRate(data.cacheReadTokens, data.cacheReadTokens + inputTokens);
@@ -76,10 +71,10 @@ export function RangeBlock({ data }: { data: RangeMetrics }) {
   );
   const successfulCallRate = calculateRate(data.successfulCalls, data.llmCalls);
   const costs = {
-    input: priceTokens(inputTokens, TOKEN_PRICE_PER_MILLION.input),
-    output: priceTokens(outputTokens, TOKEN_PRICE_PER_MILLION.output),
-    cacheRead: priceTokens(data.cacheReadTokens, TOKEN_PRICE_PER_MILLION.cacheRead),
-    cacheWrite: priceTokens(data.cacheWriteTokens, TOKEN_PRICE_PER_MILLION.cacheWrite),
+    input: priceTokens(inputTokens, pricing.input_per_million),
+    output: priceTokens(outputTokens, pricing.output_per_million),
+    cacheRead: priceTokens(data.cacheReadTokens, pricing.cache_read_per_million),
+    cacheWrite: priceTokens(data.cacheWriteTokens, pricing.cache_write_per_million),
   };
   const totalCost = costs.input + costs.output + costs.cacheRead + costs.cacheWrite;
   const cacheTooltip = [
@@ -111,27 +106,27 @@ export function RangeBlock({ data }: { data: RangeMetrics }) {
     t("缓存读写已计入提示词侧统计。"),
   ].join("\n");
   const costTooltip = [
-    t("按 Claude Opus 4.7 价格估算。"),
+    t("按配置的 Token 价格估算。"),
     t("缓存统计策略：默认口径（{rate}）", { rate: formatRate(defaultCacheHitRate) }),
     "",
     t("普通输入：{tokens} × ${price}/1M = {cost}", {
       tokens: formatMetricValue(inputTokens),
-      price: TOKEN_PRICE_PER_MILLION.input,
+      price: pricing.input_per_million,
       cost: formatUSD(costs.input),
     }),
     t("模型输出：{tokens} × ${price}/1M = {cost}", {
       tokens: formatMetricValue(outputTokens),
-      price: TOKEN_PRICE_PER_MILLION.output,
+      price: pricing.output_per_million,
       cost: formatUSD(costs.output),
     }),
     t("缓存读取：{tokens} × ${price}/1M = {cost}", {
       tokens: formatMetricValue(data.cacheReadTokens),
-      price: TOKEN_PRICE_PER_MILLION.cacheRead,
+      price: pricing.cache_read_per_million,
       cost: formatUSD(costs.cacheRead),
     }),
     t("缓存写入：{tokens} × ${price}/1M = {cost}", {
       tokens: formatMetricValue(data.cacheWriteTokens),
-      price: TOKEN_PRICE_PER_MILLION.cacheWrite,
+      price: pricing.cache_write_per_million,
       cost: formatUSD(costs.cacheWrite),
     }),
     "",

@@ -1,6 +1,13 @@
 import { useSyncExternalStore } from "react";
-import { api, type CursorHarnessStatus, type CursorModel, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings, type Provider, type ProviderInput } from "../api";
+import { api, type CursorHarnessStatus, type CursorModel, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings, type Provider, type ProviderInput, type TokenPricingSettings } from "../api";
 import { applyTheme, isThemeId, type ThemeId } from "../theme/theme";
+
+export const DEFAULT_TOKEN_PRICING: TokenPricingSettings = {
+  input_per_million: 5.0,
+  output_per_million: 25.0,
+  cache_read_per_million: 0.5,
+  cache_write_per_million: 6.25,
+};
 
 export type AppSnapshot = {
   providers: Provider[];
@@ -9,6 +16,7 @@ export type AppSnapshot = {
   overview: Overview;
   detailed: boolean;
   ports: PortSettings;
+  pricing: TokenPricingSettings;
   busy: boolean;
   error: string | null;
   theme: ThemeId;
@@ -47,6 +55,7 @@ let snapshot: AppSnapshot = {
   },
   detailed: false,
   ports: { proxy_port: 0, service_port: 0 },
+  pricing: DEFAULT_TOKEN_PRICING,
   busy: false,
   error: null,
   theme: savedTheme(),
@@ -84,18 +93,19 @@ export const appStore = {
   async refresh() {
     update({ busy: true, error: null });
     try {
-      const [providers, models, cursorModels, overview, settings, ports, cursorHarness, pluginRuntime, plugins] = await Promise.all([
+      const [providers, models, cursorModels, overview, settings, ports, pricing, cursorHarness, pluginRuntime, plugins] = await Promise.all([
         api.providers(),
         api.models(),
         api.cursorModels(),
         api.overview(),
         api.observability(),
         api.ports(),
+        api.pricingSettings(),
         api.cursorHarness(),
         api.pluginRuntime(),
         api.plugins(),
       ]);
-      update({ providers, models, cursorModels, overview, detailed: settings.detailed, ports, cursorHarness, pluginRuntime, plugins });
+      update({ providers, models, cursorModels, overview, detailed: settings.detailed, ports, pricing, cursorHarness, pluginRuntime, plugins });
     } catch (cause) {
       update({ error: cause instanceof Error ? cause.message : String(cause) });
     } finally {
@@ -325,6 +335,16 @@ export const appStore = {
     try {
       update({ error: null });
       update({ ports: await api.setPorts(ports) });
+      return true;
+    } catch (cause) {
+      update({ error: cause instanceof Error ? cause.message : String(cause) });
+      return false;
+    }
+  },
+  async updatePricingSettings(pricing: TokenPricingSettings) {
+    try {
+      update({ error: null });
+      update({ pricing: await api.setPricingSettings(pricing) });
       return true;
     } catch (cause) {
       update({ error: cause instanceof Error ? cause.message : String(cause) });
