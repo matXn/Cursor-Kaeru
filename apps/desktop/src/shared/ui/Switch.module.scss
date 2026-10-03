@@ -1,18 +1,16 @@
-
+// A slot pressed into the glass with one cell in it, the same cell as the activity wall:
+// off, it rests dark at the left; on, it moves right and lights up like a busy day.
 .root {
   position: relative;
-  width: 40px;
-  height: 24px;
+  flex: none;
+  width: 32px;
+  height: 18px;
   padding: 0;
   border: 0;
-  border-radius: 999px;
-  background: var(--border-strong);
-  transition: background 160ms ease, box-shadow 160ms ease;
-
-  &[data-checked] {
-    background: var(--accent);
-    box-shadow: none;
-  }
+  border-radius: 4px;
+  background: var(--pocket-bg);
+  box-shadow: var(--pocket-shadow);
+  cursor: pointer;
 
   &:focus-visible {
     outline: 1px solid var(--accent);
@@ -21,21 +19,30 @@
 
   &:disabled {
     opacity: 0.5;
+    cursor: not-allowed;
   }
 
   span {
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #ffffff;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 30%);
-    transition: transform 160ms ease;
+    top: 4px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--border-strong);
+    box-shadow: inset 1px 1px 1px rgb(0 0 0 / 25%);
+    transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), background 180ms ease, box-shadow 180ms ease;
   }
 
   &[data-checked] span {
-    transform: translateX(16px);
+    transform: translateX(14px);
+    background: var(--heat-3);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--heat-3) 70%, transparent), inset -1px -1px 1px rgb(0 0 0 / 15%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root span {
+    transition: none;
   }
 }
