@@ -133,7 +133,7 @@
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 177,
+          "line": 175,
           "column": 10
         },
         {
@@ -165,7 +165,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 224,
+          "line": 222,
           "column": 23
         }
       ]
@@ -431,7 +431,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 281,
+          "line": 280,
           "column": 26
         }
       ]
@@ -670,12 +670,12 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 174,
+          "line": 172,
           "column": 10
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 206,
+          "line": 204,
           "column": 16
         }
       ]
@@ -772,7 +772,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 285,
+          "line": 284,
           "column": 131
         }
       ]
@@ -979,7 +979,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 308,
+          "line": 307,
           "column": 24
         }
       ]
@@ -1178,12 +1178,12 @@
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 166,
+          "line": 164,
           "column": 78
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 213,
+          "line": 211,
           "column": 21
         },
         {
@@ -1203,7 +1203,7 @@
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 300,
+          "line": 299,
           "column": 22
         },
         {
@@ -1512,7 +1512,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 310,
+          "line": 309,
           "column": 42
         }
       ]
@@ -1575,7 +1575,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 292,
+          "line": 291,
           "column": 14
         }
       ]
@@ -1758,7 +1758,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 276,
+          "line": 275,
           "column": 52
         }
       ]
@@ -1901,7 +1901,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 163,
+          "line": 161,
           "column": 8
         },
         {
@@ -2239,7 +2239,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 184,
+          "line": 182,
           "column": 26
         }
       ]
@@ -2936,7 +2936,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 268,
+          "line": 267,
           "column": 26
         }
       ]
@@ -3001,7 +3001,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 301,
+          "line": 300,
           "column": 23
         }
       ]
@@ -3976,12 +3976,12 @@
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 168,
+          "line": 166,
           "column": 36
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 212,
+          "line": 210,
           "column": 22
         },
         {
@@ -4356,7 +4356,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 58,
+          "line": 56,
           "column": 63
         },
         {
@@ -4529,7 +4529,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 284,
+          "line": 283,
           "column": 22
         }
       ]
@@ -4606,7 +4606,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 216,
+          "line": 214,
           "column": 14
         },
         {
@@ -4694,7 +4694,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 285,
+          "line": 284,
           "column": 31
         }
       ]
@@ -4706,7 +4706,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 276,
+          "line": 275,
           "column": 40
         }
       ]
@@ -5309,7 +5309,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 148,
+          "line": 146,
           "column": 15
         }
       ]
@@ -5650,12 +5650,12 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 188,
+          "line": 186,
           "column": 24
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 196,
+          "line": 194,
           "column": 24
         }
       ]
@@ -6327,7 +6327,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 311,
+          "line": 310,
           "column": 38
         }
       ]
@@ -6339,7 +6339,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 168,
+          "line": 166,
           "column": 24
         },
         {

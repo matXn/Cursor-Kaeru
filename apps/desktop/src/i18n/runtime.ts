@@ -1,13 +1,7 @@
 import zhCN from "./locales/zh-CN.json";
 import enUS from "./locales/en-US.json";
-import ptBR from "./locales/pt-BR.json";
 
-export type Locale = "zh-CN" | "en-US" | "pt-BR";
-export type CommitPromptLocale = "zh-CN" | "en-US";
-
-export function commitPromptLocale(locale: Locale): CommitPromptLocale {
-  return locale === "zh-CN" ? "zh-CN" : "en-US";
-}
+export type Locale = "zh-CN" | "en-US";
 
 export type TranslationValue = string | number;
 export type TranslationParams = Readonly<Record<string, TranslationValue>>;
@@ -16,7 +10,6 @@ const sourceMessages = zhCN as Record<string, string>;
 const localeMessages: Record<Locale, Record<string, string>> = {
   "zh-CN": sourceMessages,
   "en-US": enUS as Record<string, string>,
-  "pt-BR": ptBR as Record<string, string>,
 };
 
 let currentMessages: Record<string, string> = {};

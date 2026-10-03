@@ -1,4 +1,4 @@
-import type { CommitPromptLocale, Locale } from "../i18n/runtime";
+import type { Locale } from "../i18n/runtime";
 import { utcOffsetMs } from "./utils/localDay";
 
 export type ModelType = "openai" | "anthropic";
@@ -201,7 +201,7 @@ export interface DesktopSettings {
 export interface CommitSettings {
   model_id: string;
   prompt: string;
-  prompt_locale: CommitPromptLocale;
+  prompt_locale: Locale;
 }
 
 export interface CommitSettingsView extends CommitSettings {
