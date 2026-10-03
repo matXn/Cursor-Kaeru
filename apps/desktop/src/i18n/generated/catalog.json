@@ -147,11 +147,6 @@
           "column": 8
         },
         {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 185,
-          "column": 82
-        },
-        {
           "file": "features/settings/TabSettingsCard.tsx",
           "line": 38,
           "column": 98
@@ -419,7 +414,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 102,
+          "line": 58,
           "column": 38
         }
       ]
@@ -443,7 +438,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 280,
+          "line": 185,
           "column": 26
         }
       ]
@@ -596,12 +591,12 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 52,
+          "line": 69,
           "column": 20
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 55,
+          "line": 72,
           "column": 24
         }
       ]
@@ -806,7 +801,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 284,
+          "line": 189,
           "column": 131
         }
       ]
@@ -831,19 +826,14 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 72,
-          "column": 42
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 39,
+          "column": 54
         },
         {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 190,
-          "column": 22
-        },
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 217,
-          "column": 58
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 88,
+          "column": 27
         }
       ]
     },
@@ -953,7 +943,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 258,
+          "line": 163,
           "column": 43
         }
       ]
@@ -989,7 +979,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 127,
+          "line": 83,
           "column": 15
         }
       ]
@@ -1013,7 +1003,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 307,
+          "line": 212,
           "column": 24
         }
       ]
@@ -1232,12 +1222,7 @@
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 181,
-          "column": 81
-        },
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 299,
+          "line": 204,
           "column": 22
         },
         {
@@ -1457,7 +1442,7 @@
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 243,
+          "line": 148,
           "column": 27
         }
       ]
@@ -1534,7 +1519,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 309,
+          "line": 214,
           "column": 42
         }
       ]
@@ -1597,7 +1582,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 291,
+          "line": 196,
           "column": 14
         }
       ]
@@ -1626,7 +1611,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 243,
+          "line": 148,
           "column": 39
         }
       ]
@@ -1693,12 +1678,12 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 250,
+          "line": 155,
           "column": 22
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 256,
+          "line": 161,
           "column": 26
         }
       ]
@@ -1768,7 +1753,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 158,
+          "line": 114,
           "column": 66
         }
       ]
@@ -1780,7 +1765,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 275,
+          "line": 180,
           "column": 52
         }
       ]
@@ -2211,18 +2196,6 @@
         }
       ]
     },
-    "54644705e9c61009": {
-      "source": "端口设置",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 179,
-          "column": 26
-        }
-      ]
-    },
     "54c53e5fe791d1f3": {
       "source": "初始化 CA",
       "kind": "text",
@@ -2322,7 +2295,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 236,
+          "line": 141,
           "column": 78
         }
       ]
@@ -2346,7 +2319,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 240,
+          "line": 145,
           "column": 21
         }
       ]
@@ -2418,18 +2391,6 @@
         }
       ]
     },
-    "5d31dd0e5243750f": {
-      "source": "端口即服务端口，在上方「端口设置」中修改",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 69,
-          "column": 17
-        }
-      ]
-    },
     "5f600b307b4eb0fb": {
       "source": "API 密钥",
       "kind": "text",
@@ -2437,7 +2398,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 58,
+          "line": 75,
           "column": 25
         }
       ]
@@ -2748,7 +2709,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 102,
+          "line": 58,
           "column": 55
         }
       ]
@@ -2905,7 +2866,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 145,
+          "line": 101,
           "column": 83
         }
       ]
@@ -2946,7 +2907,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 169,
+          "line": 125,
           "column": 16
         }
       ]
@@ -2970,7 +2931,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 267,
+          "line": 172,
           "column": 26
         }
       ]
@@ -3035,7 +2996,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 300,
+          "line": 205,
           "column": 23
         }
       ]
@@ -3059,7 +3020,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 53,
+          "line": 70,
           "column": 19
         }
       ]
@@ -3078,6 +3039,30 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 408,
           "column": 67
+        }
+      ]
+    },
+    "7d30b65420ccc841": {
+      "source": "外部 API 和桌面界面连接的本地服务端口。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 84,
+          "column": 44
+        }
+      ]
+    },
+    "7d8fd1bd365c004f": {
+      "source": "接管时 Cursor 使用的本地代理端口。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 88,
+          "column": 44
         }
       ]
     },
@@ -3112,8 +3097,8 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 30,
-          "column": 15
+          "line": 49,
+          "column": 49
         }
       ]
     },
@@ -3326,18 +3311,6 @@
         }
       ]
     },
-    "857d282a0213d785": {
-      "source": "外部 API",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 46,
-          "column": 29
-        }
-      ]
-    },
     "864597982c308d72": {
       "source": "已开启静默启动",
       "kind": "text",
@@ -3480,7 +3453,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 239,
+          "line": 144,
           "column": 22
         }
       ]
@@ -3583,7 +3556,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 151,
+          "line": 107,
           "column": 15
         }
       ]
@@ -3595,7 +3568,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 161,
+          "line": 117,
           "column": 7
         }
       ]
@@ -3705,7 +3678,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 58,
+          "line": 75,
           "column": 44
         }
       ]
@@ -3875,7 +3848,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 247,
+          "line": 152,
           "column": 26
         }
       ]
@@ -3886,9 +3859,9 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 65,
-          "column": 34
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 104,
+          "column": 88
         }
       ]
     },
@@ -3986,7 +3959,7 @@
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 47,
+          "line": 64,
           "column": 27
         },
         {
@@ -3998,11 +3971,6 @@
           "file": "features/settings/ProxySettingsCard.tsx",
           "line": 33,
           "column": 103
-        },
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 182,
-          "column": 133
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
@@ -4395,7 +4363,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 67,
+          "line": 94,
           "column": 18
         }
       ]
@@ -4453,6 +4421,18 @@
         }
       ]
     },
+    "b4ebf3394308e148": {
+      "source": "已保存，端口在重启软件后生效",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 49,
+          "column": 27
+        }
+      ]
+    },
     "b502b1d414664337": {
       "source": "提示词：{tokens}",
       "kind": "template",
@@ -4503,7 +4483,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 158,
+          "line": 114,
           "column": 45
         }
       ]
@@ -4529,7 +4509,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 283,
+          "line": 188,
           "column": 22
         }
       ]
@@ -4694,7 +4674,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 284,
+          "line": 189,
           "column": 31
         }
       ]
@@ -4706,7 +4686,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 275,
+          "line": 180,
           "column": 40
         }
       ]
@@ -5009,25 +4989,25 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 167,
+          "line": 123,
           "column": 22
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 173,
+          "line": 129,
           "column": 20
         }
       ]
     },
-    "cfe085015632e9c8": {
-      "source": "桌面前端连接的本地管理服务端口；填写 0 时启动时随机选择。",
+    "d042e5b50c7ad47c": {
+      "source": "外部 API 与端口",
       "kind": "text",
       "placeholders": [],
       "refs": [
         {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 204,
-          "column": 21
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 63,
+          "column": 29
         }
       ]
     },
@@ -5050,7 +5030,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 160,
+          "line": 116,
           "column": 7
         }
       ]
@@ -5062,7 +5042,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 63,
+          "line": 80,
           "column": 33
         }
       ]
@@ -5129,7 +5109,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 62,
+          "line": 79,
           "column": 33
         }
       ]
@@ -5708,6 +5688,18 @@
         }
       ]
     },
+    "e4d58f63bb6a66f8": {
+      "source": "修改端口后需要重启软件；端口被占用时会自动换成随机端口并保存。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 96,
+          "column": 17
+        }
+      ]
+    },
     "e59ae97924d62f01": {
       "source": "第一页",
       "kind": "text",
@@ -5722,18 +5714,6 @@
           "file": "shared/ui/Pagination.tsx",
           "line": 24,
           "column": 92
-        }
-      ]
-    },
-    "e5b9961a0d5242e3": {
-      "source": "端口设置已保存，重启软件后生效",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 78,
-          "column": 17
         }
       ]
     },
@@ -5838,7 +5818,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 164,
+          "line": 120,
           "column": 26
         }
       ]
@@ -5850,7 +5830,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 42,
+          "line": 60,
           "column": 13
         }
       ]
@@ -5914,18 +5894,6 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 380,
           "column": 53
-        }
-      ]
-    },
-    "ee6b89a6a740a4c4": {
-      "source": "端口被占用时会自动选择新的随机端口并保存。修改后需要重启软件才会生效。",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 223,
-          "column": 16
         }
       ]
     },
@@ -6118,7 +6086,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 251,
+          "line": 156,
           "column": 21
         }
       ]
@@ -6196,18 +6164,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 65,
           "column": 44
-        }
-      ]
-    },
-    "fa5b4b8a751c7d1b": {
-      "source": "Cursor 使用的本地代理端口；填写 0 时启动时随机选择。",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 191,
-          "column": 21
         }
       ]
     },
@@ -6375,7 +6331,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 310,
+          "line": 215,
           "column": 38
         }
       ]
@@ -6392,7 +6348,7 @@
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 47,
+          "line": 64,
           "column": 15
         },
         {
@@ -6404,11 +6360,6 @@
           "file": "features/settings/ProxySettingsCard.tsx",
           "line": 33,
           "column": 91
-        },
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 182,
-          "column": 121
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
@@ -6435,19 +6386,14 @@
       "placeholders": [],
       "refs": [
         {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 73,
-          "column": 46
-        },
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 203,
-          "column": 22
-        },
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 218,
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 40,
           "column": 58
+        },
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 84,
+          "column": 27
         }
       ]
     }

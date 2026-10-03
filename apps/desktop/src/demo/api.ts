@@ -205,7 +205,7 @@ let harnessStatus: CursorHarnessStatus = {
 };
 
 let detailed = true;
-let portSettings = { proxy_port: 0, service_port: 0 };
+let portSettings = { proxy_port: 47822, service_port: 47821 };
 let externalApiSettings: ExternalApiSettings = { enabled: false, api_key: "" };
 let pricingSettings: TokenPricingSettings = { input_per_million: 5, output_per_million: 25, cache_read_per_million: 0.5, cache_write_per_million: 6.25 };
 let proxySettings: ProxySettings = {

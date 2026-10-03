@@ -13,7 +13,6 @@ import { TabSettingsCard } from "./TabSettingsCard";
 import { Button } from "../../shared/ui/Button";
 import { Checkbox } from "../../shared/ui/Checkbox";
 import { ConfirmDialog } from "../../shared/ui/ConfirmDialog";
-import { FormField, TextInput } from "../../shared/ui/FormControls";
 import { Select } from "../../shared/ui/Select";
 import { TitledCard } from "../../shared/ui/TitledCard";
 import { setLocalePreference, useI18n, type LocalePreference } from "../../i18n/store";
@@ -26,10 +25,6 @@ export function SettingsPage() {
   const { detailed, ports, theme } = useAppStore();
   const { preference, locale } = useI18n();
   const message = useMessage();
-  const [proxyPort, setProxyPort] = useState(String(ports.proxy_port));
-  const [servicePort, setServicePort] = useState(String(ports.service_port));
-  const [editingPorts, setEditingPorts] = useState(false);
-  const [savingPorts, setSavingPorts] = useState(false);
   const [storage, setStorage] = useState<StatisticsStorage | null>(null);
   const [confirmClear, setConfirmClear] = useState(false);
   const [clearScope, setClearScope] = useState<StatisticsStorageScope>("details");
@@ -54,45 +49,6 @@ export function SettingsPage() {
       setTabDraft(next);
     }).catch(report);
   }, [message]);
-  useEffect(() => {
-    setProxyPort(String(ports.proxy_port));
-    setServicePort(String(ports.service_port));
-  }, [ports.proxy_port, ports.service_port]);
-
-  const parsePort = (value: string, label: string) => {
-    const port = Number(value);
-    if (!Number.isInteger(port) || port < 0 || port > 65_535) {
-      throw new Error(`${label}${t("必须是 0–65535 之间的整数")}`);
-    }
-    return port;
-  };
-  const savePorts = async () => {
-    try {
-      const next = {
-        proxy_port: parsePort(proxyPort, t("代理端口")),
-        service_port: parsePort(servicePort, t("服务端口")),
-      };
-      setSavingPorts(true);
-      if (await appStore.updatePorts(next)) {
-        setEditingPorts(false);
-        message(t("端口设置已保存，重启软件后生效"), { duration: 4_000 });
-      }
-    } catch (cause) {
-      message(cause instanceof Error ? cause.message : String(cause));
-    } finally {
-      setSavingPorts(false);
-    }
-  };
-  const editPorts = () => {
-    setProxyPort(String(ports.proxy_port));
-    setServicePort(String(ports.service_port));
-    setEditingPorts(true);
-  };
-  const cancelPortEdit = () => {
-    setProxyPort(String(ports.proxy_port));
-    setServicePort(String(ports.service_port));
-    setEditingPorts(false);
-  };
   const clearStorage = async () => {
     try {
       setClearing(true);
@@ -176,58 +132,7 @@ export function SettingsPage() {
           />
         </div>
       </TitledCard>
-      <TitledCard title={t("端口设置")} action={editingPorts ? (
-        <div className={styles.cardActions}>
-          <Button size="small" disabled={savingPorts} onClick={cancelPortEdit}>{t("取消")}</Button>
-          <Button variant="primary" size="small" disabled={savingPorts} onClick={() => void savePorts()}>{savingPorts ? t("保存中…") : t("保存")}</Button>
-        </div>
-      ) : (
-        <button type="button" className={styles.textButton} onClick={editPorts}>{t("编辑")}</button>
-      )}>
-        <div className={styles.portSettings}>
-          <div className={styles.portFields}>
-            {editingPorts ? <><FormField
-              label={t("代理端口")}
-              hint={t("Cursor 使用的本地代理端口；填写 0 时启动时随机选择。")}
-            >
-              <TextInput
-                type="number"
-                min={0}
-                max={65535}
-                step={1}
-                value={proxyPort}
-                onChange={(event) => setProxyPort(event.target.value)}
-              />
-            </FormField>
-            <FormField
-              label={t("服务端口")}
-              hint={t(
-                "桌面前端连接的本地管理服务端口；填写 0 时启动时随机选择。",
-              )}
-            >
-              <TextInput
-                type="number"
-                min={0}
-                max={65535}
-                step={1}
-                value={servicePort}
-                onChange={(event) => setServicePort(event.target.value)}
-              />
-            </FormField></> : <>
-              <div className={styles.portValue}><strong>{t("代理端口")}</strong><span>{ports.proxy_port}</span></div>
-              <div className={styles.portValue}><strong>{t("服务端口")}</strong><span>{ports.service_port}</span></div>
-            </>}
-          </div>
-          <div className={styles.portFooter}>
-            <small>
-              {t(
-                "端口被占用时会自动选择新的随机端口并保存。修改后需要重启软件才会生效。",
-              )}
-            </small>
-          </div>
-        </div>
-      </TitledCard>
-      <ExternalApiSettingsCard servicePort={ports.service_port} />
+      <ExternalApiSettingsCard ports={ports} />
       <ProxySettingsCard settings={outboundProxy} draft={proxyDraft} editing={editingProxy} saving={savingProxy} onDraftChange={setProxyDraft} onEdit={editProxy} onCancel={cancelProxyEdit} onSave={() => void saveProxy()} />
       <TabSettingsCard settings={tabSettings} draft={tabDraft} editing={editingTab} saving={savingTab} onDraftChange={setTabDraft} onEdit={editTab} onCancel={cancelTabEdit} onSave={() => void saveTab()} />
       <CommitSettingsCard />

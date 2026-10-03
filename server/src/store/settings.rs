@@ -20,10 +20,24 @@ pub const DEFAULT_COMMIT_PROMPT_EN_US: &str = include_str!("../../prompt/cursor/
 
 pub const PUBLIC_TAB_SERVICE_URL: &str = "https://tab.leokun.cn";
 
-#[derive(Clone, Copy, Debug, Default, Deserialize, PartialEq, Eq, Serialize)]
+#[derive(Clone, Copy, Debug, Deserialize, PartialEq, Eq, Serialize)]
 pub struct PortSettings {
     pub proxy_port: u16,
     pub service_port: u16,
+}
+
+/// Fixed ports out of the way of common dev servers and below the OS ephemeral range, so the
+/// external API keeps one address. A port in use falls back to a random one at bind time.
+pub const DEFAULT_SERVICE_PORT: u16 = 47821;
+pub const DEFAULT_PROXY_PORT: u16 = 47822;
+
+impl Default for PortSettings {
+    fn default() -> Self {
+        Self {
+            proxy_port: DEFAULT_PROXY_PORT,
+            service_port: DEFAULT_SERVICE_PORT,
+        }
+    }
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Eq, Serialize)]
