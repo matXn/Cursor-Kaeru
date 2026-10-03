@@ -142,13 +142,13 @@ export function SettingsPage() {
   };
   const saveTab = async () => {
     try {
-      if (tabDraft.mode === "custom" && !tabDraft.address.trim()) throw new Error(t("TAB 服务地址不能为空"));
+      if (tabDraft.mode === "custom" && !tabDraft.address.trim()) throw new Error(t("补全服务地址不能为空"));
       setSavingTab(true);
       const saved = await api.setTabSettings({ ...tabDraft, address: tabDraft.address.trim() });
       setTabSettings(saved);
       setTabDraft(saved);
       setEditingTab(false);
-      message(t("TAB 设置已保存"));
+      message(t("Tab 补全设置已保存"));
     } catch (cause) {
       message(cause instanceof Error ? cause.message : String(cause));
     } finally {

@@ -1,3 +1,5 @@
+@use "../../styles/field";
+
 
 .target {
   width: 100%;
@@ -5,15 +7,11 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: var(--field);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius);
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  @include field.ruled;
 
   &:focus-within,
   &[data-open] {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+    @include field.ruled-active;
   }
 
   &[data-disabled] {
@@ -29,12 +27,16 @@
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 8px;
-  padding: 0 12px;
+  padding: 0 2px 0 field.$ruled-inset;
   color: var(--text);
   background: transparent;
   border: 0;
   font-size: var(--text-base);
   text-align: left;
+
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 .clear {

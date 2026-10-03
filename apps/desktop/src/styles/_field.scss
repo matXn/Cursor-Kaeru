@@ -1,0 +1,28 @@
+// A field drawn as a line on a form: a caret-like upright where the writing starts, apart
+// from the rule it is written on. While the field is in use the rule turns to the accent and
+// the upright folds into its middle, leaving the real caret in its place.
+@mixin ruled {
+  --tick: var(--text-faint);
+  --line: var(--border-strong);
+  background: linear-gradient(var(--tick), var(--tick)) left center / 1px 14px no-repeat;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  transition: border-color 150ms ease, background-size 260ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    --tick: var(--text-muted);
+    --line: var(--text-faint);
+  }
+}
+
+// The in-use state, for whichever selector means "in use" on the element.
+@mixin ruled-active {
+  --line: var(--accent);
+  background-size: 1px 0;
+}
+
+// Room for the upright before the text.
+$ruled-inset: 12px;

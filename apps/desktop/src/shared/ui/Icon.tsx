@@ -12,7 +12,8 @@ export function Icon({ icon, src, size = "1em", className }: IconProps) {
   return <div
     aria-hidden="true"
     className={[styles.icon, className].filter(Boolean).join(" ")}
-    style={{ height: size, width: size }}
+    // A wide icon keeps its proportions: `size` is its height.
+    style={{ height: size, width: icon && icon.width && icon.height && icon.width !== icon.height ? `calc(${size} * ${icon.width / icon.height})` : size }}
   >
     {src ? <img alt="" src={src} /> : icon ? <IconifyIcon height="100%" icon={icon} width="100%" /> : null}
   </div>;

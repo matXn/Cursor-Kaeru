@@ -383,6 +383,18 @@
         }
       ]
     },
+    "0bf7f72f356a18f4": {
+      "source": "Tab 补全",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 44,
+          "column": 96
+        }
+      ]
+    },
     "0c70665b6eb65f1a": {
       "source": "否",
       "kind": "text",
@@ -499,6 +511,28 @@
           "file": "features/models/CursorModelTestResult.tsx",
           "line": 21,
           "column": 95
+        }
+      ]
+    },
+    "11551f72ccb45ec1": {
+      "source": "补全服务",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 51,
+          "column": 22
+        },
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 56,
+          "column": 24
+        },
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 80,
+          "column": 20
         }
       ]
     },
@@ -1290,18 +1324,6 @@
         }
       ]
     },
-    "2f4a9609285d8f49": {
-      "source": "TAB 设置已保存",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 151,
-          "column": 15
-        }
-      ]
-    },
     "2f5f1d6fbfb061ed": {
       "source": "未设置",
       "kind": "text",
@@ -1792,6 +1814,28 @@
         }
       ]
     },
+    "4401e050237b346e": {
+      "source": "补全服务地址",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 67,
+          "column": 22
+        },
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 73,
+          "column": 25
+        },
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 84,
+          "column": 20
+        }
+      ]
+    },
     "444ddec3d9908e63": {
       "source": "按模型、状态或对话筛选",
       "kind": "text",
@@ -2167,18 +2211,6 @@
         }
       ]
     },
-    "5401344227e49e2f": {
-      "source": "TAB 设置",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 44,
-          "column": 90
-        }
-      ]
-    },
     "54644705e9c61009": {
       "source": "端口设置",
       "kind": "text",
@@ -2304,28 +2336,6 @@
           "file": "features/models/CursorModelEditor.tsx",
           "line": 69,
           "column": 69
-        }
-      ]
-    },
-    "59346e82b3dd2998": {
-      "source": "TAB 服务地址",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 67,
-          "column": 22
-        },
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 73,
-          "column": 25
-        },
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 84,
-          "column": 20
         }
       ]
     },
@@ -2876,6 +2886,18 @@
         }
       ]
     },
+    "722a475b45375122": {
+      "source": "补全服务地址不能为空",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/SettingsPage.tsx",
+          "line": 145,
+          "column": 83
+        }
+      ]
+    },
     "722f133fe39e926f": {
       "source": "服务商、模型名称和显示名称不能为空",
       "kind": "text",
@@ -3044,18 +3066,6 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 408,
           "column": 67
-        }
-      ]
-    },
-    "7e0891860c9e6374": {
-      "source": "TAB 服务地址不能为空",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/SettingsPage.tsx",
-          "line": 145,
-          "column": 83
         }
       ]
     },
@@ -3511,18 +3521,6 @@
         }
       ]
     },
-    "8f9b0d6cc477d334": {
-      "source": "控制 Cursor TAB 相关接口的连接方式。",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 52,
-          "column": 21
-        }
-      ]
-    },
     "90800c48a1dd0655": {
       "source": "{label} 必须是 JSON 对象",
       "kind": "template",
@@ -3563,6 +3561,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 247,
           "column": 81
+        }
+      ]
+    },
+    "91b2a17385d2f667": {
+      "source": "Tab 补全设置已保存",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/SettingsPage.tsx",
+          "line": 151,
+          "column": 15
         }
       ]
     },
@@ -3634,28 +3644,6 @@
         {
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 275,
-          "column": 20
-        }
-      ]
-    },
-    "966498853d801a52": {
-      "source": "TAB 选择",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 51,
-          "column": 22
-        },
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 56,
-          "column": 24
-        },
-        {
-          "file": "features/settings/TabSettingsCard.tsx",
-          "line": 80,
           "column": 20
         }
       ]
@@ -5431,6 +5419,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 162,
           "column": 80
+        }
+      ]
+    },
+    "dd16fb52f7a9de03": {
+      "source": "Cursor 写代码时给出的补全建议，从哪里获取。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/TabSettingsCard.tsx",
+          "line": 52,
+          "column": 21
         }
       ]
     },

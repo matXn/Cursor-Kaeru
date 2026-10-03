@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { api, type ExternalApiSettings } from "../../shared/api";
 import { Button } from "../../shared/ui/Button";
 import { FieldAction, FormField, SecretTextInput } from "../../shared/ui/FormControls";
-import { copyIcon, diceIcon } from "../../shared/ui/icons";
+import { copyIcon, shuffleIcon } from "../../shared/ui/icons";
 import { Switch } from "../../shared/ui/Switch";
 import { TitledCard } from "../../shared/ui/TitledCard";
 import { useMessage } from "../../shared/ui/message";
@@ -59,7 +59,7 @@ export function ExternalApiSettingsCard({ servicePort }: { servicePort: number }
         <SecretTextInput value={draft.api_key} autoComplete="off" disabled={!saved || saving}
           onChange={(event) => setDraft((current) => ({ ...current, api_key: event.target.value }))}
           actions={<>
-            <FieldAction label={t("生成随机密钥")} icon={diceIcon} disabled={!saved || saving} onClick={generateKey} />
+            <FieldAction label={t("生成随机密钥")} icon={shuffleIcon} disabled={!saved || saving} onClick={generateKey} />
             <FieldAction label={t("复制密钥")} icon={copyIcon} disabled={!draft.api_key} onClick={() => void copyKey()} />
           </>} />
       </FormField>

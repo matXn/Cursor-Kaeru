@@ -1,8 +1,8 @@
-import cursorIconUrl from "../../shared/assets/icons/cursor.svg";
 import type { TabMode, TabSettings } from "../../shared/api";
 import { Button } from "../../shared/ui/Button";
 import { TextInput } from "../../shared/ui/FormControls";
 import { Icon } from "../../shared/ui/Icon";
+import { tabCompletionGlyph } from "../../shared/ui/glyphs";
 import { Select } from "../../shared/ui/Select";
 import { TitledCard } from "../../shared/ui/TitledCard";
 import styles from "./TabSettingsCard.module.scss";
@@ -41,19 +41,19 @@ export function TabSettingsCard({
   );
 
   return <TitledCard
-    title={<div className={styles.title}><Icon src={cursorIconUrl} size="1.1em" /><span>{t("TAB 设置")}</span></div>}
+    title={<div className={styles.title}><Icon icon={tabCompletionGlyph} size="0.8em" /><span>{t("Tab 补全")}</span></div>}
     action={action}
   >
     <div className={styles.content}>
       {editing ? <>
         <div className={styles.row}>
           <div className={styles.description}>
-            <strong>{t("TAB 选择")}</strong>
-            <small>{t("控制 Cursor TAB 相关接口的连接方式。")}</small>
+            <strong>{t("补全服务")}</strong>
+            <small>{t("Cursor 写代码时给出的补全建议，从哪里获取。")}</small>
           </div>
           <div className={styles.control}><Select
             value={draft.mode}
-            ariaLabel={t("TAB 选择")}
+            ariaLabel={t("补全服务")}
             options={[
               { value: "public", label: t("使用公益服务") },
               { value: "direct", label: t("直连") },
@@ -64,24 +64,24 @@ export function TabSettingsCard({
         </div>
         {draft.mode === "custom" && <div className={styles.row}>
           <div className={styles.description}>
-            <strong>{t("TAB 服务地址")}</strong>
+            <strong>{t("补全服务地址")}</strong>
             <small>{t("原接口路径会追加到此服务地址。")}</small>
           </div>
           <div className={styles.control}><TextInput
             value={draft.address}
             placeholder="https://tab.leokun.cn"
-            aria-label={t("TAB 服务地址")}
+            aria-label={t("补全服务地址")}
             onChange={(event) => onDraftChange({ ...draft, address: event.target.value })}
             onKeyDown={(event) => { if (event.key === "Enter") onSave(); }}
           /></div>
         </div>}
       </> : <>
         <div className={styles.row}>
-          <strong>{t("TAB 选择")}</strong>
+          <strong>{t("补全服务")}</strong>
           <span className={styles.value}>{settings ? modeLabel(settings.mode) : t("加载中…")}</span>
         </div>
         {settings?.mode === "custom" && <div className={styles.row}>
-          <strong>{t("TAB 服务地址")}</strong>
+          <strong>{t("补全服务地址")}</strong>
           <span className={styles.value}>{settings.address}</span>
         </div>}
       </>}
