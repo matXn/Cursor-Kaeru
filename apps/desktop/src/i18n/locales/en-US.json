@@ -163,6 +163,7 @@
   "5b17f59d33bde39e": "Error: {error}",
   "5c55a67935af8f45": "All",
   "5c62e36c152dfc7c": "Plugin runtime initialized",
+  "5d31dd0e5243750f": "The port is the service port; change it under Ports above",
   "5f600b307b4eb0fb": "API key",
   "5f76b2bf82dd2c5d": "Version",
   "5f8d556a9c47da3c": "Launch at login disabled",

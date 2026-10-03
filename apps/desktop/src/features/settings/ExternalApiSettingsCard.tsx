@@ -66,6 +66,7 @@ export function ExternalApiSettingsCard({ servicePort }: { servicePort: number }
       <div className={styles.address}>
         <strong>{t("基础地址")}</strong>
         <code>{address}</code>
+        <small>{t("端口即服务端口，在上方「端口设置」中修改")}</small>
       </div>
     </div>
   </TitledCard>;

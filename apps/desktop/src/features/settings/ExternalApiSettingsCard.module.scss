@@ -26,6 +26,12 @@
 .address {
   flex-wrap: wrap;
 
+  small {
+    flex-basis: 100%;
+    color: var(--text-faint);
+    font-size: var(--text-sm);
+  }
+
   code {
     font-family: var(--font-mono);
     flex: 1 1 240px;

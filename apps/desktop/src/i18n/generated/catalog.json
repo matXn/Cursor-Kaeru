@@ -153,7 +153,7 @@
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 40,
+          "line": 38,
           "column": 98
         }
       ]
@@ -390,8 +390,8 @@
       "refs": [
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 44,
-          "column": 96
+          "line": 42,
+          "column": 12
         }
       ]
     },
@@ -521,17 +521,17 @@
       "refs": [
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 51,
+          "line": 49,
           "column": 22
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 56,
+          "line": 54,
           "column": 24
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 80,
+          "line": 78,
           "column": 20
         }
       ]
@@ -1242,7 +1242,7 @@
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 36,
+          "line": 34,
           "column": 66
         },
         {
@@ -1710,7 +1710,7 @@
       "refs": [
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 68,
+          "line": 66,
           "column": 21
         }
       ]
@@ -1821,17 +1821,17 @@
       "refs": [
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 67,
+          "line": 65,
           "column": 22
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 73,
+          "line": 71,
           "column": 25
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 84,
+          "line": 82,
           "column": 20
         }
       ]
@@ -1955,7 +1955,7 @@
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 81,
+          "line": 79,
           "column": 81
         }
       ]
@@ -2139,12 +2139,12 @@
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 32,
+          "line": 30,
           "column": 12
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 60,
+          "line": 58,
           "column": 41
         }
       ]
@@ -2358,12 +2358,12 @@
       "refs": [
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 30,
+          "line": 28,
           "column": 35
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 58,
+          "line": 56,
           "column": 41
         }
       ]
@@ -2415,6 +2415,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 303,
           "column": 7
+        }
+      ]
+    },
+    "5d31dd0e5243750f": {
+      "source": "端口即服务端口，在上方「端口设置」中修改",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 69,
+          "column": 17
         }
       ]
     },
@@ -3994,7 +4006,7 @@
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 37,
+          "line": 35,
           "column": 103
         },
         {
@@ -4349,12 +4361,12 @@
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 31,
+          "line": 29,
           "column": 35
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 59,
+          "line": 57,
           "column": 41
         }
       ]
@@ -5429,7 +5441,7 @@
       "refs": [
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 52,
+          "line": 50,
           "column": 21
         }
       ]
@@ -6400,7 +6412,7 @@
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
-          "line": 37,
+          "line": 35,
           "column": 91
         }
       ]
