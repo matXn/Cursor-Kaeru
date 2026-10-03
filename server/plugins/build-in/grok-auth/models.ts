@@ -4,7 +4,7 @@ import { accountData } from "./resources.ts";
 const LANGUAGE_MODELS_URL = "https://api.x.ai/v1/language-models";
 const MODELS_URL = "https://api.x.ai/v1/models";
 
-/** 免费账号无权调用模型列表接口(403 spending-limit);退回已知模型。 */
+/** 免费账号无权调用模型列表接口(403 spending-limit);仅此时退回已知模型。 */
 export const FALLBACK_MODELS: ModelDefinition[] = [
   {
     id: "grok-4.6",
@@ -81,8 +81,11 @@ export const grokModels: ModelSupport = {
     if (response.status < 200 || response.status >= 300) {
       response = await context.network.fetch(MODELS_URL, { method: "GET", headers });
     }
+    // Only an account that may not list models gets the known ones. Any other failure is an
+    // error, so a refresh keeps the previous list instead of replacing it with a guess.
+    if (response.status === 403) return FALLBACK_MODELS;
     if (response.status < 200 || response.status >= 300) {
-      return FALLBACK_MODELS;
+      throw new Error(`Grok model discovery failed (HTTP ${response.status}): ${response.body}`);
     }
     let body: unknown;
     try {

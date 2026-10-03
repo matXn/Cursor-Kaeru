@@ -23,223 +23,6 @@ export const ANTIGRAVITY_CLIENT_HEADERS: Record<string, string> = {
 
 const ANTIGRAVITY_DENYLIST = new Set(["chat_20706", "chat_23310"]);
 
-export const STATIC_ANTIGRAVITY_MODELS: ModelDefinition[] = [
-  // Gemini 3.7 Series
-  {
-    id: "gemini-3.7-flash",
-    displayName: "Gemini 3.7 Flash",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "gemini-3.7-flash-high",
-    displayName: "Gemini 3.7 Flash (High)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.7-flash-medium",
-    displayName: "Gemini 3.7 Flash (Medium)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.7-flash-low",
-    displayName: "Gemini 3.7 Flash (Low)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.7-flash-tiered",
-    displayName: "Gemini 3.7 Flash (Tiered)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.7-flash-thinking",
-    displayName: "Gemini 3.7 Flash (Thinking)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-
-  // Gemini 3.6 Series
-  {
-    id: "gemini-3.6-flash-high",
-    displayName: "Gemini 3.6 Flash (High)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.6-flash-medium",
-    displayName: "Gemini 3.6 Flash (Medium)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.6-flash-low",
-    displayName: "Gemini 3.6 Flash (Low)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-
-  // Gemini 3.1 Pro Series
-  {
-    id: "gemini-3.1-pro-preview",
-    displayName: "Gemini 3.1 Pro Preview",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "gemini-3.1-pro-high",
-    displayName: "Gemini 3.1 Pro (High)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.1-pro-medium",
-    displayName: "Gemini 3.1 Pro (Medium)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.1-pro-low",
-    displayName: "Gemini 3.1 Pro (Low)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-
-  // Gemini 2.5 / 2.0 Series
-  {
-    id: "gemini-2.5-pro",
-    displayName: "Gemini 2.5 Pro",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "gemini-2.5-flash",
-    displayName: "Gemini 2.5 Flash",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "gemini-2.5-flash-thinking",
-    displayName: "Gemini 2.5 Flash Thinking",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-2.5-flash-lite",
-    displayName: "Gemini 2.5 Flash Lite",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-2.0-flash",
-    displayName: "Gemini 2.0 Flash",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-2.0-flash-lite",
-    displayName: "Gemini 2.0 Flash Lite",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-
-  // Claude Series (via Antigravity)
-  {
-    id: "claude-sonnet-4-6",
-    displayName: "Claude Sonnet 4.6 (Antigravity)",
-    capabilities: { images: true },
-    maxOutputTokens: 64000,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "claude-sonnet-4-6-thinking",
-    displayName: "Claude Sonnet 4.6 Thinking (Antigravity)",
-    capabilities: { images: true },
-    maxOutputTokens: 64000,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "claude-opus-4-6-thinking",
-    displayName: "Claude 3.7 Opus Thinking (Antigravity)",
-    capabilities: { images: true },
-    maxOutputTokens: 64000,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "claude-3-7-sonnet",
-    displayName: "Claude 3.7 Sonnet (Antigravity)",
-    capabilities: { images: true },
-    maxOutputTokens: 64000,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "claude-3-5-sonnet",
-    displayName: "Claude 3.5 Sonnet (Antigravity)",
-    capabilities: { images: true },
-    maxOutputTokens: 64000,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "claude-3-5-haiku",
-    displayName: "Claude 3.5 Haiku (Antigravity)",
-    capabilities: { images: true },
-    maxOutputTokens: 64000,
-    privateData: { reasoningEfforts: [] },
-  },
-
-  // Other Models
-  {
-    id: "gpt-4o",
-    displayName: "GPT-4o (Antigravity / Gemini)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: ["low", "medium", "high"] },
-  },
-  {
-    id: "gpt-4o-mini",
-    displayName: "GPT-4o Mini (Antigravity / Gemini)",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gpt-oss-120b-medium",
-    displayName: "GPT OSS 120B Medium",
-    capabilities: { images: false },
-    maxOutputTokens: 32768,
-    privateData: { reasoningEfforts: [] },
-  },
-  {
-    id: "gemini-3.1-flash-image",
-    displayName: "Gemini 3.1 Flash Image",
-    capabilities: { images: true },
-    maxOutputTokens: 65536,
-    privateData: { reasoningEfforts: [] },
-  },
-];
-
 function object(value: unknown): Record<string, unknown> | null {
   return value !== null && typeof value === "object" && !Array.isArray(value)
     ? value as Record<string, unknown>
@@ -267,7 +50,10 @@ export function parseAntigravityModels(payload: unknown): ModelDefinition[] {
     if (!id || seen.has(id)) continue;
     seen.add(id);
 
-    const displayName = text(model.displayName) ?? id;
+    // Entries without a display name are internal routes (tab completion, tiers), not models
+    // the Antigravity picker offers.
+    const displayName = text(model.displayName);
+    if (!displayName) continue;
     const supportsThinking = model.supportsThinking === true;
     const reasoningEfforts = supportsThinking ? ["low", "medium", "high"] : [];
     const maxOutputTokens = typeof model.maxOutputTokens === "number" && model.maxOutputTokens > 0
@@ -285,14 +71,6 @@ export function parseAntigravityModels(payload: unknown): ModelDefinition[] {
     });
   }
 
-  // Merge static models from Antigravity catalog that might not be dynamically returned
-  for (const staticModel of STATIC_ANTIGRAVITY_MODELS) {
-    if (!seen.has(staticModel.id)) {
-      seen.add(staticModel.id);
-      models.push(staticModel);
-    }
-  }
-
   return models;
 }
 
@@ -302,21 +80,18 @@ export function reasoningEfforts(model: ModelSnapshot): string[] {
   return Array.isArray(efforts) ? efforts.filter((item) => typeof item === "string") : [];
 }
 
+// The catalog is whatever the account is offered. When the lookup fails the error is raised, so
+// a refresh keeps the previous list instead of replacing it with a guess.
 export const antigravityModels: ModelSupport = {
   list: async ({ resource }, context): Promise<ModelDefinition[]> => {
-    if (!resource) return STATIC_ANTIGRAVITY_MODELS;
-    let data;
-    try {
-      data = accountData(resource);
-    } catch {
-      return STATIC_ANTIGRAVITY_MODELS;
-    }
-
+    if (!resource) throw new Error("add a Google account before syncing Antigravity models");
+    const data = accountData(resource);
     const payloads = [
       JSON.stringify({ project: data.projectId || "bamboo-precept-lgxtn" }),
       JSON.stringify({}),
     ];
 
+    let lastError = "no endpoint answered";
     for (const endpoint of ANTIGRAVITY_ENDPOINTS) {
       for (const bodyPayload of payloads) {
         try {
@@ -333,17 +108,18 @@ export const antigravityModels: ModelSupport = {
               body: bodyPayload,
             },
           );
-          if (response.status >= 200 && response.status < 300) {
-            const body = JSON.parse(response.body);
-            const models = parseAntigravityModels(body);
-            if (models.length > 0) return models;
+          if (response.status < 200 || response.status >= 300) {
+            lastError = `HTTP ${response.status}`;
+            continue;
           }
-        } catch {
-          // Continue
+          const models = parseAntigravityModels(JSON.parse(response.body));
+          if (models.length > 0) return models;
+          lastError = "the account was offered no models";
+        } catch (error) {
+          lastError = error instanceof Error ? error.message : String(error);
         }
       }
     }
-
-    return STATIC_ANTIGRAVITY_MODELS;
+    throw new Error(`Antigravity model discovery failed: ${lastError}`);
   },
 };

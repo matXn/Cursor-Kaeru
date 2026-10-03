@@ -32,6 +32,11 @@ use crate::{
 };
 
 const OAUTH_SLOW_DOWN_STEP_MS: i64 = 5_000;
+/// Model lists change upstream without notice: re-read them from the accounts this often.
+const MODEL_REFRESH_INTERVAL: Duration = Duration::from_secs(6 * 60 * 60);
+/// Wait for the plugin runtime after startup, and retry at this pace until it is ready.
+const MODEL_REFRESH_FIRST_DELAY: Duration = Duration::from_secs(30);
+const MODEL_REFRESH_RETRY: Duration = Duration::from_secs(60);
 const MAX_IMPORT_DRAFTS: usize = 256;
 
 #[derive(Clone)]
@@ -146,6 +151,60 @@ impl PluginRegistry {
                 oauth_sessions: Mutex::new(HashMap::new()),
             }),
         })
+    }
+
+    /// Keeps every account's model list current without anyone pressing sync: once shortly
+    /// after startup, then every six hours. Accounts that fail keep their previous list.
+    pub fn spawn_model_refresh(&self) {
+        let registry = self.clone();
+        tokio::spawn(async move {
+            let mut delay = MODEL_REFRESH_FIRST_DELAY;
+            loop {
+                tokio::time::sleep(delay).await;
+                delay = if registry.refresh_all_models().await {
+                    MODEL_REFRESH_INTERVAL
+                } else {
+                    MODEL_REFRESH_RETRY
+                };
+            }
+        });
+    }
+
+    /// Re-reads the model list of every provider that has an account. False while the
+    /// plugin runtime is not ready yet.
+    async fn refresh_all_models(&self) -> bool {
+        let Ok(executable) = self.executable() else {
+            return false;
+        };
+        for entry in self.entries(&executable).await {
+            for provider in entry.definition.providers.clone() {
+                let Some(resource_type) = provider.resource_type.as_deref() else {
+                    continue;
+                };
+                let has_account = !self
+                    .inner
+                    .state
+                    .resources(&entry.manifest.id, resource_type)
+                    .await
+                    .unwrap_or_default()
+                    .is_empty();
+                if !provider.has_models || !has_account {
+                    continue;
+                }
+                match self
+                    .sync_provider_models(&entry, &executable, &provider)
+                    .await
+                {
+                    Ok(count) => {
+                        tracing::info!(plugin = %entry.manifest.id, provider = %provider.id, count, "plugin models refreshed")
+                    }
+                    Err(error) => {
+                        tracing::warn!(plugin = %entry.manifest.id, provider = %provider.id, %error, "plugin model refresh failed")
+                    }
+                }
+            }
+        }
+        true
     }
 
     pub async fn plugins(&self) -> Vec<PluginDescriptor> {
