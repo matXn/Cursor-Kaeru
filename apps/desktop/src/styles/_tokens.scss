@@ -66,7 +66,11 @@
   // any wallpaper. The lamp is translucent so the blurred desktop still shows through it.
   --acrylic-stage: radial-gradient(circle at -100px 60%, rgb(255 178 125 / 60%) 0, rgb(239 138 86 / 40%) 170px, rgb(166 90 59 / 20%) 360px, transparent 640px),
     linear-gradient(rgb(24 20 18 / 58%), rgb(24 20 18 / 58%));
-  --surface: #171716; // cards, panels
+  --surface: #171716; // panels
+  // Cards: smoked glass over the stage, no blur (blur made page switches stutter).
+  --card-glass: rgb(16 14 13 / 42%);
+  --card-edge: rgb(255 255 255 / 7%);
+  --card-highlight: inset 0 1px 0 rgb(255 255 255 / 5%);
   --surface-raised: #211f1e; // menus, tooltips, modals
   --field: #0c0c0b; // inputs, editors
   --hover: rgb(255 255 255 / 4.5%);
@@ -136,6 +140,9 @@
   --acrylic-stage: radial-gradient(circle at -100px 60%, rgb(255 211 174 / 70%) 0, rgb(243 154 102 / 45%) 180px, rgb(201 138 108 / 22%) 380px, transparent 680px),
     linear-gradient(rgb(238 233 228 / 52%), rgb(238 233 228 / 52%));
   --surface: #cdc8c3;
+  --card-glass: rgb(255 252 248 / 34%);
+  --card-edge: rgb(40 25 15 / 11%);
+  --card-highlight: inset 0 1px 0 rgb(255 255 255 / 60%);
   --surface-raised: #dcd7d2;
   --field: #d3cec9;
   --hover: rgb(40 25 15 / 6%);

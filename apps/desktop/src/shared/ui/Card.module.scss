@@ -4,6 +4,7 @@
   color: var(--text);
   border-radius: var(--radius);
 
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--card-glass);
+  border: 1px solid var(--card-edge);
+  box-shadow: var(--card-highlight);
 }
