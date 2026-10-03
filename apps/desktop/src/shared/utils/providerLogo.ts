@@ -34,6 +34,7 @@ const rules: Array<[ProviderLogoKey, string[]]> = [
   ["aws", ["bedrock", "amazonaws"]],
   ["cloudflare", ["cloudflare", "workers.ai"]],
   ["githubcopilot", ["githubcopilot", "copilot"]],
+  ["cursor", ["cursor"]],
 ];
 
 /**

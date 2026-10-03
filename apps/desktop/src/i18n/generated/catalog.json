@@ -128,7 +128,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 165,
+          "line": 198,
           "column": 101
         },
         {
@@ -258,7 +258,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 407,
+          "line": 409,
           "column": 73
         }
       ]
@@ -316,7 +316,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 178,
+          "line": 211,
           "column": 74
         }
       ]
@@ -328,7 +328,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 418,
+          "line": 420,
           "column": 89
         }
       ]
@@ -487,7 +487,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 417,
+          "line": 419,
           "column": 36
         },
         {
@@ -504,7 +504,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 190,
+          "line": 223,
           "column": 57
         }
       ]
@@ -569,7 +569,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 375,
+          "line": 377,
           "column": 74
         }
       ]
@@ -709,7 +709,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 381,
+          "line": 383,
           "column": 52
         }
       ]
@@ -856,7 +856,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 411,
+          "line": 413,
           "column": 89
         }
       ]
@@ -906,6 +906,18 @@
           "file": "features/settings/SettingsPage.tsx",
           "line": 122,
           "column": 15
+        }
+      ]
+    },
+    "23647b2f11ca2fad": {
+      "source": "接管后在 Cursor 中打开模型列表，官方模型会出现在这里。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 121,
+          "column": 38
         }
       ]
     },
@@ -966,12 +978,17 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 91,
+          "line": 93,
           "column": 50
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 163,
+          "line": 127,
+          "column": 50
+        },
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 196,
           "column": 50
         }
       ]
@@ -1066,7 +1083,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 410,
+          "line": 412,
           "column": 178
         }
       ]
@@ -1090,12 +1107,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 381,
+          "line": 383,
           "column": 76
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 382,
+          "line": 384,
           "column": 85
         },
         {
@@ -1186,7 +1203,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 383,
+          "line": 385,
           "column": 11
         }
       ]
@@ -1212,7 +1229,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 424,
+          "line": 426,
           "column": 70
         }
       ]
@@ -1260,17 +1277,17 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 381,
+          "line": 383,
           "column": 99
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 382,
+          "line": 384,
           "column": 108
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 168,
+          "line": 201,
           "column": 36
         },
         {
@@ -1367,6 +1384,18 @@
         }
       ]
     },
+    "34f7336d39831fca": {
+      "source": "全部关闭",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 117,
+          "column": 138
+        }
+      ]
+    },
     "36b083d724506f21": {
       "source": "访问模型服务所需的密钥，这个服务商下的所有模型共用。",
       "kind": "text",
@@ -1398,7 +1427,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 58,
+          "line": 60,
           "column": 107
         }
       ]
@@ -1444,12 +1473,12 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 60,
+          "line": 62,
           "column": 32
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 166,
+          "line": 199,
           "column": 30
         },
         {
@@ -1557,7 +1586,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 67,
+          "line": 69,
           "column": 42
         }
       ]
@@ -1610,7 +1639,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 378,
+          "line": 380,
           "column": 80
         },
         {
@@ -1831,7 +1860,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 410,
+          "line": 412,
           "column": 34
         }
       ]
@@ -1843,17 +1872,17 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 375,
+          "line": 377,
           "column": 703
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 92,
+          "line": 94,
           "column": 210
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 164,
+          "line": 197,
           "column": 118
         }
       ]
@@ -2010,7 +2039,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 363,
+          "line": 365,
           "column": 258
         }
       ]
@@ -2130,12 +2159,12 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 410,
+          "line": 412,
           "column": 83
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 410,
+          "line": 412,
           "column": 131
         }
       ]
@@ -2403,7 +2432,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 167,
+          "line": 200,
           "column": 39
         },
         {
@@ -2434,7 +2463,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 569,
+          "line": 579,
           "column": 43
         }
       ]
@@ -2581,6 +2610,18 @@
         }
       ]
     },
+    "69ff76633224a3ba": {
+      "source": "关闭后不在 Cursor 的模型列表中显示，Cursor 重新读取模型列表后生效",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 115,
+          "column": 88
+        }
+      ]
+    },
     "6a9906c79f26c0ba": {
       "source": "开始时间",
       "kind": "text",
@@ -2600,12 +2641,12 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 92,
+          "line": 94,
           "column": 222
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 164,
+          "line": 197,
           "column": 130
         }
       ]
@@ -2692,7 +2733,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 409,
+          "line": 411,
           "column": 85
         }
       ]
@@ -2704,12 +2745,12 @@
       "refs": [
         {
           "file": "shared/store/appStore.ts",
-          "line": 283,
+          "line": 293,
           "column": 23
         },
         {
           "file": "shared/store/appStore.ts",
-          "line": 290,
+          "line": 300,
           "column": 25
         }
       ]
@@ -2769,7 +2810,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 564,
+          "line": 574,
           "column": 43
         }
       ]
@@ -2798,7 +2839,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 59,
+          "line": 61,
           "column": 105
         }
       ]
@@ -2839,7 +2880,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 406,
+          "line": 408,
           "column": 67
         }
       ]
@@ -2921,7 +2962,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 363,
+          "line": 365,
           "column": 80
         }
       ]
@@ -2960,7 +3001,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 501,
+          "line": 508,
           "column": 21
         }
       ]
@@ -3243,7 +3284,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 190,
+          "line": 223,
           "column": 47
         }
       ]
@@ -3305,7 +3346,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 425,
+          "line": 427,
           "column": 87
         }
       ]
@@ -3394,7 +3435,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 381,
+          "line": 383,
           "column": 250
         }
       ]
@@ -3715,12 +3756,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 363,
+          "line": 365,
           "column": 248
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 375,
+          "line": 377,
           "column": 432
         },
         {
@@ -3862,7 +3903,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 375,
+          "line": 377,
           "column": 715
         }
       ]
@@ -3898,12 +3939,12 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 153,
+          "line": 186,
           "column": 97
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 153,
+          "line": 186,
           "column": 115
         }
       ]
@@ -4117,12 +4158,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 363,
+          "line": 365,
           "column": 67
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 61,
+          "line": 63,
           "column": 36
         }
       ]
@@ -4280,7 +4321,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 378,
+          "line": 380,
           "column": 103
         }
       ]
@@ -4461,12 +4502,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 382,
+          "line": 384,
           "column": 60
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 62,
+          "line": 64,
           "column": 38
         }
       ]
@@ -4559,7 +4600,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 375,
+          "line": 377,
           "column": 62
         }
       ]
@@ -4848,7 +4889,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 375,
+          "line": 377,
           "column": 675
         },
         {
@@ -5040,7 +5081,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 379,
+          "line": 381,
           "column": 47
         }
       ]
@@ -5172,12 +5213,12 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 82,
+          "line": 84,
           "column": 67
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 93,
+          "line": 95,
           "column": 67
         },
         {
@@ -5420,6 +5461,18 @@
         }
       ]
     },
+    "e73e38c1f65d0326": {
+      "source": "官方",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 113,
+          "column": 39
+        }
+      ]
+    },
     "e77e3d58b0dcffaa": {
       "source": "耗时",
       "kind": "text",
@@ -5444,7 +5497,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 78,
+          "line": 80,
           "column": 41
         },
         {
@@ -5533,8 +5586,20 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 379,
+          "line": 381,
           "column": 77
+        }
+      ]
+    },
+    "ec9886e657bf3176": {
+      "source": "全部开启",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 117,
+          "column": 150
         }
       ]
     },
@@ -5545,7 +5610,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 378,
+          "line": 380,
           "column": 53
         }
       ]
@@ -5569,7 +5634,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 396,
+          "line": 398,
           "column": 64
         }
       ]
@@ -5595,7 +5660,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 80,
+          "line": 82,
           "column": 90
         }
       ]

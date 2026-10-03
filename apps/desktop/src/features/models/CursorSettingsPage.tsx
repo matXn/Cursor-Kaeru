@@ -27,7 +27,7 @@ type Picking = { provider: Provider; options: string[]; loading: boolean };
 // Models, one section per provider. Providers hold the address and key; models only say
 // which upstream model to call and how.
 export function CursorSettingsPage() {
-  const { providers, models, cursorHarness, cursorBusy, busy, plugins } = useAppStore();
+  const { providers, models, cursorModels, cursorHarness, cursorBusy, busy, plugins } = useAppStore();
   const navigate = useNavigate();
   const message = useMessage();
   const [providerDraft, setProviderDraft] = useState<ProviderDraft | null>(null);
@@ -334,6 +334,7 @@ export function CursorSettingsPage() {
             providers={providers}
             models={models}
             pluginModels={pluginModels}
+            cursorModels={cursorModels}
             disabled={cursorBusy}
             testing={testingModelHashes}
             results={modelTestResults}
@@ -348,6 +349,7 @@ export function CursorSettingsPage() {
             onDeleteModel={setDeleting}
             onPluginSettings={() => navigate("/plugins")}
             onReorder={(hashes) => void reorderModels(hashes)}
+            onToggleCursorModel={(name, enabled) => void appStore.setCursorModelEnabled(name, enabled)}
           />
         </CursorModelGate></CursorModelProvider>
     </CursorCaGate></CursorCaProvider>

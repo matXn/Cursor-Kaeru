@@ -4,8 +4,13 @@ use axum::{
     extract::{Extension, State},
     http::{header, HeaderValue, Request, Response, StatusCode},
 };
+use std::collections::HashSet;
+
 use bytes::{BufMut, BytesMut};
-use prost::Message;
+use prost::{
+    encoding::{decode_key, decode_varint, WireType},
+    Message,
+};
 
 use crate::{
     api::cursor::proxy::{self, CursorProxy},
@@ -272,8 +277,20 @@ pub async fn available_models(
         models: available_models,
     }
     .encode_to_vec();
+    let store = registry.store();
+    let disabled = store.disabled_cursor_models().await?;
     match proxy::forward_buffered(&proxy, request).await {
-        Ok(upstream) => merge_response(upstream, local),
+        Ok(upstream) => {
+            let mut offered = Vec::new();
+            let response = merge_response(upstream, local, |payload| {
+                offered = offered_models(payload)?;
+                filter_models(payload, CatalogShape::Available, &disabled)
+            })?;
+            if !offered.is_empty() {
+                store.record_cursor_models(&offered).await?;
+            }
+            Ok(response)
+        }
         Err(error) => {
             tracing::warn!(%error, "Cursor AvailableModels upstream unavailable; using local catalog");
             Ok(local_response(local))
@@ -304,8 +321,11 @@ pub async fn usable_models(
             .collect(),
     }
     .encode_to_vec();
+    let disabled = registry.store().disabled_cursor_models().await?;
     match proxy::forward_buffered(&proxy, request).await {
-        Ok(upstream) => merge_response(upstream, local),
+        Ok(upstream) => merge_response(upstream, local, |payload| {
+            filter_models(payload, CatalogShape::Usable, &disabled)
+        }),
         Err(error) => {
             tracing::warn!(%error, "Cursor GetUsableModels upstream unavailable; using local catalog");
             Ok(local_response(local))
@@ -408,12 +428,19 @@ fn default_model_nudge_response(
     }
 }
 
-fn merge_response(upstream: proxy::BufferedResponse, extra: Vec<u8>) -> Result<Response<Body>> {
+/// Cursor's catalog with its own models passed through `filter`, then the local ones appended.
+fn merge_response(
+    upstream: proxy::BufferedResponse,
+    extra: Vec<u8>,
+    filter: impl FnOnce(&[u8]) -> Result<Vec<u8>>,
+) -> Result<Response<Body>> {
     if !upstream.status.is_success() {
         tracing::warn!(status = %upstream.status, "Cursor model catalog upstream rejected request; using local catalog");
         return Ok(local_response(extra));
     }
     let (framed, payload) = unary_payload(&upstream.body)?;
+    let payload = filter(payload)?;
+    let payload = payload.as_slice();
     let body = if framed {
         let mut merged = BytesMut::with_capacity(5 + payload.len() + extra.len());
         merged.put_u8(0);
@@ -428,6 +455,122 @@ fn merge_response(upstream: proxy::BufferedResponse, extra: Vec<u8>) -> Result<R
         merged.freeze()
     };
     Ok(upstream.with_body(body))
+}
+
+/// Where a catalog response keeps its model entries.
+#[derive(Clone, Copy)]
+enum CatalogShape {
+    /// `AvailableModelsResponse`: names in field 1, models (name in their field 1) in field 2.
+    Available,
+    /// `GetUsableModelsResponse`: models (id in their field 1) in field 1.
+    Usable,
+}
+
+/// Drops the entries of Cursor models switched off on the Models page. Works on the wire
+/// format, so every field this gateway does not model is passed on byte for byte.
+fn filter_models(
+    payload: &[u8],
+    shape: CatalogShape,
+    disabled: &HashSet<String>,
+) -> Result<Vec<u8>> {
+    if disabled.is_empty() {
+        return Ok(payload.to_vec());
+    }
+    let mut kept = Vec::with_capacity(payload.len());
+    let mut rest = payload;
+    while !rest.is_empty() {
+        let field = next_field(&mut rest)?;
+        let name = match (shape, field.tag, field.value) {
+            (CatalogShape::Available, 1, Some(value)) => Some(utf8(value)?),
+            (CatalogShape::Available, 2, Some(value)) | (CatalogShape::Usable, 1, Some(value)) => {
+                string_field(value, 1)?
+            }
+            _ => None,
+        };
+        if !name.is_some_and(|name| disabled.contains(name)) {
+            kept.extend_from_slice(field.bytes);
+        }
+    }
+    Ok(kept)
+}
+
+/// Cursor's own models in an `AvailableModelsResponse`: name and display name, in its order.
+fn offered_models(payload: &[u8]) -> Result<Vec<(String, String)>> {
+    let mut offered = Vec::new();
+    let mut rest = payload;
+    while !rest.is_empty() {
+        let field = next_field(&mut rest)?;
+        let (2, Some(model)) = (field.tag, field.value) else {
+            continue;
+        };
+        let Some(name) = string_field(model, 1)? else {
+            continue;
+        };
+        let display_name = string_field(model, 17)?.unwrap_or(name);
+        offered.push((name.to_owned(), display_name.to_owned()));
+    }
+    Ok(offered)
+}
+
+struct WireField<'a> {
+    tag: u32,
+    /// The payload of a length-delimited field.
+    value: Option<&'a [u8]>,
+    /// The whole field, key included.
+    bytes: &'a [u8],
+}
+
+fn next_field<'a>(rest: &mut &'a [u8]) -> Result<WireField<'a>> {
+    let start = *rest;
+    let malformed =
+        |error: prost::DecodeError| Error::Protocol(format!("malformed model catalog: {error}"));
+    let (tag, wire_type) = decode_key(rest).map_err(malformed)?;
+    let mut value = None;
+    let skip = match wire_type {
+        WireType::Varint => {
+            decode_varint(rest).map_err(malformed)?;
+            0
+        }
+        WireType::SixtyFourBit => 8,
+        WireType::ThirtyTwoBit => 4,
+        WireType::LengthDelimited => {
+            let length = decode_varint(rest).map_err(malformed)? as usize;
+            if length > rest.len() {
+                return Err(Error::Protocol("truncated model catalog field".into()));
+            }
+            value = Some(&rest[..length]);
+            length
+        }
+        WireType::StartGroup | WireType::EndGroup => {
+            return Err(Error::Protocol("unexpected group in model catalog".into()));
+        }
+    };
+    if skip > rest.len() {
+        return Err(Error::Protocol("truncated model catalog field".into()));
+    }
+    *rest = &rest[skip..];
+    Ok(WireField {
+        tag,
+        value,
+        bytes: &start[..start.len() - rest.len()],
+    })
+}
+
+/// The first string field `tag` of a message.
+fn string_field(message: &[u8], tag: u32) -> Result<Option<&str>> {
+    let mut rest = message;
+    while !rest.is_empty() {
+        let field = next_field(&mut rest)?;
+        if let (true, Some(value)) = (field.tag == tag, field.value) {
+            return utf8(value).map(Some);
+        }
+    }
+    Ok(None)
+}
+
+fn utf8(value: &[u8]) -> Result<&str> {
+    std::str::from_utf8(value)
+        .map_err(|_| Error::Protocol("model catalog name is not UTF-8".into()))
 }
 
 fn local_response(body: Vec<u8>) -> Response<Body> {
@@ -797,6 +940,56 @@ mod tests {
             created_at_ms: 0,
             updated_at_ms: 0,
         }
+    }
+
+    #[test]
+    fn switched_off_cursor_models_are_dropped_and_other_fields_kept() {
+        let model = |name: &str, display: &str| AvailableModel {
+            name: name.into(),
+            client_display_name: Some(display.into()),
+            ..Default::default()
+        };
+        let upstream = AvailableModelsAddition {
+            model_names: vec!["gpt-5".into(), "claude-4".into()],
+            models: vec![model("gpt-5", "GPT-5"), model("claude-4", "Claude 4")],
+        };
+        let mut payload = upstream.encode_to_vec();
+        // An unrelated field (composer_model_config, tag 4) must come through untouched.
+        let unrelated = [0x22, 0x02, 0x0a, 0x00];
+        payload.extend_from_slice(&unrelated);
+
+        assert_eq!(
+            offered_models(&payload).unwrap(),
+            [
+                ("gpt-5".to_string(), "GPT-5".to_string()),
+                ("claude-4".to_string(), "Claude 4".to_string())
+            ]
+        );
+        let disabled = HashSet::from(["gpt-5".to_string()]);
+        let filtered = filter_models(&payload, CatalogShape::Available, &disabled).unwrap();
+        assert!(filtered.ends_with(&unrelated));
+        let decoded = AvailableModelsAddition::decode(filtered.as_slice()).unwrap();
+        assert_eq!(decoded.model_names, ["claude-4"]);
+        assert_eq!(decoded.models.len(), 1);
+        assert_eq!(decoded.models[0].name, "claude-4");
+
+        let usable = UsableModelsAddition {
+            models: vec![
+                agent::ModelDetails {
+                    model_id: "gpt-5".into(),
+                    ..Default::default()
+                },
+                agent::ModelDetails {
+                    model_id: "claude-4".into(),
+                    ..Default::default()
+                },
+            ],
+        }
+        .encode_to_vec();
+        let filtered = filter_models(&usable, CatalogShape::Usable, &disabled).unwrap();
+        let decoded = UsableModelsAddition::decode(filtered.as_slice()).unwrap();
+        assert_eq!(decoded.models.len(), 1);
+        assert_eq!(decoded.models[0].model_id, "claude-4");
     }
 
     #[test]

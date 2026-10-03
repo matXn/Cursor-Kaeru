@@ -42,6 +42,7 @@ const logos = {
   aws: ["simple-icons", "amazonwebservices"],
   cloudflare: ["simple-icons", "cloudflare"],
   githubcopilot: ["simple-icons", "githubcopilot"],
+  cursor: ["simple-icons", "cursor"],
 };
 
 const sets = new Map();

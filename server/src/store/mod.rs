@@ -2,6 +2,7 @@
 mod cas;
 mod checkpoints;
 mod conversations;
+mod cursor_models;
 mod cursor_traces;
 mod input_anchors;
 mod legacy_config;

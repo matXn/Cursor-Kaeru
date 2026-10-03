@@ -1,10 +1,11 @@
 import { useSyncExternalStore } from "react";
-import { api, type CursorHarnessStatus, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings, type Provider, type ProviderInput } from "../api";
+import { api, type CursorHarnessStatus, type CursorModel, type Model, type ModelInput, type Overview, type PluginDescriptor, type PluginRuntimeStatus, type PortSettings, type Provider, type ProviderInput } from "../api";
 import { applyTheme, isThemeId, type ThemeId } from "../theme/theme";
 
 export type AppSnapshot = {
   providers: Provider[];
   models: Model[];
+  cursorModels: CursorModel[];
   overview: Overview;
   detailed: boolean;
   ports: PortSettings;
@@ -25,6 +26,7 @@ const savedTheme = (): ThemeId => {
 let snapshot: AppSnapshot = {
   providers: [],
   models: [],
+  cursorModels: [],
   overview: {
     metrics: {
       llm_calls: 0,
@@ -82,9 +84,10 @@ export const appStore = {
   async refresh() {
     update({ busy: true, error: null });
     try {
-      const [providers, models, overview, settings, ports, cursorHarness, pluginRuntime, plugins] = await Promise.all([
+      const [providers, models, cursorModels, overview, settings, ports, cursorHarness, pluginRuntime, plugins] = await Promise.all([
         api.providers(),
         api.models(),
+        api.cursorModels(),
         api.overview(),
         api.observability(),
         api.ports(),
@@ -92,7 +95,7 @@ export const appStore = {
         api.pluginRuntime(),
         api.plugins(),
       ]);
-      update({ providers, models, overview, detailed: settings.detailed, ports, cursorHarness, pluginRuntime, plugins });
+      update({ providers, models, cursorModels, overview, detailed: settings.detailed, ports, cursorHarness, pluginRuntime, plugins });
     } catch (cause) {
       update({ error: cause instanceof Error ? cause.message : String(cause) });
     } finally {
@@ -235,6 +238,13 @@ export const appStore = {
       if ("modelHash" in target) await api.setModelEnabled(target.modelHash, enabled);
       else await api.setPluginModelEnabled(target.pluginId, target.providerId, target.modelId, enabled);
       await appStore.refresh();
+    });
+  },
+  /** Switches one of Cursor's own models, or all of them without a name. */
+  async setCursorModelEnabled(name: string | null, enabled: boolean) {
+    update({ cursorModels: snapshot.cursorModels.map((model) => name === null || model.name === name ? { ...model, enabled } : model) });
+    await perform(async () => {
+      update({ cursorModels: await api.setCursorModelEnabled(name, enabled) });
     });
   },
   async deleteProvider(id: string) {

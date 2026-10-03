@@ -525,3 +525,11 @@ impl ModelSpec {
         }
     }
 }
+
+/// One of Cursor's own models, as its server last offered it.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
+pub struct CursorModel {
+    pub name: String,
+    pub display_name: String,
+    pub enabled: bool,
+}

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import Sortable from "sortablejs";
-import type { Model, PluginModelDescriptor, Provider } from "../../shared/api";
+import type { CursorModel, Model, PluginModelDescriptor, Provider } from "../../shared/api";
 import { ActionMenu } from "../../shared/ui/ActionMenu";
 import { Icon } from "../../shared/ui/Icon";
 import { Switch } from "../../shared/ui/Switch";
@@ -20,6 +20,7 @@ type ProviderTableProps = Tests & {
   providers: Provider[];
   models: Model[];
   pluginModels: PluginModelDescriptor[];
+  cursorModels: CursorModel[];
   disabled: boolean;
   onTest: (model: { model_hash: string; display_name: string }) => void;
   onToggle: (target: { modelHash: string } | { pluginId: string; providerId: string; modelId: string }, enabled: boolean) => void;
@@ -32,6 +33,7 @@ type ProviderTableProps = Tests & {
   onDeleteModel: (model: Model) => void;
   onPluginSettings: () => void;
   onReorder: (modelHashes: string[]) => void;
+  onToggleCursorModel: (name: string | null, enabled: boolean) => void;
 };
 
 // Column plan, shared by every section so all rows line up on the page grid:
@@ -94,7 +96,38 @@ export function ProviderTable(props: ProviderTableProps) {
         </Cell>
       </Grid>)}
     </section>)}
+
+    <CursorModels {...props} number={next} />
   </div>;
+}
+
+// Cursor's own models: they come from the Cursor account, so they can only be switched.
+function CursorModels({ cursorModels, disabled, onToggleCursorModel, number }: ProviderTableProps & { number: () => string }) {
+  const allOn = cursorModels.every((model) => model.enabled);
+  return <section className={styles.section} aria-label="Cursor">
+    <Grid>
+      <Rule />
+      <Cell from={1} to={5} className={styles.provider}>
+        <ProviderLogo className={styles.logo} hints={["cursor"]} size="18px" />
+        <span className={styles.providerName}>Cursor</span>
+        <span className={styles.tag}>{t("官方")}</span>
+      </Cell>
+      <Cell from={5} to={10} className={styles.muted} style={{ alignSelf: "center" }}>{t("关闭后不在 Cursor 的模型列表中显示，Cursor 重新读取模型列表后生效")}</Cell>
+      <Cell from={10} to={13} className={styles.actions}>
+        {cursorModels.length > 0 && <button type="button" disabled={disabled} onClick={() => onToggleCursorModel(null, !allOn)}>{allOn ? t("全部关闭") : t("全部开启")}</button>}
+      </Cell>
+    </Grid>
+    {cursorModels.length === 0
+      ? <p className={styles.empty}>{t("接管后在 Cursor 中打开模型列表，官方模型会出现在这里。")}</p>
+      : cursorModels.map((model) => <Grid key={model.name} className={styles.row} data-off={model.enabled ? undefined : ""}>
+        <Cell from={1} to={2} className={styles.number}>{number()}</Cell>
+        <Cell from={2} to={5} className={styles.name}>{model.display_name}</Cell>
+        <Cell from={5} to={10} className={styles.mono}><span title={model.name}>{model.name}</span></Cell>
+        <Cell from={10} to={13} className={styles.actions}>
+          <Switch checked={model.enabled} label={t("在 Cursor 中启用")} disabled={disabled} onChange={(enabled) => onToggleCursorModel(model.name, enabled)} />
+        </Cell>
+      </Grid>)}
+  </section>;
 }
 
 // A provider's models, draggable among themselves by the handle in the Nº column.

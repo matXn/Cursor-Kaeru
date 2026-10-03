@@ -6,6 +6,7 @@ import type {
   Overview,
   OverviewTokenUsageBucket,
   PluginDescriptor,
+  CursorModel,
   Provider,
   PluginResourceView,
   ProxySettings,
@@ -27,6 +28,13 @@ const providerNames: Record<string, string> = {
   "https://open.bigmodel.cn": "智谱",
   "https://api.mistral.ai": "Mistral",
 };
+const cursorModels: CursorModel[] = [
+  ["claude-4.5-sonnet", "Sonnet 4.5"],
+  ["gpt-5", "GPT-5"],
+  ["gemini-2.5-pro", "Gemini 2.5 Pro"],
+  ["composer-1", "Composer 1"],
+].map(([name, display_name]) => ({ name, display_name, enabled: name !== "gemini-2.5-pro" }));
+
 const providers: Provider[] = Object.entries(providerNames).map(([url, name], index) => ({
   provider_id: `mock-provider-${index + 1}`,
   sort_order: index + 1,
@@ -225,6 +233,12 @@ export function installDemoApi() {
       return json({ state: "ready", version: "demo", target: null, phase: null, downloaded_bytes: 0, total_bytes: null, error: null });
     }
     if (path === "/plugins" && method === "GET") return json(plugins);
+    if (path === "/cursor-models" && method === "GET") return json(cursorModels);
+    if (path === "/cursor-models/enabled") {
+      const { name, enabled } = body as { name: string | null; enabled: boolean };
+      for (const model of cursorModels) if (name === null || model.name === name) model.enabled = enabled;
+      return json(cursorModels);
+    }
     if (path === "/providers" && method === "GET") return json(providers);
     if (path === "/providers" && method === "POST") return json(providers[0]);
     if (path === "/providers/order") return json(providers);

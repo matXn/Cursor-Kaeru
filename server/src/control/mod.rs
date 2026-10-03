@@ -138,6 +138,11 @@ pub fn api_router(service: ControlService) -> Router {
             "/__byok-api__/api/models/{model_hash}/enabled",
             put(models::set_enabled),
         )
+        .route("/__byok-api__/api/cursor-models", get(models::list_cursor_models))
+        .route(
+            "/__byok-api__/api/cursor-models/enabled",
+            put(models::set_cursor_model_enabled),
+        )
         .route(
             "/__byok-api__/api/models/{model_hash}/test/{test_id}",
             post(models::test).delete(models::cancel),

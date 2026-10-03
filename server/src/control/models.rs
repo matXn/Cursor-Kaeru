@@ -7,7 +7,7 @@ use axum::{
 use serde::Deserialize;
 
 use crate::{
-    model::{ModelConfig, ModelConfigInput, ProviderConfig, ProviderConfigInput},
+    model::{CursorModel, ModelConfig, ModelConfigInput, ProviderConfig, ProviderConfigInput},
     Result,
 };
 
@@ -39,6 +39,30 @@ pub async fn set_enabled(
     Ok(Json(
         service
             .set_model_enabled(&model_hash, input.enabled)
+            .await?,
+    ))
+}
+
+pub async fn list_cursor_models(
+    State(service): State<ControlService>,
+) -> Result<Json<Vec<CursorModel>>> {
+    Ok(Json(service.cursor_models().await?))
+}
+
+/// Switches one of Cursor's own models, or all of them when no name is given.
+#[derive(Deserialize)]
+pub struct CursorModelEnabled {
+    pub name: Option<String>,
+    pub enabled: bool,
+}
+
+pub async fn set_cursor_model_enabled(
+    State(service): State<ControlService>,
+    Json(input): Json<CursorModelEnabled>,
+) -> Result<Json<Vec<CursorModel>>> {
+    Ok(Json(
+        service
+            .set_cursor_model_enabled(input.name.as_deref(), input.enabled)
             .await?,
     ))
 }

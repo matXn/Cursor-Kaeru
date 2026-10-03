@@ -4,6 +4,13 @@ import { utcOffsetMs } from "./utils/localDay";
 export type ModelType = "openai" | "anthropic";
 
 /** A model service: where requests go and how they are authenticated, shared by its models. */
+/** One of Cursor's own models, as its server last offered it. */
+export interface CursorModel {
+  name: string;
+  display_name: string;
+  enabled: boolean;
+}
+
 export interface Provider {
   provider_id: string;
   sort_order: number;
@@ -530,6 +537,9 @@ export const api = {
   updateModel: (hash: string, model: ModelInput) => request<Model>(`/models/${hash}`, { method: "PUT", body: JSON.stringify(model) }),
   setModelEnabled: (hash: string, enabled: boolean) => request<Model>(`/models/${encodeURIComponent(hash)}/enabled`, { method: "PUT", body: JSON.stringify({ enabled }) }),
   deleteModel: (hash: string) => request<void>(`/models/${hash}`, { method: "DELETE" }),
+  cursorModels: () => request<CursorModel[]>("/cursor-models"),
+  /** Switches one of Cursor's own models, or all of them without a name. */
+  setCursorModelEnabled: (name: string | null, enabled: boolean) => request<CursorModel[]>("/cursor-models/enabled", { method: "PUT", body: JSON.stringify({ name, enabled }) }),
   testModel: (hash: string, testId: string, signal?: AbortSignal) => request<ModelConnectivityResult>(`/models/${encodeURIComponent(hash)}/test/${encodeURIComponent(testId)}`, { method: "POST", signal }),
   cancelModelTest: (hash: string, testId: string) => request<void>(`/models/${encodeURIComponent(hash)}/test/${encodeURIComponent(testId)}`, { method: "DELETE" }),
   overview: (filter?: { startMs: number; endMs: number; modelHashes?: string[]; bucketMs?: number }) => {

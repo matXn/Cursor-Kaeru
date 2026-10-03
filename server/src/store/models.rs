@@ -679,7 +679,7 @@ pub(crate) mod tests {
         }
     }
 
-    async fn store() -> (tempfile::TempDir, Store) {
+    pub(crate) async fn store() -> (tempfile::TempDir, Store) {
         let directory = tempfile::tempdir().unwrap();
         let store = Store::connect(&format!(
             "sqlite://{}",

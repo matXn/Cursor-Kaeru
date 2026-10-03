@@ -15,7 +15,7 @@ use url::Url;
 use crate::{
     local_app::CursorHarness,
     model::{
-        ContentPart, CursorRunTraceArtifact, CursorRunTraceSummary, LlmCallRequest,
+        ContentPart, CursorModel, CursorRunTraceArtifact, CursorRunTraceSummary, LlmCallRequest,
         LlmCallResponseChunk, LlmCallSummary, ModelConfig, ModelConfigInput, ModelInvocation,
         ModelRequest, ModelSpec, ModelType, Overview, ProjectedContent, ProjectedMessage,
         PromptSpec, ProviderConfig, ProviderConfigInput, ProviderType, Role,
@@ -280,6 +280,19 @@ impl ControlService {
 
     pub async fn set_model_enabled(&self, model_hash: &str, enabled: bool) -> Result<ModelConfig> {
         self.store.set_model_enabled(model_hash, enabled).await
+    }
+
+    pub async fn cursor_models(&self) -> Result<Vec<CursorModel>> {
+        self.store.cursor_models().await
+    }
+
+    pub async fn set_cursor_model_enabled(
+        &self,
+        name: Option<&str>,
+        enabled: bool,
+    ) -> Result<Vec<CursorModel>> {
+        self.store.set_cursor_model_enabled(name, enabled).await?;
+        self.store.cursor_models().await
     }
 
     pub async fn providers(&self) -> Result<Vec<ProviderConfig>> {
