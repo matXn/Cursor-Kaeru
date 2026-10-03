@@ -278,6 +278,10 @@ impl ControlService {
         self.store.models().await
     }
 
+    pub async fn set_model_enabled(&self, model_hash: &str, enabled: bool) -> Result<ModelConfig> {
+        self.store.set_model_enabled(model_hash, enabled).await
+    }
+
     pub async fn providers(&self) -> Result<Vec<ProviderConfig>> {
         self.store.providers().await
     }

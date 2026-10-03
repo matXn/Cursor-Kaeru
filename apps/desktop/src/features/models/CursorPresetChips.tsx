@@ -1,6 +1,6 @@
 import type { ModelType } from "../../shared/api";
 import { modelPresets, presetEndpoint, trimTrailingSlash, type ModelPreset } from "../../shared/utils/modelPresets";
-import { ProviderLogo } from "./ProviderLogo";
+import { ProviderLogo } from "../../shared/ui/ProviderLogo";
 import styles from "./CursorPresetChips.module.scss";
 
 /** 常用服务商预设：点击按当前协议类型自动填充对应端点与默认模型 */

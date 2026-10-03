@@ -128,7 +128,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 159,
+          "line": 162,
           "column": 101
         },
         {
@@ -258,7 +258,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 406,
+          "line": 407,
           "column": 73
         }
       ]
@@ -316,7 +316,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 172,
+          "line": 175,
           "column": 74
         }
       ]
@@ -328,7 +328,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 417,
+          "line": 418,
           "column": 89
         }
       ]
@@ -487,7 +487,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 416,
+          "line": 417,
           "column": 36
         },
         {
@@ -504,7 +504,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 191,
+          "line": 187,
           "column": 57
         }
       ]
@@ -569,7 +569,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 374,
+          "line": 375,
           "column": 74
         }
       ]
@@ -709,7 +709,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 380,
+          "line": 381,
           "column": 52
         }
       ]
@@ -856,7 +856,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 410,
+          "line": 411,
           "column": 89
         }
       ]
@@ -973,6 +973,23 @@
         }
       ]
     },
+    "266a7949b0dc7ee1": {
+      "source": "在 Cursor 中启用",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 91,
+          "column": 50
+        },
+        {
+          "file": "features/models/ProviderTable.tsx",
+          "line": 160,
+          "column": 50
+        }
+      ]
+    },
     "287cb2593e03dead": {
       "source": "例如：我的中转",
       "kind": "text",
@@ -1020,7 +1037,7 @@
       "refs": [
         {
           "file": "features/home/activity/YearFacts.tsx",
-          "line": 52,
+          "line": 54,
           "column": 13
         }
       ]
@@ -1063,7 +1080,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 409,
+          "line": 410,
           "column": 178
         }
       ]
@@ -1087,12 +1104,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 380,
+          "line": 381,
           "column": 76
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 381,
+          "line": 382,
           "column": 85
         },
         {
@@ -1183,7 +1200,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 382,
+          "line": 383,
           "column": 11
         }
       ]
@@ -1209,7 +1226,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 423,
+          "line": 424,
           "column": 70
         }
       ]
@@ -1257,17 +1274,17 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 380,
+          "line": 381,
           "column": 99
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 381,
+          "line": 382,
           "column": 108
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 162,
+          "line": 165,
           "column": 36
         },
         {
@@ -1395,7 +1412,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 57,
+          "line": 58,
           "column": 107
         }
       ]
@@ -1441,12 +1458,12 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 59,
+          "line": 60,
           "column": 32
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 160,
+          "line": 163,
           "column": 30
         },
         {
@@ -1554,7 +1571,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 66,
+          "line": 67,
           "column": 42
         }
       ]
@@ -1607,7 +1624,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 377,
+          "line": 378,
           "column": 80
         },
         {
@@ -1806,7 +1823,7 @@
       "refs": [
         {
           "file": "features/home/activity/YearFacts.tsx",
-          "line": 40,
+          "line": 42,
           "column": 100
         },
         {
@@ -1828,7 +1845,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 409,
+          "line": 410,
           "column": 34
         }
       ]
@@ -1840,17 +1857,17 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 374,
+          "line": 375,
           "column": 703
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 90,
+          "line": 92,
           "column": 210
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 158,
+          "line": 161,
           "column": 118
         }
       ]
@@ -2007,7 +2024,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 362,
+          "line": 363,
           "column": 258
         }
       ]
@@ -2127,12 +2144,12 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 409,
+          "line": 410,
           "column": 83
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 409,
+          "line": 410,
           "column": 131
         }
       ]
@@ -2414,7 +2431,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 161,
+          "line": 164,
           "column": 39
         },
         {
@@ -2445,7 +2462,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 561,
+          "line": 569,
           "column": 43
         }
       ]
@@ -2611,12 +2628,12 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 90,
+          "line": 92,
           "column": 222
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 158,
+          "line": 161,
           "column": 130
         }
       ]
@@ -2703,7 +2720,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 408,
+          "line": 409,
           "column": 85
         }
       ]
@@ -2715,12 +2732,12 @@
       "refs": [
         {
           "file": "shared/store/appStore.ts",
-          "line": 239,
+          "line": 247,
           "column": 23
         },
         {
           "file": "shared/store/appStore.ts",
-          "line": 246,
+          "line": 254,
           "column": 25
         }
       ]
@@ -2780,7 +2797,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 556,
+          "line": 564,
           "column": 43
         }
       ]
@@ -2809,7 +2826,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 58,
+          "line": 59,
           "column": 105
         }
       ]
@@ -2850,7 +2867,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 405,
+          "line": 406,
           "column": 67
         }
       ]
@@ -2932,7 +2949,7 @@
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 362,
+          "line": 363,
           "column": 80
         }
       ]
@@ -2971,7 +2988,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 494,
+          "line": 501,
           "column": 21
         }
       ]
@@ -2995,7 +3012,7 @@
       "refs": [
         {
           "file": "features/home/activity/YearFacts.tsx",
-          "line": 34,
+          "line": 35,
           "column": 13
         }
       ]
@@ -3256,7 +3273,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 191,
+          "line": 187,
           "column": 47
         }
       ]
@@ -3318,7 +3335,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 424,
+          "line": 425,
           "column": 87
         }
       ]
@@ -3402,7 +3419,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 380,
+          "line": 381,
           "column": 250
         }
       ]
@@ -3723,12 +3740,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 362,
+          "line": 363,
           "column": 248
         },
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 374,
+          "line": 375,
           "column": 432
         },
         {
@@ -3870,7 +3887,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 374,
+          "line": 375,
           "column": 715
         }
       ]
@@ -3906,12 +3923,12 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 148,
+          "line": 150,
           "column": 97
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 148,
+          "line": 150,
           "column": 115
         }
       ]
@@ -4125,12 +4142,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 362,
+          "line": 363,
           "column": 67
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 60,
+          "line": 61,
           "column": 36
         }
       ]
@@ -4288,7 +4305,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 377,
+          "line": 378,
           "column": 103
         }
       ]
@@ -4409,7 +4426,7 @@
       "refs": [
         {
           "file": "features/home/activity/YearFacts.tsx",
-          "line": 46,
+          "line": 48,
           "column": 13
         }
       ]
@@ -4469,12 +4486,12 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 381,
+          "line": 382,
           "column": 60
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 61,
+          "line": 62,
           "column": 38
         }
       ]
@@ -4567,7 +4584,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 374,
+          "line": 375,
           "column": 62
         }
       ]
@@ -4779,7 +4796,7 @@
       "refs": [
         {
           "file": "features/home/activity/YearFacts.tsx",
-          "line": 40,
+          "line": 42,
           "column": 24
         }
       ]
@@ -4856,7 +4873,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 374,
+          "line": 375,
           "column": 675
         },
         {
@@ -5048,7 +5065,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 378,
+          "line": 379,
           "column": 47
         }
       ]
@@ -5180,12 +5197,12 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 81,
+          "line": 82,
           "column": 67
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 91,
+          "line": 93,
           "column": 67
         },
         {
@@ -5457,7 +5474,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 77,
+          "line": 78,
           "column": 41
         },
         {
@@ -5546,7 +5563,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 378,
+          "line": 379,
           "column": 77
         }
       ]
@@ -5570,7 +5587,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 377,
+          "line": 378,
           "column": 53
         }
       ]
@@ -5594,7 +5611,7 @@
       "refs": [
         {
           "file": "features/models/CursorSettingsPage.tsx",
-          "line": 395,
+          "line": 396,
           "column": 64
         }
       ]
@@ -5620,7 +5637,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 79,
+          "line": 80,
           "column": 90
         }
       ]

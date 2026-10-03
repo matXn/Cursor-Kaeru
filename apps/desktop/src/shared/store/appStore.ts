@@ -193,6 +193,14 @@ export const appStore = {
       return null;
     } finally { update({ cursorBusy: false }); }
   },
+  /** Switches a model on or off for Cursor; plugin models go through their plugin. */
+  async setModelEnabled(target: { modelHash: string } | { pluginId: string; providerId: string; modelId: string }, enabled: boolean) {
+    await perform(async () => {
+      if ("modelHash" in target) await api.setModelEnabled(target.modelHash, enabled);
+      else await api.setPluginModelEnabled(target.pluginId, target.providerId, target.modelId, enabled);
+      await appStore.refresh();
+    });
+  },
   async deleteProvider(id: string) {
     await perform(async () => {
       await api.deleteProvider(id);

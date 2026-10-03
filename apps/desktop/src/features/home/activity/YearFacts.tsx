@@ -4,6 +4,7 @@ import { activeDaysGlyph, conversationsGlyph, favoriteModelGlyph, peakHourGlyph 
 import type { Overview } from "../../../shared/api";
 import { Cell, Grid, Rule } from "../../../shell/layout/Grid";
 import type { ContributionDay } from "./ContributionCalendar";
+import { FittedName } from "./FittedName";
 import { ModelShare } from "./ModelShare";
 import styles from "./YearFacts.module.scss";
 
@@ -37,6 +38,7 @@ export function YearFacts({ days, overview }: { days: ContributionDay[]; overvie
       glyph: favoriteModelGlyph,
       label: "Favorite model",
       value: favorite?.display_name ?? "—",
+      fit: favorite !== undefined,
       note: favorite ? t("占全部 Token 的 {share}", { share: percent(favorite.tokens, shareTotal) }) : t("暂无数据"),
     },
     {
@@ -57,7 +59,9 @@ export function YearFacts({ days, overview }: { days: ContributionDay[]; overvie
     <Rule />
     {facts.map((fact, index) => <Cell key={fact.label} from={index * 3 + 1} to={index * 3 + 4} className={styles.fact}>
       <div className={styles.label}><Icon icon={fact.glyph} size="1.2em" />{fact.label}</div>
-      <div className={styles.value} title={fact.value}>{fact.value}</div>
+      {"fit" in fact && fact.fit
+        ? <FittedName className={styles.value} name={fact.value} />
+        : <div className={styles.value} title={fact.value}>{fact.value}</div>}
       <div className={styles.note}>{fact.note}</div>
     </Cell>)}
     {overview.model_share.length > 0 && <>

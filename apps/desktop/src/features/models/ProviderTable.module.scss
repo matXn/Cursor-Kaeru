@@ -43,6 +43,11 @@
   border-top: 1px solid var(--border);
 }
 
+// Switched off: still listed here, not offered to Cursor.
+.row[data-off] > :not(:last-child) {
+  opacity: 0.45;
+}
+
 .number {
   display: flex;
   align-items: center;
@@ -141,7 +146,11 @@
   gap: var(--space-1);
   min-width: 0;
 
-  > button {
+  > button[role="switch"] {
+    margin-right: var(--space-2);
+  }
+
+  > button:not([role="switch"]) {
     height: var(--control-h-sm);
     padding: 0 var(--space-2);
     color: var(--text-muted);
@@ -152,7 +161,7 @@
     white-space: nowrap;
     transition: background var(--duration), color var(--duration);
 
-    &:first-child {
+    &:first-of-type {
       color: var(--text);
     }
 

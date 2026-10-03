@@ -1,0 +1,12 @@
+.root {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.probe {
+  position: absolute;
+  visibility: hidden;
+  white-space: nowrap;
+}

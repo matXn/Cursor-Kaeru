@@ -1,6 +1,6 @@
-import { Icon, type IconProps } from "../../shared/ui/Icon";
-import { modelsGlyph } from "../../shared/ui/glyphs";
-import { providerLogo } from "../../shared/utils/providerLogo";
+import { Icon, type IconProps } from "./Icon";
+import { modelsGlyph } from "./glyphs";
+import { providerLogo } from "../utils/providerLogo";
 
 /** The provider's monochrome logo, or the neutral model cube when nothing matches. */
 export function providerMark(...hints: Array<string | null | undefined>) {

@@ -171,6 +171,8 @@ pub struct ModelConfig {
     pub model_hash: String,
     pub provider_id: String,
     pub provider_name: String,
+    /// Off: still configured, but not offered to Cursor.
+    pub enabled: bool,
     pub sort_order: i64,
     pub display_name: String,
     #[serde(rename = "type")]

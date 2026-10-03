@@ -3,7 +3,7 @@ import type { ModelInput, Provider } from "../../shared/api";
 import { Button } from "../../shared/ui/Button";
 import { FormField, TextInput } from "../../shared/ui/FormControls";
 import { Combobox, Select, type ComboboxHandle } from "../../shared/ui/Select";
-import { providerMark } from "./ProviderLogo";
+import { providerMark } from "../../shared/ui/ProviderLogo";
 import { ToggleJsonField } from "./ToggleJsonField";
 import styles from "./CursorSettings.module.scss";
 

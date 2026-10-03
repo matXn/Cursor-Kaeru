@@ -26,6 +26,8 @@ export interface Model {
   model_hash: string;
   provider_id: string;
   provider_name: string;
+  /** Off: still configured, but not offered to Cursor. */
+  enabled: boolean;
   sort_order: number;
   display_name: string;
   type: ModelType;
@@ -365,6 +367,11 @@ export interface PluginImportResult {
   modelSyncError: string | null;
 }
 
+/** Every model of the plugin providers that have an account, switched on or not. */
+export function pluginCatalogModels(plugins: PluginDescriptor[]): PluginModelDescriptor[] {
+  return plugins.flatMap((plugin) => plugin.providers.flatMap((provider) => provider.configured ? provider.models : []));
+}
+
 export function configuredPluginModels(plugins: PluginDescriptor[]): PluginModelDescriptor[] {
   return plugins.flatMap((plugin) =>
     plugin.providers.flatMap((provider) => provider.configured ? provider.models.filter((model) => model.enabled) : []));
@@ -521,6 +528,7 @@ export const api = {
   previewV0049Models: () => request<LegacyModelImportPreview>("/models/import-v0049"),
   importV0049Models: () => request<LegacyModelImportResult>("/models/import-v0049", { method: "POST" }),
   updateModel: (hash: string, model: ModelInput) => request<Model>(`/models/${hash}`, { method: "PUT", body: JSON.stringify(model) }),
+  setModelEnabled: (hash: string, enabled: boolean) => request<Model>(`/models/${encodeURIComponent(hash)}/enabled`, { method: "PUT", body: JSON.stringify({ enabled }) }),
   deleteModel: (hash: string) => request<void>(`/models/${hash}`, { method: "DELETE" }),
   testModel: (hash: string, testId: string, signal?: AbortSignal) => request<ModelConnectivityResult>(`/models/${encodeURIComponent(hash)}/test/${encodeURIComponent(testId)}`, { method: "POST", signal }),
   cancelModelTest: (hash: string, testId: string) => request<void>(`/models/${encodeURIComponent(hash)}/test/${encodeURIComponent(testId)}`, { method: "DELETE" }),

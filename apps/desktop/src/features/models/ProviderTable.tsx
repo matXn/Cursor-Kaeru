@@ -3,11 +3,12 @@ import Sortable from "sortablejs";
 import type { Model, PluginModelDescriptor, Provider } from "../../shared/api";
 import { ActionMenu } from "../../shared/ui/ActionMenu";
 import { Icon } from "../../shared/ui/Icon";
+import { Switch } from "../../shared/ui/Switch";
 import { dragIcon } from "../../shared/ui/icons";
 import { formatCompactInteger } from "../../shared/utils/numberFormat";
 import { Cell, Grid, Rule } from "../../shell/layout/Grid";
 import { CursorModelTestResult, type CursorModelTestState } from "./CursorModelTestResult";
-import { ProviderLogo } from "./ProviderLogo";
+import { ProviderLogo } from "../../shared/ui/ProviderLogo";
 import styles from "./ProviderTable.module.scss";
 
 type Tests = {
@@ -21,6 +22,7 @@ type ProviderTableProps = Tests & {
   pluginModels: PluginModelDescriptor[];
   disabled: boolean;
   onTest: (model: { model_hash: string; display_name: string }) => void;
+  onToggle: (target: { modelHash: string } | { pluginId: string; providerId: string; modelId: string }, enabled: boolean) => void;
   onAddModel: (provider: Provider) => void;
   onPickModels: (provider: Provider) => void;
   onEditProvider: (provider: Provider) => void;
@@ -33,8 +35,8 @@ type ProviderTableProps = Tests & {
 };
 
 // Column plan, shared by every section so all rows line up on the page grid:
-// provider row   1–5 name · 5–8 address · 8–10 key · 10–13 actions
-// model row      1–2 Nº · 2–5 name + options · 5–8 model ID · 8–10 test · 10–13 actions
+// provider row   1–5 name · 5–10 address · 10–13 actions
+// model row      1–2 Nº · 2–5 name + options · 5–8 model ID · 8–10 test · 10–13 switch + actions
 export function ProviderTable(props: ProviderTableProps) {
   let number = 0;
   const next = () => String(++number).padStart(2, "0");
@@ -51,8 +53,7 @@ export function ProviderTable(props: ProviderTableProps) {
             <span className={styles.providerName}>{provider.name}</span>
             <span className={styles.tag}>{protocolLabel(provider)}</span>
           </Cell>
-          <Cell from={5} to={8} className={styles.mono} style={{ alignSelf: "center" }}><span title={provider.base_url}>{provider.base_url.replace(/^https?:\/\//, "")}</span></Cell>
-          <Cell from={8} to={10} className={styles.mono} style={{ alignSelf: "center" }}>{maskKey(provider.api_key)}</Cell>
+          <Cell from={5} to={10} className={styles.mono} style={{ alignSelf: "center" }}><span title={provider.base_url}>{provider.base_url.replace(/^https?:\/\//, "")}</span></Cell>
           <Cell from={10} to={13} className={styles.actions}>
             <button type="button" disabled={props.disabled} onClick={() => props.onPickModels(provider)}>{t("获取模型列表")}</button>
             <button type="button" disabled={props.disabled} onClick={() => props.onAddModel(provider)}>{t("添加")}</button>
@@ -81,12 +82,13 @@ export function ProviderTable(props: ProviderTableProps) {
           <button type="button" onClick={props.onPluginSettings}>{t("设置")}</button>
         </Cell>
       </Grid>
-      {group.models.map((model) => <Grid key={model.id} className={styles.row}>
+      {group.models.map((model) => <Grid key={model.id} className={styles.row} data-off={model.enabled ? undefined : ""}>
         <Cell from={1} to={2} className={styles.number}>{next()}</Cell>
         <Cell from={2} to={5} className={styles.name}>{model.displayName}</Cell>
         <Cell from={5} to={8} className={styles.mono}>{model.modelId}</Cell>
         <Cell from={8} to={10}><TestState id={model.id} {...props} /></Cell>
         <Cell from={10} to={13} className={styles.actions}>
+          <Switch checked={model.enabled} label={t("在 Cursor 中启用")} disabled={props.disabled} onChange={(enabled) => props.onToggle({ pluginId: model.pluginId, providerId: model.providerId, modelId: model.modelId }, enabled)} />
           <button type="button" disabled={props.disabled && !props.testing.has(model.id)} onClick={() => props.onTest({ model_hash: model.id, display_name: model.displayName })}>{props.testing.has(model.id) ? t("取消测试") : t("测试")}</button>
           <button type="button" onClick={props.onPluginSettings}>{t("设置")}</button>
         </Cell>
@@ -143,7 +145,7 @@ function ModelRows(props: ProviderTableProps & { rows: Model[]; number: () => st
   return <div ref={list}>
     {props.rows.map((model) => {
       const testing = props.testing.has(model.model_hash);
-      return <Grid key={model.model_hash} className={styles.row} data-model-hash={model.model_hash}>
+      return <Grid key={model.model_hash} className={styles.row} data-model-hash={model.model_hash} data-off={model.enabled ? undefined : ""}>
         <Cell from={1} to={2} className={styles.number}>
           <button type="button" className={styles.handle} disabled={props.disabled} aria-label={t("拖动排序")} title={t("拖动排序")}><Icon icon={dragIcon} size="14px" /></button>
           <span>{props.number()}</span>
@@ -155,6 +157,7 @@ function ModelRows(props: ProviderTableProps & { rows: Model[]; number: () => st
         <Cell from={5} to={8} className={styles.mono}><span title={model.model_id}>{model.model_id}</span></Cell>
         <Cell from={8} to={10}><TestState id={model.model_hash} {...props} /></Cell>
         <Cell from={10} to={13} className={styles.actions}>
+          <Switch checked={model.enabled} label={t("在 Cursor 中启用")} disabled={props.disabled} onChange={(enabled) => props.onToggle({ modelHash: model.model_hash }, enabled)} />
           <button type="button" disabled={props.disabled && !testing} onClick={() => props.onTest(model)}>{testing ? t("取消测试") : t("测试")}</button>
           <button type="button" disabled={props.disabled} onClick={() => props.onEditModel(model)}>{t("编辑")}</button>
           <ActionMenu label={t("更多")} disabled={props.disabled} items={[
@@ -176,13 +179,6 @@ function TestState({ id, testing, results }: Tests & { id: string }) {
 function protocolLabel(provider: Provider) {
   if (provider.type === "anthropic") return "ANTHROPIC";
   return provider.openai_endpoint === "/v1/chat/completions" ? "OPENAI · CHAT" : "OPENAI · RESPONSES";
-}
-
-/** "sk-a••••9f3a": enough to tell keys apart, never enough to use one. */
-function maskKey(key: string) {
-  const value = key.trim();
-  if (value.length <= 8) return "••••";
-  return `${value.slice(0, 4)}••••${value.slice(-4)}`;
 }
 
 function modelOptions(model: Model) {

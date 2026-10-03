@@ -21,7 +21,8 @@ const PROVIDER_COLUMNS: &str = r#"
 /// A model row joined with its provider: the resolved view the runtime reads.
 const MODEL_SELECT: &str = r#"
     SELECT
-        model.model_hash, model.provider_id, provider.name AS provider_name, model.sort_order,
+        model.model_hash, model.provider_id, provider.name AS provider_name, model.enabled,
+        model.sort_order,
         model.display_name, provider.model_type, provider.base_url, provider.use_full_url,
         provider.api_key, model.tooltip_data, model.model_id, model.reasoning_effort,
         provider.openai_endpoint, model.openai_extra_params_enabled,
@@ -301,6 +302,24 @@ impl Store {
         Ok(())
     }
 
+    /// Switches a model on or off for Cursor; its configuration and identity stay as they are.
+    pub async fn set_model_enabled(&self, hash: &str, enabled: bool) -> Result<ModelConfig> {
+        let _write = self.writes.lock().await;
+        let result = sqlx::query(
+            "UPDATE model_configs SET enabled = ?, updated_at_ms = ? WHERE model_hash = ?",
+        )
+        .bind(enabled)
+        .bind(now_ms())
+        .bind(hash)
+        .execute(&self.pool)
+        .await?;
+        if result.rows_affected() != 1 {
+            return Err(Error::RunNotFound(format!("model {hash}")));
+        }
+        drop(_write);
+        Ok(self.model(hash).await?.expect("updated model must exist"))
+    }
+
     /// Orders models among their siblings; providers keep their own order.
     pub async fn reorder_models(&self, model_hashes: &[String]) -> Result<Vec<ModelConfig>> {
         let current = self.models().await?;
@@ -575,6 +594,7 @@ fn model_from_row(row: sqlx::sqlite::SqliteRow) -> Result<ModelConfig> {
         model_hash: row.try_get("model_hash")?,
         provider_id: row.try_get("provider_id")?,
         provider_name: row.try_get("provider_name")?,
+        enabled: row.try_get("enabled")?,
         sort_order: row.try_get("sort_order")?,
         display_name: row.try_get("display_name")?,
         model_type: ModelType::from_str(row.try_get("model_type")?)?,

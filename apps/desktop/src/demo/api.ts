@@ -230,6 +230,11 @@ export function installDemoApi() {
     if (path === "/providers/order") return json(providers);
     if (/^\/providers\/[^/]+$/.test(path)) return method === "DELETE" ? empty() : json(providers[0]);
     if (path === "/models" && method === "GET") return json(models);
+    if (/^\/models\/[^/]+\/enabled$/.test(path)) {
+      const model = models.find((candidate) => path === `/models/${encodeURIComponent(candidate.model_hash)}/enabled`);
+      if (model) model.enabled = (body as { enabled: boolean }).enabled;
+      return json(model ?? models[0]);
+    }
     if (path === "/models" && method === "POST") return json(models);
     if (path === "/models/order") return json(models);
     if (path === "/models/discover") return json({ models: models.map((model) => model.model_id) });
@@ -321,6 +326,7 @@ function createModel({ hash, order, name, type, url, modelId, endpoint = "/v1/re
     model_hash: hash,
     provider_id: provider.provider_id,
     provider_name: provider.name,
+    enabled: true,
     sort_order: order,
     display_name: name,
     type,

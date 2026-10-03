@@ -27,6 +27,23 @@ pub struct ModelOrder {
 }
 
 #[derive(Deserialize)]
+pub struct ModelEnabled {
+    pub enabled: bool,
+}
+
+pub async fn set_enabled(
+    State(service): State<ControlService>,
+    Path(model_hash): Path<String>,
+    Json(input): Json<ModelEnabled>,
+) -> Result<Json<ModelConfig>> {
+    Ok(Json(
+        service
+            .set_model_enabled(&model_hash, input.enabled)
+            .await?,
+    ))
+}
+
+#[derive(Deserialize)]
 pub struct ProviderOrder {
     pub provider_ids: Vec<String>,
 }

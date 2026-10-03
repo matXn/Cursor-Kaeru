@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api, configuredPluginModels, modelInput, type Model, type ModelInput, type Provider, type ProviderInput } from "../../shared/api";
+import { api, modelInput, pluginCatalogModels, type Model, type ModelInput, type Provider, type ProviderInput } from "../../shared/api";
 import { CursorCaGate, CursorCaProvider, CursorModelGate, CursorModelProvider } from "./CursorGates";
 import { CursorModelEditor, emptyCursorModelDraft, type CursorModelDraft } from "./CursorModelEditor";
 import { CursorModelTestResult, type CursorModelTestState } from "./CursorModelTestResult";
@@ -48,7 +48,7 @@ export function CursorSettingsPage() {
   const activeModelTests = useRef(new Map<string, { testId: string; controller: AbortController; cancelling: boolean }>());
   const caReady = cursorHarness?.ca === "ready";
   const cursorTakenOver = cursorHarness?.settings_applied ?? false;
-  const pluginModels = configuredPluginModels(plugins);
+  const pluginModels = pluginCatalogModels(plugins);
   const testTargets = [
     ...models.map((model) => ({ model_hash: model.model_hash, display_name: model.display_name })),
     ...pluginModels.map((model) => ({ model_hash: model.id, display_name: model.displayName })),
@@ -338,6 +338,7 @@ export function CursorSettingsPage() {
             testing={testingModelHashes}
             results={modelTestResults}
             onTest={(model) => void testModel(model)}
+            onToggle={(target, enabled) => void appStore.setModelEnabled(target, enabled)}
             onAddModel={openNewModel}
             onPickModels={(provider) => void openPicker(provider)}
             onEditProvider={openEditProvider}

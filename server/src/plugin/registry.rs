@@ -34,9 +34,8 @@ use crate::{
 const OAUTH_SLOW_DOWN_STEP_MS: i64 = 5_000;
 /// Model lists change upstream without notice: re-read them from the accounts this often.
 const MODEL_REFRESH_INTERVAL: Duration = Duration::from_secs(6 * 60 * 60);
-/// Wait for the plugin runtime after startup, and retry at this pace until it is ready.
-const MODEL_REFRESH_FIRST_DELAY: Duration = Duration::from_secs(30);
-const MODEL_REFRESH_RETRY: Duration = Duration::from_secs(60);
+/// Until the plugin runtime is ready the startup check waits, looking again at this pace.
+const MODEL_REFRESH_RUNTIME_WAIT: Duration = Duration::from_secs(10);
 const MAX_IMPORT_DRAFTS: usize = 256;
 
 #[derive(Clone)]
@@ -153,19 +152,19 @@ impl PluginRegistry {
         })
     }
 
-    /// Keeps every account's model list current without anyone pressing sync: once shortly
-    /// after startup, then every six hours. Accounts that fail keep their previous list.
+    /// Keeps every account's model list current without anyone pressing sync: once when the
+    /// app starts (as soon as the plugin runtime is ready), then every six hours. Accounts
+    /// that fail keep their previous list.
     pub fn spawn_model_refresh(&self) {
         let registry = self.clone();
         tokio::spawn(async move {
-            let mut delay = MODEL_REFRESH_FIRST_DELAY;
             loop {
-                tokio::time::sleep(delay).await;
-                delay = if registry.refresh_all_models().await {
+                let delay = if registry.refresh_all_models().await {
                     MODEL_REFRESH_INTERVAL
                 } else {
-                    MODEL_REFRESH_RETRY
+                    MODEL_REFRESH_RUNTIME_WAIT
                 };
+                tokio::time::sleep(delay).await;
             }
         });
     }

@@ -135,6 +135,10 @@ pub fn api_router(service: ControlService) -> Router {
             put(models::update).delete(models::remove),
         )
         .route(
+            "/__byok-api__/api/models/{model_hash}/enabled",
+            put(models::set_enabled),
+        )
+        .route(
             "/__byok-api__/api/models/{model_hash}/test/{test_id}",
             post(models::test).delete(models::cancel),
         )
