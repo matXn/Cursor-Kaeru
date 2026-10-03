@@ -15,12 +15,6 @@ export const overviewGlyph = glyph('<rect x="4" y="4" width="6.5" height="6.5" r
 export const callsGlyph = glyph('<path d="M4 7h8M9 12h11M6 17h7"/><circle cx="16" cy="7" r="1.6" fill="currentColor" stroke="none"/>');
 export const modelsGlyph = glyph('<path d="M12 3.5l7.5 4.25v8.5L12 20.5l-7.5-4.25v-8.5z"/><path d="M4.5 7.75L12 12l7.5-4.25M12 12v8.5"/>');
 export const pluginsGlyph = glyph('<path d="M9 3.5v4M15 3.5v4"/><path d="M6.5 7.5h11v3a5.5 5.5 0 0 1-11 0z"/><path d="M12 16v4.5"/>');
-// Tab completion: the typed letter, then the suggestion still in ghost ink.
-export const tabCompletionGlyph: IconifyIcon = {
-  body: '<text x="0" y="12" fill="currentColor" font-size="17" font-weight="700" style="font-family:inherit">a</text><text x="10" y="12" fill="currentColor" fill-opacity=".38" font-size="17" font-weight="700" style="font-family:inherit">bc</text>',
-  width: 28,
-  height: 13,
-};
 export const settingsGlyph = glyph('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>');
 
 // ---- Overview gauges --------------------------------------------

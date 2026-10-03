@@ -1,3 +1,5 @@
+@use "../../styles/field";
+
 .pageContent {
   height: 100%;
 }
@@ -50,12 +52,9 @@
   flex: 1 1 auto;
   min-width: 120px;
   height: var(--control-h);
-  padding: 0 var(--space-3);
+  @include field.ruled;
+  padding: 0 2px 0 field.$ruled-inset;
   color: var(--text);
-  background: var(--field);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  outline: none;
   font-size: var(--text-base);
 
   &::placeholder {
@@ -63,7 +62,7 @@
   }
 
   &:focus {
-    border-color: var(--accent);
+    @include field.ruled-active;
   }
 }
 

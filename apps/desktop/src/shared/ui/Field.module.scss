@@ -1,3 +1,5 @@
+@use "../../styles/field";
+
 
 .root {
   display: grid;
@@ -8,17 +10,12 @@
   input {
     width: 100%;
     height: 32px;
-    padding: 0 14px;
+    @include field.ruled;
+    padding: 0 2px 0 field.$ruled-inset;
     color: var(--text);
-    background: var(--field);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
-    outline: 0;
-    transition: border-color 150ms ease, box-shadow 150ms ease;
 
     &:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+      @include field.ruled-active;
     }
   }
 }

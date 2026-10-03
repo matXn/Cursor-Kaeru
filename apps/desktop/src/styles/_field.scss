@@ -16,6 +16,11 @@
     --tick: var(--text-muted);
     --line: var(--text-faint);
   }
+
+  // The rule is the focus mark; the global focus outline would box it in again.
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 // The in-use state, for whichever selector means "in use" on the element.

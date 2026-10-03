@@ -1,3 +1,5 @@
+@use "../../../styles/field";
+
 .root {
   display: flex;
   align-items: center;
@@ -92,17 +94,14 @@
   input {
     min-width: 0;
     height: var(--control-h);
-    padding: 0 var(--space-2);
+    @include field.ruled;
+    padding: 0 2px 0 field.$ruled-inset;
     color: var(--text);
-    background: var(--field);
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
-    outline: none;
     font: inherit;
     font-size: var(--text-base);
 
     &:focus {
-      border-color: var(--accent);
+      @include field.ruled-active;
     }
   }
 }

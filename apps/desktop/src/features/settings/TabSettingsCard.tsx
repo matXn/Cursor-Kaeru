@@ -1,8 +1,6 @@
 import type { TabMode, TabSettings } from "../../shared/api";
 import { Button } from "../../shared/ui/Button";
 import { TextInput } from "../../shared/ui/FormControls";
-import { Icon } from "../../shared/ui/Icon";
-import { tabCompletionGlyph } from "../../shared/ui/glyphs";
 import { Select } from "../../shared/ui/Select";
 import { TitledCard } from "../../shared/ui/TitledCard";
 import styles from "./TabSettingsCard.module.scss";
@@ -41,7 +39,7 @@ export function TabSettingsCard({
   );
 
   return <TitledCard
-    title={<div className={styles.title}><Icon icon={tabCompletionGlyph} size="0.8em" /><span>{t("Tab 补全")}</span></div>}
+    title={t("Tab 补全")}
     action={action}
   >
     <div className={styles.content}>
