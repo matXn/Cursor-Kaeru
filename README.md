@@ -105,6 +105,12 @@ pnpm --dir apps/desktop run fonts:cjk
 pnpm --dir apps/desktop run logos:providers
 ```
 
+概览中的价值估算使用随版本内置的模型标价，发版前更新：
+
+```bash
+node server/scripts/model-prices.mjs
+```
+
 ## 许可证
 
-MIT，见 [LICENSE](./LICENSE)。服务商 logo 取自 [Simple Icons](https://simpleicons.org)（CC0）与 [theSVG](https://thesvg.org)（MIT）。
+MIT，见 [LICENSE](./LICENSE)。服务商 logo 取自 [Simple Icons](https://simpleicons.org)（CC0）与 [theSVG](https://thesvg.org)（MIT）；模型标价取自 [models.dev](https://models.dev)（MIT）。
