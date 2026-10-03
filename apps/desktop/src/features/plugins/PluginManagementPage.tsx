@@ -10,6 +10,10 @@ import { Button } from "../../shared/ui/Button";
 import { Card } from "../../shared/ui/Card";
 import { Modal } from "../../shared/ui/Modal";
 import { useMessage } from "../../shared/ui/message";
+import controls from "../../shared/ui/Controls.module.scss";
+import { Icon } from "../../shared/ui/Icon";
+import { addIcon } from "../../shared/ui/icons";
+import { TooltipTrigger } from "../../shared/ui/TooltipTrigger";
 import { TruncatedButton } from "../../shared/ui/TruncatedButton";
 import { PluginAddPanel, PluginSettingsPanel } from "./PluginResourcePanels";
 import { QuotaMeter } from "./quota/QuotaMeter";
@@ -26,6 +30,12 @@ export function PluginManagementPage() {
   useEffect(() => {
     if (!pluginRuntime) void appStore.refreshPluginRuntime();
   }, [pluginRuntime]);
+
+  // Each visit to the page (kept-alive pages re-run effects when shown) refreshes every
+  // account's quota, so the meters are current when you look at them.
+  useEffect(() => {
+    if (pluginRuntime?.state === "ready") void appStore.refreshPluginQuotas();
+  }, [pluginRuntime?.state]);
 
   useEffect(() => {
     if (pluginRuntime?.state !== "initializing") return;
@@ -232,7 +242,14 @@ function PluginCard({ plugin, onOpen }: {
       <div className={styles.pluginCardTop}>
         <img className={styles.pluginIcon} src={plugin.icon} />
         <div className={styles.pluginIdentity}>
-          <span className={styles.pluginName}>{plugin.name}</span>
+          <span className={styles.pluginNameRow}>
+            <span className={styles.pluginName}>{plugin.name}</span>
+            <TooltipTrigger label={t("添加账号")}>
+              <button type="button" className={controls.iconButton} aria-label={t("添加账号")} onClick={() => onOpen(plugin.id, "add")}>
+                <Icon icon={addIcon} size="1.1em" />
+              </button>
+            </TooltipTrigger>
+          </span>
           <span className={styles.pluginId}>{subtitle}</span>
         </div>
         <span
@@ -254,16 +271,10 @@ function PluginCard({ plugin, onOpen }: {
       </div>
       <AccountQuotas plugin={plugin} />
       <div className={styles.cardActions}>
-        <TruncatedButton
-          size="small"
-          variant="primary"
-          label={t("添加账号")}
-          onClick={() => onOpen(plugin.id, "add")}
-        />
         {configured && (
           <TruncatedButton
             size="small"
-            label={t("账号管理")}
+            label={t("设置")}
             onClick={() => onOpen(plugin.id, "settings")}
           />
         )}

@@ -128,7 +128,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 162,
+          "line": 165,
           "column": 101
         },
         {
@@ -213,7 +213,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 340,
+          "line": 351,
           "column": 21
         }
       ]
@@ -285,7 +285,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 246,
+          "line": 263,
           "column": 12
         }
       ]
@@ -316,7 +316,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 175,
+          "line": 178,
           "column": 74
         }
       ]
@@ -504,7 +504,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 187,
+          "line": 190,
           "column": 57
         }
       ]
@@ -607,7 +607,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 126,
+          "line": 136,
           "column": 16
         }
       ]
@@ -656,7 +656,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 182,
+          "line": 192,
           "column": 23
         }
       ]
@@ -930,7 +930,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 324,
+          "line": 335,
           "column": 122
         }
       ]
@@ -985,7 +985,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 160,
+          "line": 163,
           "column": 50
         }
       ]
@@ -1119,7 +1119,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 304,
+          "line": 315,
           "column": 70
         },
         {
@@ -1284,7 +1284,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 165,
+          "line": 168,
           "column": 36
         },
         {
@@ -1463,12 +1463,12 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 163,
+          "line": 166,
           "column": 30
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 272,
+          "line": 283,
           "column": 32
         }
       ]
@@ -1629,7 +1629,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 304,
+          "line": 315,
           "column": 80
         },
         {
@@ -1646,7 +1646,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 115,
+          "line": 125,
           "column": 68
         }
       ]
@@ -1867,7 +1867,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 161,
+          "line": 164,
           "column": 118
         }
       ]
@@ -1879,7 +1879,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 303,
+          "line": 314,
           "column": 12
         }
       ]
@@ -1903,7 +1903,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 115,
+          "line": 125,
           "column": 46
         }
       ]
@@ -2288,7 +2288,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 296,
+          "line": 307,
           "column": 7
         }
       ]
@@ -2431,7 +2431,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 164,
+          "line": 167,
           "column": 39
         },
         {
@@ -2633,7 +2633,7 @@
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 161,
+          "line": 164,
           "column": 130
         }
       ]
@@ -2732,12 +2732,12 @@
       "refs": [
         {
           "file": "shared/store/appStore.ts",
-          "line": 247,
+          "line": 283,
           "column": 23
         },
         {
           "file": "shared/store/appStore.ts",
-          "line": 254,
+          "line": 290,
           "column": 25
         }
       ]
@@ -2850,7 +2850,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 339,
+          "line": 350,
           "column": 31
         }
       ]
@@ -2976,7 +2976,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 241,
+          "line": 258,
           "column": 36
         }
       ]
@@ -3000,7 +3000,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 108,
+          "line": 118,
           "column": 25
         }
       ]
@@ -3042,7 +3042,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 324,
+          "line": 335,
           "column": 20
         }
       ]
@@ -3191,7 +3191,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 336,
+          "line": 347,
           "column": 32
         }
       ]
@@ -3273,7 +3273,7 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 187,
+          "line": 190,
           "column": 47
         }
       ]
@@ -3359,8 +3359,13 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 260,
-          "column": 18
+          "line": 247,
+          "column": 36
+        },
+        {
+          "file": "features/plugins/PluginManagementPage.tsx",
+          "line": 248,
+          "column": 81
         }
       ]
     },
@@ -3407,7 +3412,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 338,
+          "line": 349,
           "column": 31
         }
       ]
@@ -3563,12 +3568,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 101,
+          "line": 111,
           "column": 9
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 298,
+          "line": 309,
           "column": 9
         }
       ]
@@ -3606,7 +3611,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 81,
+          "line": 91,
           "column": 11
         }
       ]
@@ -3618,7 +3623,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 127,
+          "line": 137,
           "column": 14
         }
       ]
@@ -3630,7 +3635,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 337,
+          "line": 348,
           "column": 30
         }
       ]
@@ -3644,7 +3649,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 184,
+          "line": 194,
           "column": 17
         },
         {
@@ -3875,7 +3880,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 82,
+          "line": 92,
           "column": 11
         }
       ]
@@ -3923,12 +3928,12 @@
       "refs": [
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 150,
+          "line": 153,
           "column": 97
         },
         {
           "file": "features/models/ProviderTable.tsx",
-          "line": 150,
+          "line": 153,
           "column": 115
         }
       ]
@@ -4159,12 +4164,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 106,
+          "line": 116,
           "column": 7
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 327,
+          "line": 338,
           "column": 70
         }
       ]
@@ -4200,7 +4205,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 104,
+          "line": 114,
           "column": 11
         }
       ]
@@ -4450,7 +4455,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 115,
+          "line": 125,
           "column": 83
         }
       ]
@@ -4474,7 +4479,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 304,
+          "line": 315,
           "column": 45
         }
       ]
@@ -4560,7 +4565,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 103,
+          "line": 113,
           "column": 11
         }
       ]
@@ -4700,7 +4705,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 109,
+          "line": 119,
           "column": 9
         }
       ]
@@ -4849,7 +4854,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 213,
+          "line": 223,
           "column": 20
         }
       ]
@@ -5003,7 +5008,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 328,
+          "line": 339,
           "column": 44
         }
       ]
@@ -5137,7 +5142,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 153,
+          "line": 163,
           "column": 80
         }
       ]
@@ -5149,7 +5154,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 241,
+          "line": 258,
           "column": 25
         }
       ]
@@ -5204,6 +5209,11 @@
           "file": "features/models/ProviderTable.tsx",
           "line": 93,
           "column": 67
+        },
+        {
+          "file": "features/plugins/PluginManagementPage.tsx",
+          "line": 277,
+          "column": 20
         },
         {
           "file": "shell/TopBar.tsx",
@@ -5568,18 +5578,6 @@
         }
       ]
     },
-    "eba54690937bc532": {
-      "source": "账号管理",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 266,
-          "column": 20
-        }
-      ]
-    },
     "edc70de18c6da1a6": {
       "source": "安装本地 CA",
       "kind": "text",
@@ -5738,7 +5736,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 203,
+          "line": 213,
           "column": 32
         }
       ]
@@ -5864,7 +5862,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 85,
+          "line": 95,
           "column": 20
         },
         {
@@ -5881,7 +5879,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 313,
+          "line": 324,
           "column": 23
         }
       ]
@@ -5893,7 +5891,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 115,
+          "line": 125,
           "column": 19
         }
       ]
@@ -5917,12 +5915,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 99,
+          "line": 109,
           "column": 7
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 335,
+          "line": 346,
           "column": 29
         }
       ]
@@ -5973,7 +5971,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 203,
+          "line": 213,
           "column": 45
         }
       ]

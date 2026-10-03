@@ -61,6 +61,8 @@ function update(patch: Partial<AppSnapshot>) {
   listeners.forEach((listener) => listener());
 }
 
+let refreshingQuotas = false;
+
 async function perform(task: () => Promise<void>) {
   update({ error: null });
   try {
@@ -150,6 +152,25 @@ export const appStore = {
     } catch (cause) {
       update({ error: cause instanceof Error ? cause.message : String(cause) });
       return null;
+    }
+  },
+  /**
+   * Refreshes every account that can be refreshed (tokens and quota), then the plugin list.
+   * Runs once at a time; a second call while one is running is dropped.
+   */
+  async refreshPluginQuotas() {
+    if (refreshingQuotas) return;
+    refreshingQuotas = true;
+    try {
+      const plugins = await api.plugins();
+      await Promise.allSettled(plugins.flatMap((plugin) => plugin.resources
+        .filter((resource) => resource.canRefresh)
+        .flatMap((resource) => resource.resources.map((item) => api.refreshPluginResource(plugin.id, resource.type, item.id)))));
+      update({ plugins: await api.plugins() });
+    } catch (cause) {
+      update({ error: cause instanceof Error ? cause.message : String(cause) });
+    } finally {
+      refreshingQuotas = false;
     }
   },
   async refreshPlugins() {
