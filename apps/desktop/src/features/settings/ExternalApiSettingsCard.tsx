@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { api, type ExternalApiSettings } from "../../shared/api";
 import { Button } from "../../shared/ui/Button";
-import { FormField, SecretTextInput } from "../../shared/ui/FormControls";
+import { FieldAction, FormField, SecretTextInput } from "../../shared/ui/FormControls";
+import { copyIcon, diceIcon } from "../../shared/ui/icons";
 import { Switch } from "../../shared/ui/Switch";
 import { TitledCard } from "../../shared/ui/TitledCard";
 import { useMessage } from "../../shared/ui/message";
@@ -35,6 +36,11 @@ export function ExternalApiSettingsCard({ servicePort }: { servicePort: number }
   };
 
   const address = `http://127.0.0.1:${servicePort}/kaeru/v1`;
+  const generateKey = () => setDraft((current) => ({ ...current, api_key: randomKey() }));
+  const copyKey = async () => {
+    await navigator.clipboard.writeText(draft.api_key);
+    message(t("已复制密钥"));
+  };
   const changed = saved && (saved.enabled !== draft.enabled || saved.api_key !== draft.api_key);
 
   return <TitledCard title={t("外部 API")} action={changed ? <Button size="small" variant="primary" disabled={saving} onClick={() => void save()}>
@@ -51,7 +57,11 @@ export function ExternalApiSettingsCard({ servicePort }: { servicePort: number }
       </div>
       <FormField label={t("API 密钥")} hint={t("开启后，所有外部请求都必须提供此密钥。")}> 
         <SecretTextInput value={draft.api_key} autoComplete="off" disabled={!saved || saving}
-          onChange={(event) => setDraft((current) => ({ ...current, api_key: event.target.value }))} />
+          onChange={(event) => setDraft((current) => ({ ...current, api_key: event.target.value }))}
+          actions={<>
+            <FieldAction label={t("生成随机密钥")} icon={diceIcon} disabled={!saved || saving} onClick={generateKey} />
+            <FieldAction label={t("复制密钥")} icon={copyIcon} disabled={!draft.api_key} onClick={() => void copyKey()} />
+          </>} />
       </FormField>
       <div className={styles.address}>
         <strong>{t("基础地址")}</strong>
@@ -59,4 +69,10 @@ export function ExternalApiSettingsCard({ servicePort }: { servicePort: number }
       </div>
     </div>
   </TitledCard>;
+}
+
+/** 32 random bytes as hex, prefixed so the key says what it is for. */
+function randomKey() {
+  const bytes = crypto.getRandomValues(new Uint8Array(32));
+  return `kaeru-${Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("")}`;
 }

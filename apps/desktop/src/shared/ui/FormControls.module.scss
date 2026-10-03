@@ -28,14 +28,14 @@
   }
 }
 
-// A field drawn with two strokes: a short tick where the field starts at the top, and the
-// long rule it is written on. Both turn to the accent while typing.
+// A field drawn with two strokes, like a line on a form: a short upright where it starts,
+// and the long rule it is written on. Both turn to the accent while typing.
 .input {
   --tick: var(--text-faint);
   --line: var(--border-strong);
   width: 100%;
   color: var(--text);
-  background: linear-gradient(var(--tick), var(--tick)) left top / 12px 1px no-repeat;
+  background: linear-gradient(var(--tick), var(--tick)) left bottom / 1px 9px no-repeat;
   border: 0;
   border-bottom: 1px solid var(--line);
   border-radius: 0;
@@ -51,7 +51,12 @@
   &:focus {
     --tick: var(--accent);
     --line: var(--accent);
-    background-size: 24px 1px;
+    background-size: 1px 15px;
+  }
+
+  // The rule is the focus mark; the global outline would draw a box around it.
+  &:focus-visible {
+    outline: none;
   }
 
   &:disabled {
@@ -61,7 +66,7 @@
 
 .input {
   height: 34px;
-  padding: 0 2px;
+  padding: 0 2px 0 10px;
 
   &[type="number"] {
     appearance: textfield;
@@ -76,28 +81,47 @@
 
 .secret {
   position: relative;
+  display: flex;
   width: 100%;
 
   input {
-    padding-right: 38px;
+    flex: 1;
+    min-width: 0;
   }
 }
 
-.secretToggle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 34px;
-  height: 34px;
+// Icon buttons at the end of a field, sitting on its rule.
+.trailing {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-left: 6px;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.secret:focus-within .trailing {
+  border-bottom-color: var(--accent);
+}
+
+.trailingButton {
+  width: 28px;
+  height: 28px;
   display: grid;
   place-items: center;
   padding: 0;
   color: var(--text-muted);
   background: transparent;
   border: 0;
+  border-radius: var(--radius);
   cursor: pointer;
 
-  &:hover {
+  &:hover:not(:disabled) {
     color: var(--text);
+    background: var(--hover);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
   }
 }

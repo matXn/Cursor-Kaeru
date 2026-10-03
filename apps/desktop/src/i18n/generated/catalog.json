@@ -562,12 +562,12 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 46,
+          "line": 52,
           "column": 20
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 49,
+          "line": 55,
           "column": 24
         }
       ]
@@ -2415,7 +2415,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 52,
+          "line": 58,
           "column": 25
         }
       ]
@@ -3025,7 +3025,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 47,
+          "line": 53,
           "column": 19
         }
       ]
@@ -3090,7 +3090,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 29,
+          "line": 30,
           "column": 15
         }
       ]
@@ -3311,7 +3311,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 40,
+          "line": 46,
           "column": 29
         }
       ]
@@ -3705,7 +3705,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 52,
+          "line": 58,
           "column": 44
         }
       ]
@@ -3925,8 +3925,8 @@
       "refs": [
         {
           "file": "shared/ui/FormControls.tsx",
-          "line": 15,
-          "column": 81
+          "line": 18,
+          "column": 85
         }
       ]
     },
@@ -3986,7 +3986,7 @@
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 41,
+          "line": 47,
           "column": 27
         },
         {
@@ -4395,7 +4395,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 57,
+          "line": 67,
           "column": 18
         }
       ]
@@ -5055,6 +5055,18 @@
         }
       ]
     },
+    "d22d5fd54ca0aef5": {
+      "source": "复制密钥",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 63,
+          "column": 33
+        }
+      ]
+    },
     "d2813cb0eec9a7ae": {
       "source": "占全部 Token 的 {share}",
       "kind": "template",
@@ -5107,6 +5119,18 @@
           "file": "features/settings/ProxySettingsCard.tsx",
           "line": 72,
           "column": 48
+        }
+      ]
+    },
+    "d2d86f482c1384c7": {
+      "source": "生成随机密钥",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 62,
+          "column": 33
         }
       ]
     },
@@ -5170,8 +5194,8 @@
       "refs": [
         {
           "file": "shared/ui/FormControls.tsx",
-          "line": 15,
-          "column": 95
+          "line": 18,
+          "column": 99
         }
       ]
     },
@@ -5807,6 +5831,18 @@
         }
       ]
     },
+    "ea5a37e40d4c7925": {
+      "source": "已复制密钥",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 42,
+          "column": 13
+        }
+      ]
+    },
     "eb11e2df1d8ae387": {
       "source": "上游地址",
       "kind": "text",
@@ -6344,7 +6380,7 @@
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 41,
+          "line": 47,
           "column": 15
         },
         {
