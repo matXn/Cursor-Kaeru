@@ -1,5 +1,5 @@
 import { formatCompactInteger, formatInteger } from "../../../shared/utils/numberFormat";
-import { useAppStore } from "../../../shared/store/appStore";
+import type { OverviewCost } from "../../../shared/api";
 import { Icon } from "../../../shared/ui/Icon";
 import { useTooltip, type TooltipAnchor } from "../../../shared/ui/Tooltip";
 import { informationOutlineIcon } from "../../../shared/ui/icons";
@@ -13,6 +13,7 @@ export type RangeMetrics = {
   promptTokens: number;
   cacheReadTokens: number;
   cacheWriteTokens: number;
+  cost: OverviewCost;
 };
 
 function formatMetricValue(value: number) {
@@ -27,10 +28,6 @@ function formatRate(value: number | null) {
 
 function calculateRate(numerator: number, denominator: number) {
   return denominator > 0 ? numerator / denominator : null;
-}
-
-function priceTokens(tokens: number, pricePerMillion: number) {
-  return (tokens / 1_000_000) * pricePerMillion;
 }
 
 function formatUSD(value: number) {
@@ -61,7 +58,6 @@ function InfoTooltip({ content }: { content: string }) {
 // The page's one solid block: calls in the selected range, with cache hit, tokens and value
 // as rows beneath. The range filter lives in the column label above it.
 export function RangeBlock({ data }: { data: RangeMetrics }) {
-  const { pricing } = useAppStore();
   const inputTokens = Math.max(0, data.promptTokens - data.cacheReadTokens - data.cacheWriteTokens);
   const outputTokens = Math.max(0, data.tokenUsage - data.promptTokens);
   const defaultCacheHitRate = calculateRate(data.cacheReadTokens, data.cacheReadTokens + inputTokens);
@@ -70,13 +66,8 @@ export function RangeBlock({ data }: { data: RangeMetrics }) {
     data.cacheReadTokens + data.cacheWriteTokens + inputTokens,
   );
   const successfulCallRate = calculateRate(data.successfulCalls, data.llmCalls);
-  const costs = {
-    input: priceTokens(inputTokens, pricing.input_per_million),
-    output: priceTokens(outputTokens, pricing.output_per_million),
-    cacheRead: priceTokens(data.cacheReadTokens, pricing.cache_read_per_million),
-    cacheWrite: priceTokens(data.cacheWriteTokens, pricing.cache_write_per_million),
-  };
-  const totalCost = costs.input + costs.output + costs.cacheRead + costs.cacheWrite;
+  const { cost } = data;
+  const totalCost = cost.input_usd + cost.output_usd + cost.cache_read_usd + cost.cache_write_usd;
   const cacheTooltip = [
     t("当前：{rate}", { rate: formatRate(defaultCacheHitRate) }),
     t("公式：缓存读取 /（缓存读取 + 非缓存输入）"),
@@ -106,31 +97,18 @@ export function RangeBlock({ data }: { data: RangeMetrics }) {
     t("缓存读写已计入提示词侧统计。"),
   ].join("\n");
   const costTooltip = [
-    t("按配置的 Token 价格估算。"),
-    t("缓存统计策略：默认口径（{rate}）", { rate: formatRate(defaultCacheHitRate) }),
+    t("按各模型官方标价估算（随版本内置的 models.dev 价格表），只作参考。"),
     "",
-    t("普通输入：{tokens} × ${price}/1M = {cost}", {
-      tokens: formatMetricValue(inputTokens),
-      price: pricing.input_per_million,
-      cost: formatUSD(costs.input),
-    }),
-    t("模型输出：{tokens} × ${price}/1M = {cost}", {
-      tokens: formatMetricValue(outputTokens),
-      price: pricing.output_per_million,
-      cost: formatUSD(costs.output),
-    }),
-    t("缓存读取：{tokens} × ${price}/1M = {cost}", {
-      tokens: formatMetricValue(data.cacheReadTokens),
-      price: pricing.cache_read_per_million,
-      cost: formatUSD(costs.cacheRead),
-    }),
-    t("缓存写入：{tokens} × ${price}/1M = {cost}", {
-      tokens: formatMetricValue(data.cacheWriteTokens),
-      price: pricing.cache_write_per_million,
-      cost: formatUSD(costs.cacheWrite),
-    }),
+    t("普通输入：{cost}", { cost: formatUSD(cost.input_usd) }),
+    t("模型输出：{cost}", { cost: formatUSD(cost.output_usd) }),
+    t("缓存读取：{cost}", { cost: formatUSD(cost.cache_read_usd) }),
+    t("缓存写入：{cost}", { cost: formatUSD(cost.cache_write_usd) }),
     "",
     t("合计：{cost}", { cost: formatUSD(totalCost) }),
+    ...(cost.unpriced_calls > 0 ? [
+      "",
+      t("{count} 次调用的模型没有标价，未计入：{models}", { count: formatMetricValue(cost.unpriced_calls), models: cost.unpriced_models.join("、") }),
+    ] : []),
   ].join("\n");
 
   const rows = [

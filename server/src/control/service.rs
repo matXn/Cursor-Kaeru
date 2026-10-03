@@ -24,7 +24,7 @@ use crate::{
     provider::{is_valid_response_event, ModelEvent, Provider},
     store::{
         CommitSettings, DesktopSettings, ExternalApiSettings, PortSettings, ProxySettings,
-        ProxySettingsInput, StatisticsStorage, Store, TabSettings, TokenPricingSettings,
+        ProxySettingsInput, StatisticsStorage, Store, TabSettings,
     },
     Error, Result,
 };
@@ -733,17 +733,6 @@ impl ControlService {
 
     pub async fn set_commit_settings(&self, settings: CommitSettings) -> Result<CommitSettings> {
         self.store.set_commit_settings(settings).await
-    }
-
-    pub async fn pricing_settings(&self) -> Result<TokenPricingSettings> {
-        self.store.pricing_settings().await
-    }
-
-    pub async fn set_pricing_settings(
-        &self,
-        settings: TokenPricingSettings,
-    ) -> Result<TokenPricingSettings> {
-        self.store.set_pricing_settings(settings).await
     }
 }
 

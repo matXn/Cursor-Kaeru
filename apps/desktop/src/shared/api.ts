@@ -208,13 +208,6 @@ export interface CommitSettingsView extends CommitSettings {
   default_prompt: string;
 }
 
-export interface TokenPricingSettings {
-  input_per_million: number;
-  output_per_million: number;
-  cache_read_per_million: number;
-  cache_write_per_million: number;
-}
-
 export type PluginRuntimeState = "uninitialized" | "initializing" | "ready" | "failed" | "unsupported";
 export type PluginRuntimePhase = "checking" | "downloading" | "verifying" | "installing" | "validating";
 
@@ -423,8 +416,20 @@ export interface ModelShare {
   tokens: number;
 }
 
+/** What the range would have cost at the vendors' list prices (bundled from models.dev). */
+export interface OverviewCost {
+  input_usd: number;
+  output_usd: number;
+  cache_read_usd: number;
+  cache_write_usd: number;
+  /** Calls whose model no vendor lists; left out of the sums. */
+  unpriced_calls: number;
+  unpriced_models: string[];
+}
+
 export interface Overview {
   metrics: OverviewMetrics;
+  cost: OverviewCost;
   /** Local hour of day (0–23) with the most tokens; null without usage. */
   peak_hour: number | null;
   /** Every model with usage in the range, most tokens first. */
@@ -611,6 +616,4 @@ export const api = {
   setDesktopSettings: (settings: DesktopSettings) => request<DesktopSettings>("/settings/desktop", { method: "PUT", body: JSON.stringify(settings) }),
   commitSettings: (locale: Locale) => request<CommitSettingsView>("/settings/commit", { headers: { "accept-language": locale } }),
   setCommitSettings: (settings: CommitSettings) => request<CommitSettingsView>("/settings/commit", { method: "PUT", body: JSON.stringify(settings) }),
-  pricingSettings: () => request<TokenPricingSettings>("/settings/pricing"),
-  setPricingSettings: (settings: TokenPricingSettings) => request<TokenPricingSettings>("/settings/pricing", { method: "PUT", body: JSON.stringify(settings) }),
 };

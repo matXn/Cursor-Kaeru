@@ -274,9 +274,23 @@ mod overview {
         pub tokens: i64,
     }
 
-    #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize)]
+    /// What the range would have cost at the vendors' list prices, by kind of token. Calls
+    /// whose model no vendor lists are left out and counted instead.
+    #[derive(Clone, Debug, Default, PartialEq, Serialize)]
+    pub struct OverviewCost {
+        pub input_usd: f64,
+        pub output_usd: f64,
+        pub cache_read_usd: f64,
+        pub cache_write_usd: f64,
+        pub unpriced_calls: i64,
+        /// Model IDs without a list price, most calls first.
+        pub unpriced_models: Vec<String>,
+    }
+
+    #[derive(Clone, Debug, Default, PartialEq, Serialize)]
     pub struct Overview {
         pub metrics: OverviewMetrics,
+        pub cost: OverviewCost,
         /// Local hour of day (0–23) with the most tokens in the range; none without usage.
         pub peak_hour: Option<i64>,
         /// Every model with usage in the range, most tokens first.

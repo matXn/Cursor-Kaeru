@@ -7,7 +7,11 @@ use chrono::Utc;
 use sqlx::Row;
 
 use crate::{
-    model::{ModelShare, Overview, OverviewMetrics, TokenUsageBucket, TokenUsageGranularity},
+    model::{
+        ModelShare, Overview, OverviewCost, OverviewMetrics, TokenUsageBucket,
+        TokenUsageGranularity,
+    },
+    pricing::{self, TokenCounts},
     Result,
 };
 
@@ -87,6 +91,8 @@ impl Store {
             cache_write_tokens,
             output_tokens,
         };
+
+        let cost = self.overview_cost(start_ms, end_ms, model_hashes).await?;
 
         let model_share = sqlx::query(&format!(
             "SELECT display_name, COALESCE(SUM({tokens}), 0) AS tokens
@@ -195,11 +201,70 @@ impl Store {
 
         Ok(Overview {
             metrics,
+            cost,
             peak_hour,
             model_share,
             token_usage_granularity,
             token_usage_series,
         })
+    }
+}
+
+impl Store {
+    /// Tokens grouped by the model ID the provider was asked for, each group at that model's
+    /// list price.
+    async fn overview_cost(
+        &self,
+        start_ms: Option<i64>,
+        end_ms: Option<i64>,
+        model_hashes: Option<&str>,
+    ) -> Result<OverviewCost> {
+        let rows = sqlx::query(&format!(
+            "SELECT
+                model_id,
+                COUNT(*) AS calls,
+                COALESCE(SUM({fresh_input}), 0) AS input_tokens,
+                COALESCE(SUM(COALESCE(cache_read_tokens, 0)), 0) AS cache_read_tokens,
+                COALESCE(SUM(COALESCE(cache_write_tokens, 0)), 0) AS cache_write_tokens,
+                COALESCE(SUM(COALESCE(output_tokens, 0)), 0) AS output_tokens
+             FROM llm_calls
+             WHERE status != 'running'
+               AND (? IS NULL OR created_at_ms >= ?)
+               AND (? IS NULL OR created_at_ms < ?)
+               AND (? IS NULL OR model_hash IN (SELECT value FROM json_each(?)))
+             GROUP BY model_id
+             ORDER BY calls DESC, model_id",
+            fresh_input = fresh_input_sql(),
+        ))
+        .bind(start_ms)
+        .bind(start_ms)
+        .bind(end_ms)
+        .bind(end_ms)
+        .bind(model_hashes)
+        .bind(model_hashes)
+        .fetch_all(&self.pool)
+        .await?;
+        let mut cost = OverviewCost::default();
+        for row in rows {
+            let model_id: String = row.try_get("model_id")?;
+            let calls: i64 = row.try_get("calls")?;
+            let Some(price) = pricing::price(&model_id) else {
+                cost.unpriced_calls += calls;
+                cost.unpriced_models.push(model_id);
+                continue;
+            };
+            let priced = price.cost(&TokenCounts {
+                input: non_negative(row.try_get("input_tokens")?),
+                output: non_negative(row.try_get("output_tokens")?),
+                cache_read: non_negative(row.try_get("cache_read_tokens")?),
+                cache_write: non_negative(row.try_get("cache_write_tokens")?),
+            });
+            cost.input_usd += priced.input;
+            cost.output_usd += priced.output;
+            cost.cache_read_usd += priced.cache_read;
+            cost.cache_write_usd += priced.cache_write;
+        }
+        Ok(cost)
     }
 }
 

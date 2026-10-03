@@ -33,7 +33,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 92,
+          "line": 83,
           "column": 5
         }
       ]
@@ -59,22 +59,6 @@
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 267,
           "column": 39
-        }
-      ]
-    },
-    "028a4de61bff743d": {
-      "source": "普通输入：{tokens} × ${price}/1M = {cost}",
-      "kind": "template",
-      "placeholders": [
-        "tokens",
-        "price",
-        "cost"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 112,
-          "column": 5
         }
       ]
     },
@@ -105,22 +89,6 @@
         }
       ]
     },
-    "03ff62ab4b818492": {
-      "source": "缓存写入：{tokens} × ${price}/1M = {cost}",
-      "kind": "template",
-      "placeholders": [
-        "tokens",
-        "price",
-        "cost"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 127,
-          "column": 5
-        }
-      ]
-    },
     "051836569928a9f9": {
       "source": "编辑",
       "kind": "text",
@@ -135,11 +103,6 @@
           "file": "features/settings/CommitSettingsCard.tsx",
           "line": 175,
           "column": 10
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 96,
-          "column": 75
         },
         {
           "file": "features/settings/ProxySettingsCard.tsx",
@@ -227,7 +190,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 104,
+          "line": 95,
           "column": 5
         }
       ]
@@ -241,7 +204,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 101,
+          "line": 92,
           "column": 5
         }
       ]
@@ -340,24 +303,8 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 139,
+          "line": 117,
           "column": 14
-        }
-      ]
-    },
-    "0b96da34f6fbdd3b": {
-      "source": "缓存读取：{tokens} × ${price}/1M = {cost}",
-      "kind": "template",
-      "placeholders": [
-        "tokens",
-        "price",
-        "cost"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 122,
-          "column": 5
         }
       ]
     },
@@ -414,7 +361,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 58,
+          "line": 57,
           "column": 38
         }
       ]
@@ -438,7 +385,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 185,
+          "line": 183,
           "column": 26
         }
       ]
@@ -472,23 +419,6 @@
           "file": "features/calls/CallDetailsPage.tsx",
           "line": 41,
           "column": 39
-        }
-      ]
-    },
-    "0ecfbbe0697af7ea": {
-      "source": "输入价格（$/1M）",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 105,
-          "column": 31
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 145,
-          "column": 24
         }
       ]
     },
@@ -528,18 +458,6 @@
           "file": "features/settings/TabSettingsCard.tsx",
           "line": 78,
           "column": 20
-        }
-      ]
-    },
-    "12430375c0db4727": {
-      "source": "按配置的 Token 价格估算。",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 109,
-          "column": 5
         }
       ]
     },
@@ -663,7 +581,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 91,
+          "line": 82,
           "column": 5
         }
       ]
@@ -801,7 +719,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 189,
+          "line": 187,
           "column": 131
         }
       ]
@@ -815,7 +733,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 99,
+          "line": 90,
           "column": 5
         }
       ]
@@ -844,7 +762,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 82,
+          "line": 73,
           "column": 5
         }
       ]
@@ -943,7 +861,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 163,
+          "line": 161,
           "column": 43
         }
       ]
@@ -979,7 +897,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 83,
+          "line": 82,
           "column": 15
         }
       ]
@@ -1003,7 +921,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 212,
+          "line": 210,
           "column": 24
         }
       ]
@@ -1068,6 +986,20 @@
         }
       ]
     },
+    "27df04da151b2452": {
+      "source": "普通输入：{cost}",
+      "kind": "template",
+      "placeholders": [
+        "cost"
+      ],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 102,
+          "column": 5
+        }
+      ]
+    },
     "287cb2593e03dead": {
       "source": "例如：我的中转",
       "kind": "text",
@@ -1101,7 +1033,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 89,
+          "line": 80,
           "column": 5
         }
       ]
@@ -1211,18 +1143,13 @@
           "column": 21
         },
         {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 90,
-          "column": 64
-        },
-        {
           "file": "features/settings/ProxySettingsCard.tsx",
           "line": 32,
           "column": 66
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 204,
+          "line": 202,
           "column": 22
         },
         {
@@ -1251,7 +1178,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 81,
+          "line": 72,
           "column": 5
         }
       ]
@@ -1442,7 +1369,7 @@
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 148,
+          "line": 146,
           "column": 27
         }
       ]
@@ -1456,6 +1383,20 @@
           "file": "features/models/ProviderTable.tsx",
           "line": 117,
           "column": 138
+        }
+      ]
+    },
+    "350094be7a4e2f7c": {
+      "source": "模型输出：{cost}",
+      "kind": "template",
+      "placeholders": [
+        "cost"
+      ],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 103,
+          "column": 5
         }
       ]
     },
@@ -1519,7 +1460,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 214,
+          "line": 212,
           "column": 42
         }
       ]
@@ -1582,7 +1523,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 196,
+          "line": 194,
           "column": 14
         }
       ]
@@ -1611,7 +1552,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 148,
+          "line": 146,
           "column": 39
         }
       ]
@@ -1627,23 +1568,6 @@
           "file": "features/models/ModelPicker.tsx",
           "line": 38,
           "column": 12
-        }
-      ]
-    },
-    "3b63f1f9d5922e65": {
-      "source": "缓存写入价格（$/1M）",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 132,
-          "column": 31
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 157,
-          "column": 24
         }
       ]
     },
@@ -1678,12 +1602,12 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 155,
+          "line": 153,
           "column": 22
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 161,
+          "line": 159,
           "column": 26
         }
       ]
@@ -1753,7 +1677,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 114,
+          "line": 113,
           "column": 66
         }
       ]
@@ -1765,7 +1689,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 180,
+          "line": 178,
           "column": 52
         }
       ]
@@ -1856,20 +1780,8 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 94,
+          "line": 85,
           "column": 5
-        }
-      ]
-    },
-    "4791868cb0a4be4d": {
-      "source": "输出价格",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 41,
-          "column": 62
         }
       ]
     },
@@ -1957,7 +1869,7 @@
         },
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 25,
+          "line": 26,
           "column": 27
         }
       ]
@@ -2208,23 +2120,6 @@
         }
       ]
     },
-    "54d735fcd15e8c93": {
-      "source": "输出价格（$/1M）",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 114,
-          "column": 31
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 149,
-          "column": 24
-        }
-      ]
-    },
     "54e6745ff43c9c74": {
       "source": "排序失败",
       "kind": "text",
@@ -2246,18 +2141,6 @@
           "file": "features/settings/CommitSettingsCard.tsx",
           "line": 182,
           "column": 26
-        }
-      ]
-    },
-    "565678b3704a383d": {
-      "source": "定价设置已保存",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 74,
-          "column": 17
         }
       ]
     },
@@ -2295,7 +2178,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 141,
+          "line": 139,
           "column": 78
         }
       ]
@@ -2319,7 +2202,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 145,
+          "line": 143,
           "column": 21
         }
       ]
@@ -2436,7 +2319,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 133,
+          "line": 107,
           "column": 5
         }
       ]
@@ -2453,18 +2336,6 @@
         }
       ]
     },
-    "60e7671141df2731": {
-      "source": "输入价格",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 40,
-          "column": 60
-        }
-      ]
-    },
     "61a4c7bac12dc125": {
       "source": "异常调用：{count}",
       "kind": "template",
@@ -2474,7 +2345,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 93,
+          "line": 84,
           "column": 5
         }
       ]
@@ -2500,7 +2371,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 103,
+          "line": 94,
           "column": 5
         }
       ]
@@ -2584,7 +2455,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 590,
+          "line": 595,
           "column": 43
         }
       ]
@@ -2661,18 +2532,6 @@
         }
       ]
     },
-    "66f7ceff962da68c": {
-      "source": "用于首页价值估算的 Token 单价，单位：美元 / 百万 Token。",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 102,
-          "column": 17
-        }
-      ]
-    },
     "670ec44baf9b6e5d": {
       "source": "近 4 小时",
       "kind": "text",
@@ -2709,7 +2568,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 58,
+          "line": 57,
           "column": 55
         }
       ]
@@ -2738,7 +2597,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 137,
+          "line": 115,
           "column": 14
         }
       ]
@@ -2866,7 +2725,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 101,
+          "line": 100,
           "column": 83
         }
       ]
@@ -2890,12 +2749,12 @@
       "refs": [
         {
           "file": "shared/store/appStore.ts",
-          "line": 303,
+          "line": 294,
           "column": 23
         },
         {
           "file": "shared/store/appStore.ts",
-          "line": 310,
+          "line": 301,
           "column": 25
         }
       ]
@@ -2907,7 +2766,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 125,
+          "line": 124,
           "column": 16
         }
       ]
@@ -2931,7 +2790,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 172,
+          "line": 170,
           "column": 26
         }
       ]
@@ -2955,7 +2814,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 585,
+          "line": 590,
           "column": 43
         }
       ]
@@ -2967,7 +2826,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 142,
+          "line": 120,
           "column": 55
         }
       ]
@@ -2996,7 +2855,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 205,
+          "line": 203,
           "column": 23
         }
       ]
@@ -3182,7 +3041,7 @@
       "refs": [
         {
           "file": "shared/api.ts",
-          "line": 519,
+          "line": 524,
           "column": 21
         }
       ]
@@ -3359,7 +3218,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 53,
+          "line": 50,
           "column": 17
         }
       ]
@@ -3453,7 +3312,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 144,
+          "line": 142,
           "column": 22
         }
       ]
@@ -3556,7 +3415,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 107,
+          "line": 106,
           "column": 15
         }
       ]
@@ -3568,7 +3427,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 117,
+          "line": 116,
           "column": 7
         }
       ]
@@ -3848,7 +3707,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 152,
+          "line": 150,
           "column": 26
         }
       ]
@@ -3862,18 +3721,6 @@
           "file": "features/settings/ExternalApiSettingsCard.tsx",
           "line": 104,
           "column": 88
-        }
-      ]
-    },
-    "a0ad0c340abf41c7": {
-      "source": "缓存读取价格",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 42,
-          "column": 70
         }
       ]
     },
@@ -3900,6 +3747,20 @@
           "file": "shared/ui/FormControls.tsx",
           "line": 18,
           "column": 85
+        }
+      ]
+    },
+    "a17114dacfd6fd65": {
+      "source": "缓存读取：{cost}",
+      "kind": "template",
+      "placeholders": [
+        "cost"
+      ],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 104,
+          "column": 5
         }
       ]
     },
@@ -3961,11 +3822,6 @@
           "file": "features/settings/ExternalApiSettingsCard.tsx",
           "line": 64,
           "column": 27
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 92,
-          "column": 31
         },
         {
           "file": "features/settings/ProxySettingsCard.tsx",
@@ -4195,6 +4051,20 @@
         }
       ]
     },
+    "ac98f47fa04008e3": {
+      "source": "缓存写入：{cost}",
+      "kind": "template",
+      "placeholders": [
+        "cost"
+      ],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 105,
+          "column": 5
+        }
+      ]
+    },
     "ad6a60ee93d3ba3e": {
       "source": "正在加载调用详情…",
       "kind": "text",
@@ -4204,22 +4074,6 @@
           "file": "features/calls/CallDetailsPage.tsx",
           "line": 36,
           "column": 69
-        }
-      ]
-    },
-    "ae2d0b7f79cea4a3": {
-      "source": "模型输出：{tokens} × ${price}/1M = {cost}",
-      "kind": "template",
-      "placeholders": [
-        "tokens",
-        "price",
-        "cost"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 117,
-          "column": 5
         }
       ]
     },
@@ -4442,7 +4296,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 100,
+          "line": 91,
           "column": 5
         }
       ]
@@ -4483,7 +4337,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 114,
+          "line": 113,
           "column": 45
         }
       ]
@@ -4497,7 +4351,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 102,
+          "line": 93,
           "column": 5
         }
       ]
@@ -4509,7 +4363,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 188,
+          "line": 186,
           "column": 22
         }
       ]
@@ -4588,11 +4442,6 @@
           "file": "features/settings/CommitSettingsCard.tsx",
           "line": 214,
           "column": 14
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 89,
-          "column": 72
         }
       ]
     },
@@ -4674,7 +4523,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 189,
+          "line": 187,
           "column": 31
         }
       ]
@@ -4686,7 +4535,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 180,
+          "line": 178,
           "column": 40
         }
       ]
@@ -4910,20 +4759,6 @@
         }
       ]
     },
-    "c9d146d006993cc1": {
-      "source": "缓存统计策略：默认口径（{rate}）",
-      "kind": "template",
-      "placeholders": [
-        "rate"
-      ],
-      "refs": [
-        {
-          "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 110,
-          "column": 5
-        }
-      ]
-    },
     "cb2f1709f983d2f4": {
       "source": "模型名称",
       "kind": "text",
@@ -4950,6 +4785,21 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 118,
           "column": 9
+        }
+      ]
+    },
+    "cba6ea375a28bdaa": {
+      "source": "{count} 次调用的模型没有标价，未计入：{models}",
+      "kind": "template",
+      "placeholders": [
+        "count",
+        "models"
+      ],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 110,
+          "column": 7
         }
       ]
     },
@@ -4989,12 +4839,12 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 123,
+          "line": 122,
           "column": 22
         },
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 129,
+          "line": 128,
           "column": 20
         }
       ]
@@ -5030,7 +4880,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 116,
+          "line": 115,
           "column": 7
         }
       ]
@@ -5457,7 +5307,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 97,
+          "line": 88,
           "column": 5
         }
       ]
@@ -5818,7 +5668,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 120,
+          "line": 119,
           "column": 26
         }
       ]
@@ -5856,20 +5706,6 @@
           "file": "features/models/CursorSettingsPage.tsx",
           "line": 381,
           "column": 77
-        }
-      ]
-    },
-    "ec917db99e814b58": {
-      "source": "{label}必须是非负数",
-      "kind": "template",
-      "placeholders": [
-        "label"
-      ],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 33,
-          "column": 21
         }
       ]
     },
@@ -5923,23 +5759,6 @@
         }
       ]
     },
-    "ef5d9908c45f4b88": {
-      "source": "缓存读取价格（$/1M）",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 123,
-          "column": 31
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 153,
-          "column": 24
-        }
-      ]
-    },
     "f0ce0a58b89c5602": {
       "source": "账号和额度在插件页管理",
       "kind": "text",
@@ -5975,18 +5794,6 @@
           "file": "features/calls/CallDetails.tsx",
           "line": 23,
           "column": 6
-        }
-      ]
-    },
-    "f4a0b686421619eb": {
-      "source": "缓存写入价格",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 43,
-          "column": 72
         }
       ]
     },
@@ -6086,7 +5893,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 156,
+          "line": 154,
           "column": 21
         }
       ]
@@ -6152,6 +5959,18 @@
           "file": "shared/ui/ModelSelect.tsx",
           "line": 168,
           "column": 21
+        }
+      ]
+    },
+    "f98f06bff691d8cb": {
+      "source": "按各模型官方标价估算（随版本内置的 models.dev 价格表），只作参考。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/home/metrics/RangeBlock.tsx",
+          "line": 100,
+          "column": 5
         }
       ]
     },
@@ -6247,7 +6066,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 83,
+          "line": 74,
           "column": 5
         }
       ]
@@ -6271,7 +6090,7 @@
       "refs": [
         {
           "file": "features/home/metrics/RangeBlock.tsx",
-          "line": 106,
+          "line": 97,
           "column": 5
         }
       ]
@@ -6300,18 +6119,6 @@
         }
       ]
     },
-    "fe6ec799e02ed9a7": {
-      "source": "Token 定价",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 100,
-          "column": 24
-        }
-      ]
-    },
     "fea405f9b01d1416": {
       "source": "概览",
       "kind": "text",
@@ -6331,7 +6138,7 @@
       "refs": [
         {
           "file": "features/settings/SettingsPage.tsx",
-          "line": 215,
+          "line": 213,
           "column": 38
         }
       ]
@@ -6350,11 +6157,6 @@
           "file": "features/settings/ExternalApiSettingsCard.tsx",
           "line": 64,
           "column": 15
-        },
-        {
-          "file": "features/settings/PricingSettingsCard.tsx",
-          "line": 92,
-          "column": 19
         },
         {
           "file": "features/settings/ProxySettingsCard.tsx",

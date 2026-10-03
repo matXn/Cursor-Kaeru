@@ -9,7 +9,6 @@ import type {
   PluginDescriptor,
   CursorModel,
   Provider,
-  TokenPricingSettings,
   PluginResourceView,
   ProxySettings,
   StatisticsStorage,
@@ -207,7 +206,6 @@ let harnessStatus: CursorHarnessStatus = {
 let detailed = true;
 let portSettings = { proxy_port: 47822, service_port: 47821 };
 let externalApiSettings: ExternalApiSettings = { enabled: false, api_key: "" };
-let pricingSettings: TokenPricingSettings = { input_per_million: 5, output_per_million: 25, cache_read_per_million: 0.5, cache_write_per_million: 6.25 };
 let proxySettings: ProxySettings = {
   mode: "default",
   address: "",
@@ -294,11 +292,6 @@ export function installDemoApi() {
     if (path === "/settings/ports") {
       portSettings = body as typeof portSettings;
       return json(portSettings);
-    }
-    if (path === "/settings/pricing" && method === "GET") return json(pricingSettings);
-    if (path === "/settings/pricing") {
-      pricingSettings = body as TokenPricingSettings;
-      return json(pricingSettings);
     }
     if (path === "/settings/external-api" && method === "GET") return json(externalApiSettings);
     if (path === "/settings/external-api") {
@@ -409,6 +402,15 @@ function createOverview(params: URLSearchParams): Overview {
       cache_read_tokens: totals.cacheRead,
       cache_write_tokens: totals.cacheWrite,
       output_tokens: totals.output,
+    },
+    // Roughly Opus-class list prices over the demo's mix, with one unlisted model.
+    cost: {
+      input_usd: totals.input / 1e6 * 5,
+      output_usd: totals.output / 1e6 * 25,
+      cache_read_usd: totals.cacheRead / 1e6 * 0.5,
+      cache_write_usd: totals.cacheWrite / 1e6 * 6.25,
+      unpriced_calls: 3,
+      unpriced_models: ["my-finetune-v2"],
     },
     peak_hour: 17,
     model_share: shares.map(([display_name, share]) => ({ display_name, tokens: Math.round(tokenUsage * share) })),

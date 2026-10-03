@@ -116,6 +116,7 @@ export function HomePage() {
     promptTokens: filteredOverview.metrics.prompt_tokens,
     cacheReadTokens: filteredOverview.metrics.cache_read_tokens,
     cacheWriteTokens: filteredOverview.metrics.cache_write_tokens,
+    cost: filteredOverview.cost,
   };
   const applyCustom = () => {
     const startMs = parseTimeInput(customStart);
