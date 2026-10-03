@@ -20,7 +20,7 @@
     grid-template-columns: 132px minmax(0, 1fr);
     gap: 10px;
     padding: 8px 10px;
-    background: color-mix(in srgb, var(--surface-raised) 60%, transparent);
+    background: var(--field);
     border-radius: var(--radius);
   }
 

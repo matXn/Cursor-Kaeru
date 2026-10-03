@@ -40,7 +40,8 @@
   top: 0;
   color: var(--text-faint);
   font-size: var(--text-xs);
-  background: var(--surface);
+  background: var(--surface-raised);
+  backdrop-filter: var(--float-blur);
   border-bottom: 1px solid var(--border);
   border-radius: var(--radius) var(--radius) 0 0;
 }
@@ -136,7 +137,7 @@
 .groupRow {
   position: relative;
   z-index: 1;
-  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  background: var(--field);
   border-bottom: 1px solid var(--border);
 
   button.side {

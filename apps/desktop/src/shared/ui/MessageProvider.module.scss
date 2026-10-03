@@ -29,6 +29,8 @@
   transition: opacity 200ms ease, transform 200ms ease;
 
   background: var(--surface-raised);
+
+  backdrop-filter: var(--float-blur);
   border: 1px solid var(--border);
 }
 

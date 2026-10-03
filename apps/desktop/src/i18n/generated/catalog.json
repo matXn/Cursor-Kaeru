@@ -213,7 +213,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 352,
+          "line": 347,
           "column": 21
         }
       ]
@@ -285,7 +285,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 264,
+          "line": 262,
           "column": 12
         }
       ]
@@ -607,7 +607,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 137,
+          "line": 135,
           "column": 16
         }
       ]
@@ -656,7 +656,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 193,
+          "line": 191,
           "column": 23
         }
       ]
@@ -930,7 +930,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 336,
+          "line": 331,
           "column": 122
         }
       ]
@@ -1105,7 +1105,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 316,
+          "line": 311,
           "column": 70
         },
         {
@@ -1454,7 +1454,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 284,
+          "line": 279,
           "column": 32
         }
       ]
@@ -1615,7 +1615,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 316,
+          "line": 311,
           "column": 80
         },
         {
@@ -1632,7 +1632,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 126,
+          "line": 124,
           "column": 68
         }
       ]
@@ -1865,7 +1865,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 315,
+          "line": 310,
           "column": 12
         }
       ]
@@ -1889,7 +1889,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 126,
+          "line": 124,
           "column": 46
         }
       ]
@@ -2260,7 +2260,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 308,
+          "line": 303,
           "column": 7
         }
       ]
@@ -2822,7 +2822,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 351,
+          "line": 346,
           "column": 31
         }
       ]
@@ -2948,7 +2948,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 259,
+          "line": 257,
           "column": 36
         }
       ]
@@ -2972,7 +2972,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 119,
+          "line": 117,
           "column": 25
         }
       ]
@@ -3014,7 +3014,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 336,
+          "line": 331,
           "column": 20
         }
       ]
@@ -3149,7 +3149,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 348,
+          "line": 343,
           "column": 32
         }
       ]
@@ -3317,12 +3317,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 248,
+          "line": 246,
           "column": 36
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 249,
+          "line": 247,
           "column": 81
         }
       ]
@@ -3370,7 +3370,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 350,
+          "line": 345,
           "column": 31
         }
       ]
@@ -3526,12 +3526,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 112,
+          "line": 110,
           "column": 9
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 310,
+          "line": 305,
           "column": 9
         }
       ]
@@ -3569,7 +3569,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 92,
+          "line": 90,
           "column": 11
         }
       ]
@@ -3581,7 +3581,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 138,
+          "line": 136,
           "column": 14
         }
       ]
@@ -3593,7 +3593,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 349,
+          "line": 344,
           "column": 30
         }
       ]
@@ -3607,7 +3607,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 195,
+          "line": 193,
           "column": 17
         },
         {
@@ -3838,7 +3838,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 93,
+          "line": 91,
           "column": 11
         }
       ]
@@ -4122,12 +4122,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 117,
+          "line": 115,
           "column": 7
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 339,
+          "line": 334,
           "column": 70
         }
       ]
@@ -4163,7 +4163,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 115,
+          "line": 113,
           "column": 11
         }
       ]
@@ -4413,7 +4413,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 126,
+          "line": 124,
           "column": 83
         }
       ]
@@ -4437,7 +4437,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 316,
+          "line": 311,
           "column": 45
         }
       ]
@@ -4523,7 +4523,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 114,
+          "line": 112,
           "column": 11
         }
       ]
@@ -4663,7 +4663,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 120,
+          "line": 118,
           "column": 9
         }
       ]
@@ -4812,7 +4812,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 224,
+          "line": 222,
           "column": 20
         }
       ]
@@ -4966,7 +4966,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 340,
+          "line": 335,
           "column": 44
         }
       ]
@@ -5100,7 +5100,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 164,
+          "line": 162,
           "column": 80
         }
       ]
@@ -5112,7 +5112,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 259,
+          "line": 257,
           "column": 25
         }
       ]
@@ -5170,12 +5170,12 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 276,
+          "line": 271,
           "column": 34
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 277,
+          "line": 272,
           "column": 47
         },
         {
@@ -5684,7 +5684,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 214,
+          "line": 212,
           "column": 32
         }
       ]
@@ -5810,7 +5810,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 96,
+          "line": 94,
           "column": 20
         },
         {
@@ -5827,7 +5827,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 325,
+          "line": 320,
           "column": 23
         }
       ]
@@ -5839,7 +5839,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 126,
+          "line": 124,
           "column": 19
         }
       ]
@@ -5863,12 +5863,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 110,
+          "line": 108,
           "column": 7
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 347,
+          "line": 342,
           "column": 29
         }
       ]
@@ -5919,7 +5919,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 214,
+          "line": 212,
           "column": 45
         }
       ]

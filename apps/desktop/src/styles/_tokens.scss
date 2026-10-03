@@ -66,18 +66,22 @@
   // any wallpaper. The lamp is translucent so the blurred desktop still shows through it.
   --acrylic-stage: radial-gradient(circle at -100px 60%, rgb(255 178 125 / 60%) 0, rgb(239 138 86 / 40%) 170px, rgb(166 90 59 / 20%) 360px, transparent 640px),
     linear-gradient(rgb(24 20 18 / 58%), rgb(24 20 18 / 58%));
-  --surface: #171716; // panels
-  // Cards: smoked glass over the stage, no blur (blur made page switches stutter).
-  --card-glass: rgb(16 14 13 / 42%);
-  --card-edge: rgb(255 255 255 / 7%);
-  --card-highlight: inset 0 1px 0 rgb(255 255 255 / 5%);
-  --surface-raised: #211f1e; // menus, tooltips, modals
-  --field: #0c0c0b; // inputs, editors
+  // Three layers of smoked glass. Each tint is light enough that the stage still shows
+  // through once layers stack (card + field ≈ 52% black).
+  // 1. On the stage: cards, panels. No blur: it made page switches stutter.
+  --surface: rgb(16 14 13 / 42%);
+  --surface-edge: inset 0 1px 0 rgb(255 255 255 / 5%);
+  // 2. Inside a layer-1 surface: inputs, buttons, editors, inset rows.
+  --field: rgb(0 0 0 / 18%);
+  // 3. Floating over everything: menus, tooltips, modals, sticky headers. Short-lived and
+  // small, so these may blur what is under them.
+  --surface-raised: rgb(30 26 24 / 68%);
+  --float-blur: blur(22px) saturate(1.35);
   --hover: rgb(255 255 255 / 4.5%);
   --selected: rgb(255 255 255 / 7.5%);
 
-  --border: #282725; // hairlines between regions
-  --border-strong: #3a3935; // control outlines, hovered borders
+  --border: rgb(255 255 255 / 8%); // hairlines between regions
+  --border-strong: rgb(255 255 255 / 15%); // control outlines, hovered borders
 
   --text: #e6e4de;
   --text-muted: #9d9a92;
@@ -139,12 +143,11 @@
   --topbar-glass: rgb(214 209 204 / 55%);
   --acrylic-stage: radial-gradient(circle at -100px 60%, rgb(255 211 174 / 70%) 0, rgb(243 154 102 / 45%) 180px, rgb(201 138 108 / 22%) 380px, transparent 680px),
     linear-gradient(rgb(238 233 228 / 52%), rgb(238 233 228 / 52%));
-  --surface: #cdc8c3;
-  --card-glass: rgb(255 252 248 / 34%);
-  --card-edge: rgb(40 25 15 / 11%);
-  --card-highlight: inset 0 1px 0 rgb(255 255 255 / 60%);
-  --surface-raised: #dcd7d2;
-  --field: #d3cec9;
+  --surface: rgb(255 252 248 / 34%);
+  --surface-edge: inset 0 1px 0 rgb(255 255 255 / 60%);
+  --field: rgb(255 255 255 / 30%);
+  --surface-raised: rgb(246 242 238 / 72%);
+  --float-blur: blur(22px) saturate(1.35);
   --hover: rgb(40 25 15 / 6%);
   --selected: rgb(40 25 15 / 10%);
 

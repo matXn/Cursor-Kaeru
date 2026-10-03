@@ -232,7 +232,7 @@ function PluginCard({ plugin, onOpen }: {
         ]
       : []),
     ...(plugin.version
-      ? [{ id: "version", type: "text" as const, label: `v${plugin.version}` }]
+      ? [{ id: "version", type: "text" as const, label: [`v${plugin.version}`, plugin.author].filter(Boolean).join(" · ") }]
       : []),
   ];
 
@@ -264,9 +264,6 @@ function PluginCard({ plugin, onOpen }: {
             models: modelCount,
           })}
         </span>
-        {plugin.author && (
-          <span className={styles.pluginAuthor}>{plugin.author}</span>
-        )}
       </div>
       <AccountQuotas plugin={plugin} />
       <div className={styles.cardActions}>

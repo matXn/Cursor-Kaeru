@@ -40,6 +40,7 @@
   flex-direction: column;
   color: var(--text);
   background: var(--surface-raised);
+  backdrop-filter: var(--float-blur);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-popover);

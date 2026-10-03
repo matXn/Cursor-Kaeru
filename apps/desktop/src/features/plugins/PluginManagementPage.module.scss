@@ -95,13 +95,6 @@
   font-size: var(--text-sm);
 }
 
-.pluginAuthor {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  opacity: 0.85;
-}
-
 // The card's foot: a hairline, then plain text actions like the rows of the models table,
 // no outlined boxes. Each one only shows a surface while hovered.
 .cardActions {

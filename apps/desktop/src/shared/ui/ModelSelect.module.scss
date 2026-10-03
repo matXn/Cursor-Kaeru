@@ -74,6 +74,8 @@
   border-radius: var(--radius);
 
   background: var(--surface-raised);
+
+  backdrop-filter: var(--float-blur);
   border: 1px solid var(--border);
 }
 

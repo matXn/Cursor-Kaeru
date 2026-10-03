@@ -41,7 +41,7 @@
   padding: 12px 14px;
   overflow: auto;
   color: var(--accent);
-  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  background: var(--field);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   white-space: pre-wrap;

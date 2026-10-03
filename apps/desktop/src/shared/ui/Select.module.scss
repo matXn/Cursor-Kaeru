@@ -114,6 +114,8 @@
   box-shadow: var(--shadow-popover);
 
   background: var(--surface-raised);
+
+  backdrop-filter: var(--float-blur);
   border: 1px solid var(--border);
 
   button {
