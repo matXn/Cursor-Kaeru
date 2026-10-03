@@ -34,12 +34,12 @@ export function ExternalApiSettingsCard({ servicePort }: { servicePort: number }
     }
   };
 
-  const address = `http://127.0.0.1:${servicePort}/byok/v1`;
+  const address = `http://127.0.0.1:${servicePort}/kaeru/v1`;
   const changed = saved && (saved.enabled !== draft.enabled || saved.api_key !== draft.api_key);
 
-  return <TitledCard title={t("外部 API")} action={<Button size="small" variant="primary" disabled={!changed || saving} onClick={() => void save()}>
+  return <TitledCard title={t("外部 API")} action={changed ? <Button size="small" variant="primary" disabled={saving} onClick={() => void save()}>
     {saving ? t("保存中…") : t("保存")}
-  </Button>}>
+  </Button> : undefined}>
     <div className={styles.content}>
       <div className={styles.row}>
         <div className={styles.description}>

@@ -51,7 +51,7 @@ pub(super) async fn list(store: &Store, plugins: &PluginRegistry) -> Result<Vec<
 
 pub(super) fn response(models: &[ListedModel]) -> Value {
     json!({"object":"list","data":models.iter().map(|model| json!({
-        "id":model.public_id,"object":"model","created":0,"owned_by":"cursor-byok",
+        "id":model.public_id,"object":"model","created":0,"owned_by":"cursor-kaeru",
         "name":model.display_name
     })).collect::<Vec<_>>()})
 }

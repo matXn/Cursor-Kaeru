@@ -38,10 +38,10 @@ pub fn router(
     native: Option<NativeForwarder>,
 ) -> Router {
     Router::new()
-        .route("/byok/v1/models", get(list_models))
-        .route("/byok/v1/chat/completions", post(chat))
-        .route("/byok/v1/responses", post(responses))
-        .route("/byok/v1/messages", post(messages))
+        .route("/kaeru/v1/models", get(list_models))
+        .route("/kaeru/v1/chat/completions", post(chat))
+        .route("/kaeru/v1/responses", post(responses))
+        .route("/kaeru/v1/messages", post(messages))
         .with_state(ApiState {
             store,
             plugins,

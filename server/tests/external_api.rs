@@ -109,7 +109,7 @@ async fn management_settings_enable_the_external_route_without_restart() {
         send(
             router,
             "GET",
-            "/byok/v1/models",
+            "/kaeru/v1/models",
             Some("changed-key"),
             json!({})
         )
@@ -149,7 +149,7 @@ async fn disabled_and_unauthorized_requests_cannot_list_models() {
         send(
             router.clone(),
             "GET",
-            "/byok/v1/models",
+            "/kaeru/v1/models",
             Some("secret"),
             json!({})
         )
@@ -165,7 +165,7 @@ async fn disabled_and_unauthorized_requests_cannot_list_models() {
         .await
         .unwrap();
     assert_eq!(
-        send(router.clone(), "GET", "/byok/v1/models", None, json!({}))
+        send(router.clone(), "GET", "/kaeru/v1/models", None, json!({}))
             .await
             .0,
         StatusCode::UNAUTHORIZED
@@ -174,7 +174,7 @@ async fn disabled_and_unauthorized_requests_cannot_list_models() {
         send(
             router.clone(),
             "GET",
-            "/byok/v1/models",
+            "/kaeru/v1/models",
             Some("wrong"),
             json!({})
         )
@@ -182,7 +182,7 @@ async fn disabled_and_unauthorized_requests_cannot_list_models() {
         .0,
         StatusCode::UNAUTHORIZED
     );
-    let (status, body) = send(router, "GET", "/byok/v1/models", Some("secret"), json!({})).await;
+    let (status, body) = send(router, "GET", "/kaeru/v1/models", Some("secret"), json!({})).await;
     assert_eq!(status, StatusCode::OK);
     assert_eq!(
         serde_json::from_str::<Value>(&body).unwrap()["data"][0]["id"],
@@ -217,7 +217,7 @@ async fn duplicate_public_model_ids_use_the_first_configured_model() {
     let (status, body) = send(
         router.clone(),
         "GET",
-        "/byok/v1/models",
+        "/kaeru/v1/models",
         Some("secret"),
         json!({}),
     )
@@ -242,7 +242,7 @@ async fn duplicate_public_model_ids_use_the_first_configured_model() {
     let (status, body) = send(
         router,
         "POST",
-        "/byok/v1/chat/completions",
+        "/kaeru/v1/chat/completions",
         Some("secret"),
         json!({"model":"work/qwen/model","messages":[{"role":"user","content":"hello"}]}),
     )
@@ -263,15 +263,15 @@ async fn all_three_protocols_use_the_public_model_id() {
         .unwrap();
     for (path, body) in [
         (
-            "/byok/v1/chat/completions",
+            "/kaeru/v1/chat/completions",
             json!({"model":"work/qwen/model","messages":[{"role":"user","content":"hello"}]}),
         ),
         (
-            "/byok/v1/responses",
+            "/kaeru/v1/responses",
             json!({"model":"work/qwen/model","input":"hello"}),
         ),
         (
-            "/byok/v1/messages",
+            "/kaeru/v1/messages",
             json!({"model":"work/qwen/model","max_tokens":100,"messages":[{"role":"user","content":"hello"}]}),
         ),
     ] {
@@ -318,7 +318,7 @@ async fn streaming_chat_returns_incremental_sse_and_tool_calls() {
         ModelEvent::ToolCallEnd { index: 0 },
         ModelEvent::Done(FinishReason::ToolUse),
     ]);
-    let (status, body) = send(router, "POST", "/byok/v1/chat/completions", Some("secret"),
+    let (status, body) = send(router, "POST", "/kaeru/v1/chat/completions", Some("secret"),
         json!({"model":"work/qwen/model","stream":true,"messages":[{"role":"user","content":"hello"}]})).await;
     assert_eq!(status, StatusCode::OK);
     assert!(body.contains("chat.completion.chunk"));
@@ -350,7 +350,7 @@ async fn chat_tool_result_keeps_the_assistant_function_name() {
         send(
             router,
             "POST",
-            "/byok/v1/chat/completions",
+            "/kaeru/v1/chat/completions",
             Some("secret"),
             body
         )
@@ -377,12 +377,12 @@ async fn responses_and_messages_stream_with_protocol_end_events() {
         .unwrap();
     for (path, request, terminal) in [
         (
-            "/byok/v1/responses",
+            "/kaeru/v1/responses",
             json!({"model":"work/qwen/model","input":"hello","stream":true}),
             "response.completed",
         ),
         (
-            "/byok/v1/messages",
+            "/kaeru/v1/messages",
             json!({"model":"work/qwen/model","max_tokens":100,"messages":[{"role":"user","content":"hello"}],"stream":true}),
             "message_stop",
         ),
@@ -426,7 +426,7 @@ async fn responses_stream_emits_complete_text_and_tool_item_lifecycles() {
     let (status, body) = send(
         router,
         "POST",
-        "/byok/v1/responses",
+        "/kaeru/v1/responses",
         Some("secret"),
         json!({"model":"work/qwen/model","input":"hello","stream":true}),
     )
@@ -483,7 +483,7 @@ async fn messages_stream_closes_each_content_block_before_stopping() {
         ModelEvent::ToolCallEnd { index: 0 },
         ModelEvent::Done(FinishReason::ToolUse),
     ]);
-    let (status, body) = send(router, "POST", "/byok/v1/messages", Some("secret"),
+    let (status, body) = send(router, "POST", "/kaeru/v1/messages", Some("secret"),
         json!({"model":"work/qwen/model","max_tokens":100,"messages":[{"role":"user","content":"hello"}],"stream":true})).await;
     assert_eq!(status, StatusCode::OK);
     let events = body
@@ -528,21 +528,21 @@ async fn all_protocols_preserve_cached_usage_in_streaming_and_complete_responses
     };
     for (path, request, usage_pointer, cached_pointer, expected_input) in [
         (
-            "/byok/v1/chat/completions",
+            "/kaeru/v1/chat/completions",
             json!({"model":"work/qwen/model","messages":[{"role":"user","content":"hello"}]}),
             "/usage",
             "/prompt_tokens_details/cached_tokens",
             1_000,
         ),
         (
-            "/byok/v1/responses",
+            "/kaeru/v1/responses",
             json!({"model":"work/qwen/model","input":"hello"}),
             "/response/usage",
             "/input_tokens_details/cached_tokens",
             1_000,
         ),
         (
-            "/byok/v1/messages",
+            "/kaeru/v1/messages",
             json!({"model":"work/qwen/model","max_tokens":100,"messages":[{"role":"user","content":"hello"}]}),
             "/usage",
             "/cache_read_input_tokens",
@@ -564,8 +564,8 @@ async fn all_protocols_preserve_cached_usage_in_streaming_and_complete_responses
                     .filter_map(|line| line.strip_prefix("data: "))
                     .filter_map(|line| serde_json::from_str::<Value>(line).ok())
                     .find(|event| match path {
-                        "/byok/v1/chat/completions" => event.get("usage").is_some(),
-                        "/byok/v1/responses" => event["type"] == "response.completed",
+                        "/kaeru/v1/chat/completions" => event.get("usage").is_some(),
+                        "/kaeru/v1/responses" => event["type"] == "response.completed",
                         _ => event["type"] == "message_delta",
                     })
                     .unwrap_or_else(|| panic!("missing usage event in {path}: {body}"))
@@ -580,7 +580,7 @@ async fn all_protocols_preserve_cached_usage_in_streaming_and_complete_responses
                 Some(&json!(800)),
                 "{path} stream={stream}: {body}"
             );
-            let input_field = if path == "/byok/v1/chat/completions" {
+            let input_field = if path == "/kaeru/v1/chat/completions" {
                 "prompt_tokens"
             } else {
                 "input_tokens"
@@ -589,10 +589,10 @@ async fn all_protocols_preserve_cached_usage_in_streaming_and_complete_responses
                 usage[input_field], expected_input,
                 "{path} stream={stream}: {body}"
             );
-            if path == "/byok/v1/messages" {
+            if path == "/kaeru/v1/messages" {
                 assert_eq!(usage["cache_creation_input_tokens"], 20, "{body}");
             }
-            if stream && path == "/byok/v1/chat/completions" {
+            if stream && path == "/kaeru/v1/chat/completions" {
                 let finished = body.find("\"finish_reason\":\"stop\"").unwrap();
                 let usage_position = body.find("\"cached_tokens\":800").unwrap();
                 let done = body.find("[DONE]").unwrap();
@@ -639,7 +639,7 @@ async fn all_entry_and_upstream_protocol_pairs_preserve_cache_usage() {
         model.display_name = format!("Bridge {group}");
         model.model_type = model_type;
         model.openai_endpoint = endpoint.into();
-        model.base_url = format!("http://127.0.0.1:{port}/byok/v1");
+        model.base_url = format!("http://127.0.0.1:{port}/kaeru/v1");
         model.model_id = "work/qwen/model".into();
         model.api_key = "secret".into();
         store.create_test_model_in(group, &model).await.unwrap();
@@ -664,17 +664,17 @@ async fn all_entry_and_upstream_protocol_pairs_preserve_cache_usage() {
     );
     for (path, request) in [
         (
-            "/byok/v1/chat/completions",
+            "/kaeru/v1/chat/completions",
             json!({"messages":[{"role":"user","content":"hello"}],
                 "tools":[{"type":"function","function":{"name":"lookup","description":"Look up a value","parameters":{"type":"object","properties":{"q":{"type":"string"}}}}}]}),
         ),
         (
-            "/byok/v1/responses",
+            "/kaeru/v1/responses",
             json!({"input":"hello",
             "tools":[{"type":"function","name":"lookup","description":"Look up a value","parameters":{"type":"object","properties":{"q":{"type":"string"}}}}]}),
         ),
         (
-            "/byok/v1/messages",
+            "/kaeru/v1/messages",
             json!({"max_tokens":100,"messages":[{"role":"user","content":"hello"}],
                 "tools":[{"name":"lookup","description":"Look up a value","input_schema":{"type":"object","properties":{"q":{"type":"string"}}}}]}),
         ),
@@ -808,7 +808,7 @@ async fn matching_http_protocols_forward_native_requests_and_responses() {
             "chat",
             ModelType::OpenAi,
             OPENAI_CHAT_ENDPOINT,
-            "/byok/v1/chat/completions",
+            "/kaeru/v1/chat/completions",
             json!({"messages":[{"role":"user","content":"hi"}],"native_extension":{"keep":1}}),
         ),
         (
@@ -816,7 +816,7 @@ async fn matching_http_protocols_forward_native_requests_and_responses() {
             "responses",
             ModelType::OpenAi,
             OPENAI_RESPONSES_ENDPOINT,
-            "/byok/v1/responses",
+            "/kaeru/v1/responses",
             json!({"input":[{"type":"native_unsupported","value":1}],"native_extension":{"keep":2}}),
         ),
         (
@@ -824,7 +824,7 @@ async fn matching_http_protocols_forward_native_requests_and_responses() {
             "messages",
             ModelType::Anthropic,
             "",
-            "/byok/v1/messages",
+            "/kaeru/v1/messages",
             json!({"max_tokens":100,"messages":[{"role":"user","content":[{"type":"document","source":{"type":"url","url":"https://example.com"}}]}],"native_extension":{"keep":3}}),
         ),
     ] {
@@ -832,7 +832,7 @@ async fn matching_http_protocols_forward_native_requests_and_responses() {
         model.sort_order = order;
         model.model_type = model_type;
         model.openai_endpoint = endpoint.into();
-        model.base_url = format!("http://127.0.0.1:{port}/byok/v1");
+        model.base_url = format!("http://127.0.0.1:{port}/kaeru/v1");
         model.model_id = "native-model".into();
         store.create_test_model_in(group, &model).await.unwrap();
         for stream in [false, true] {
@@ -893,7 +893,7 @@ async fn matching_http_protocols_forward_native_requests_and_responses() {
             )),
         ),
         "POST",
-        "/byok/v1/chat/completions",
+        "/kaeru/v1/chat/completions",
         Some("secret"),
         error_request.clone(),
     )
