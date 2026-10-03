@@ -185,12 +185,24 @@ fn decode_assistant(value: &Value, internal_id: &str) -> Result<MessageContent> 
             Some("reasoning") => {
                 thinking.push_str(part.get("text").and_then(Value::as_str).unwrap_or_default());
                 if let Some(signature) = part.get("signature").and_then(Value::as_str) {
-                    if replay_state.is_some() {
-                        return Err(Error::Protocol(
-                            "Cursor assistant has multiple reasoning signatures".into(),
-                        ));
+                    // Cursor's own models answer with several reasoning parts, each signed;
+                    // those signatures mean nothing to a BYOK provider. Ours wins, and of
+                    // Cursor's the first one is kept.
+                    let next = decode_replay_state(signature)?;
+                    match &replay_state {
+                        None => replay_state = Some(next),
+                        Some(current) if current.provider_kind == "cursor_opaque" => {
+                            if next.provider_kind != "cursor_opaque" {
+                                replay_state = Some(next);
+                            }
+                        }
+                        Some(_) if next.provider_kind == "cursor_opaque" => {}
+                        Some(_) => {
+                            return Err(Error::Protocol(
+                                "Cursor assistant has multiple BYOK replay envelopes".into(),
+                            ));
+                        }
                     }
-                    replay_state = Some(decode_replay_state(signature)?);
                 }
             }
             Some("tool-call") => calls.push(ToolCallContent {

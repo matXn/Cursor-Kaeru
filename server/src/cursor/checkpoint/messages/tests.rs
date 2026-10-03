@@ -269,3 +269,33 @@ fn opaque_cursor_reasoning_signature_round_trips_without_decoding() {
     let encoded = wire_message(&projected[0], "model", None).unwrap();
     assert_eq!(encoded["content"][0]["signature"], signature);
 }
+
+#[test]
+fn cursor_models_with_several_signed_reasoning_parts_still_decode() {
+    let wire = json!({
+        "role": "assistant",
+        "id": "1",
+        "content": [
+            {"type":"reasoning", "text":"first ", "signature":"cursor-sig-1"},
+            {"type":"text", "text":"answer"},
+            {"type":"reasoning", "text":"second", "signature":"cursor-sig-2"},
+        ],
+    });
+    let message = decode(
+        serde_json::to_vec(&wire).unwrap().as_slice(),
+        "cursor-root:several".into(),
+    )
+    .unwrap();
+    let MessageContent::Assistant {
+        thinking,
+        replay_state,
+        ..
+    } = &message.content
+    else {
+        panic!("expected assistant");
+    };
+    assert_eq!(thinking, "first second");
+    let replay_state = replay_state.as_ref().unwrap();
+    assert_eq!(replay_state.provider_kind, "cursor_opaque");
+    assert_eq!(replay_state.value, json!("cursor-sig-1"));
+}
