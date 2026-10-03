@@ -75,7 +75,7 @@
   --field: rgb(0 0 0 / 18%);
   // 3. Floating over everything: menus, tooltips, modals, sticky headers. Short-lived and
   // small, so these may blur what is under them.
-  --surface-raised: rgb(30 26 24 / 68%);
+  --surface-raised: rgb(30 26 24 / 50%);
   --float-blur: blur(22px) saturate(1.35);
   --hover: rgb(255 255 255 / 4.5%);
   --selected: rgb(255 255 255 / 7.5%);
@@ -146,7 +146,7 @@
   --surface: rgb(255 252 248 / 34%);
   --surface-edge: inset 0 1px 0 rgb(255 255 255 / 60%);
   --field: rgb(255 255 255 / 30%);
-  --surface-raised: rgb(246 242 238 / 72%);
+  --surface-raised: rgb(246 242 238 / 56%);
   --float-blur: blur(22px) saturate(1.35);
   --hover: rgb(40 25 15 / 6%);
   --selected: rgb(40 25 15 / 10%);

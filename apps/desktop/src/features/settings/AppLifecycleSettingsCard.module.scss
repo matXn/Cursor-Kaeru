@@ -20,3 +20,13 @@
     font-size: var(--text-base);
   }
 }
+
+.link {
+  padding: 4px;
+  color: var(--accent);
+  background: transparent;
+  border: 0;
+  white-space: nowrap;
+
+  &:hover { color: var(--accent-hover); }
+}
