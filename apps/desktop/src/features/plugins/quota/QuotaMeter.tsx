@@ -8,12 +8,19 @@ const LOW_PERCENT = 20;
 const weekdayTime = new Intl.DateTimeFormat("en-US", { weekday: "short", hour: "numeric", minute: "2-digit", hour12: true });
 const monthDay = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" });
 
-// When the window resets, in English like the quota names: "Fri 3:40 AM" within a week,
-// otherwise the date, "Oct 12".
+// When the window resets, in English like the quota names: a short window (the 5h one) as the
+// time left, "3 h 05 min"; within a week the moment, "Fri 3:40 AM"; later the date, "Oct 12".
 export function resetText(resetAtMs: number, nowMs = Date.now()) {
+  const left = resetAtMs - nowMs;
+  if (left < SHORT_WINDOW_MS) {
+    const minutes = Math.max(0, Math.ceil(left / 60_000));
+    return `${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, "0")} min`;
+  }
   const date = new Date(resetAtMs);
-  return resetAtMs - nowMs < 7 * 24 * 60 * 60_000 ? weekdayTime.format(date).replace(",", "") : monthDay.format(date);
+  return left < 7 * 24 * 60 * 60_000 ? weekdayTime.format(date).replace(",", "") : monthDay.format(date);
 }
+
+const SHORT_WINDOW_MS = 6 * 60 * 60_000;
 
 /** Remaining quota of one window as a row of lit cells, the same cells as the activity wall. */
 export function QuotaMeter({ metric, compact = false }: { metric: PluginResourceMetric; compact?: boolean }) {
