@@ -139,7 +139,10 @@ function ModelRows(props: ProviderTableProps & { rows: Model[]; number: () => st
 
   useEffect(() => {
     sortable.current?.option("disabled", props.disabled);
-    sortable.current?.sort(props.rows.map((model) => model.model_hash), false);
+    // Sorting re-inserts every row, which cuts running transitions (the switches): only when
+    // the order on screen is actually stale.
+    const order = props.rows.map((model) => model.model_hash);
+    if (sortable.current && sortable.current.toArray().join() !== order.join()) sortable.current.sort(order, false);
   }, [props.disabled, props.rows]);
 
   return <div ref={list}>

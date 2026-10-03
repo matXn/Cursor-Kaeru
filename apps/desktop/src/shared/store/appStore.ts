@@ -195,6 +195,21 @@ export const appStore = {
   },
   /** Switches a model on or off for Cursor; plugin models go through their plugin. */
   async setModelEnabled(target: { modelHash: string } | { pluginId: string; providerId: string; modelId: string }, enabled: boolean) {
+    // Flip it on screen right away, so the switch animates on the click, not on the reply;
+    // the refresh afterwards brings back whatever the server holds.
+    if ("modelHash" in target) {
+      update({ models: snapshot.models.map((model) => model.model_hash === target.modelHash ? { ...model, enabled } : model) });
+    } else {
+      update({
+        plugins: snapshot.plugins.map((plugin) => plugin.id !== target.pluginId ? plugin : {
+          ...plugin,
+          providers: plugin.providers.map((provider) => provider.id !== target.providerId ? provider : {
+            ...provider,
+            models: provider.models.map((model) => model.modelId === target.modelId ? { ...model, enabled } : model),
+          }),
+        }),
+      });
+    }
     await perform(async () => {
       if ("modelHash" in target) await api.setModelEnabled(target.modelHash, enabled);
       else await api.setPluginModelEnabled(target.pluginId, target.providerId, target.modelId, enabled);
