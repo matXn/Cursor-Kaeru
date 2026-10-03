@@ -116,8 +116,12 @@
   button {
     min-width: 0;
     flex: 0 1 auto;
+    width: var(--control-h-sm);
     height: var(--control-h-sm);
-    padding: 0 var(--space-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     color: var(--text-muted);
     background: transparent;
     border: 0;
@@ -133,9 +137,6 @@
     }
   }
 
-  > button:first-child {
-    color: var(--text);
-  }
 }
 
 

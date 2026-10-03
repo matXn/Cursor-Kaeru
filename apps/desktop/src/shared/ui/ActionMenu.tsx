@@ -2,6 +2,7 @@ import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/d
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "./Button";
+import type { IconifyIcon } from "@iconify/react";
 import { Icon } from "./Icon";
 import { chevronDownIcon } from "./icons";
 import styles from "./ActionMenu.module.scss";
@@ -20,11 +21,12 @@ export type ActionMenuItem =
       type: "text";
     };
 
-/** 触发器 + 动作列表的下拉菜单,用于容纳卡片上的次要操作。 */
-export function ActionMenu({ label, items, disabled }: {
+/** 触发器 + 动作列表的下拉菜单,用于容纳卡片上的次要操作。给了 icon 时触发器只显示图标,label 作为无障碍名称。 */
+export function ActionMenu({ label, items, disabled, icon }: {
   label: string;
   items: ActionMenuItem[];
   disabled?: boolean;
+  icon?: IconifyIcon;
 }) {
   const trigger = useRef<HTMLButtonElement>(null);
   const menu = useRef<HTMLDivElement>(null);
@@ -62,6 +64,8 @@ export function ActionMenu({ label, items, disabled }: {
       ref={trigger}
       size="small"
       disabled={disabled}
+      aria-label={icon ? label : undefined}
+      title={icon ? label : undefined}
       aria-haspopup="menu"
       aria-controls={open ? menuId : undefined}
       aria-expanded={open}
@@ -70,8 +74,9 @@ export function ActionMenu({ label, items, disabled }: {
         if (event.key === "Escape") close();
       }}
     >
-      {label}
-      <Icon icon={chevronDownIcon} size="1em" className={open ? styles.openIcon : undefined} />
+      {icon
+        ? <Icon icon={icon} size="1.2em" />
+        : <>{label}<Icon icon={chevronDownIcon} size="1em" className={open ? styles.openIcon : undefined} /></>}
     </Button>
     {open && createPortal(
       <div

@@ -213,7 +213,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 351,
+          "line": 352,
           "column": 21
         }
       ]
@@ -285,7 +285,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 263,
+          "line": 264,
           "column": 12
         }
       ]
@@ -607,7 +607,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 136,
+          "line": 137,
           "column": 16
         }
       ]
@@ -656,7 +656,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 192,
+          "line": 193,
           "column": 23
         }
       ]
@@ -930,22 +930,8 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 335,
+          "line": 336,
           "column": 122
-        }
-      ]
-    },
-    "248d436a5352adeb": {
-      "source": "{when} 重置",
-      "kind": "template",
-      "placeholders": [
-        "when"
-      ],
-      "refs": [
-        {
-          "file": "features/plugins/quota/QuotaMeter.tsx",
-          "line": 21,
-          "column": 10
         }
       ]
     },
@@ -1119,7 +1105,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 315,
+          "line": 316,
           "column": 70
         },
         {
@@ -1468,7 +1454,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 283,
+          "line": 284,
           "column": 32
         }
       ]
@@ -1629,7 +1615,7 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 315,
+          "line": 316,
           "column": 80
         },
         {
@@ -1646,7 +1632,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 125,
+          "line": 126,
           "column": 68
         }
       ]
@@ -1879,7 +1865,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 314,
+          "line": 315,
           "column": 12
         }
       ]
@@ -1903,7 +1889,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 125,
+          "line": 126,
           "column": 46
         }
       ]
@@ -1956,7 +1942,7 @@
       "refs": [
         {
           "file": "features/plugins/quota/QuotaMeter.tsx",
-          "line": 43,
+          "line": 37,
           "column": 59
         }
       ]
@@ -2166,20 +2152,6 @@
         }
       ]
     },
-    "581f08793696113a": {
-      "source": "{minutes} 分钟后重置",
-      "kind": "template",
-      "placeholders": [
-        "minutes"
-      ],
-      "refs": [
-        {
-          "file": "features/plugins/quota/QuotaMeter.tsx",
-          "line": 11,
-          "column": 28
-        }
-      ]
-    },
     "5886afc1c71df1fe": {
       "source": "显示在 Cursor 模型说明中。",
       "kind": "text",
@@ -2288,7 +2260,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 307,
+          "line": 308,
           "column": 7
         }
       ]
@@ -2850,7 +2822,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 350,
+          "line": 351,
           "column": 31
         }
       ]
@@ -2964,7 +2936,7 @@
       "refs": [
         {
           "file": "features/plugins/quota/QuotaMeter.tsx",
-          "line": 37,
+          "line": 31,
           "column": 106
         }
       ]
@@ -2976,7 +2948,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 258,
+          "line": 259,
           "column": 36
         }
       ]
@@ -3000,7 +2972,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 118,
+          "line": 119,
           "column": 25
         }
       ]
@@ -3042,7 +3014,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 335,
+          "line": 336,
           "column": 20
         }
       ]
@@ -3102,20 +3074,6 @@
           "file": "features/settings/ProxySettingsCard.tsx",
           "line": 46,
           "column": 129
-        }
-      ]
-    },
-    "85d92fa2bc6c67fa": {
-      "source": "{hours} 小时后重置",
-      "kind": "template",
-      "placeholders": [
-        "hours"
-      ],
-      "refs": [
-        {
-          "file": "features/plugins/quota/QuotaMeter.tsx",
-          "line": 15,
-          "column": 78
         }
       ]
     },
@@ -3191,7 +3149,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 347,
+          "line": 348,
           "column": 32
         }
       ]
@@ -3359,12 +3317,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 247,
+          "line": 248,
           "column": 36
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 248,
+          "line": 249,
           "column": 81
         }
       ]
@@ -3412,7 +3370,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 349,
+          "line": 350,
           "column": 31
         }
       ]
@@ -3568,12 +3526,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 111,
+          "line": 112,
           "column": 9
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 309,
+          "line": 310,
           "column": 9
         }
       ]
@@ -3611,7 +3569,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 91,
+          "line": 92,
           "column": 11
         }
       ]
@@ -3623,7 +3581,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 137,
+          "line": 138,
           "column": 14
         }
       ]
@@ -3635,7 +3593,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 348,
+          "line": 349,
           "column": 30
         }
       ]
@@ -3649,7 +3607,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 194,
+          "line": 195,
           "column": 17
         },
         {
@@ -3880,7 +3838,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 92,
+          "line": 93,
           "column": 11
         }
       ]
@@ -4164,12 +4122,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 116,
+          "line": 117,
           "column": 7
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 338,
+          "line": 339,
           "column": 70
         }
       ]
@@ -4205,7 +4163,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 114,
+          "line": 115,
           "column": 11
         }
       ]
@@ -4455,7 +4413,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 125,
+          "line": 126,
           "column": 83
         }
       ]
@@ -4479,7 +4437,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 315,
+          "line": 316,
           "column": 45
         }
       ]
@@ -4565,7 +4523,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 113,
+          "line": 114,
           "column": 11
         }
       ]
@@ -4705,7 +4663,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 119,
+          "line": 120,
           "column": 9
         }
       ]
@@ -4854,7 +4812,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 223,
+          "line": 224,
           "column": 20
         }
       ]
@@ -5008,7 +4966,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 339,
+          "line": 340,
           "column": 44
         }
       ]
@@ -5142,7 +5100,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 163,
+          "line": 164,
           "column": 80
         }
       ]
@@ -5154,7 +5112,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 258,
+          "line": 259,
           "column": 25
         }
       ]
@@ -5212,8 +5170,13 @@
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
+          "line": 276,
+          "column": 34
+        },
+        {
+          "file": "features/plugins/PluginManagementPage.tsx",
           "line": 277,
-          "column": 20
+          "column": 47
         },
         {
           "file": "shell/TopBar.tsx",
@@ -5442,21 +5405,6 @@
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 269,
           "column": 43
-        }
-      ]
-    },
-    "e757b38d064e92c2": {
-      "source": "{hours} 小时 {minutes} 分后重置",
-      "kind": "template",
-      "placeholders": [
-        "hours",
-        "minutes"
-      ],
-      "refs": [
-        {
-          "file": "features/plugins/quota/QuotaMeter.tsx",
-          "line": 15,
-          "column": 19
         }
       ]
     },
@@ -5736,7 +5684,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 213,
+          "line": 214,
           "column": 32
         }
       ]
@@ -5862,7 +5810,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 95,
+          "line": 96,
           "column": 20
         },
         {
@@ -5879,7 +5827,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 324,
+          "line": 325,
           "column": 23
         }
       ]
@@ -5891,7 +5839,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 125,
+          "line": 126,
           "column": 19
         }
       ]
@@ -5915,12 +5863,12 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 109,
+          "line": 110,
           "column": 7
         },
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 346,
+          "line": 347,
           "column": 29
         }
       ]
@@ -5971,7 +5919,7 @@
       "refs": [
         {
           "file": "features/plugins/PluginManagementPage.tsx",
-          "line": 213,
+          "line": 214,
           "column": 45
         }
       ]

@@ -3,7 +3,7 @@ import { api, pluginText, type PluginDescriptor, type PluginImportFile, type Plu
 import { useI18n } from "../../i18n/store";
 import { PageContent } from "../../shell/layout/PageContent";
 import { PageTitle } from "../../shell/layout/PageTitle";
-import { pluginsGlyph } from "../../shared/ui/glyphs";
+import { moreGlyph, pluginsGlyph, settingsGlyph } from "../../shared/ui/glyphs";
 import { appStore, useAppStore } from "../../shared/store/appStore";
 import { ActionMenu, type ActionMenuItem } from "../../shared/ui/ActionMenu";
 import { Button } from "../../shared/ui/Button";
@@ -14,7 +14,6 @@ import controls from "../../shared/ui/Controls.module.scss";
 import { Icon } from "../../shared/ui/Icon";
 import { addIcon } from "../../shared/ui/icons";
 import { TooltipTrigger } from "../../shared/ui/TooltipTrigger";
-import { TruncatedButton } from "../../shared/ui/TruncatedButton";
 import { PluginAddPanel, PluginSettingsPanel } from "./PluginResourcePanels";
 import { QuotaMeter } from "./quota/QuotaMeter";
 import styles from "./PluginManagementPage.module.scss";
@@ -272,15 +271,15 @@ function PluginCard({ plugin, onOpen }: {
       <AccountQuotas plugin={plugin} />
       <div className={styles.cardActions}>
         {configured && (
-          <TruncatedButton
-            size="small"
-            label={t("设置")}
-            onClick={() => onOpen(plugin.id, "settings")}
-          />
+          <TooltipTrigger label={t("设置")}>
+            <button type="button" aria-label={t("设置")} onClick={() => onOpen(plugin.id, "settings")}>
+              <Icon icon={settingsGlyph} size="1.2em" />
+            </button>
+          </TooltipTrigger>
         )}
         {moreItems.length > 0 && (
           <span className={styles.moreAction}>
-            <ActionMenu label={t("更多")} items={moreItems} />
+            <ActionMenu label={t("更多")} icon={moreGlyph} items={moreItems} />
           </span>
         )}
         {importResource && (

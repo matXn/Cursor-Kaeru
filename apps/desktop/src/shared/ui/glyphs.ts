@@ -25,5 +25,8 @@ export const conversationsGlyph = glyph('<path d="M5.5 5h13a2 2 0 0 1 2 2v8a2 2 
 export const favoriteModelGlyph = glyph('<path d="M11 4.5l6.5 3.75v7.5L11 19.5l-6.5-3.75v-7.5z"/><path d="M4.5 8.25L11 12l6.5-3.75M11 12v7.5"/><path d="M19.5 2.5v4M17.5 4.5h4"/>');
 // A clock face, hands near four.
 export const peakHourGlyph = glyph('<circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2.5"/>');
+// ---- Actions ----------------------------------------------------
+// Three dots in a row: more actions.
+export const moreGlyph = glyph('<circle cx="5.5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="18.5" cy="12" r="1.4" fill="currentColor" stroke="none"/>');
 export const rangeGlyph = glyph('<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 9.5h16M8.5 3.5v3M15.5 3.5v3M8 14h8"/>');
 

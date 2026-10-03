@@ -455,7 +455,7 @@ export function presentAccount(resource: ResourceSnapshot): ResourceView {
   if (weekly && weekly.remainingPercent !== null) {
     metrics.push({
       id: "weekly",
-      label: { "en-US": "Weekly quota", "zh-CN": "周额度" },
+      label: "Weekly limit",
       unit: "percent",
       value: weekly.remainingPercent,
       ...(weekly.resetAtMs !== null ? { resetAtMs: weekly.resetAtMs } : {}),
@@ -465,7 +465,7 @@ export function presentAccount(resource: ResourceSnapshot): ResourceView {
   if (fiveHour && fiveHour.remainingPercent !== null) {
     metrics.push({
       id: "five-hour",
-      label: { "en-US": "5-hour window", "zh-CN": "5 小时窗口" },
+      label: "5h limit",
       unit: "percent",
       value: fiveHour.remainingPercent,
       ...(fiveHour.resetAtMs !== null ? { resetAtMs: fiveHour.resetAtMs } : {}),

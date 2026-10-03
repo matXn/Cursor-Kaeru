@@ -78,8 +78,8 @@ Deno.test("accounts show the four windows, labelled by model group and period", 
       windows: parseQuotaSummary(QUOTA_SUMMARY),
     } },
   } as never);
-  const labels = (view.metrics ?? []).map((metric) => (metric.label as Record<string, string>)["zh-CN"]);
-  assert(JSON.stringify(labels) === JSON.stringify(["Gemini 模型 · 5 小时", "Gemini 模型 · 每周", "Claude / GPT 模型 · 5 小时", "Claude / GPT 模型 · 每周"]), JSON.stringify(labels));
+  const labels = (view.metrics ?? []).map((metric) => metric.label);
+  assert(JSON.stringify(labels) === JSON.stringify(["Gemini · 5h limit", "Gemini · Weekly limit", "Claude / GPT · 5h limit", "Claude / GPT · Weekly limit"]), JSON.stringify(labels));
 });
 
 Deno.test("without a summary, per-model quota is shown under the group names", () => {
@@ -90,6 +90,6 @@ Deno.test("without a summary, per-model quota is shown under the group names", (
       claude: { remainingPercent: 74, resetAtMs: null }, gemini: { remainingPercent: 100, resetAtMs: null }, windows: null,
     } },
   } as never);
-  const labels = (view.metrics ?? []).map((metric) => (metric.label as Record<string, string>)["zh-CN"]);
-  assert(JSON.stringify(labels) === JSON.stringify(["Gemini 模型", "Claude / GPT 模型"]), JSON.stringify(labels));
+  const labels = (view.metrics ?? []).map((metric) => metric.label);
+  assert(JSON.stringify(labels) === JSON.stringify(["Gemini", "Claude / GPT"]), JSON.stringify(labels));
 });

@@ -104,13 +104,13 @@ function demoPlugin(id: string, name: string, color: string, resourceType: strin
 const plugins: PluginDescriptor[] = [
   demoPlugin("dev.cursorbyok.examples.codex-auth", "Codex", "#10a37f", "account", [
     demoAccount("codex-1", "tozzy@example.com", "ChatGPT Plus", [
-      { id: "weekly", label: { "zh-CN": "周额度", "en-US": "Weekly quota" }, unit: "percent", value: 62, resetAtMs: DEMO_NOW + 3 * 24 * HOUR + 5 * HOUR },
-      { id: "five-hour", label: { "zh-CN": "5 小时窗口", "en-US": "5-hour window" }, unit: "percent", value: 81, resetAtMs: DEMO_NOW + 2 * HOUR + 14 * 60_000 },
+      { id: "weekly", label: "Weekly limit", unit: "percent", value: 62, resetAtMs: DEMO_NOW + 3 * 24 * HOUR + 5 * HOUR },
+      { id: "five-hour", label: "5h limit", unit: "percent", value: 81, resetAtMs: DEMO_NOW + 2 * HOUR + 14 * 60_000 },
       { id: "reset-credits", label: { "zh-CN": "重置卡", "en-US": "Reset cards" }, unit: "count", value: 2 },
     ]),
     demoAccount("codex-2", "work@example.com", "ChatGPT Pro", [
-      { id: "weekly", label: { "zh-CN": "周额度", "en-US": "Weekly quota" }, unit: "percent", value: 34, resetAtMs: DEMO_NOW + 5 * 24 * HOUR },
-      { id: "five-hour", label: { "zh-CN": "5 小时窗口", "en-US": "5-hour window" }, unit: "percent", value: 12, resetAtMs: DEMO_NOW + 38 * 60_000 },
+      { id: "weekly", label: "Weekly limit", unit: "percent", value: 34, resetAtMs: DEMO_NOW + 5 * 24 * HOUR },
+      { id: "five-hour", label: "5h limit", unit: "percent", value: 12, resetAtMs: DEMO_NOW + 38 * 60_000 },
     ]),
   ]),
   demoPlugin("dev.cursorbyok.examples.grok-auth", "Grok", "#1f1f1f", "account", [
@@ -120,10 +120,10 @@ const plugins: PluginDescriptor[] = [
   ]),
   demoPlugin("dev.cursorbyok.examples.antigravity-auth", "Antigravity", "#4285f4", "account", [
     demoAccount("ag-1", "tozzy@gmail.com", "Google AI Pro", [
-      { id: "gemini-5h", label: { "zh-CN": "Gemini 模型 · 5 小时", "en-US": "Gemini models · 5 hours" }, unit: "percent", value: 95, resetAtMs: DEMO_NOW + 3 * HOUR },
-      { id: "gemini-weekly", label: { "zh-CN": "Gemini 模型 · 每周", "en-US": "Gemini models · weekly" }, unit: "percent", value: 62, resetAtMs: DEMO_NOW + 4 * 24 * HOUR },
-      { id: "3p-5h", label: { "zh-CN": "Claude / GPT 模型 · 5 小时", "en-US": "Claude / GPT models · 5 hours" }, unit: "percent", value: 70, resetAtMs: DEMO_NOW + 2 * HOUR + 30 * 60_000 },
-      { id: "3p-weekly", label: { "zh-CN": "Claude / GPT 模型 · 每周", "en-US": "Claude / GPT models · weekly" }, unit: "percent", value: 31, resetAtMs: DEMO_NOW + 4 * 24 * HOUR },
+      { id: "gemini-5h", label: "Gemini · 5h limit", unit: "percent", value: 95, resetAtMs: DEMO_NOW + 3 * HOUR },
+      { id: "gemini-weekly", label: "Gemini · Weekly limit", unit: "percent", value: 62, resetAtMs: DEMO_NOW + 4 * 24 * HOUR },
+      { id: "3p-5h", label: "Claude / GPT · 5h limit", unit: "percent", value: 70, resetAtMs: DEMO_NOW + 2 * HOUR + 30 * 60_000 },
+      { id: "3p-weekly", label: "Claude / GPT · Weekly limit", unit: "percent", value: 31, resetAtMs: DEMO_NOW + 4 * 24 * HOUR },
     ]),
   ]),
 ];

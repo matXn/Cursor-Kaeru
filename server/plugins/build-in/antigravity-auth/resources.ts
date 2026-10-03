@@ -422,13 +422,14 @@ export function quotaExhaustedPatch(
   };
 }
 
-const GROUP_LABEL: Record<QuotaGroup, { "en-US": string; "zh-CN": string }> = {
-  gemini: { "en-US": "Gemini models", "zh-CN": "Gemini 模型" },
-  "3p": { "en-US": "Claude / GPT models", "zh-CN": "Claude / GPT 模型" },
+// Quota names stay in English in every locale: "Gemini · 5h limit", "Claude / GPT · Weekly limit".
+const GROUP_LABEL: Record<QuotaGroup, string> = {
+  gemini: "Gemini",
+  "3p": "Claude / GPT",
 };
-const PERIOD_LABEL: Record<QuotaPeriod, { "en-US": string; "zh-CN": string }> = {
-  "5h": { "en-US": "5 hours", "zh-CN": "5 小时" },
-  weekly: { "en-US": "weekly", "zh-CN": "每周" },
+const PERIOD_LABEL: Record<QuotaPeriod, string> = {
+  "5h": "5h limit",
+  weekly: "Weekly limit",
 };
 
 function windowMetric(window: QuotaWindow): ResourceMetric {
@@ -436,7 +437,7 @@ function windowMetric(window: QuotaWindow): ResourceMetric {
   const period = PERIOD_LABEL[window.period];
   return {
     id: `${window.group}-${window.period}`,
-    label: { "en-US": `${group["en-US"]} · ${period["en-US"]}`, "zh-CN": `${group["zh-CN"]} · ${period["zh-CN"]}` },
+    label: `${group} · ${period}`,
     unit: "percent",
     value: window.remainingPercent,
     ...(window.resetAtMs ? { resetAtMs: window.resetAtMs } : {}),
