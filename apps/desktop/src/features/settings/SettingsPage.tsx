@@ -6,7 +6,7 @@ import { settingsGlyph } from "../../shared/ui/glyphs";
 import { LegacyModelImport } from "../models/LegacyModelImport";
 import { AppLifecycleSettingsCard } from "./AppLifecycleSettingsCard";
 import { CommitSettingsCard } from "./CommitSettingsCard";
-import { ExternalApiSettingsCard } from "./ExternalApiSettingsCard";
+import { ExternalApiSettingsCard, parsePort } from "./ExternalApiSettingsCard";
 import { ProxySettingsCard } from "./ProxySettingsCard";
 import { TabSettingsCard } from "./TabSettingsCard";
 import { Button } from "../../shared/ui/Button";
@@ -31,6 +31,7 @@ export function SettingsPage() {
   const [outboundProxy, setOutboundProxy] = useState<ProxySettings | null>(null);
   const [proxyDraft, setProxyDraft] = useState<ProxySettingsInput>({ mode: "default", address: "", auth_enabled: false, username: "", password: "" });
   const [editingProxy, setEditingProxy] = useState(false);
+  const [proxyPortDraft, setProxyPortDraft] = useState(String(ports.proxy_port));
   const [savingProxy, setSavingProxy] = useState(false);
   const [tabSettings, setTabSettings] = useState<TabSettings | null>(null);
   const [tabDraft, setTabDraft] = useState<TabSettings>({ mode: "public", address: "" });
@@ -64,6 +65,7 @@ export function SettingsPage() {
   const editProxy = () => {
     if (!outboundProxy) return;
     setProxyDraft({ mode: outboundProxy.mode, address: outboundProxy.address, auth_enabled: outboundProxy.auth_enabled, username: outboundProxy.username, password: "" });
+    setProxyPortDraft(String(ports.proxy_port));
     setEditingProxy(true);
   };
   const cancelProxyEdit = () => {
@@ -74,12 +76,15 @@ export function SettingsPage() {
   };
   const saveProxy = async () => {
     try {
+      const proxyPort = parsePort(proxyPortDraft, t("Cursor 代理端口"));
       setSavingProxy(true);
       const saved = await api.setProxySettings({ ...proxyDraft, password: proxyDraft.password || undefined });
+      const portChanged = proxyPort !== ports.proxy_port;
+      if (portChanged && !(await appStore.updatePorts({ ...ports, proxy_port: proxyPort }))) return;
       setOutboundProxy(saved);
       setProxyDraft({ mode: saved.mode, address: saved.address, auth_enabled: saved.auth_enabled, username: saved.username, password: "" });
       setEditingProxy(false);
-      message(t("代理设置已保存"));
+      message(portChanged ? t("已保存，端口在重启软件后生效") : t("代理设置已保存"), { duration: portChanged ? 4_000 : undefined });
     } catch (cause) {
       message(cause instanceof Error ? cause.message : String(cause));
     } finally {
@@ -132,7 +137,7 @@ export function SettingsPage() {
         </div>
       </TitledCard>
       <ExternalApiSettingsCard ports={ports} />
-      <ProxySettingsCard settings={outboundProxy} draft={proxyDraft} editing={editingProxy} saving={savingProxy} onDraftChange={setProxyDraft} onEdit={editProxy} onCancel={cancelProxyEdit} onSave={() => void saveProxy()} />
+      <ProxySettingsCard settings={outboundProxy} draft={proxyDraft} proxyPort={ports.proxy_port} proxyPortDraft={proxyPortDraft} onProxyPortChange={setProxyPortDraft} editing={editingProxy} saving={savingProxy} onDraftChange={setProxyDraft} onEdit={editProxy} onCancel={cancelProxyEdit} onSave={() => void saveProxy()} />
       <TabSettingsCard settings={tabSettings} draft={tabDraft} editing={editingTab} saving={savingTab} onDraftChange={setTabDraft} onEdit={editTab} onCancel={cancelTabEdit} onSave={() => void saveTab()} />
       <CommitSettingsCard />
       <AppLifecycleSettingsCard />

@@ -9,18 +9,24 @@ import styles from "./ProxySettingsCard.module.scss";
 export function ProxySettingsCard({
   settings,
   draft,
+  proxyPort,
+  proxyPortDraft,
   editing,
   saving,
   onDraftChange,
+  onProxyPortChange,
   onEdit,
   onCancel,
   onSave,
 }: {
   settings: ProxySettings | null;
   draft: ProxySettingsInput;
+  proxyPort: number;
+  proxyPortDraft: string;
   editing: boolean;
   saving: boolean;
   onDraftChange: (draft: ProxySettingsInput) => void;
+  onProxyPortChange: (port: string) => void;
   onEdit: () => void;
   onCancel: () => void;
   onSave: () => void;
@@ -40,7 +46,12 @@ export function ProxySettingsCard({
 
   return <TitledCard title={t("代理设置")} action={action}>
     <div className={styles.content}>
+      <small className={styles.note}>{t("Cursor 代理端口：接管时 Cursor 的请求先发到这里，修改后重启软件生效。代理方式：Kaeru 访问模型服务和 Cursor 官方时走的网络代理。")}</small>
       {editing ? <>
+        <div className={styles.row}>
+          <strong>{t("Cursor 代理端口")}</strong>
+          <div className={styles.control}><TextInput type="number" min={0} max={65535} step={1} value={proxyPortDraft} onChange={(event) => onProxyPortChange(event.target.value)} /></div>
+        </div>
         <div className={styles.row}>
           <strong>{t("代理方式")}</strong>
           <div className={styles.control}><Select ariaLabel={t("代理方式")} value={draft.mode} options={[{ value: "default", label: t("默认") }, { value: "custom", label: t("自定义") }]} onChange={(mode) => onDraftChange({ ...draft, mode: mode as ProxySettingsInput["mode"] })} /></div>
@@ -66,6 +77,7 @@ export function ProxySettingsCard({
           </div>}
         </div>}
       </> : <>
+        <div className={styles.row}><strong>{t("Cursor 代理端口")}</strong><span className={styles.value}>{proxyPort}</span></div>
         <div className={styles.row}><strong>{t("代理方式")}</strong><span className={styles.value}>{settings ? modeLabel(settings.mode) : t("加载中…")}</span></div>
         {settings?.mode === "custom" && <div className={styles.customFields}>
           <div className={styles.row}><strong>{t("代理地址")}</strong><span className={styles.value}>{settings.address}</span></div>
