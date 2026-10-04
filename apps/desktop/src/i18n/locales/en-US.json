@@ -204,7 +204,6 @@
   "7d30b65420ccc841": "The local service port the external API and this app connect to.",
   "7e7df68f2a82e09e": "Importing the same configuration again will not create duplicate models. Existing models are skipped automatically.",
   "7ec748fe2d1017dc": "Share of tokens by model",
-  "7ed9f96f513813a4": "External API settings saved",
   "7f3c8312816fe26a": "Refreshing…",
   "7f4bb32751aca68d": "Last 24 hours",
   "7f7703a1bae86e36": "Add provider",
