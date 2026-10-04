@@ -509,12 +509,12 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 76,
+          "line": 89,
           "column": 20
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 79,
+          "line": 92,
           "column": 24
         }
       ]
@@ -2264,7 +2264,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 81,
+          "line": 94,
           "column": 25
         }
       ]
@@ -2884,7 +2884,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 77,
+          "line": 90,
           "column": 19
         }
       ]
@@ -2913,7 +2913,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 90,
+          "line": 103,
           "column": 42
         }
       ]
@@ -3158,7 +3158,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 72,
+          "line": 85,
           "column": 29
         }
       ]
@@ -3530,7 +3530,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 81,
+          "line": 94,
           "column": 44
         }
       ]
@@ -3712,7 +3712,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 107,
+          "line": 122,
           "column": 88
         }
       ]
@@ -4205,7 +4205,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 97,
+          "line": 110,
           "column": 18
         }
       ]
@@ -4270,7 +4270,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 64,
+          "line": 77,
           "column": 17
         },
         {
@@ -4885,7 +4885,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 87,
+          "line": 100,
           "column": 33
         }
       ]
@@ -4952,7 +4952,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 86,
+          "line": 99,
           "column": 33
         }
       ]
@@ -5538,7 +5538,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 99,
+          "line": 112,
           "column": 17
         }
       ]
@@ -5673,7 +5673,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 57,
+          "line": 70,
           "column": 13
         }
       ]
@@ -6177,12 +6177,12 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 62,
+          "line": 75,
           "column": 43
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 90,
+          "line": 103,
           "column": 25
         }
       ]

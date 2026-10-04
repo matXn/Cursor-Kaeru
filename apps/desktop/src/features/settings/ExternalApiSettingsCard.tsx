@@ -17,6 +17,7 @@ export function ExternalApiSettingsCard({ ports }: { ports: PortSettings }) {
   const [apiKey, setApiKey] = useState("");
   const [servicePort, setServicePort] = useState(String(ports.service_port));
   const [saving, setSaving] = useState(false);
+  const [filling, setFilling] = useState(false);
   const report = (cause: unknown) => message(cause instanceof Error ? cause.message : String(cause));
 
   useEffect(() => {
@@ -47,10 +48,22 @@ export function ExternalApiSettingsCard({ ports }: { ports: PortSettings }) {
     setApiKey(key);
     void save({ enabled, api_key: key });
   };
+  // A new key types itself in over a quarter second, then saves.
   const generateKey = () => {
     const key = randomKey();
-    setApiKey(key);
-    void save({ enabled: saved?.enabled ?? false, api_key: key });
+    const started = performance.now();
+    setFilling(true);
+    const step = (now: number) => {
+      const shown = Math.ceil(key.length * Math.min(1, (now - started) / FILL_MS));
+      setApiKey(key.slice(0, shown));
+      if (shown < key.length) {
+        requestAnimationFrame(step);
+        return;
+      }
+      setFilling(false);
+      void save({ enabled: saved?.enabled ?? false, api_key: key });
+    };
+    requestAnimationFrame(step);
   };
   const copyKey = async () => {
     await navigator.clipboard.writeText(apiKey);
@@ -81,9 +94,9 @@ export function ExternalApiSettingsCard({ ports }: { ports: PortSettings }) {
       <FormField label={t("API 密钥")} hint={t("开启后，所有外部请求都必须提供此密钥。")}>
         <SecretTextInput value={apiKey} autoComplete="off" disabled={!saved || saving}
           onChange={(event) => setApiKey(event.target.value)}
-          onBlur={() => void save({ enabled: saved?.enabled ?? false, api_key: apiKey })}
+          onBlur={() => { if (!filling) void save({ enabled: saved?.enabled ?? false, api_key: apiKey }); }}
           actions={<>
-            <FieldAction label={t("生成随机密钥")} icon={shuffleIcon} disabled={!saved || saving} onClick={generateKey} />
+            <FieldAction label={t("生成随机密钥")} icon={shuffleIcon} disabled={!saved || saving || filling} onClick={generateKey} />
             <FieldAction label={t("复制密钥")} icon={copyIcon} disabled={!apiKey} onClick={() => void copyKey()} />
           </>} />
       </FormField>
@@ -101,6 +114,8 @@ export function ExternalApiSettingsCard({ ports }: { ports: PortSettings }) {
     </div>
   </TitledCard>;
 }
+
+const FILL_MS = 260;
 
 export function parsePort(value: string, label: string) {
   const port = Number(value);
