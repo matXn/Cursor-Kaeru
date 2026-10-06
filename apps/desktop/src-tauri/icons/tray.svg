@@ -1,18 +1,18 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Tray icon: the app icon's nine-cell grid in plain white on transparent, filling the whole
-       canvas so it lines up with the other tray icons. Drawn for small sizes rather than scaled
-       from the app icon: 8px cells and 4px gaps land on whole pixels at 32px and, halved by
-       Windows at 100% scaling, at 16px (4px cells, 2px gaps); rounder corners keep the cells
-       reading as tiles once they are that small. Rendered to tray.png. -->
+       canvas so it lines up with the other tray icons. Read as one rounded tile cut by 2px
+       gaps: only the grid's four outer corners are round (4px); the corners along the gaps are
+       nearly square (1px). Cells are 10, 8, 10px so the gaps sit on even pixels and stay crisp
+       when Windows halves the icon to 16px at 100% scaling. Rendered to tray.png. -->
   <g fill="#ffffff">
-    <rect x="0" y="0" width="8" height="8" rx="2"/>
-    <rect x="12" y="0" width="8" height="8" rx="2"/>
-    <rect x="24" y="0" width="8" height="8" rx="2"/>
-    <rect x="0" y="12" width="8" height="8" rx="2"/>
-    <rect x="12" y="12" width="8" height="8" rx="2"/>
-    <rect x="24" y="12" width="8" height="8" rx="2"/>
-    <rect x="0" y="24" width="8" height="8" rx="2"/>
-    <rect x="12" y="24" width="8" height="8" rx="2"/>
-    <rect x="24" y="24" width="8" height="8" rx="2"/>
+    <path d="M4 0H9Q10 0 10 1V9Q10 10 9 10H1Q0 10 0 9V4Q0 0 4 0Z"/>
+    <path d="M13 0H19Q20 0 20 1V9Q20 10 19 10H13Q12 10 12 9V1Q12 0 13 0Z"/>
+    <path d="M23 0H28Q32 0 32 4V9Q32 10 31 10H23Q22 10 22 9V1Q22 0 23 0Z"/>
+    <path d="M1 12H9Q10 12 10 13V19Q10 20 9 20H1Q0 20 0 19V13Q0 12 1 12Z"/>
+    <path d="M13 12H19Q20 12 20 13V19Q20 20 19 20H13Q12 20 12 19V13Q12 12 13 12Z"/>
+    <path d="M23 12H31Q32 12 32 13V19Q32 20 31 20H23Q22 20 22 19V13Q22 12 23 12Z"/>
+    <path d="M1 22H9Q10 22 10 23V31Q10 32 9 32H4Q0 32 0 28V23Q0 22 1 22Z"/>
+    <path d="M13 22H19Q20 22 20 23V31Q20 32 19 32H13Q12 32 12 31V23Q12 22 13 22Z"/>
+    <path d="M23 22H31Q32 22 32 23V28Q32 32 28 32H23Q22 32 22 31V23Q22 22 23 22Z"/>
   </g>
 </svg>
