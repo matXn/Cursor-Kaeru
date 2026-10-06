@@ -1,16 +1,16 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Tray icon: the app icon's nine-cell grid in plain white, to sit with the other monochrome
-       icons in the notification area. Drawn on the 32px pixel grid (8px cells, 3px gaps) so the
-       gaps stay open when Windows scales it to 16px. Rendered to tray.png. -->
+  <!-- Tray icon: the app icon's nine-cell grid in plain white on transparent. It fills the whole
+       32px canvas (10px cells, 1px gaps, no margin) so it lines up with the other tray icons,
+       and keeps the app icon's tight proportions. Rendered to tray.png. -->
   <g fill="#ffffff">
-    <rect x="1" y="1" width="8" height="8" rx="1.5"/>
-    <rect x="12" y="1" width="8" height="8" rx="1.5"/>
-    <rect x="23" y="1" width="8" height="8" rx="1.5"/>
-    <rect x="1" y="12" width="8" height="8" rx="1.5"/>
-    <rect x="12" y="12" width="8" height="8" rx="1.5"/>
-    <rect x="23" y="12" width="8" height="8" rx="1.5"/>
-    <rect x="1" y="23" width="8" height="8" rx="1.5"/>
-    <rect x="12" y="23" width="8" height="8" rx="1.5"/>
-    <rect x="23" y="23" width="8" height="8" rx="1.5"/>
+    <rect x="0" y="0" width="10" height="10" rx="1.25"/>
+    <rect x="11" y="0" width="10" height="10" rx="1.25"/>
+    <rect x="22" y="0" width="10" height="10" rx="1.25"/>
+    <rect x="0" y="11" width="10" height="10" rx="1.25"/>
+    <rect x="11" y="11" width="10" height="10" rx="1.25"/>
+    <rect x="22" y="11" width="10" height="10" rx="1.25"/>
+    <rect x="0" y="22" width="10" height="10" rx="1.25"/>
+    <rect x="11" y="22" width="10" height="10" rx="1.25"/>
+    <rect x="22" y="22" width="10" height="10" rx="1.25"/>
   </g>
 </svg>
