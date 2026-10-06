@@ -1,14 +1,16 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Tray icon: the nine-cell mark in grayscale on a near-black tile, to sit next to
-       Cursor's own monochrome icon in the notification area. Rendered to tray.png. -->
-  <rect width="512" height="512" rx="112" fill="#141414"/>
-  <rect x="96" y="96" width="88" height="88" rx="20" fill="#4d4d4d"/>
-  <rect x="212" y="96" width="88" height="88" rx="20" fill="#808080"/>
-  <rect x="328" y="96" width="88" height="88" rx="20" fill="#b3b3b3"/>
-  <rect x="96" y="212" width="88" height="88" rx="20" fill="#808080"/>
-  <rect x="212" y="212" width="88" height="88" rx="20" fill="#b3b3b3"/>
-  <rect x="328" y="212" width="88" height="88" rx="20" fill="#f2f2f2"/>
-  <rect x="96" y="328" width="88" height="88" rx="20" fill="#b3b3b3"/>
-  <rect x="212" y="328" width="88" height="88" rx="20" fill="#f2f2f2"/>
-  <rect x="328" y="328" width="88" height="88" rx="20" fill="#f2f2f2"/>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tray icon: the app icon's nine-cell grid in plain white, to sit with the other monochrome
+       icons in the notification area. Drawn on the 32px pixel grid (8px cells, 3px gaps) so the
+       gaps stay open when Windows scales it to 16px. Rendered to tray.png. -->
+  <g fill="#ffffff">
+    <rect x="1" y="1" width="8" height="8" rx="1.5"/>
+    <rect x="12" y="1" width="8" height="8" rx="1.5"/>
+    <rect x="23" y="1" width="8" height="8" rx="1.5"/>
+    <rect x="1" y="12" width="8" height="8" rx="1.5"/>
+    <rect x="12" y="12" width="8" height="8" rx="1.5"/>
+    <rect x="23" y="12" width="8" height="8" rx="1.5"/>
+    <rect x="1" y="23" width="8" height="8" rx="1.5"/>
+    <rect x="12" y="23" width="8" height="8" rx="1.5"/>
+    <rect x="23" y="23" width="8" height="8" rx="1.5"/>
+  </g>
 </svg>
