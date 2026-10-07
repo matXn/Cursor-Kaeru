@@ -138,14 +138,19 @@ impl<'de> Deserialize<'de> for CommitPromptLocale {
     }
 }
 
+/// `CommitSettings::model_id` that follows the model of the current Cursor chat.
+pub const COMMIT_MODEL_FOLLOW_CHAT: &str = "@chat";
+
 /// User preferences for Git commit message generation.
 ///
-/// Empty `model_id` means 直连: forward the original Cursor RPC unchanged.
-/// A non-empty value is the stable identifier of a configured built-in or
-/// plugin model, and the request is generated locally through that model.
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Eq, Serialize)]
+/// `model_id` is one of:
+/// - `@chat` (the default): the model of the current Cursor chat; a local model answers
+///   locally, an official one (or none seen yet) forwards like 直连;
+/// - empty, 直连: forward the original Cursor RPC unchanged;
+/// - the stable identifier of a configured built-in or plugin model, which answers locally.
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 pub struct CommitSettings {
-    #[serde(default)]
+    #[serde(default = "follow_chat")]
     pub model_id: String,
     #[serde(default)]
     pub prompt: String,
@@ -153,9 +158,27 @@ pub struct CommitSettings {
     pub prompt_locale: CommitPromptLocale,
 }
 
+fn follow_chat() -> String {
+    COMMIT_MODEL_FOLLOW_CHAT.into()
+}
+
+impl Default for CommitSettings {
+    fn default() -> Self {
+        Self {
+            model_id: follow_chat(),
+            prompt: String::new(),
+            prompt_locale: CommitPromptLocale::default(),
+        }
+    }
+}
+
 impl CommitSettings {
     pub fn is_direct(&self) -> bool {
         self.model_id.trim().is_empty()
+    }
+
+    pub fn follows_chat(&self) -> bool {
+        self.model_id.trim() == COMMIT_MODEL_FOLLOW_CHAT
     }
 
     pub fn effective_prompt(&self) -> &str {

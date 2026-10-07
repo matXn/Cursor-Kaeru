@@ -101,7 +101,7 @@
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 175,
+          "line": 181,
           "column": 10
         },
         {
@@ -123,7 +123,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 222,
+          "line": 228,
           "column": 23
         }
       ]
@@ -150,7 +150,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 71,
+          "line": 73,
           "column": 54
         }
       ]
@@ -344,12 +344,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 28,
+          "line": 29,
           "column": 61
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 45,
+          "line": 47,
           "column": 42
         }
       ]
@@ -373,7 +373,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 43,
+          "line": 45,
           "column": 6
         }
       ]
@@ -509,12 +509,12 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 89,
+          "line": 90,
           "column": 20
         },
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 92,
+          "line": 93,
           "column": 24
         }
       ]
@@ -617,12 +617,12 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 172,
+          "line": 178,
           "column": 10
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 204,
+          "line": 210,
           "column": 16
         }
       ]
@@ -1103,12 +1103,12 @@
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 164,
+          "line": 170,
           "column": 78
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 211,
+          "line": 217,
           "column": 21
         },
         {
@@ -1159,7 +1159,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 45,
+          "line": 47,
           "column": 6
         }
       ]
@@ -1224,7 +1224,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 24,
+          "line": 25,
           "column": 6
         }
       ]
@@ -1468,7 +1468,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 54,
+          "line": 56,
           "column": 32
         }
       ]
@@ -1480,7 +1480,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 63,
+          "line": 65,
           "column": 39
         }
       ]
@@ -1670,12 +1670,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 56,
+          "line": 58,
           "column": 39
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 63,
+          "line": 65,
           "column": 68
         }
       ]
@@ -1825,7 +1825,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 161,
+          "line": 167,
           "column": 8
         },
         {
@@ -2122,7 +2122,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 182,
+          "line": 188,
           "column": 26
         }
       ]
@@ -2264,7 +2264,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 94,
+          "line": 95,
           "column": 25
         }
       ]
@@ -2328,7 +2328,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 51,
+          "line": 53,
           "column": 29
         }
       ]
@@ -2344,6 +2344,18 @@
           "file": "features/home/metrics/RangeBlock.tsx",
           "line": 94,
           "column": 5
+        }
+      ]
+    },
+    "6250d4ff55e2498b": {
+      "source": "已复制基础地址",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 113,
+          "column": 94
         }
       ]
     },
@@ -2393,7 +2405,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 29,
+          "line": 30,
           "column": 6
         }
       ]
@@ -2479,7 +2491,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 84,
+          "line": 85,
           "column": 40
         },
         {
@@ -2508,7 +2520,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 44,
+          "line": 46,
           "column": 6
         }
       ]
@@ -2660,7 +2672,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 110,
+          "line": 112,
           "column": 52
         }
       ]
@@ -2872,7 +2884,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 90,
+          "line": 91,
           "column": 19
         }
       ]
@@ -3134,7 +3146,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 85,
+          "line": 86,
           "column": 29
         }
       ]
@@ -3170,12 +3182,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 15,
+          "line": 16,
           "column": 56
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 16,
+          "line": 17,
           "column": 50
         }
       ]
@@ -3305,7 +3317,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 15,
+          "line": 16,
           "column": 6
         }
       ]
@@ -3398,6 +3410,18 @@
           "file": "features/settings/SettingsPage.tsx",
           "line": 122,
           "column": 7
+        }
+      ]
+    },
+    "92f54227a946a743": {
+      "source": "跟随当前对话模型",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/CommitSettingsCard.tsx",
+          "line": 60,
+          "column": 36
         }
       ]
     },
@@ -3506,7 +3530,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 94,
+          "line": 95,
           "column": 44
         }
       ]
@@ -3556,7 +3580,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 27,
+          "line": 28,
           "column": 6
         },
         {
@@ -3688,7 +3712,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 122,
+          "line": 125,
           "column": 88
         }
       ]
@@ -3779,12 +3803,12 @@
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 166,
+          "line": 172,
           "column": 36
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 210,
+          "line": 216,
           "column": 22
         },
         {
@@ -3837,7 +3861,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 59,
+          "line": 61,
           "column": 44
         }
       ]
@@ -3964,13 +3988,25 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 26,
+          "line": 27,
           "column": 6
         },
         {
           "file": "features/models/CursorModelEditor.tsx",
           "line": 68,
           "column": 25
+        }
+      ]
+    },
+    "ab61bf4eeefbf1cc": {
+      "source": "复制基础地址",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/ExternalApiSettingsCard.tsx",
+          "line": 113,
+          "column": 31
         }
       ]
     },
@@ -4142,8 +4178,8 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 56,
-          "column": 63
+          "line": 61,
+          "column": 27
         },
         {
           "file": "features/settings/TabSettingsCard.tsx",
@@ -4222,7 +4258,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 21,
+          "line": 22,
           "column": 6
         }
       ]
@@ -4246,7 +4282,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 77,
+          "line": 78,
           "column": 17
         },
         {
@@ -4277,12 +4313,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 28,
+          "line": 29,
           "column": 52
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 45,
+          "line": 47,
           "column": 33
         }
       ]
@@ -4380,7 +4416,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 16,
+          "line": 17,
           "column": 6
         }
       ]
@@ -4409,7 +4445,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 214,
+          "line": 220,
           "column": 14
         }
       ]
@@ -4460,12 +4496,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 69,
+          "line": 71,
           "column": 62
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 74,
+          "line": 76,
           "column": 20
         }
       ]
@@ -4597,7 +4633,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 80,
+          "line": 81,
           "column": 64
         }
       ]
@@ -4609,12 +4645,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 58,
+          "line": 60,
           "column": 14
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 58,
+          "line": 60,
           "column": 51
         }
       ]
@@ -4791,12 +4827,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 57,
+          "line": 59,
           "column": 14
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 57,
+          "line": 59,
           "column": 51
         }
       ]
@@ -4861,8 +4897,8 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 100,
-          "column": 33
+          "line": 101,
+          "column": 35
         }
       ]
     },
@@ -4899,7 +4935,7 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 85,
+          "line": 86,
           "column": 40
         }
       ]
@@ -4928,8 +4964,8 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 99,
-          "column": 33
+          "line": 100,
+          "column": 35
         }
       ]
     },
@@ -5132,7 +5168,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 146,
+          "line": 152,
           "column": 15
         }
       ]
@@ -5209,12 +5245,12 @@
       "refs": [
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 116,
+          "line": 118,
           "column": 78
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 131,
+          "line": 133,
           "column": 76
         }
       ]
@@ -5332,12 +5368,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 61,
+          "line": 63,
           "column": 33
         },
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 64,
+          "line": 66,
           "column": 32
         }
       ]
@@ -5411,7 +5447,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 19,
+          "line": 20,
           "column": 6
         }
       ]
@@ -5485,12 +5521,12 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 186,
+          "line": 192,
           "column": 24
         },
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 194,
+          "line": 200,
           "column": 24
         }
       ]
@@ -5514,7 +5550,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 112,
+          "line": 115,
           "column": 17
         }
       ]
@@ -5567,12 +5603,12 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 33,
+          "line": 34,
           "column": 6
         },
         {
           "file": "features/calls/roadmap/CallRoadmap.tsx",
-          "line": 86,
+          "line": 87,
           "column": 40
         }
       ]
@@ -5649,8 +5685,8 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 70,
-          "column": 13
+          "line": 101,
+          "column": 95
         }
       ]
     },
@@ -5661,7 +5697,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 22,
+          "line": 23,
           "column": 6
         }
       ]
@@ -5761,7 +5797,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 23,
+          "line": 24,
           "column": 6
         }
       ]
@@ -5964,7 +6000,7 @@
       "refs": [
         {
           "file": "features/calls/CallDetails.tsx",
-          "line": 65,
+          "line": 67,
           "column": 44
         }
       ]
@@ -6133,7 +6169,7 @@
       "refs": [
         {
           "file": "features/settings/CommitSettingsCard.tsx",
-          "line": 166,
+          "line": 172,
           "column": 24
         },
         {
@@ -6167,7 +6203,7 @@
       "refs": [
         {
           "file": "features/settings/ExternalApiSettingsCard.tsx",
-          "line": 75,
+          "line": 76,
           "column": 43
         },
         {

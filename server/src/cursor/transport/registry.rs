@@ -39,6 +39,8 @@ struct RegistryInner {
     web_cache: WebCache,
     plugins: Option<PluginRegistry>,
     conversations: ConversationRegistry,
+    /// The model Cursor's most recent top-level Run selected, local or official.
+    chat_model: std::sync::Mutex<Option<String>>,
 }
 
 #[derive(Clone)]
@@ -127,6 +129,7 @@ impl TransportRegistry {
                 store,
                 web_cache,
                 plugins,
+                chat_model: std::sync::Mutex::new(None),
             }),
         }
     }
@@ -152,6 +155,15 @@ impl TransportRegistry {
 
     pub fn conversations(&self) -> &ConversationRegistry {
         &self.inner.conversations
+    }
+
+    pub fn record_chat_model(&self, model_id: &str) {
+        *self.inner.chat_model.lock().expect("chat model lock") = Some(model_id.to_owned());
+    }
+
+    /// The model the user is chatting with in Cursor, as last seen since the service started.
+    pub fn chat_model(&self) -> Option<String> {
+        self.inner.chat_model.lock().expect("chat model lock").clone()
     }
 
     pub async fn get_or_create(&self, request_id: &str) -> Result<TransportHandle> {

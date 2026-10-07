@@ -1,6 +1,7 @@
 import type { CallDetail } from "../../shared/api";
 import { JsonEditor } from "../../shared/ui/JsonEditor";
 import { Tabs, type TabItem } from "../../shared/ui/Tabs";
+import { formatOutputSpeed, outputSpeed } from "./outputSpeed";
 import styles from "./CallDetails.module.scss";
 
 const show = (value: string | number | null) => value ?? "-";
@@ -34,6 +35,7 @@ export function CallDetails({ detail }: { detail: CallDetail }) {
     ["TTFB", timing(call.ttfb_ms)],
     ["TTFR", timing(call.ttfr_ms)],
     ["TTFT", timing(call.ttft_ms)],
+    ["Token/s", formatOutputSpeed(outputSpeed(call))],
     ["Input Token", show(call.input_tokens)],
     ["Output Token", show(call.output_tokens)],
     ["Total Token", show(call.total_tokens)],

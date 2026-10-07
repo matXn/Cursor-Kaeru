@@ -4,6 +4,7 @@ import { Icon } from "../../../shared/ui/Icon";
 import { chevronDownIcon } from "../../../shared/ui/icons";
 import { formatCompactInteger } from "../../../shared/utils/numberFormat";
 import { callEnd, formatClock, formatDuration, timeScale, type TimeScale } from "./timeScale";
+import { formatOutputSpeed, outputSpeed } from "../outputSpeed";
 import styles from "./CallRoadmap.module.scss";
 
 type Group = {
@@ -85,6 +86,7 @@ export function CallRoadmap({ calls, nowMs, live, onOpen }: {
         <span className={styles.cell}>{t("开始")}</span>
         <span className={styles.cell}>{t("耗时")}</span>
         <span className={styles.cell}>Token</span>
+        <span className={styles.cell}>Token/s</span>
       </div>
       <div className={styles.lane}>
         {/* Edge ticks keep their grid line but drop the label, so labels never collide or clip. */}
@@ -130,6 +132,7 @@ export function CallRoadmap({ calls, nowMs, live, onOpen }: {
                 <span className={styles.cell}>{formatClock(call.created_at_ms)}</span>
                 <span className={styles.cell}>{call.status === "running" ? t("进行中") : formatDuration(call.duration_ms)}</span>
                 <span className={styles.cell}>{call.total_tokens == null ? "—" : formatCompactInteger(call.total_tokens)}</span>
+                <span className={styles.cell}>{formatOutputSpeed(outputSpeed(call))}</span>
               </span>
               <span className={styles.lane}>
                 <span className={styles.bar} data-status={call.status} style={span(scale, call.created_at_ms, end)} />

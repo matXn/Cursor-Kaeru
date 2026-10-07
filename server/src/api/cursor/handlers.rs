@@ -238,6 +238,9 @@ async fn bidi_handler(
     let trace_metadata = decoded.trace_metadata();
     let trace = registry.trace(&decoded.request_id);
     let local = if let Some(model_id) = decoded.model_id() {
+        if !decoded.is_subagent() {
+            registry.record_chat_model(model_id);
+        }
         // 插件模型 ID 只在本地有意义,永远不转发到 Cursor 官方上游。
         if model_id.starts_with(crate::plugin::ADAPTER_ID_PREFIX)
             || registry.store().model(model_id).await?.is_some()

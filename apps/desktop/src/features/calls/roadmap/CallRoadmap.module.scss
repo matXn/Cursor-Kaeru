@@ -1,6 +1,6 @@
 // Two panes sharing rows: the table on the left, the shared time axis on the right.
 .root {
-  --side-width: clamp(360px, 46%, 520px);
+  --side-width: clamp(420px, 52%, 580px);
   --row-h: 36px;
   position: relative;
   border: 1px solid var(--border);

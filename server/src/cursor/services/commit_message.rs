@@ -2,7 +2,8 @@
 //!
 //! Cursor sends `aiserver.v1.AiService/WriteGitCommitMessage` with the staged
 //! diffs. Empty commit-settings `model_id` keeps the original behaviour and
-//! forwards the RPC unchanged (直连). A configured local model identifier
+//! forwards the RPC unchanged (直连); `@chat` uses whatever model the current
+//! Cursor chat runs on, local or official. A configured local model identifier
 //! answers the request locally: truncated diffs + previous commits form the user
 //! message, the customizable commit prompt is the system prompt, and the raw
 //! completion is cleaned before being returned.
@@ -48,7 +49,13 @@ pub async fn write_git_commit_message(
     Extension(upstream): Extension<CursorProxy>,
     request: Request<Body>,
 ) -> Result<Response<Body>> {
-    let settings = registry.store().commit_settings().await?;
+    let mut settings = registry.store().commit_settings().await?;
+    if settings.follows_chat() {
+        settings.model_id = match registry.chat_model() {
+            Some(model_id) if is_local_model(&registry, &model_id).await? => model_id,
+            _ => String::new(),
+        };
+    }
     if settings.is_direct() {
         return forward_direct(&registry, upstream, request).await;
     }
@@ -109,6 +116,10 @@ async fn generate_local(
         HeaderValue::from_static("application/proto"),
     );
     Ok(response)
+}
+
+async fn is_local_model(registry: &TransportRegistry, model_id: &str) -> Result<bool> {
+    Ok(model_id.starts_with(ADAPTER_ID_PREFIX) || registry.store().model(model_id).await?.is_some())
 }
 
 async fn ensure_configured_model(registry: &TransportRegistry, model_id: &str) -> Result<()> {
@@ -365,8 +376,14 @@ mod tests {
     use super::*;
 
     #[test]
-    fn empty_model_id_is_direct() {
-        assert!(CommitSettings::default().is_direct());
+    fn empty_model_id_is_direct_and_the_default_follows_the_chat() {
+        assert!(CommitSettings::default().follows_chat());
+        assert!(!CommitSettings::default().is_direct());
+        assert!(CommitSettings {
+            model_id: String::new(),
+            ..CommitSettings::default()
+        }
+        .is_direct());
         assert!(CommitSettings {
             model_id: "  ".into(),
             ..CommitSettings::default()

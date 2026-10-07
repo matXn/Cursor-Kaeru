@@ -65,9 +65,10 @@ export function ExternalApiSettingsCard({ ports }: { ports: PortSettings }) {
     };
     requestAnimationFrame(step);
   };
-  const copyKey = async () => {
-    await navigator.clipboard.writeText(apiKey);
-    message(t("已复制密钥"));
+  const baseUrl = `http://127.0.0.1:${ports.service_port}/kaeru/v1`;
+  const copy = async (text: string, done: string) => {
+    await navigator.clipboard.writeText(text);
+    message(done);
   };
   const savePort = async () => {
     if (servicePort === String(ports.service_port)) return;
@@ -95,10 +96,9 @@ export function ExternalApiSettingsCard({ ports }: { ports: PortSettings }) {
         <SecretTextInput value={apiKey} autoComplete="off" disabled={!saved || saving}
           onChange={(event) => setApiKey(event.target.value)}
           onBlur={() => { if (!filling) void save({ enabled: saved?.enabled ?? false, api_key: apiKey }); }}
-          actions={<>
-            <FieldAction label={t("生成随机密钥")} icon={shuffleIcon} disabled={!saved || saving || filling} onClick={generateKey} />
-            <FieldAction label={t("复制密钥")} icon={copyIcon} disabled={!apiKey} onClick={() => void copyKey()} />
-          </>} />
+          actions={!apiKey || filling
+            ? <FieldAction label={t("生成随机密钥")} icon={shuffleIcon} disabled={!saved || saving || filling} onClick={generateKey} />
+            : <FieldAction label={t("复制密钥")} icon={copyIcon} onClick={() => void copy(apiKey, t("已复制密钥"))} />} />
       </FormField>
       <FormField label={t("服务端口")} hint={t("外部 API 和桌面界面连接的本地服务端口。")}>
         <TextInput type="number" min={0} max={65535} step={1} value={servicePort}
@@ -108,7 +108,10 @@ export function ExternalApiSettingsCard({ ports }: { ports: PortSettings }) {
       </FormField>
       <div className={styles.address}>
         <strong>{t("基础地址")}</strong>
-        <code>{`http://127.0.0.1:${ports.service_port}/kaeru/v1`}</code>
+        <span className={styles.url}>
+          <code>{baseUrl}</code>
+          <FieldAction label={t("复制基础地址")} icon={copyIcon} onClick={() => void copy(baseUrl, t("已复制基础地址"))} />
+        </span>
         <small>{t("修改端口后需要重启软件；端口被占用时会自动换成随机端口并保存。")}</small>
       </div>
     </div>

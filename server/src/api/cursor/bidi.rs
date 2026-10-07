@@ -40,6 +40,14 @@ impl DecodedAppend {
             })
     }
 
+    pub fn is_subagent(&self) -> bool {
+        matches!(
+            self.message.message.as_ref(),
+            Some(agent::agent_client_message::Message::RunRequest(request))
+                if request.subagent_type_name.is_some()
+        )
+    }
+
     pub fn conversation_id(&self) -> Option<&str> {
         let agent::agent_client_message::Message::RunRequest(request) =
             self.message.message.as_ref()?
