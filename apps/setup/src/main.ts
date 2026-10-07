@@ -109,6 +109,22 @@ function applyLook() {
   void window_.setTheme(options.theme === "default-light" ? "light" : "dark");
 }
 
+// A new theme or language dips the page to bare glass and brings it back restyled, so
+// neither the colors nor the words snap (timings match html.dipping in setup.scss).
+let restyling = false;
+async function restyle() {
+  if (restyling) return render();
+  restyling = true;
+  const root = document.documentElement;
+  root.classList.add("dipping");
+  await new Promise((resolve) => setTimeout(resolve, DIP_MS));
+  applyLook();
+  render();
+  root.classList.remove("dipping");
+  restyling = false;
+}
+const DIP_MS = 180;
+
 function render() {
   const t = text();
   app.dataset.step = step.kind;
@@ -196,10 +212,7 @@ app.addEventListener("click", async (event) => {
   if (!target) return;
   if (target.dataset.choice === "theme") options.theme = target.dataset.value as Theme;
   if (target.dataset.choice === "locale") options.locale = target.dataset.value as Locale;
-  if (target.dataset.choice) {
-    applyLook();
-    return render();
-  }
+  if (target.dataset.choice) return restyle();
   switch (target.dataset.action) {
     case "minimize": return window_.minimize();
     case "close": return window_.close();

@@ -164,6 +164,24 @@ h1 {
   }
 }
 
+// Switching theme or language: fade to the bare acrylic (180ms, DIP_MS in main.ts), restyle
+// out of sight, fade back in a little slower.
+html {
+  transition: opacity 320ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+html.dipping {
+  opacity: 0;
+  transition: opacity 180ms cubic-bezier(0.4, 0, 1, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html,
+  html.dipping {
+    transition: none;
+  }
+}
+
 // ---- The nine cells -------------------------------------------------
 .logo {
   display: grid;
