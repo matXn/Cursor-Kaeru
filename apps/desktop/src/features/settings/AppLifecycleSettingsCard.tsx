@@ -15,7 +15,7 @@ import { TitledCard } from "../../shared/ui/TitledCard";
 import { useMessage } from "../../shared/ui/message";
 import styles from "./AppLifecycleSettingsCard.module.scss";
 
-const REPOSITORY_URL = "https://github.com/matXn/cursor-kaeru";
+const REPOSITORY_URL = "https://github.com/matXn/Cursor-Kaeru";
 
 export function AppLifecycleSettingsCard() {
   const message = useMessage();
@@ -133,8 +133,14 @@ export function AppLifecycleSettingsCard() {
         <strong>{t("版本")}</strong>
         <small>{t("当前版本 {version}", { version })}</small>
       </div>
+    </div>
+    <div className={styles.row}>
+      <div>
+        <strong>{t("项目地址")}</strong>
+        <small>{t("源码、更新说明与问题反馈。")}</small>
+      </div>
       <button type="button" className={styles.link} onClick={() => void api.openExternalUrl(REPOSITORY_URL)}>
-        {t("GitHub 项目页")} ↗
+        {REPOSITORY_URL.replace("https://", "")} ↗
       </button>
     </div>
   </TitledCard>;

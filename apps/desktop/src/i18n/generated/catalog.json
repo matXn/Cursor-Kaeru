@@ -3139,18 +3139,6 @@
         }
       ]
     },
-    "8502353c15ace7d2": {
-      "source": "GitHub 项目页",
-      "kind": "text",
-      "placeholders": [],
-      "refs": [
-        {
-          "file": "features/settings/AppLifecycleSettingsCard.tsx",
-          "line": 137,
-          "column": 10
-        }
-      ]
-    },
     "857d282a0213d785": {
       "source": "外部 API",
       "kind": "text",
@@ -3355,6 +3343,18 @@
           "file": "features/plugins/PluginResourcePanels.tsx",
           "line": 135,
           "column": 19
+        }
+      ]
+    },
+    "8fe3b307b48b8a4f": {
+      "source": "项目地址",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/AppLifecycleSettingsCard.tsx",
+          "line": 139,
+          "column": 18
         }
       ]
     },
@@ -4566,6 +4566,18 @@
           "file": "features/plugins/PluginManagementPage.tsx",
           "line": 311,
           "column": 45
+        }
+      ]
+    },
+    "c12b0f6ce70598e2": {
+      "source": "源码、更新说明与问题反馈。",
+      "kind": "text",
+      "placeholders": [],
+      "refs": [
+        {
+          "file": "features/settings/AppLifecycleSettingsCard.tsx",
+          "line": 140,
+          "column": 17
         }
       ]
     },
