@@ -1,0 +1,36 @@
+.footer {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 12px 0 8px;
+
+  small {
+    color: var(--text-faint);
+    font-size: var(--text-xs);
+  }
+}
+
+.repository,
+.credit {
+  padding: 2px 4px;
+  background: transparent;
+  border: 0;
+  white-space: nowrap;
+}
+
+.repository {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+
+  &:hover { color: var(--accent); }
+}
+
+.credit {
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+
+  &:hover { color: var(--text-muted); }
+}

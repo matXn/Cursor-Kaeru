@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  currentAppVersion,
   hasDockVisibilitySetting,
   hasNativeAppLifecycle,
   readAutostart,
@@ -9,19 +8,15 @@ import {
   writeDockIconVisibility,
   writeSilentStart,
 } from "../../shared/native/appLifecycle";
-import { api } from "../../shared/api";
 import { Switch } from "../../shared/ui/Switch";
 import { TitledCard } from "../../shared/ui/TitledCard";
 import { useMessage } from "../../shared/ui/message";
 import styles from "./AppLifecycleSettingsCard.module.scss";
 
-const REPOSITORY_URL = "https://github.com/matXn/Cursor-Kaeru";
-
 export function AppLifecycleSettingsCard() {
   const message = useMessage();
   const native = hasNativeAppLifecycle();
   const dockVisibilitySetting = hasDockVisibilitySetting();
-  const [version, setVersion] = useState("…");
   const [autostart, setAutostart] = useState(false);
   const [loadingAutostart, setLoadingAutostart] = useState(native);
   const [silentStart, setSilentStart] = useState(false);
@@ -30,7 +25,6 @@ export function AppLifecycleSettingsCard() {
 
   useEffect(() => {
     let disposed = false;
-    void currentAppVersion().then((next) => { if (!disposed) setVersion(next); });
     if (native) {
       void readAutostart()
         .then((enabled) => { if (!disposed) setAutostart(enabled); })
@@ -128,20 +122,5 @@ export function AppLifecycleSettingsCard() {
         onChange={(visible) => void toggleDockIcon(visible)}
       />
     </div>}
-    <div className={styles.row}>
-      <div>
-        <strong>{t("版本")}</strong>
-        <small>{t("当前版本 {version}", { version })}</small>
-      </div>
-    </div>
-    <div className={styles.row}>
-      <div>
-        <strong>{t("项目地址")}</strong>
-        <small>{t("源码、更新说明与问题反馈。")}</small>
-      </div>
-      <button type="button" className={styles.link} onClick={() => void api.openExternalUrl(REPOSITORY_URL)}>
-        {REPOSITORY_URL.replace("https://", "")} ↗
-      </button>
-    </div>
   </TitledCard>;
 }

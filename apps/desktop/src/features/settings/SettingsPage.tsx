@@ -7,6 +7,7 @@ import { LegacyModelImport } from "../models/LegacyModelImport";
 import { AppLifecycleSettingsCard } from "./AppLifecycleSettingsCard";
 import { CommitSettingsCard } from "./CommitSettingsCard";
 import { ExternalApiSettingsCard, parsePort } from "./ExternalApiSettingsCard";
+import { ProjectFooter } from "./ProjectFooter";
 import { ProxySettingsCard } from "./ProxySettingsCard";
 import { TabSettingsCard } from "./TabSettingsCard";
 import { Button } from "../../shared/ui/Button";
@@ -200,6 +201,7 @@ export function SettingsPage() {
           </button>
         </div>
       </TitledCard>
+      <ProjectFooter />
       <ConfirmDialog
         open={confirmClear}
         title={clearTitle}
