@@ -1,6 +1,7 @@
 mod desktop;
 #[cfg(not(dev))]
 mod frontend;
+mod installer_preferences;
 mod resource_limits;
 mod startup;
 mod tray;

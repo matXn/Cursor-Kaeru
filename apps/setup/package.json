@@ -1,0 +1,27 @@
+{
+  "name": "cursor-kaeru-setup",
+  "version": "0.1.1",
+  "description": "Acrylic installer for Cursor Kaeru: wraps the desktop app's NSIS package and runs it silently",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "bundle": "node scripts/bundle.mjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@fontsource/mona-sans": "^5.3.0",
+    "@fontsource/outfit": "^5.3.0",
+    "@tauri-apps/api": "~2.11.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "~2.11.4",
+    "sass": "^1.102.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.0"
+  },
+  "packageManager": "pnpm@11.9.0"
+}

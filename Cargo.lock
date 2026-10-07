@@ -1196,6 +1196,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "cursor-kaeru-setup"
+version = "0.1.1"
+dependencies = [
+ "dirs 6.0.0",
+ "rfd",
+ "serde",
+ "tauri",
+ "tauri-build",
+ "winreg 0.55.0",
+]
+
+[[package]]
 name = "cursor-server"
 version = "0.1.0"
 dependencies = [

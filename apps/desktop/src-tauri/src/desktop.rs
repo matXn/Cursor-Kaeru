@@ -145,6 +145,12 @@ fn create_main_window(
         .effects(EffectsBuilder::new().effect(Effect::Acrylic).build())
         .initialization_script("window.__KAERU_MATERIAL__ = \"acrylic\";");
 
+    // Theme and language chosen in the installer, applied by the first window.
+    let builder = match crate::installer_preferences::take_script() {
+        Some(script) => builder.initialization_script(script),
+        None => builder,
+    };
+
     // Elsewhere: dark glass (--bg in _tokens.scss), shown before the page paints.
     #[cfg(not(target_os = "windows"))]
     let builder = builder.background_color(Color(26, 22, 20, 255));

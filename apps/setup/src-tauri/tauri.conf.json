@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Cursor Kaeru Setup",
+  "mainBinaryName": "cursor-kaeru-setup",
+  "version": "../../desktop/package.json",
+  "identifier": "dev.cursorbyok.setup",
+  "build": {
+    "beforeDevCommand": "pnpm run dev",
+    "devUrl": "http://localhost:1421",
+    "beforeBuildCommand": "pnpm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Cursor Kaeru",
+        "width": 600,
+        "height": 400,
+        "resizable": false,
+        "maximizable": false,
+        "decorations": false,
+        "transparent": true,
+        "shadow": true,
+        "center": true,
+        "windowEffects": { "effects": ["acrylic"] }
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:"
+    }
+  },
+  "bundle": {
+    "active": false,
+    "icon": ["../../desktop/src-tauri/icons/icon.ico"]
+  }
+}
