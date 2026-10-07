@@ -1,0 +1,16 @@
+<svg width="150" height="57" viewBox="0 0 150 57" xmlns="http://www.w3.org/2000/svg">
+  <!-- Header art for the inner installer pages, which keep the system's white header band.
+       Render with `node scripts/installer-art.mjs`. -->
+  <rect width="150" height="57" fill="#ffffff"/>
+  <g transform="translate(16 15)">
+    <rect x="0" y="0" width="8" height="8" rx="1.5" fill="#6e3320"/>
+    <rect x="9.5" y="0" width="8" height="8" rx="1.5" fill="#a84b2b"/>
+    <rect x="19" y="0" width="8" height="8" rx="1.5" fill="#d97757"/>
+    <rect x="0" y="9.5" width="8" height="8" rx="1.5" fill="#a84b2b"/>
+    <rect x="9.5" y="9.5" width="8" height="8" rx="1.5" fill="#d97757"/>
+    <rect x="19" y="9.5" width="8" height="8" rx="1.5" fill="#f5a582"/>
+    <rect x="0" y="19" width="8" height="8" rx="1.5" fill="#d97757"/>
+    <rect x="9.5" y="19" width="8" height="8" rx="1.5" fill="#f5a582"/>
+    <rect x="19" y="19" width="8" height="8" rx="1.5" fill="#f5a582"/>
+  </g>
+</svg>

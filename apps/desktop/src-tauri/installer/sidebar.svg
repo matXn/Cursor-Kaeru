@@ -1,0 +1,27 @@
+<svg width="164" height="314" viewBox="0 0 164 314" xmlns="http://www.w3.org/2000/svg">
+  <!-- Welcome/finish page art: the app's dark stage with its warm glow from the left edge,
+       and the nine-cell icon. Render with `node scripts/installer-art.mjs`. -->
+  <defs>
+    <radialGradient id="glow" cx="-30" cy="330" r="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb27d"/>
+      <stop offset="0.19" stop-color="#ef8a56"/>
+      <stop offset="0.39" stop-color="#a65a3b"/>
+      <stop offset="0.66" stop-color="#4a2f26"/>
+      <stop offset="1" stop-color="#1f1816"/>
+    </radialGradient>
+  </defs>
+  <rect width="164" height="314" fill="url(#glow)"/>
+  <g transform="translate(24 32)">
+    <rect x="0" y="0" width="16" height="16" rx="2" fill="#6e3320"/>
+    <rect x="18" y="0" width="16" height="16" rx="2" fill="#a84b2b"/>
+    <rect x="36" y="0" width="16" height="16" rx="2" fill="#d97757"/>
+    <rect x="0" y="18" width="16" height="16" rx="2" fill="#a84b2b"/>
+    <rect x="18" y="18" width="16" height="16" rx="2" fill="#d97757"/>
+    <rect x="36" y="18" width="16" height="16" rx="2" fill="#f5a582"/>
+    <rect x="0" y="36" width="16" height="16" rx="2" fill="#d97757"/>
+    <rect x="18" y="36" width="16" height="16" rx="2" fill="#f5a582"/>
+    <rect x="36" y="36" width="16" height="16" rx="2" fill="#f5a582"/>
+  </g>
+  <text x="24" y="114" fill="#f6efe9" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="600">Cursor Kaeru</text>
+  <rect x="24" y="124" width="20" height="2" fill="#f5a582"/>
+</svg>
