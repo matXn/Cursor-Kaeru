@@ -199,6 +199,13 @@ function sanitizeSchema(value: unknown): unknown {
   return clean;
 }
 
+// Claude models behind Cloud Code turn functionCall/functionResponse into tool_use/tool_result,
+// which Anthropic pairs by id and only accepts in [A-Za-z0-9_-]. Ids from other providers
+// (Cursor, OpenAI) may carry other characters, so both halves of a pair map through this.
+function wireCallId(callId: string): string {
+  return callId.replace(/[^A-Za-z0-9_-]/g, "_") || "call";
+}
+
 function convertToCloudCodeContents(
   instructions: string,
   messages: LlmMessage[],
@@ -237,6 +244,7 @@ function convertToCloudCodeContents(
       for (const call of msg.toolCalls) {
         parts.push({
           functionCall: {
+            id: wireCallId(call.callId),
             name: call.name,
             args: typeof call.arguments === "object" && call.arguments !== null
               ? call.arguments
@@ -255,6 +263,7 @@ function convertToCloudCodeContents(
         parts: [
           {
             functionResponse: {
+              id: wireCallId(msg.callId),
               name: msg.name || "function",
               response: { result: msg.content },
             },
@@ -479,7 +488,7 @@ async function streamCloudCode(
               }
             }
 
-            const fnCall = part.functionCall as { name: string; args: unknown } | undefined;
+            const fnCall = part.functionCall as { id?: string; name: string; args: unknown } | undefined;
             if (fnCall) {
               hasEmittedAnyChunk = true;
               if (thinkingStarted) {
@@ -492,7 +501,7 @@ async function streamCloudCode(
               }
               hasTools = true;
               const currentIdx = toolIndex++;
-              const callId = `call_${Date.now()}_${currentIdx}`;
+              const callId = fnCall.id || `call_${Date.now()}_${currentIdx}`;
               output.emit({
                 type: "tool-call-start",
                 index: currentIdx,
