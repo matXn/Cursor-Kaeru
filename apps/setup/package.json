@@ -1,6 +1,6 @@
 {
   "name": "cursor-kaeru-setup",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Acrylic installer for Cursor Kaeru: wraps the desktop app's NSIS package and runs it silently",
   "private": true,
   "type": "module",

@@ -23,10 +23,12 @@ build-web:
 build-server:
 	cargo build --release --package cursor-server --bin cursor-server
 
-# Windows ships an NSIS installer only; other platforms use Tauri's default bundles.
+# Windows ships the acrylic installer in apps/setup, which carries the desktop app's NSIS
+# package inside; other platforms use Tauri's default bundles.
 ifeq ($(OS),Windows_NT)
 build-desktop:
-	$(DESKTOP) exec tauri build --bundles nsis
+	pnpm --dir apps/setup install
+	pnpm --dir apps/setup run bundle
 else
 build-desktop:
 	$(DESKTOP) run tauri:build
