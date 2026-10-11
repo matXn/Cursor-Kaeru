@@ -180,12 +180,24 @@ function enforceUppercaseTypes(value: unknown): unknown {
     if (UNSUPPORTED_SCHEMA_KEYS[key]) continue;
     if (key === "type" && typeof child === "string") {
       out[key] = PROTO_TYPE_MAP[child.toLowerCase()] ?? child.toUpperCase();
+    } else if (key === "properties" && child && typeof child === "object" && !Array.isArray(child)) {
+      // Keys here are parameter names, not schema keywords: a parameter may well be called
+      // "title", "format" or "default". Keep every name; clean each parameter's own schema.
+      out[key] = Object.fromEntries(
+        Object.entries(child as Record<string, unknown>).map(([name, schema]) => [name, enforceUppercaseTypes(schema)]),
+      );
     } else {
       out[key] = enforceUppercaseTypes(child);
     }
   }
   if (!out.type && out.properties) {
     out.type = "OBJECT";
+  }
+  // Cloud Code rejects a required name that properties does not define.
+  if (Array.isArray(out.required)) {
+    const defined = (out.properties ?? {}) as Record<string, unknown>;
+    out.required = out.required.filter((name) => typeof name === "string" && name in defined);
+    if ((out.required as unknown[]).length === 0) delete out.required;
   }
   return out;
 }
