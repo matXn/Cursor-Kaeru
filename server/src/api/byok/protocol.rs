@@ -58,7 +58,7 @@ pub(super) fn parse(protocol: Protocol, body: &Value) -> Result<ParsedRequest> {
                 .to_owned();
             match body.get("input") {
                 Some(Value::String(text)) => history.push(text_message(0, Role::User, text)),
-                Some(input) => parse_responses_input(input, &mut history)?,
+                Some(input) => parse_responses_input(input, &mut prompt, &mut history)?,
                 None => return Err(Error::Protocol("input is required".into())),
             }
             parse_tools(body.get("tools"), protocol, &mut prompt)?;
@@ -66,7 +66,7 @@ pub(super) fn parse(protocol: Protocol, body: &Value) -> Result<ParsedRequest> {
         }
         Protocol::Messages => {
             prompt.instructions = text_content(body.get("system")).unwrap_or_default();
-            parse_anthropic_messages(body.get("messages"), &mut history)?;
+            parse_anthropic_messages(body.get("messages"), &mut prompt, &mut history)?;
             parse_tools(body.get("tools"), protocol, &mut prompt)?;
             model.max_output_tokens = body.get("max_tokens").and_then(Value::as_u64);
         }
@@ -118,6 +118,18 @@ fn text_content(value: Option<&Value>) -> Option<String> {
         ),
         _ => None,
     }
+}
+
+/// System and developer messages, wherever a client puts them, join the instructions: the
+/// providers behind this API take one system prompt, not system turns in the history.
+fn append_instructions(prompt: &mut PromptSpec, message: &Value) -> Result<()> {
+    let text = text_content(message.get("content"))
+        .ok_or_else(|| Error::Protocol("system content must be text".into()))?;
+    if !prompt.instructions.is_empty() {
+        prompt.instructions.push('\n');
+    }
+    prompt.instructions.push_str(&text);
+    Ok(())
 }
 
 fn parse_parts(value: Option<&Value>) -> Result<Vec<ContentPart>> {
@@ -186,19 +198,7 @@ fn parse_chat_messages(
     for (index, message) in messages.iter().enumerate() {
         let role = required_string(message, "role")?;
         match role {
-            "system" | "developer" => {
-                if !history.is_empty() {
-                    return Err(Error::Protocol(
-                        "system messages must precede conversation messages".into(),
-                    ));
-                }
-                let text = text_content(message.get("content"))
-                    .ok_or_else(|| Error::Protocol("system content must be text".into()))?;
-                if !prompt.instructions.is_empty() {
-                    prompt.instructions.push('\n');
-                }
-                prompt.instructions.push_str(&text);
-            }
+            "system" | "developer" => append_instructions(prompt, message)?,
             "user" => history.push(ProjectedMessage {
                 message_id: format!("external:{index}"),
                 role: Role::User,
@@ -271,7 +271,11 @@ fn parse_chat_messages(
     Ok(())
 }
 
-fn parse_responses_input(value: &Value, history: &mut Vec<ProjectedMessage>) -> Result<()> {
+fn parse_responses_input(
+    value: &Value,
+    prompt: &mut PromptSpec,
+    history: &mut Vec<ProjectedMessage>,
+) -> Result<()> {
     let items = value
         .as_array()
         .ok_or_else(|| Error::Protocol("input must be text or an array".into()))?;
@@ -310,6 +314,10 @@ fn parse_responses_input(value: &Value, history: &mut Vec<ProjectedMessage>) -> 
                 let role = match role {
                     "user" => Role::User,
                     "assistant" => Role::Assistant,
+                    "system" | "developer" => {
+                        append_instructions(prompt, item)?;
+                        continue;
+                    }
                     _ => return Err(Error::Protocol(format!("unsupported role: {role}"))),
                 };
                 history.push(ProjectedMessage {
@@ -325,6 +333,7 @@ fn parse_responses_input(value: &Value, history: &mut Vec<ProjectedMessage>) -> 
 
 fn parse_anthropic_messages(
     value: Option<&Value>,
+    prompt: &mut PromptSpec,
     history: &mut Vec<ProjectedMessage>,
 ) -> Result<()> {
     let messages = value
@@ -332,6 +341,10 @@ fn parse_anthropic_messages(
         .ok_or_else(|| Error::Protocol("messages must be an array".into()))?;
     for (index, message) in messages.iter().enumerate() {
         let role = required_string(message, "role")?;
+        if role == "system" {
+            append_instructions(prompt, message)?;
+            continue;
+        }
         let content = message
             .get("content")
             .ok_or_else(|| Error::Protocol("content is required".into()))?;
@@ -468,4 +481,56 @@ fn tool_name(history: &[ProjectedMessage], call_id: &str) -> Option<String> {
                 .map(|call| call.name.clone()),
             _ => None,
         })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn system_and_developer_messages_join_the_instructions_on_every_endpoint() {
+        let responses = parse(
+            Protocol::Responses,
+            &serde_json::json!({
+                "model": "m",
+                "instructions": "base",
+                "input": [
+                    { "role": "system", "content": "be brief" },
+                    { "role": "developer", "content": [{ "type": "input_text", "text": "use tools" }] },
+                    { "role": "user", "content": "hi" },
+                ],
+            }),
+        )
+        .unwrap();
+        assert_eq!(responses.request.prompt.instructions, "base\nbe brief\nuse tools");
+        assert_eq!(responses.request.history.len(), 1);
+
+        let messages = parse(
+            Protocol::Messages,
+            &serde_json::json!({
+                "model": "m",
+                "system": "base",
+                "messages": [
+                    { "role": "system", "content": "be brief" },
+                    { "role": "user", "content": "hi" },
+                ],
+            }),
+        )
+        .unwrap();
+        assert_eq!(messages.request.prompt.instructions, "base\nbe brief");
+
+        // A system message after the conversation has started no longer fails the request.
+        let chat = parse(
+            Protocol::Chat,
+            &serde_json::json!({
+                "model": "m",
+                "messages": [
+                    { "role": "user", "content": "hi" },
+                    { "role": "system", "content": "be brief" },
+                ],
+            }),
+        )
+        .unwrap();
+        assert_eq!(chat.request.prompt.instructions, "be brief");
+    }
 }
